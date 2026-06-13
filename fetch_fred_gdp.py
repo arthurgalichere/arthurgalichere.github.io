@@ -23,6 +23,7 @@ for obs in raw_data['observations']:
             "value": float(obs["value"])
         })
 
-# 5. Save it as a clean data file in your website folder
-with open("fred_data.json", "w") as f:
+# 5. Create data folder if it doesn't exist, then save the file inside it
+os.makedirs("data", exist_ok=True)
+with open("data/fred_data.json", "w") as f:
     json.dump(clean_data, f)
