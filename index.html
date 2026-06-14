@@ -135,11 +135,12 @@
 
     .hero-left { min-width: 0; }
     
-    /* Layout styling for the logo insertion container */
+    /* Layout styling for right side elements - aligned flush right */
     .hero-right { 
       min-width: 0; 
       display: flex;
       flex-direction: column;
+      align-items: flex-end;
       gap: 1.5rem;
     }
     .warwick-logo img {
@@ -179,19 +180,15 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Academic Underline Elements */
+    /* Cleaned Inline Link Style (No Underline) */
     .inline-link {
       color: var(--accent);
-      text-decoration-line: underline;
-      text-decoration-color: var(--accent-line);
-      text-decoration-thickness: 1px;
-      text-underline-offset: 0.16em;
-      transition: color 0.16s ease, text-decoration-color 0.16s ease;
+      text-decoration: none;
+      transition: color 0.16s ease;
     }
     .inline-link:hover {
       color: var(--accent-strong);
-      text-decoration-color: var(--accent-strong);
-      text-decoration-thickness: 2px;
+      text-decoration: none;
     }
 
     /* Subsections Design */
@@ -259,6 +256,21 @@
       line-height: 1.65;
       color: var(--ink-soft);
       text-align: justify;
+    }
+    
+    /* Academic Underline Elements within Biography blocks */
+    .about-wrapper a:not(.inline-link) {
+      color: var(--accent);
+      text-decoration-line: underline;
+      text-decoration-color: var(--accent-line);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+      transition: color 0.16s ease, text-decoration-color 0.16s ease;
+    }
+    .about-wrapper a:not(.inline-link):hover {
+      color: var(--accent-strong);
+      text-decoration-color: var(--accent-strong);
+      text-decoration-thickness: 2px;
     }
     
     /* Side Highlights Box layout (Fatih Style) */
@@ -333,6 +345,7 @@
         padding: 2.5rem 1.5rem 2rem;
         row-gap: 2rem;
       }
+      .hero-right { align-items: flex-start; }
       .portrait-landscape { aspect-ratio: 16 / 9; max-width: 550px; }
       .about-wrapper {
         grid-template-columns: 1fr;
@@ -392,7 +405,7 @@
                 I am an Assistant Professor (Teaching Focussed) at the 
                 <a href="https://warwick.ac.uk" target="_blank" rel="noreferrer" class="inline-link">
                   University of Warwick
-                </a>. 
+                </a>, studying macroeconomics. 
                 I obtained my PhD in Economics from the 
                 <a href="https://www.gla.ac.uk" target="_blank" rel="noreferrer" class="inline-link">
                   University of Glasgow
