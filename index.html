@@ -12,12 +12,10 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.arthurgalichere.com/" />
 
-  <!-- Google Fonts: Montserrat, Bitter, & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
@@ -96,16 +94,16 @@
     /* Top Brand Spine */
     .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
 
-    /* Top Navigation Matrix (Fatih Architecture Pins to Top) */
+    /* Top Navigation Matrix - Centered text alignment across 5 explicit columns */
     .index-nav {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       border-bottom: 1px solid var(--line-strong);
     }
     .index-card {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 1rem;
       padding: 1.1rem 1.4rem;
       border-left: 1px solid var(--line);
@@ -113,9 +111,6 @@
       transition: background-color 0.16s ease, color 0.16s ease;
     }
     .index-card:first-child { border-left: none; }
-    .index-nav .idx-top { order: 2; display: flex; align-items: center; gap: 0.55rem; }
-    .index-nav .idx-num { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
-    .index-nav .idx-arrow { font-size: 0.78rem; color: var(--accent); transition: transform 0.16s ease; }
     .index-nav .idx-label {
       display: inline-flex; align-items: center; gap: 0.6rem;
       font-family: var(--display); font-size: 1.15rem; font-weight: 600;
@@ -123,11 +118,10 @@
     .index-nav .idx-label i { font-size: 0.85rem; color: var(--accent); width: 1.1rem; text-align: center; }
     
     .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
-    .index-card.is-current .idx-num, .index-card.is-current .idx-arrow, .index-card.is-current .idx-label i { color: var(--accent-strong); }
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
     
     .index-card:hover { background: var(--accent); color: #fff; }
-    .index-card:hover .idx-num, .index-card:hover .idx-arrow, .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
-    .index-card:hover .idx-arrow { transform: translateX(4px); }
+    .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
 
     /* Structural Grid System */
     .hero-section {
@@ -154,21 +148,8 @@
       box-shadow: 0 10px 24px rgba(28, 28, 30, 0.06);
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .eyebrow::before { content: ''; width: 1.5rem; height: 2px; background: var(--accent); border-radius: 2px; }
-
     .name {
-      margin-top: 0.4rem;
+      margin-top: 0.2rem;
       font-family: var(--display);
       font-size: 3.2rem;
       font-weight: 700;
@@ -193,10 +174,7 @@
       color: var(--muted);
       margin-bottom: 2rem;
     }
-    .affiliation .sep { color: var(--line-strong); margin: 0 0.5rem; }
-
-    /* Academic Underline Elements */
-    .hero-left a, .about-wrapper a {
+    .affiliation a {
       color: var(--accent);
       text-decoration-line: underline;
       text-decoration-color: var(--accent-line);
@@ -204,7 +182,22 @@
       text-underline-offset: 0.16em;
       transition: color 0.16s ease, text-decoration-color 0.16s ease;
     }
-    .hero-left a:hover, .about-wrapper a:hover {
+    .affiliation a:hover {
+      color: var(--accent-strong);
+      text-decoration-color: var(--accent-strong);
+      text-decoration-thickness: 2px;
+    }
+
+    /* Academic Underline Elements */
+    .about-wrapper a {
+      color: var(--accent);
+      text-decoration-line: underline;
+      text-decoration-color: var(--accent-line);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+      transition: color 0.16s ease, text-decoration-color 0.16s ease;
+    }
+    .about-wrapper a:hover {
       color: var(--accent-strong);
       text-decoration-color: var(--accent-strong);
       text-decoration-thickness: 2px;
@@ -227,6 +220,7 @@
       font-size: 0.98rem;
       line-height: 1.6;
       color: var(--ink-soft);
+      text-align: justify;
     }
 
     .interest-list {
@@ -264,7 +258,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.9fr);
       column-gap: 3rem;
-      row-gap: 2srem;
+      row-gap: 2rem;
     }
     .about-text {
       display: grid;
@@ -356,12 +350,14 @@
       }
       .about-container { padding: 0 1.5rem 2.5rem; }
     }
+    @media (max-width: 768px) {
+      .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
     @media (max-width: 680px) {
       .name { font-size: 2.5rem; }
       .index-nav { grid-template-columns: 1fr; }
       .index-card { border-left: none; border-top: 1px solid var(--line); }
       .index-card:first-child { border-top: none; }
-      .index-card .idx-arrow { display: none; }
       .interest-list { grid-template-columns: 1fr; }
       .foot { flex-direction: column; align-items: center; text-align: center; gap: 0.8rem; }
     }
@@ -374,47 +370,35 @@
   <main id="main" class="page">
     <article class="card">
       
-      <!-- Top Navigation Menu Matrix (Exact Tab Order Requested) -->
       <nav class="index-nav" aria-label="Academic Directory">
         <a href="/" class="index-card is-current" aria-current="page">
-          <span class="idx-top">
-       
-          </span>
           <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
         </a>
         <a href="#cv" class="index-card">
-          <span class="idx-top">
-            
-          </span>
           <span class="idx-label"><i class="fas fa-file-pdf" aria-hidden="true"></i> CV</span>
         </a>
         <a href="#research" class="index-card">
-          <span class="idx-top"> 
-          </span>
           <span class="idx-label"><i class="fas fa-chart-line" aria-hidden="true"></i> Research</span>
         </a>
         <a href="#teaching" class="index-card">
-          <span class="idx-top"> 
-          </span>
           <span class="idx-label"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Teaching</span>
+        </a>
+        <a href="#economics" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
         </a>
       </nav>
 
-      <!-- Upper Layout Split Architecture -->
       <section class="hero-section">
         
-        <!-- Top Left Structural Block -->
         <div class="hero-left">
-          <p class="eyebrow reveal" style="--d:40ms">Welcome</p>
-          <h1 class="name reveal" style="--d:80ms">Arthur Galichère</h1>
-          <p class="subtitle reveal" style="--d:120ms">Assistant Professor (Teaching Focussed)</p>
-          <p class="affiliation reveal" style="--d:160ms">
+          <h1 class="name reveal" style="--d:40ms">Arthur Galichère</h1>
+          <p class="subtitle reveal" style="--d:80ms">Assistant Professor (Teaching Focussed)</p>
+          <p class="affiliation reveal" style="--d:120ms">
             <a href="https://warwick.ac.uk" target="_blank" rel="noreferrer">University of Warwick</a>
           </p>
           
-          <!-- In A Few Words Block (Directly below identity context) -->
-          <div class="in-a-few-words-wrapper reveal" style="--d:220ms">
-            <h2 class="section-label">  In a few words</h2>
+          <div class="in-a-few-words-wrapper reveal" style="--d:160ms">
+            <h2 class="section-label">In a few words</h2>
             <div class="in-a-few-words-content">
               <p>
                 I am an Assistant Professor (Teaching Focussed) at the University of Warwick. I obtained my PhD in Economics from the Adam Smith Business School of the University of Glasgow in 2022.
@@ -432,19 +416,16 @@
           </div>
         </div>
 
-        <!-- Top Right Landscape Canvas Block -->
-        <div class="hero-right reveal" style="--d:180ms">
-          <!-- Replace source URL below with your actual landscape picture path -->
+        <div class="hero-right reveal" style="--d:140ms">
           <img src="website/arthur_galichere.png" alt="Arthur Galichère landscape view" class="portrait-landscape" />
         </div>
 
       </section>
 
-      <!-- Bottom Layout Full Width Architecture: About Me -->
       <section class="about-container">
         <div class="about-wrapper">
           
-          <div class="about-text reveal" style="--d:300ms">
+          <div class="about-text reveal" style="--d:220ms">
             <h2 class="section-label">About me</h2>
             <p>
               I am an Assistant Professor at the University of Warwick studying macroeconomics. My main research interests in this field focus on themes related to financial crises and macroeconomic policies, such as asset pricing, monetary policy, heterogeneous investments, financial intermediation and stability. I design theoretical models and apply empirical methods to evaluate the effects of asset price bubbles on the economy to provide policy recommendations. My job market paper studies the dynamic ownership of bubbles and its effects on the real economy and financial stability. In contrast, my current projects focus on the Bayesian estimation of DSGE models with stock market bubbles and nominal rigidities.
@@ -472,8 +453,7 @@
             </p>
           </div>
 
-          <!-- Editorial Accent Column: Highlights Panel -->
-          <div class="highlights-panel reveal" style="--d:360ms">
+          <div class="highlights-panel reveal" style="--d:280ms">
             <div class="h-title"><i class="fas fa-award"></i> Teaching Accolades</div>
             <div class="award-card">
               <h3 class="award-title">WATE Award Winner (2025)</h3>
@@ -489,8 +469,7 @@
         </div>
       </section>
 
-      <!-- UI Structural Base Footer -->
-      <footer class="foot reveal" style="--d:420ms">
+      <footer class="foot reveal" style="--d:340ms">
         <div class="socials">
           <a href="mailto:A.Galichere@warwick.ac.uk" aria-label="Email Arthur"><i class="fas fa-envelope" aria-hidden="true"></i></a>
           <a href="#" aria-label="CV Link"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>
