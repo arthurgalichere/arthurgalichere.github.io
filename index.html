@@ -1,188 +1,421 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arthur Galichère — Portfolio</title>
+  <meta name="description" content="Arthur Galichère — Personal portfolio and professional projects." />
+  <meta name="author" content="Arthur Galichère" />
+  
+  <meta property="og:title" content="Arthur Galichère — Portfolio" />
+  <meta property="og:description" content="Personal portfolio and professional projects." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.arthurgalichere.com/" />
+
+  <!-- Google Fonts: Montserrat & Bitter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      /* Arthur's Palette: Dark Charcoal, Slate Blue, Light Gray */
+      --paper:        #f4f5f7;      /* Light Gray Background */
+      --paper-soft:   #fafbfc;      /* Soft Off-White for Gradients */
+      --sheet:        #ffffff;      /* Card Canvas White */
+      --panel:        #ebeeec;      /* Subdued UI Elements */
+      --panel-deep:   #e2e5e9;      /* Footer Tone */
+      --line:         rgba(28, 28, 30, 0.08);
+      --line-strong:  rgba(28, 28, 30, 0.15);
+      --ink:          #1c1c1e;      /* Dark Charcoal Main Text */
+      --ink-soft:     #3a3a3c;      /* Muted Body Text */
+      --muted:        #71717a;      /* Secondary Labels */
+      
+      --accent:       #3b5a75;      /* Slate Blue Accent */
+      --accent-strong:#25394b;      /* Deep Slate for hover states */
+      --accent-soft:  #edf2f6;      /* Light Tinted Blue Background */
+      --accent-line:  rgba(59, 90, 117, 0.35);
+
+      --display: 'Bitter', Georgia, serif;
+      --sans:    'Montserrat', system-ui, sans-serif;
+      --mono:    'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { width: 100%; overflow-x: hidden; background: var(--paper); }
+    body {
+      min-width: 0;
+      min-height: 100vh;
+      font-family: var(--sans);
+      background: 
+        radial-gradient(circle 840px at 50% -16%, #ffffff 0%, transparent 52%),
+        linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .skip {
+      position: absolute; left: -9999px; top: 0;
+      background: var(--ink); color: #fff;
+      padding: 0.55rem 0.9rem;
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      z-index: 200; border-radius: 3px;
+    }
+    .skip:focus { left: 1rem; top: 1rem; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+      gap: 0.55rem;
+    }
+
+    .card {
+      position: relative;
+      width: min(100%, 1100px);
+      min-width: 0;
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(28, 28, 30, 0.03), 0 20px 48px rgba(28, 28, 30, 0.08);
+      overflow: hidden;
+    }
+    /* Top Accent Spine */
+    .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
+
+    .body-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(315px, 0.9fr);
+      grid-template-areas:
+        "id        portrait"
+        "bio       portrait"
+        "research  portrait";
+      column-gap: 2rem;
+      row-gap: 1.2rem;
+      padding: 2.5rem 2.5rem 1.8rem;
+      align-items: start;
+    }
+
+    .id { grid-area: id; min-width: 0; }
+    .bio { grid-area: bio; min-width: 0; }
+    .research-focus { grid-area: research; min-width: 0; }
+
+    .portrait {
+      grid-area: portrait;
+      align-self: start;
+      width: 100%;
+      height: auto;
+      max-height: 595px;
+      aspect-ratio: 4 / 5.45;
+      object-fit: cover;
+      object-position: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      box-shadow: 0 12px 24px rgba(28, 28, 30, 0.1);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .eyebrow::before { content: ''; width: 1.5rem; height: 2px; background: var(--accent); border-radius: 2px; }
+
+    .name {
+      margin-top: 0.5rem;
+      font-family: var(--display);
+      font-size: 3.4rem;
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      margin-top: 0.5rem;
+      font-family: var(--sans);
+      font-size: 1.15rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--accent);
+    }
+
+    .affiliation {
+      margin-top: 0.6rem;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .affiliation .sep { color: var(--line-strong); margin: 0 0.45rem; }
+
+    /* Universal Links inside content */
+    .id a, .bio a, .recent-list a {
+      color: var(--accent);
+      text-decoration-line: underline;
+      text-decoration-color: var(--accent-line);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+      transition: color 0.16s ease, text-decoration-color 0.16s ease;
+    }
+    .id a:hover, .bio a:hover, .recent-list a:hover {
+      color: var(--accent-strong);
+      text-decoration-color: var(--accent-strong);
+      text-decoration-thickness: 2px;
+    }
+
+    .bio {
+      display: grid;
+      gap: 0.8rem;
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    .research-focus { padding-top: 1rem; border-top: 1px solid var(--line); }
+    .r-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .r-label::before { content: ''; width: 1rem; height: 2px; background: var(--accent); border-radius: 2px; }
+
+    .recent-list {
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+    }
+    .recent-list li {
+      position: relative;
+      padding-left: 0.9rem;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .recent-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 0.3rem;
+      height: 0.3rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .recent-meta {
+      display: inline-block;
+      margin-right: 0.45rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Bottom Index Nav System */
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line);
+    }
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.2rem;
+      border-left: 1px solid var(--line);
+      color: var(--ink);
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+    .index-card:first-child { border-left: none; }
+    .index-nav .idx-top { order: 2; display: flex; align-items: center; gap: 0.55rem; }
+    .index-nav .idx-num { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+    .index-nav .idx-arrow { font-size: 0.78rem; color: var(--accent); transition: transform 0.16s ease; }
+    .index-nav .idx-label {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-family: var(--display); font-size: 1.2rem; font-weight: 600;
+    }
+    .index-nav .idx-label i { font-size: 0.85rem; color: var(--accent); }
     
-    <title>Arthur Galichère</title>
+    .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
+    .index-card.is-current .idx-num, .index-card.is-current .idx-arrow, .index-card.is-current .idx-label i { color: var(--accent-strong); }
     
-    <meta name="description" content="Personal Portfolio of Arthur Galichère">
-    <meta property="og:title" content="Arthur Galichère">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.arthurgalichere.com/">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="https://lh3.googleusercontent.com/sitesv/AA5AbUB38go0D4voiFPMK86_KAoUi9Fou1Aj0b3FcISAS8feVOO8pFr1i2nj7H3h9GEOFQbIn_uJCXXfPB6QHvJ2ciWQhx-aBIYEO24RppWpvKaqljXefnrvCNbG9QtxuljJJE2xeSiPGMtS4rSqW-NAj9e-STqFt2ihEDJ9tm76D6fm9r8XFGqckrmNBx9X9rF__IvlVjo14fxYj-O62Q8=w1280">
+    .index-card:hover { background: var(--accent); color: #fff; }
+    .index-card:hover .idx-num, .index-card:hover .idx-arrow, .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
+    .index-card:hover .idx-arrow { transform: translateX(4px); }
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Bitter:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:300,400,500,700|Source+Code+Pro:400,700&display=swap" rel="stylesheet">
+    /* Footer Styles */
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--panel-deep);
+    }
+    .foot-loc { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .socials { display: flex; align-items: center; gap: 0.4rem; }
+    .socials a {
+      width: 1.9rem; height: 1.9rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      background: var(--sheet);
+      color: var(--ink-soft);
+      font-size: 0.8rem;
+      transition: all 0.16s ease;
+    }
+    .socials a:hover { color: #fff; background: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
 
-    <style>
-        /* CSS Cleaned & Reconstructed from your original Google Site palette */
-        :root {
-            --primary-slate: #546E7A;       /* rgba(84,110,122,1) */
-            --text-dark: #212121;           /* rgba(33,33,33,1) */
-            --bg-light: #F0F0F0;            /* rgba(240,240,240,1) */
-            --bg-dark: #3A3A3A;             /* rgba(58,58,58,1) */
-            --white: #FFFFFF;
-        }
+    /* Reveal Animations */
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { animation: rise 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both; animation-delay: var(--d, 0ms); }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Bitter', serif;
-            color: var(--text-dark);
-            background-color: var(--white);
-            line-height: 1.6;
-        }
-
-        /* Hero / Header Section */
-        header {
-            height: 340px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-image: url('https://ssl.gstatic.com/atari/images/vision-header.jpg');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-            text-align: center;
-        }
-
-        /* Overlay logic from your CSS opacity configurations */
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(31, 31, 31, 0.5);
-            z-index: 1;
-        }
-
-        header .header-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.5rem;
-            margin: 0;
-            font-weight: 700;
-        }
-
-        @media (max-width: 479px) {
-            header { height: 250px; }
-            header h1 { font-size: 2.3rem; }
-        }
-
-        /* Main Content Grid */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Typography Styles matching your Google configurations */
-        .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 34pt;
-            line-height: 1.2;
-            font-weight: 700;
-            color: var(--primary-slate);
-            margin-top: 30px;
-            padding: 13px 0;
-            border-top: 5px solid var(--bg-light);
-            border-bottom: 5px solid var(--bg-light);
-        }
-
-        .subsection-title {
-            font-family: 'Bitter', serif;
-            font-size: 21pt;
-            line-height: 1.25;
-            font-weight: 700;
-            margin-top: 25px;
-            color: var(--text-dark);
-        }
-
-        .minor-title {
-            font-family: 'Bitter', serif;
-            font-size: 15pt;
-            line-height: 1.25;
-            font-weight: 700;
-            color: var(--primary-slate);
-            margin-top: 20px;
-        }
-
-        p {
-            font-size: 11pt;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Custom Quote / Highlight block styling found in your source */
-        .highlight-quote {
-            border-left: 8px solid var(--primary-slate);
-            padding-left: 28px;
-            margin: 20px 0;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 15pt;
-            line-height: 1.33;
-        }
-
-        /* Call to Action Button */
-        .btn-cta {
-            display: inline-block;
-            background-color: var(--primary-slate);
-            border: 1px solid var(--white);
-            color: var(--white);
-            padding: 10px 20px;
-            font-family: 'Bitter', serif;
-            font-size: 11pt;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .btn-cta:hover {
-            background-color: var(--text-dark);
-        }
-
-        footer {
-            background-color: var(--bg-dark);
-            color: var(--white);
-            text-align: center;
-            padding: 40px 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 9pt;
-        }
-    </style>
+    /* Responsive Breakthrough points */
+    @media (max-width: 860px) {
+      .body-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: "id" "portrait" "bio" "research";
+        row-gap: 1.5rem;
+        padding: 2rem 1.5rem;
+      }
+      .portrait { max-width: 320px; aspect-ratio: 4 / 5; }
+    }
+    @media (max-width: 620px) {
+      .name { font-size: 2.4rem; }
+      .portrait { max-width: 100%; }
+      .index-nav { grid-template-columns: 1fr; }
+      .index-card { border-left: none; border-top: 1px solid var(--line); }
+      .index-card:first-child { border-top: none; }
+      .index-card .idx-arrow { display: none; }
+      .foot { flex-direction: column; align-items: center; text-align: center; gap: 0.8rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <h1>Arthur Galichère</h1>
+  <a href="#main" class="skip">Skip to content</a>
+
+  <main id="main" class="page">
+    <article class="card">
+      
+      <div class="body-grid">
+        <!-- Identity Section -->
+        <div class="id">
+          <p class="eyebrow reveal" style="--d:40ms">Welcome</p>
+          <h1 class="name reveal" style="--d:80ms">Arthur Galichère</h1>
+          <p class="subtitle reveal" style="--d:160ms">[Your Title / Profession Here]</p>
+          <p class="affiliation reveal" style="--d:220ms">
+            <a href="https://www.arthurgalichere.com">Main Domain</a>
+            <span class="sep" aria-hidden="true">·</span>
+            <span>Focus Area</span>
+          </p>
         </div>
-    </header>
 
-    <main>
-        <h2 class="section-title">Welcome to My New Site</h2>
-        
-        <p>This section is built using your original Bitter text font rules. It maps cleanly to a highly scannable, modern framework while maintaining your exact color identity guidelines.</p>
+        <!-- Profile Image Placeholder -->
+        <!-- Replace 'your-photo.jpg' with your real image path -->
+        <img src="https://via.placeholder.com/400x545" alt="Arthur Galichère" class="portrait reveal" style="--d:120ms" />
 
-        <div class="highlight-quote">
-            "This block replicates the custom callout section styling found in your original system code."
+        <!-- Biography Content Area -->
+        <div class="bio">
+          <p class="reveal" style="--d:300ms">
+            Hello! I am Arthur Galichère. This is your core biography paragraph. Use this area to explain who you are, what problems you solve, and what sets your work apart. You can naturally include <a href="#">inline links</a> to external institutions or assets.
+          </p>
+          <p class="reveal" style="--d:360ms">
+            This second paragraph is ideal for explaining your background, training, or current technical focuses. Customize this layout to fit your exact journey.
+          </p>
         </div>
 
-        <h3 class="subsection-title">Sub-heading Example</h3>
-        <p>Your original stylesheet defined distinct color variations for headings. For example, secondary items loop back into the deep Charcoal (#212121) font palette.</p>
-        
-        <a href="#" class="btn-cta">Contact Me</a>
-    </main>
+        <!-- Featured Highlights / Projects Area -->
+        <div class="research-focus reveal" style="--d:440ms">
+          <h2 class="r-label">Featured Works</h2>
+          <ul class="recent-list">
+            <li>
+              <span class="recent-meta">2026 · Project</span>
+              <a href="#">[First Major Project Title]</a>: A short sentence detailing your role, the core stack used, or the ultimate real-world result achieved.
+            </li>
+            <li>
+              <span class="recent-meta">2025 · Case Study</span>
+              <a href="#">[Second Major Project Title]</a>: Highlight alternative work milestones, operational architectures deployed, or research papers published here.
+            </li>
+          </ul>
+        </div>
+      </div>
 
-    <footer>
-        <p>&copy; 2026 Arthur Galichère. All Rights Reserved.</p>
-    </footer>
+      <!-- Footer Section Navigation Matrix -->
+      <nav class="index-nav reveal" style="--d:500ms" aria-label="Main sections">
+        <a href="/" class="index-card is-current" aria-current="page">
+          <span class="idx-top">
+            <span class="idx-num">01</span>
+            <i class="fas fa-arrow-right idx-arrow" aria-hidden="true"></i>
+          </span>
+          <span class="idx-label"><i class="fas fa-house" aria-hidden="true"></i> Home</span>
+        </a>
+        <a href="#projects" class="index-card">
+          <span class="idx-top">
+            <span class="idx-num">02</span>
+            <i class="fas fa-arrow-right idx-arrow" aria-hidden="true"></i>
+          </span>
+          <span class="idx-label"><i class="fas fa-flask" aria-hidden="true"></i> Projects</span>
+        </a>
+        <a href="#experience" class="index-card">
+          <span class="idx-top">
+            <span class="idx-num">03</span>
+            <i class="fas fa-arrow-right idx-arrow" aria-hidden="true"></i>
+          </span>
+          <span class="idx-label"><i class="fas fa-briefcase" aria-hidden="true"></i> Experience</span>
+        </a>
+        <a href="#cv" class="index-card">
+          <span class="idx-top">
+            <span class="idx-num">04</span>
+            <i class="fas fa-arrow-right idx-arrow" aria-hidden="true"></i>
+          </span>
+          <span class="idx-label"><i class="fas fa-file-lines" aria-hidden="true"></i> CV</span>
+        </a>
+      </nav>
+
+      <!-- Structural Footer -->
+      <div class="foot reveal" style="--d:560ms">
+        <div class="socials">
+          <!-- Update href values with your real social media links -->
+          <a href="mailto:your-email@example.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+          <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="X (Twitter)"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+        </div>
+        <span class="foot-loc">Location · Your Country</span>
+      </div>
+      
+    </article>
+  </main>
 
 </body>
 </html>
