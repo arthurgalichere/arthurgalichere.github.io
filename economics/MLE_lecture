@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maximum Likelihood Estimation: An Introduction</title>
+<style>
+:root{
+  --bg:#f6f7f8;
+  --surface:#ffffff;
+  --surface-2:#fafbfc;
+  --ink:#1f2937;
+  --muted:#5b6472;
+  --accent:#1f4e79;
+  --accent-soft:#eaf1f8;
+  --accent-2:#2f6b3f;
+  --border:#d8dee8;
+  --border-strong:#bcc7d6;
+  --warn:#f7edd5;
+  --pink:#f8ebee;
+  --shadow:0 8px 24px rgba(15,23,42,.045);
+  --radius:12px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{min-height:auto;padding:34px 20px 18px;background:#f7f8fa;border-bottom:0}
+.hero{max-width:880px;margin:0 auto;background:var(--surface);border:0;border-radius:18px;padding:34px 38px;box-shadow:0 10px 30px rgba(15,23,42,.06)}
+.badge{display:inline-block;background:var(--accent-soft);color:var(--accent);border:1px solid #d4e1ef;border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;letter-spacing:.02em}
+.hero h1{max-width:760px;font-size:clamp(32px,4vw,46px);line-height:1.16;margin:16px 0 12px;letter-spacing:-.02em}
+.hero p{font-size:17px;line-height:1.7;color:var(--muted);max-width:850px;margin:0}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{border-radius:8px;padding:11px 16px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;border:1px solid transparent;transition:background .15s ease,border-color .15s ease,color .15s ease;font-family:inherit;font-size:15px}
+.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.primary:hover{background:#173a5b}
+.secondary,.ghost{background:#fff;color:var(--accent);border-color:var(--border-strong)}
+.secondary:hover,.ghost:hover{background:#f7f9fb}
+nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);border-bottom:1px solid var(--border);padding:8px 16px;display:flex;gap:8px;flex-wrap:wrap;overflow:visible;justify-content:center;align-items:center;backdrop-filter:blur(6px);max-width:880px;margin:0 auto}
+nav a{white-space:nowrap;text-decoration:none;color:#334155;font-weight:600;border:1px solid transparent;border-radius:8px;padding:8px 12px}
+nav a:hover{background:#f7f9fb;border-color:var(--border)}
+main{max-width:880px;margin:0 auto;padding:26px 18px 64px}
+.section{margin:30px 0 44px;scroll-margin-top:112px}
+.grid{display:block}
+.card,.half,.third,.twoThird{width:100%;max-width:100%;margin:0 0 18px 0}
+.card{background:var(--surface);border-radius:16px;padding:28px 30px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.section .card:last-child{margin-bottom:0}
+h2{font-size:clamp(27px,3vw,34px);margin:0 0 14px;letter-spacing:-.02em}
+h3{font-size:21px;margin:0 0 12px;letter-spacing:-.01em}.muted{color:var(--muted)}
+.pill{display:inline-block;background:#f1f5f9;color:#334155;border:1px solid var(--border);padding:5px 10px;border-radius:999px;font-weight:700;font-size:12px;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em}
+.equation{font-family:Cambria,Georgia,serif;background:#253142;color:#fff;border-radius:10px;padding:16px 18px;font-size:20px;overflow:auto;line-height:1.6}
+.note{border-left:4px solid var(--accent-2);background:#f2f8f3;padding:16px;border-radius:10px}.warning{border-left-color:#b88700;background:var(--warn)}.pink{border-left-color:#b85f77;background:var(--pink)}
+.exampleBox{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:16px 0 0;color:#334155}.exampleBox p{margin:0}
+.slideRef{font-size:12px;color:#64748b;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.steps{counter-reset:s;max-width:760px}.step{position:relative;padding-left:46px;margin:16px 0}.step:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+.flashcards{display:grid;grid-template-columns:1fr;gap:12px}.flash{height:138px;perspective:900px;cursor:pointer;border-radius:10px;outline:none}.flashInner{height:100%;min-height:138px;position:relative;transition:transform .55s;transform-style:preserve-3d}.flash.flipped .flashInner{transform:rotateY(180deg)}.face{position:absolute;inset:0;border-radius:10px;padding:18px;backface-visibility:hidden;border:1px solid var(--border);box-shadow:none;display:flex;flex-direction:column;justify-content:center}.front{background:#fff}.back{background:#334155;color:#fff;transform:rotateY(180deg)}.flash:focus{outline:2px solid #9fb6cf;outline-offset:3px}
+.choice{display:block;width:100%;text-align:left;background:#f8fafc;border:1px solid var(--border);border-radius:8px;margin:10px 0;padding:13px 14px;cursor:pointer;font-weight:600;font-family:inherit;font-size:15px}.choice.correct{border-color:#81c49b;background:#edf8f0}.choice.wrong{border-color:#d98f95;background:#fff5f5}.choice:disabled{cursor:not-allowed;color:inherit;opacity:1}
+.sliderBox{display:grid;gap:12px}.sliderBox input{width:100%}.miniData span{display:inline-grid;place-items:center;width:32px;height:32px;margin:4px;border-radius:8px;background:#edf2f7;font-weight:800}.chart{width:100%;height:320px;background:linear-gradient(180deg,#fff,#fcfcfd);border:1px solid var(--border);border-radius:10px}.meter{height:12px;background:#e7edf3;border-radius:999px;overflow:hidden;border:1px solid var(--border)}.meter div{height:100%;background:linear-gradient(90deg,#365f88,#7aa37d);width:0}.calloutBig{font-size:clamp(24px,3vw,31px);font-weight:800;line-height:1.2;letter-spacing:-.02em;max-width:760px}.kbd{font-family:ui-monospace,Consolas,monospace;background:#f1f5f9;border:1px solid var(--border);border-radius:6px;padding:2px 7px}.footer{color:#64748b;text-align:center;margin-top:40px;font-size:14px;max-width:760px;margin-left:auto;margin-right:auto}
+.toggle{display:flex;gap:8px;flex-wrap:wrap}.toggle button{border:1px solid var(--border);border-radius:8px;padding:9px 13px;font-weight:700;cursor:pointer;background:#fff;color:#334155;font-family:inherit}.toggle button.active{background:var(--accent);color:#fff;border-color:var(--accent)}.hidden{display:none}.small{font-size:14px}.sourceBox{background:#f8fafc;border:1px solid var(--border);color:#475569;border-radius:10px;padding:14px}.canvasWrap{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px;margin-top:16px}#incomeCanvas,#conditionalCanvas{width:100%;height:auto;border-radius:8px;background:#fff}.animControls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}.statusBox{background:#334155;color:#fff;padding:16px 18px;border-radius:10px;margin-top:12px;min-height:78px}.miniTag{display:inline-block;background:#eef3f8;color:var(--accent);border:1px solid #d6e2ef;padding:5px 9px;border-radius:999px;font-weight:700;font-size:12px;margin-right:8px;margin-bottom:8px}.formulaCard{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-top:18px}.kpiRow{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}.kpi{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px}.kpi b{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}.kpi span{font-size:24px;font-weight:800;color:var(--accent)}.stageTabs{display:flex;gap:8px;flex-wrap:nowrap;margin:16px 0 14px;overflow-x:auto;padding-bottom:4px}.stageBtn{border:1px solid var(--border-strong);background:#fff;color:#334155;border-radius:10px;padding:9px 11px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;flex:0 0 auto}.stageBtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}.stepMini{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:10px 0}.summaryLine{background:#f2f8f3;border:1px solid #d8ead9;color:#204d2b;border-radius:10px;padding:14px 16px;font-weight:700;margin-top:16px}.mathSymbol{font-family:Cambria,Georgia,serif;font-size:1.08em}
+.modalOverlay{position:fixed;inset:0;background:rgba(15,23,42,.56);display:none;align-items:center;justify-content:center;padding:20px;z-index:99}.modalOverlay.open{display:flex}.modal{width:min(760px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:16px;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.25);padding:26px}.modalHeader{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}.modalHeader h2{margin:0}.closeBtn{background:#f8fafc;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-weight:800;padding:8px 11px}.quizQ{padding:14px 0;border-bottom:1px solid var(--border)}.quizQ:last-of-type{border-bottom:0}.scoreBox{margin-top:12px;font-weight:800;color:var(--accent)}
+@media(min-width:900px){.hero-actions{margin-top:24px}.stageTabs{display:flex;flex-wrap:nowrap}.kpiRow{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.hero,.card{padding:22px}nav{justify-content:flex-start}.flash{height:155px}.flashInner{min-height:155px}.modal{padding:20px}.chart{height:260px}.equation{font-size:18px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <span class="badge">MFE Financial Econometrics · Weeks 3-4 · Part I</span>
+    <h1>Maximum Likelihood Estimation: An Introduction</h1>
+    <div class="hero-actions">
+      <a class="btn primary" href="#overview">Begin module</a>
+      <a class="btn secondary" href="#poisson">Open Poisson example</a>
+    </div>
+  </div>
+</header>
+<nav>
+  <a href="#overview">Road map</a>
+  <a href="#estimation">Estimation</a>
+  <a href="#data-model">Start with data</a>
+  <a href="#notation">Notation and Simplifications</a>
+  <a href="#quiz1" onclick="return openQuizModal(event,'quizModal1')">Quiz 1</a>
+  <a href="#poisson">Poisson example</a>
+  <a href="#conditional">Conditional MLE</a>
+  <a href="#quiz2" onclick="return openQuizModal(event,'quizModal2')">Quiz 2</a>
+</nav>
+<main>
+  <section class="section" id="overview">
+    <div class="card">
+      <span class="pill">Overview</span>
+      <h2>Where this fits</h2>
+      <p>The lecture moves from probability theory into estimation. In probability, we start by assuming we already know the distribution and the parameters. However, when dealing with real data, we rarely know this and instead we have to rely on the observed data to estimate them.</p>
+      <div class="steps">
+        <div class="step"><b>Estimation:</b> use observed data to learn unknown quantities.</div>
+        <div class="step"><b>Maximum likelihood:</b> choose the parameter values under which the observed data would be most likely.</div>
+        <div class="step"><b>Later topics:</b> estimator properties, distribution theory, hypothesis testing, and bootstrap.</div>
+      </div>
+      <div class="note" style="margin-top:28px;">
+        <span class="pill">One-sentence goal</span>
+        <div class="calloutBig">Data are clues. MLE asks: “Which parameter makes these clues most believable?”</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="estimation">
+    <div class="card">
+      <span class="pill">Estimation</span>
+      <h2>Estimation</h2>
+      <p>Imagine you see a sequence of daily returns, trade counts, or default indicators. You do not directly see the hidden mechanism (i.e. the data generating process) that generated them. An <strong>estimator</strong> is a rule that converts the data into a guess about that hidden mechanism.</p>
+      <div class="exampleBox"><p><b>Example:</b> If transaction counts look like Poisson data, the unknown parameter might be λ, which is the average number of transactions in a fixed time window.</p></div>
+
+      <h3 style="margin-top:38px;">Click the cards</h3>
+      <div class="flashcards">
+        <div class="flash" tabindex="0" onclick="flip(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flip(this)}">
+          <div class="flashInner"><div class="face front"><h3>Data</h3><p>What we observe.</p></div><div class="face back"><p>Examples: prices, returns, counts, choices, durations.</p></div></div>
+        </div>
+        <div class="flash" tabindex="0" onclick="flip(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flip(this)}">
+          <div class="flashInner"><div class="face front"><h3>Parameter</h3><p>What we do not know.</p></div><div class="face back"><p>Examples: mean μ, variance σ², Poisson rate λ, regression coefficients β.</p></div></div>
+        </div>
+        <div class="flash" tabindex="0" onclick="flip(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flip(this)}">
+          <div class="flashInner"><div class="face front"><h3>Estimator</h3><p>The recipe.</p></div><div class="face back"><p>A formula or algorithm that turns data into a parameter estimate.</p></div></div>
+        </div>
+        <div class="flash" tabindex="0" onclick="flip(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flip(this)}">
+          <div class="flashInner"><div class="face front"><h3>Estimators Range</h3><p>Which one is best?</p></div><div class="face back"><p>There is wide range of estimators (Frequentist &amp; Bayesian Estimators). No estimator is uniquely best. It depends on the given setting.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="data-model">
+    <div class="card">
+      <span class="pill">Start with data</span>
+      <h2>MLE starts with data</h2>
+      <p>A clearer way to introduce MLE is: <strong>we observe data first</strong>, then we choose a plausible probability model, and then we use MLE to estimate the model’s unknown parameters.</p>
+      <div class="stageTabs">
+        <button class="stageBtn active" onclick="setIncomeStage(0,this)">1. Raw data</button>
+        <button class="stageBtn" onclick="setIncomeStage(1,this)">2. Add axes</button>
+        <button class="stageBtn" onclick="setIncomeStage(2,this)">3. Build histogram</button>
+        <button class="stageBtn" onclick="setIncomeStage(3,this)">4. Assume Normal</button>
+        <button class="stageBtn" onclick="setIncomeStage(4,this)">5. Estimate by MLE</button>
+      </div>
+      <div class="canvasWrap"><canvas id="incomeCanvas" width="820" height="455"></canvas></div>
+      <div class="animControls">
+        <button class="btn primary" onclick="playIncomeStory()">▶ Play the story</button>
+        <button class="btn ghost" onclick="stepIncome(-1)">← Back</button>
+        <button class="btn ghost" onclick="stepIncome(1)">Next →</button>
+        <button class="btn ghost" onclick="resetIncomeStory()">Reset</button>
+      </div>
+      <div class="statusBox" id="incomeStatus"></div>
+
+      <h2 style="margin-top:38px;">The logic in one glance</h2>
+      <div class="stepMini"><b>Step 1.</b> Suppose <i>y<sub>i</sub></i> is the income of person <i>i</i>. So the sample is <i>y₁, y₂, …, yₙ</i>.</div>
+      <div class="stepMini"><b>Step 2.</b> Add axes so the observations become values on an income scale.</div>
+      <div class="stepMini"><b>Step 3.</b> Group the observed values into a histogram to see the sample’s shape.</div>
+      <div class="stepMini"><b>Step 4.</b> If the histogram looks roughly bell-shaped, we might assume a Normal distribution.</div>
+      <div class="stepMini"><b>Step 5.</b> MLE then estimates the unknown parameters of that Normal distribution.</div>
+      <div class="formulaCard">
+        <span class="miniTag">Assumption</span>
+        <div class="equation">Y<sub>i</sub> ~ N(μ, σ²)</div>
+        <br />
+        <span class="miniTag">MLE chooses</span>
+        <div class="equation">(μ̂, σ̂²) = argmax<sub>μ,σ²</sub> L(μ, σ²; Y)</div>
+      </div>
+      <p>In plain English: MLE picks the values of the centre and the spread that make the observed incomes look most plausible under the assumed Normal model.</p>
+      <div class="kpiRow"><div class="kpi"><b>Estimated mean μ̂</b><span id="incomeMean">—</span></div><div class="kpi"><b>Estimated s.d. σ̂</b><span id="incomeSd">—</span></div></div>
+      <div class="summaryLine">This is the core of MLE: data + distributional assumption + parameter values chosen to fit the data as well as possible.</div>
+    </div>
+  </section>
+
+
+  <section class="section" id="notation">
+    <div class="card">
+      <span class="pill">Notation and Simplifications</span>
+      <h2>Notation and Simplifications</h2>
+      <p>We observe data points Y₁, …, Yₙ. However, we do not know the paramters vector θ. The likelihood function is the joint density of the observed data, viewed as a function of θ:</p>
+      <div class="equation">L(θ; Y) = f(Y; θ)</div>
+      <p>The maximum likelihood estimate is:</p>
+      <div class="equation">θ̂ = argmax<sub>θ</sub> L(θ; Y)</div>
+      <p>Maximum Likelihood estimator <span class="mathSymbol">θ̂</span> is the value of θ that maximizes the likelihood of observing the data in hand.</p>
+
+      <h2>It’s easier with logs</h2>
+      <p>In practice we usually maximize the log-likelihood:</p>
+      <div class="equation">ℓ(θ; y) = ln L(θ; y)</div>
+      <p>Because the log function is monotonically increasing transformation, it reaches its maximum at the same parameter value as the likelihood. Logs also turn products into sums, which is much easier for algebra and software.</p>
+      <div class="sourceBox">Useful memory hook: Product of many tiny probabilities can be difficult to deal with. Sum of logs is friendlier.</div>
+
+      <h2 style="margin-top:32px;">IID data: the big simplification</h2>
+      <p>If observations are independent and identically distributed, the joint likelihood is the product of individual observations densities:</p>
+      <div class="equation">f(y; θ) = ∏<sub>i=1</sub><sup>n</sup> f(y<sub>i</sub>; θ)</div>
+      <p>Taking logs gives:</p>
+      <div class="equation">ℓ(θ; y) = Σ<sub>i=1</sub><sup>n</sup> ln f(y<sub>i</sub>; θ)</div>
+      <p>Sometimes the ML estimator is available in closed form. When not, MLE can still be found by numerical tools (e.g. Newton-Raphson iteration).</p>
+    </div>
+    <div class="card pink" id="quiz1">
+      <span class="pill">Knowledge check</span>
+      <h2>Quiz 1</h2>
+      <p>Before moving to the Poisson likelihood example, let us check our knowledge so far.</p>
+      <button class="btn primary" onclick="openQuizModal(event,'quizModal1')">Open Quiz 1</button>
+    </div>
+  </section>
+
+  <section class="section" id="poisson">
+    <div class="card">
+      <span class="pill">Poisson example</span>
+      <h2>Connecting the log-likelihood to the data</h2>
+      <button class="btn ghost" onclick="openModal('poissonHelp')">Know more about Poisson</button>
+      <p>Suppose we count the number of transactions in consecutive five-minute windows for a hypothetical asset traded on exchange XYZ. The observed counts are:</p>
+      <div class="miniData" id="miniData"></div>
+      <p>So here Y₁ = 1, Y₂ = 3, and so on. There are n = 12 observations and their total is ΣYᵢ = 30.</p>
+      <p>If a random variable X follows a Poisson distribution with parameter λ (where λ is the average number of transactions in five-minutes windows), then the probability of observing a specific count x is:</p>
+      <div class="equation">f(x; λ) = P(X = x) = e<sup>−λ</sup> λ<sup>x</sup> / x!</div>
+<p>Assuming the counts are independent and come from the same Poisson distribution, the likelihood is the product of the marginal densities.</p>
+      <p>Taking logs of the joint density (i.e. logs of the product of the densities of the 12 independent observations), gives the log-likelihood:</p>
+      <div class="equation">ℓ(λ; Y) = Σ<sub>i=1</sub><sup>n</sup> [−λ + Y<sub>i</sub> log(λ) − log(Y<sub>i</sub>!)]</div>
+      <div class="note" style="margin-top:34px;">
+        <h3>The Poisson MLE</h3>
+        <p>Maximizing the Poisson log-likelihood gives:</p>
+        <div class="equation">λ̂ = (1/n) ΣY<sub>i</sub></div>
+        <p>Here, the sample mean is <b id="sampleMeanText"></b>. So the MLE is <b id="lambdaHatText"></b>. In words, our estimated average number of transactions per five-minute window is 2.5.</p>
+      </div>
+
+      <h2 style="margin-top:34px;">Interactive log-likelihood graph</h2>
+      <p>This graph shows the value of the log-likelihood as you vary λ. The peak is the value of λ that makes the observed sample most likely under the Poisson model.</p>
+      <div class="sliderBox">
+        <label><b>Candidate value of λ:</b> <span id="lambdaValue">2.00</span></label>
+        <input id="lambdaSlider" type="range" min="0.2" max="8" step="0.01" value="2" oninput="drawChart()">
+        <div class="meter"><div id="likeMeter"></div></div>
+        <div><b>Log-likelihood at this λ:</b> <span id="llValue"></span></div>
+      </div>
+      <canvas id="chart" class="chart" width="820" height="320"></canvas>
+    </div>
+  </section>
+
+  <section class="section" id="conditional">
+    <div class="card">
+      <span class="pill">Conditional MLE</span>
+      <h2>Conditional versus unconditional MLE</h2>
+      <button class="btn ghost" onclick="openModal('normalHelp')">Know more about Normal distribution</button>
+      <p>An unconditional model uses the same marginal density for every observation. A conditional model allows the distribution of Y to change conditional on another variable(s) X.</p>
+      <div class="toggle">
+        <button class="active" onclick="showStory('uncond',this)">Unconditional income model</button>
+        <button onclick="showStory('cond',this)">Conditional income model</button>
+      </div>
+      <div id="uncond" class="story">
+        <p><b>Unconditional model:</b> suppose income is drawn from one Normal distribution for the whole population.</p>
+        <div class="equation">Y<sub>i</sub> ~ N(μ, σ²)</div>
+        <p>This says every person’s income is described using the same centre μ and the same spread σ². Education is not used in the model.</p>
+      </div>
+      <div id="cond" class="story hidden">
+        <p><b>Conditional model:</b> suppose income depends on education. Let Xᵢ be the years of education of person i. We can assume income is Normally distributed conditional on education:</p>
+        <div class="equation">Y<sub>i</sub> | X<sub>i</sub> ~ N(μ<sub>i</sub>, σ²)<br>μ<sub>i</sub> = β₀ + β₁x<sub>i</sub></div>
+        <p>Now each person can have a different Normal distribution because each person can have a different education level. The model still has only a small number of parameters in this case: β₀, β₁, and σ² that are found by maximizing the conditional log-liklihood.</p>
+      </div>
+      <div class="canvasWrap"><canvas id="conditionalCanvas" width="820" height="370"></canvas></div>
+      <button class="btn ghost" style="margin-top:18px;" onclick="openModal('conditionalHelp')">Distribution help for this example</button>
+      <div class="summaryLine">Interpretation: in the conditional model, the Normal income distribution can shift depending on education. A person with more education may have a distribution centred further to the right. The curve changes with x, but the rule linking education to the centre of the distribution is the same for all observations: <span class="mathSymbol">μ<sub>i</sub> = β₀ + β₁x<sub>i</sub></span>.</div>
+    </div>
+  </section>
+
+
+  <section class="section" id="quiz2">
+    <div class="card pink">
+      <span class="pill">Knowledge check</span>
+      <h2>Quiz 2</h2>
+      <p>Let us check our knowledge of the Poisson likelihood and conditional MLE ideas.</p>
+      <button class="btn primary" onclick="openQuizModal(event,'quizModal2')">Open Quiz 2</button>
+    </div>
+  </section>
+
+  <section class="section" id="final-note">
+    <div class="card note">
+      <h2>Final Note</h2>
+      <ul>
+        <li>When possible, having closed-form solutions is helpful, since it saves a lot of computation time: solving first order conditions numerically can be time-consuming.</li>
+        <li>Time-varying volatility and time-varying covariance/correlation modelling utilise likelihood-based methods heavily (next term).</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="footer">Interactive introductory module on maximum likelihood estimation. Open locally in a browser; no internet required.</div>
+</main>
+
+<div class="modalOverlay" id="poissonHelp"><div class="modal"><div class="modalHeader"><h2>Know more: Poisson distribution</h2><button class="closeBtn" onclick="closeModal('poissonHelp')">Close</button></div><p>The Poisson distribution is used when we count how many times events occur in a fixed interval of time or space, assuming we know the average rate of events occurrence across the fixed intervals.</p><h3>Simple example</h3><p>If a café gets 3 customers on average every 10 minutes, we can use a Poisson model to ask: how many customers might arrive in the next 10 minutes? Here, the key parameter is λ = 3, the average number of events in the interval.</p><h3>When it is useful</h3><ul><li>the variable is a count: 0, 1, 2, 3, …</li><li>events are counted over a fixed period or area;</li><li>events are roughly independent;</li><li>the average rate is reasonably stable;</li><li>events are not heavily clustered because of the same cause.</li></ul><h3>Financial examples</h3><p>Poisson models are often useful for rare or countable events: number of trades per minute, corporate defaults per year, insurance claims per month, price jumps of an asset in a day, etc.</p><p><b>Memory hook:</b> Poisson counts events over time or space. The exponential distribution is anther distribution that is related and useful, but it is used for finding the waiting time between events (i.e. how long do we need to wait until the next Poisson event).</p></div></div>
+<div class="modalOverlay" id="normalHelp"><div class="modal"><div class="modalHeader"><h2>Know more: Normal distribution</h2><button class="closeBtn" onclick="closeModal('normalHelp')">Close</button></div><p>The Normal distribution is popular because it gives a simple model for variables that cluster around an average, with fewer observations far away from the centre.</p><h3>Why it is often used</h3><ul><li>many small random effects can add up to something approximately Normal;</li><li>it is mathematically convenient;</li><li>it is easy to interpret using a mean and a variance;</li><li>it often provides a reasonable first approximation.</li></ul><h3>Financial caution</h3><p>Financial returns are often not perfectly Normal. They can have fat tails, skewness, volatility clustering, and jumps. So the Normal distribution is a useful starting point, but not always the final answer.</p><p>Simple intuition: use a Normal model when many small forces combine and most observations are expected to be near the average. Be more careful when rare, large, asymmetric events matter.</p></div></div>
+<div class="modalOverlay" id="countHelp"><div class="modal"><div class="modalHeader"><h2>Why Poisson for counts?</h2><button class="closeBtn" onclick="closeModal('countHelp')">Close</button></div><p>The sample consists of non-negative integer counts: 0, 1, 2, 3, and so on. A Normal distribution would allow negative values, which makes less sense for a count variable. The Poisson distribution is often a natural first model for counts observed over equal time windows.</p></div></div>
+<div class="modalOverlay" id="conditionalHelp"><div class="modal"><div class="modalHeader"><h2>Why use a Normal distribution here?</h2><button class="closeBtn" onclick="closeModal('conditionalHelp')">Close</button></div><p>The Normal assumption is not claiming income is perfectly Normal. It is a simple way to model a variable using a centre and a spread. In the conditional model, the centre changes with education: μᵢ = β₀ + β₁xᵢ.</p><p>The important MLE idea is not the Normal curve itself. The important idea is that once we specify a conditional density for Y given X, we can build and maximize the conditional likelihood.</p></div></div>
+<div class="modalOverlay" id="quizModal1"><div class="modal"><div class="modalHeader"><h2>Quiz 1</h2><button class="closeBtn" onclick="closeModal('quizModal1')">Close</button></div><p>This short quiz checks the core intuition before continuing with the likelihood examples.</p><div class="quizQ" data-answered="0"><h3>1. What does MLE maximize?</h3><button class="choice" onclick="markQuiz(this,false)">The probability that the parameter is true</button><button class="choice" onclick="markQuiz(this,true)">The likelihood of the observed data as a function of the parameter</button><button class="choice" onclick="markQuiz(this,false)">The sample size</button></div><div class="quizQ" data-answered="0"><h3>2. Why do we often use the log-likelihood?</h3><button class="choice" onclick="markQuiz(this,true)">It has the same maximizer and is easier to work with</button><button class="choice" onclick="markQuiz(this,false)">It changes the best parameter</button><button class="choice" onclick="markQuiz(this,false)">It removes the need for a distributional assumption</button></div><button class="btn primary" onclick="scoreQuiz('quizModal1')">Show score</button> <button class="btn ghost" onclick="resetQuiz('quizModal1')">Reset quiz</button><div class="scoreBox"></div></div></div>
+
+<div class="modalOverlay" id="quizModal2"><div class="modal"><div class="modalHeader"><h2>Quiz 2</h2><button class="closeBtn" onclick="closeModal('quizModal2')">Close</button></div><p>This separate quiz checks the Poisson likelihood and conditional MLE ideas.</p><div class="quizQ" data-answered="0"><h3>1. In the Poisson example, what does λ represent?</h3><button class="choice" onclick="markQuiz(this,false)">The largest count in the sample</button><button class="choice" onclick="markQuiz(this,true)">The average event count per fixed interval</button><button class="choice" onclick="markQuiz(this,false)">The variance of a Normal distribution</button></div><div class="quizQ" data-answered="0"><h3>2. For independent Poisson data, what is λ̂?</h3><button class="choice" onclick="markQuiz(this,true)">The sample mean</button><button class="choice" onclick="markQuiz(this,false)">The sample maximum</button><button class="choice" onclick="markQuiz(this,false)">The number of observations</button></div><div class="quizQ" data-answered="0"><h3>3. What is the main idea of conditional MLE?</h3><button class="choice" onclick="markQuiz(this,false)">Ignore X and estimate only one unconditional distribution</button><button class="choice" onclick="markQuiz(this,true)">Model the distribution of Y given X, then maximize the conditional likelihood</button><button class="choice" onclick="markQuiz(this,false)">Use a histogram instead of a probability model</button></div><button class="btn primary" onclick="scoreQuiz('quizModal2')">Show score</button> <button class="btn ghost" onclick="resetQuiz('quizModal2')">Reset quiz</button><div class="scoreBox"></div></div></div>
+
+<script>
+function openModal(id){const m=document.getElementById(id); if(m){m.classList.add('open');}}
+function closeModal(id){const m=document.getElementById(id); if(m){m.classList.remove('open');}}
+document.addEventListener('click',function(e){if(e.target.classList&&e.target.classList.contains('modalOverlay'))e.target.classList.remove('open')});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.modalOverlay.open').forEach(m=>m.classList.remove('open'))});
+function openQuizModal(event,modalId='quizModal1'){if(event)event.preventDefault();openModal(modalId);return false}
+function markQuiz(btn,ok){const q=btn.closest('.quizQ');if(!q||q.dataset.answered==='1')return;q.dataset.answered='1';q.dataset.correct=ok?'1':'0';q.querySelectorAll('.choice').forEach(b=>b.disabled=true);btn.classList.add(ok?'correct':'wrong');if(!ok){q.querySelectorAll('.choice').forEach(b=>{if((b.getAttribute('onclick')||'').includes('true'))b.classList.add('correct')})}}
+function scoreQuiz(modalId){const modal=document.getElementById(modalId);if(!modal)return;const qs=[...modal.querySelectorAll('.quizQ')];const correct=qs.filter(q=>q.dataset.correct==='1').length;const box=modal.querySelector('.scoreBox');if(box)box.textContent='Score: '+correct+' out of '+qs.length+' answered correctly.'}
+function resetQuiz(modalId){const modal=document.getElementById(modalId);if(!modal)return;modal.querySelectorAll('.quizQ').forEach(q=>{q.dataset.answered='0';q.dataset.correct='0';q.querySelectorAll('.choice').forEach(b=>{b.disabled=false;b.classList.remove('correct','wrong')})});const box=modal.querySelector('.scoreBox');if(box)box.textContent=''}
+function flip(el){el.classList.toggle('flipped')}
+
+const incomeData=[32,37,40,42,45,48,49,51,54,55,57,58,60,62,63,65,68,72,78,84];
+const incomeStages=[
+  {title:'Step 1: Start with the data points.',text:'Each dot is one observed income value, labelled as y₁, y₂, …, yₙ. At this point, we are not fitting a distribution yet; we are simply looking at the sample.'},
+  {title:'Step 2: Add the measurement scale.',text:'Now we introduce the income axis. This turns the dots into quantitative observations measured in thousands of pounds.'},
+  {title:'Step 3: Build the histogram.',text:'The same data points are grouped into bins. The histogram shows the empirical shape of the sample.'},
+  {title:'Step 4: Make a modelling assumption.',text:'The histogram is roughly bell-shaped, so we may assume Normality as a useful starting assumption.'},
+  {title:'Step 5: Estimate by MLE',text:'MLE chooses μ and σ² that make the observed sample most plausible/likely under the assumed Normal model.'}
+];
+let incomeStage=0; let incomeTimer=null;
+function mean(arr){return arr.reduce((a,b)=>a+b,0)/arr.length}
+function sdMLE(arr){const m=mean(arr);return Math.sqrt(arr.reduce((s,y)=>s+(y-m)**2,0)/arr.length)}
+function setIncomeStage(i,btn){incomeStage=Math.max(0,Math.min(4,i));document.querySelectorAll('.stageBtn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');else document.querySelectorAll('.stageBtn')[incomeStage].classList.add('active');drawIncomeCanvas();}
+function stepIncome(delta){setIncomeStage(incomeStage+delta)}
+function resetIncomeStory(){clearInterval(incomeTimer);incomeTimer=null;setIncomeStage(0)}
+function playIncomeStory(){clearInterval(incomeTimer);setIncomeStage(0);incomeTimer=setInterval(()=>{if(incomeStage>=4){clearInterval(incomeTimer);incomeTimer=null}else{setIncomeStage(incomeStage+1)}},1200)}
+function drawIncomeCanvas(){
+ const c=document.getElementById('incomeCanvas'); if(!c)return; const ctx=c.getContext('2d'),w=c.width,h=c.height; ctx.clearRect(0,0,w,h); ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h); const plot={left:70,right:w-35,top:62,bottom:h-68}; const pw=plot.right-plot.left, ph=plot.bottom-plot.top; const xmin=0,xmax=100; const X=v=>plot.left+(v-xmin)/(xmax-xmin)*pw; const Y=v=>plot.bottom-v*ph; ctx.fillStyle='#5f6872';ctx.font='13px Segoe UI';ctx.fillText('Example: annual income observations, measured in £000s',plot.left,22); ctx.fillStyle='#20252b';ctx.font='20px Segoe UI';ctx.fillText(incomeStages[incomeStage].title,plot.left,48); ctx.fillStyle='#5f6872';ctx.font='13px Segoe UI';ctx.fillText('Income (£000s)',plot.right-95,plot.bottom+35); if(incomeStage>=1){ctx.fillStyle='#5f6872';ctx.font='13px Segoe UI';ctx.fillText('count',plot.left-26,plot.top+14);} if(incomeStage===0){const cols=4,boxW=150,boxH=34,gapX=12,gapY=12,startX=82,startY=86;const subDigits={'0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉'};const toSub=n=>String(n).split('').map(ch=>subDigits[ch]||ch).join('');incomeData.forEach((v,i)=>{const col=i%cols,row=Math.floor(i/cols);const x=startX+col*(boxW+gapX);const y=startY+row*(boxH+gapY);roundRect(ctx,x,y,boxW,boxH,8,'#edf2f7','#d8dee8');ctx.fillStyle='#20252b';ctx.font='14px Segoe UI';ctx.textAlign='center';ctx.fillText('y'+toSub(i+1)+' = '+v,x+boxW/2,y+22);ctx.textAlign='left'});}
+ if(incomeStage>=1){ctx.strokeStyle='#d8dde3';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(plot.left,plot.top);ctx.lineTo(plot.left,plot.bottom);ctx.lineTo(plot.right,plot.bottom);ctx.stroke();for(let t=0;t<=100;t+=10){const x=X(t);ctx.strokeStyle='#e7eaee';ctx.beginPath();ctx.moveTo(x,plot.bottom);ctx.lineTo(x,plot.bottom+6);ctx.stroke();ctx.fillStyle='#5f6872';ctx.font='12px Segoe UI';ctx.fillText(String(t),x-8,plot.bottom+22);}incomeData.forEach((v,i)=>{const jitter=((i%5)-2)*6;ctx.beginPath();ctx.arc(X(v),plot.bottom-22-jitter,7,0,Math.PI*2);ctx.fillStyle='#365f88';ctx.fill();});}
+ if(incomeStage>=2){const bins=[30,40,50,60,70,80,90], counts=[];for(let b=0;b<bins.length-1;b++)counts.push(incomeData.filter(v=>v>=bins[b]&&v<bins[b+1]).length);const maxc=Math.max(...counts);for(let b=0;b<counts.length;b++){const x0=X(bins[b])+2,x1=X(bins[b+1])-2;const bh=(counts[b]/maxc)*ph*.68;ctx.fillStyle='rgba(54,95,136,.28)';ctx.fillRect(x0,plot.bottom-bh,x1-x0,bh);ctx.strokeStyle='#365f88';ctx.strokeRect(x0,plot.bottom-bh,x1-x0,bh);}}
+ if(incomeStage>=3){drawNormal(ctx,plot,mean(incomeData),sdMLE(incomeData),xmin,xmax,'rgba(47,107,63,.95)',3.2);ctx.fillStyle='#2f6b3f';ctx.font='14px Segoe UI';ctx.fillText('Assumed Normal density',plot.right-190,plot.top+35)}
+ if(incomeStage>=4){const m=mean(incomeData),s=sdMLE(incomeData);ctx.setLineDash([6,5]);ctx.strokeStyle='#7a8491';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(X(m),plot.top+10);ctx.lineTo(X(m),plot.bottom);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#1f4e79';ctx.font='14px Segoe UI';ctx.fillText('μ̂ = '+m.toFixed(1),X(m)+8,plot.top+18);ctx.fillText('σ̂ ≈ '+s.toFixed(1),X(m)+8,plot.top+39);ctx.fillStyle='#5f6872';ctx.font='13px Segoe UI';ctx.fillText('MLE now reports the fitted Normal parameters for this sample.',plot.left,h-14)}
+ document.getElementById('incomeStatus').innerHTML='<b>'+incomeStages[incomeStage].title+'</b><br>'+incomeStages[incomeStage].text;document.getElementById('incomeMean').textContent=mean(incomeData).toFixed(1);document.getElementById('incomeSd').textContent=sdMLE(incomeData).toFixed(1);
+}
+function drawNormal(ctx,plot,mu,sd,xmin,xmax,color,lw){const pw=plot.right-plot.left,ph=plot.bottom-plot.top;const X=v=>plot.left+(v-xmin)/(xmax-xmin)*pw;function pdf(x){return (1/(sd*Math.sqrt(2*Math.PI)))*Math.exp(-.5*((x-mu)/sd)**2)}const peak=pdf(mu);ctx.beginPath();for(let x=xmin;x<=xmax;x+=.4){const y=plot.bottom-(pdf(x)/peak)*ph*.64;if(x===xmin)ctx.moveTo(X(x),y);else ctx.lineTo(X(x),y)}ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.stroke();}
+function roundRect(ctx,x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.stroke();}
+
+function showStory(id,btn){document.querySelectorAll('.story').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');drawConditionalNormals(id==='cond')}
+function drawConditionalNormals(isConditional=false){const c=document.getElementById('conditionalCanvas'); if(!c)return; const ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);const plot={left:70,right:w-35,top:50,bottom:h-55};const pw=plot.right-plot.left,ph=plot.bottom-plot.top;ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.strokeStyle='#d8dde3';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(plot.left,plot.top);ctx.lineTo(plot.left,plot.bottom);ctx.lineTo(plot.right,plot.bottom);ctx.stroke();ctx.fillStyle='#20252b';ctx.font='16px Segoe UI';ctx.fillText(isConditional?'Conditional model: different Normal curves for different education levels':'Unconditional model: one Normal curve for everyone',plot.left,28);ctx.fillStyle='#5f6872';ctx.font='13px Segoe UI';ctx.fillText('Income',plot.right-45,plot.bottom+30);ctx.fillText('Density',18,plot.top+4);const xmin=10,xmax=110;function X(v){return plot.left+(v-xmin)/(xmax-xmin)*pw}function Y(v,peak){return plot.bottom-(v/peak)*ph*.72}function pdf(x,mu,sd){return(1/(sd*Math.sqrt(2*Math.PI)))*Math.exp(-.5*((x-mu)/sd)**2)}function drawCurve(mu,sd,label,dash=false,alpha=1){let peak=0;for(let x=xmin;x<=xmax;x+=.5)peak=Math.max(peak,pdf(x,mu,sd));ctx.beginPath();for(let x=xmin;x<=xmax;x+=.5){const px=X(x),py=Y(pdf(x,mu,sd),peak);if(x===xmin)ctx.moveTo(px,py);else ctx.lineTo(px,py)}ctx.setLineDash(dash?[7,5]:[]);ctx.strokeStyle='rgba(36,54,75,'+alpha+')';ctx.lineWidth=dash?2.5:3.5;ctx.stroke();ctx.setLineDash([]);const mx=X(mu);ctx.beginPath();ctx.setLineDash([4,5]);ctx.moveTo(mx,plot.top+10);ctx.lineTo(mx,plot.bottom);ctx.strokeStyle='rgba(122,132,145,'+alpha+')';ctx.lineWidth=1.5;ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='rgba(32,37,43,'+alpha+')';ctx.font='13px Segoe UI';ctx.fillText(label,mx+6,plot.top+24+Math.max(0,(mu-45))*.15)}for(let t=20;t<=100;t+=20){const x=X(t);ctx.strokeStyle='#e7eaee';ctx.beginPath();ctx.moveTo(x,plot.bottom);ctx.lineTo(x,plot.bottom+6);ctx.stroke();ctx.fillStyle='#5f6872';ctx.font='12px Segoe UI';ctx.fillText(String(t),x-8,plot.bottom+22)}if(!isConditional){drawCurve(55,14,'one population mean μ',false,1);ctx.fillStyle='#5f6872';ctx.font='14px Segoe UI';ctx.fillText('Education is not used, so everyone is described by this same distribution.',plot.left,plot.bottom+44)}else{drawCurve(42,12,'x = 10 years',true,.55);drawCurve(58,12,'x = 14 years',false,.82);drawCurve(74,12,'x = 18 years',false,1);ctx.fillStyle='#5f6872';ctx.font='14px Segoe UI';ctx.fillText('The assumed Normal distribution shifts as education x changes: μᵢ = β₀ + β₁xᵢ.',plot.left,plot.bottom+44)}}
+
+const data=[1,3,2,4,2,3,0,5,2,1,4,3];const poissonMean=data.reduce((a,b)=>a+b,0)/data.length;function logFact(k){let s=0;for(let i=2;i<=k;i++)s+=Math.log(i);return s}function logLik(lambda){return data.reduce((s,y)=>s+(-lambda+y*Math.log(lambda)-logFact(y)),0)}function drawChart(){const c=document.getElementById('chart');if(!c)return;const ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);const xs=[],ys=[];for(let l=.2;l<=8.001;l+=.05){xs.push(l);ys.push(logLik(l))}const ymin=Math.min(...ys),ymax=Math.max(...ys);function X(l){return 50+(l-.2)/(8-.2)*(w-80)}function Y(v){return h-35-(v-ymin)/(ymax-ymin)*(h-60)}ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(50,15);ctx.lineTo(50,h-35);ctx.lineTo(w-30,h-35);ctx.strokeStyle='#d8dde3';ctx.stroke();ctx.beginPath();xs.forEach((x,i)=>{const px=X(x),py=Y(ys[i]);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)});ctx.strokeStyle='#1f4e79';ctx.lineWidth=3;ctx.stroke();for(let t=1;t<=8;t++){const x=X(t);ctx.strokeStyle='#e7eaee';ctx.beginPath();ctx.moveTo(x,h-35);ctx.lineTo(x,h-29);ctx.stroke();ctx.fillStyle='#5f6872';ctx.font='12px Segoe UI';ctx.fillText(String(t),x-4,h-12)}ctx.fillStyle='#5f6872';ctx.font='12px Segoe UI';ctx.fillText('λ',w-22,h-14);ctx.fillText('log L',12,22);const mx=X(poissonMean);ctx.beginPath();ctx.setLineDash([6,5]);ctx.moveTo(mx,20);ctx.lineTo(mx,h-35);ctx.strokeStyle='#7a8491';ctx.lineWidth=2;ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#20252b';ctx.font='13px Segoe UI';ctx.fillText('λ̂ = sample mean = '+poissonMean.toFixed(2),mx+8,58);const slider=document.getElementById('lambdaSlider');const lambda=parseFloat(slider.value);const ll=logLik(lambda);const px=X(lambda),py=Y(ll);ctx.beginPath();ctx.arc(px,py,7,0,Math.PI*2);ctx.fillStyle='#2f6b3f';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();document.getElementById('lambdaValue').textContent=lambda.toFixed(2);document.getElementById('llValue').textContent=ll.toFixed(3);const rel=(ll-ymin)/(ymax-ymin);document.getElementById('likeMeter').style.width=(rel*100).toFixed(1)+'%'}
+function init(){document.getElementById('miniData').innerHTML=data.map(x=>'<span>'+x+'</span>').join('');document.getElementById('sampleMeanText').textContent=poissonMean.toFixed(1);document.getElementById('lambdaHatText').textContent=poissonMean.toFixed(1);drawChart();drawIncomeCanvas();drawConditionalNormals(false)}
+window.addEventListener('load',init);
+</script>
+</body>
+</html>
