@@ -1,1 +1,230 @@
-# My cv
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arthur Galichère — CV</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --paper:        #f4f5f7;
+      --paper-soft:   #fafbfc;
+      --sheet:        #ffffff;
+      --panel:        #ebeeec;
+      --panel-deep:   #e2e5e9;
+      --line:         rgba(28, 28, 30, 0.08);
+      --line-strong:  rgba(28, 28, 30, 0.15);
+      --ink:          #1c1c1e;
+      --ink-soft:     #3a3a3c;
+      --muted:        #71717a;
+      --accent:       #3b5a75;
+      --accent-strong:#25394b;
+      --accent-soft:  #edf2f6;
+
+      --display: 'Bitter', Georgia, serif;
+      --sans:    'Montserrat', system-ui, sans-serif;
+      --mono:    'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: var(--paper); }
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+    }
+
+    .card {
+      width: min(100%, 1100px);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
+      overflow: hidden;
+    }
+    .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
+
+    /* Synchronized Navigation Matrix */
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      border-left: 1px solid var(--line);
+      color: var(--ink);
+      text-decoration: none;
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+    .index-card:first-child { border-left: none; }
+    .index-nav .idx-label {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--display); font-size: 1.15rem; font-weight: 600;
+    }
+    .index-nav .idx-label i { font-size: 0.85rem; color: var(--accent); width: 1.1rem; text-align: center; }
+    
+    .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
+    .index-card:hover { background: var(--accent); color: #fff; }
+    .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
+
+    /* Dynamic CV Content Styling */
+    .cv-body {
+      padding: 3rem 2.5rem;
+    }
+    .cv-header-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid var(--line-strong);
+      padding-bottom: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; }
+    
+    .cv-section {
+      margin-bottom: 2.5rem;
+    }
+    .cv-section-title {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent-strong);
+      border-bottom: 1px solid var(--line-strong);
+      padding-bottom: 0.3rem;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .cv-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .cv-item-role { font-weight: 600; color: var(--ink); font-size: 1.05rem; }
+    .cv-item-institution { color: var(--accent); font-weight: 500; font-size: 0.98rem; }
+    .cv-item-date { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); text-align: right; }
+    .cv-item-details { grid-column: 1 / -1; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.5; margin-top: 0.2rem; }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      background: var(--panel-deep);
+      border-top: 1px solid var(--line);
+    }
+    .foot-loc { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .cv-body { padding: 2rem 1.5rem; }
+      .cv-item { grid-template-columns: 1fr; }
+      .cv-item-date { text-align: left; margin-bottom: 0.2rem; }
+    }
+    @media (max-width: 680px) {
+      .index-nav { grid-template-columns: 1fr; }
+      .index-card { border-left: none; border-top: 1px solid var(--line); }
+      .index-card:first-child { border-top: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+    <article class="card">
+      
+      <nav class="index-nav" aria-label="Academic Directory">
+        <a href="../index.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
+        </a>
+        <a href="cv.html" class="index-card is-current" aria-current="page">
+          <span class="idx-label"><i class="fas fa-file" aria-hidden="true"></i> CV</span>
+        </a>
+        <a href="../index.html#research" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-line" aria-hidden="true"></i> Research</span>
+        </a>
+        <a href="../index.html#teaching" class="index-card">
+          <span class="idx-label"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Teaching</span>
+        </a>
+        <a href="../index.html#economics" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
+        </a>
+      </nav>
+
+      <section class="cv-body">
+        <div class="cv-header-block">
+          <h1 class="cv-title">Curriculum Vitae</h1>
+          <a href="cv.pdf" target="_blank" style="color: var(--accent); font-weight: 600; font-size: 0.9rem;"><i class="fas fa-download"></i> Download PDF</a>
+        </div>
+
+        <div id="cv-target">Loading CV data...</div>
+      </section>
+
+      <footer class="foot">
+        <span class="foot-loc">University of Warwick · Coventry, UK</span>
+      </footer>
+      
+    </article>
+  </main>
+
+  <script>
+    async function loadCV() {
+      try {
+        const response = await fetch('cv.json');
+        const data = await response.json();
+        const target = document.getElementById('cv-target');
+        target.innerHTML = ''; 
+
+        data.sections.forEach(section => {
+          let sectionHTML = `
+            <div class="cv-section">
+              <h2 class="cv-section-title">${section.title}</h2>
+          `;
+          
+          section.items.forEach(item => {
+            sectionHTML += `
+              <div class="cv-item">
+                <div>
+                  <div class="cv-item-role">${item.role}</div>
+                  <div class="cv-item-institution">${item.institution}</div>
+                </div>
+                <div class="cv-item-date">${item.date}</div>
+                ${item.details ? `<div class="cv-item-details">${item.details}</div>` : ''}
+              </div>
+            `;
+          });
+
+          sectionHTML += `</div>`;
+          target.innerHTML += sectionHTML;
+        });
+      } catch (error) {
+        document.getElementById('cv-target').innerHTML = '<p style="color: red;">Failed to parse CV data structural stream.</p>';
+      }
+    }
+    loadCV();
+  </script>
+</body>
+</html>
