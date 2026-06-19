@@ -1,0 +1,43 @@
+name: Auto-Update CV Data
+
+on:
+  push:
+    paths:
+      - 'website/cv.pdf' # This workflow ONLY runs when cv.pdf changes
+
+jobs:
+  parse-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Gives the bot permission to push changes back to your repo
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install PDF Parser Dependencies
+        run: |
+          python -m pip upgrade pip
+          pip install pypdf
+
+      - name: Run CV Parser Script
+        run: python parse_cv.py
+
+      - name: Commit and Push Updated JSON
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add website/cv.json
+          # Only commit if changes were actually made to the JSON
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: automated sync of cv.json from updated pdf [skip ci]"
+            git push
+          else
+            echo "No structural changes detected in CV text content."
+          fi
