@@ -1,7 +1,8 @@
 import os
 import sys
 import json
-from openai import OpenAI
+import urllib.request
+import urllib.error
 
 def clean_json_with_llm():
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -14,51 +15,69 @@ def clean_json_with_llm():
     with open(file_path, "r", encoding="utf-8") as f:
         raw_data = json.load(f)
 
-    # Check if API Key is visible to the environment
-    if not os.environ.get("OPENAI_API_KEY"):
-        print("CRITICAL ERROR: The OPENAI_API_KEY environment variable is empty or missing.")
+    # Fetch your Gemini API key from the system environment
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("CRITICAL ERROR: The GEMINI_API_KEY environment variable is empty or missing.")
         print("Ensure you have added it to your GitHub Repository Secrets.")
         sys.exit(1)
 
+    system_instruction = (
+        "You are an expert data cleaning assistant. Your task is to process a raw, messy JSON CV file.\n"
+        "Fix the following extraction errors:\n"
+        "1. Missing Spaces: Fix word spacing collisions caused by PDF font matrix conversion issues "
+        "(e.g., convert 'AssistantProfessor(TeachingFocussed)' to 'Assistant Professor (Teaching Focussed)', "
+        "and 'UniversityofWarwick' to 'University of Warwick').\n"
+        "2. Character Glitches: Fix text casing artifacts like 'UNIVErSITY' to 'University' or 'WArWICK' to 'Warwick'.\n"
+        "3. Structural Cleanup: Eliminate redundant duplicate sections (like repeated Education entries) and normalize dates.\n"
+        "4. Mapping: Output items matching a standardized array structure containing keys: 'role', 'institution', 'date', and 'details'.\n"
+        "Return ONLY the updated valid JSON object matching the input array style."
+    )
+
+    prompt = f"{system_instruction}\n\nClean this data thoroughly and return it as valid JSON:\n{json.dumps(raw_data)}"
+
+    # Set up the endpoint URL targeting gemini-2.5-flash
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+    
+    # Configure payload forcing a native application/json enforcement response
+    payload = {
+        "contents": [{
+            "parts": [{"text": prompt}]
+        }],
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "temperature": 0.1
+        }
+    }
+    
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST"
+    )
+
+    print("Streaming raw extraction matrix to Gemini API for structural cleaning...")
     try:
-        client = OpenAI()
-
-        system_prompt = (
-            "You are an expert data cleaning assistant. Your task is to process a raw, messy JSON CV file.\n"
-            "Fix the following extraction errors:\n"
-            "1. Missing Spaces: Fix word spacing collisions caused by PDF font matrix conversion issues.\n"
-            "2. Character Glitches: Fix text casing artifacts like 'UNIVErSITY' to 'University'.\n"
-            "3. Structural Cleanup: Eliminate redundant duplicate sections and normalize dates.\n"
-            "4. Mapping: Output items matching a standardized array structure containing keys: 'role', 'institution', 'date', and 'details'.\n"
-            "Return ONLY the updated valid JSON object matching the input array style. Do not include markdown code block backticks or conversational text."
-        )
-
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Clean this data thoroughly:\n\n{json.dumps(raw_data)}"}
-            ],
-            temperature=0.1
-        )
-        
-        cleaned_content = response.choices[0].message.content.strip()
-        
-        if cleaned_content.startswith("```json"):
-            cleaned_content = cleaned_content[7:-3].strip()
-        elif cleaned_content.startswith("```"):
-            cleaned_content = cleaned_content[3:-3].strip()
-
-        cleaned_json = json.loads(cleaned_content)
-
-        with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(cleaned_json, f, indent=2, ensure_ascii=False)
+        with urllib.request.urlopen(req) as response:
+            result = json.loads(response.read().decode("utf-8"))
             
-        print(f"Stage 2 Complete: Clean data saved back to {file_path}")
+            # Extract raw string block text from the nested Gemini response tree
+            json_text_out = result["candidates"][0]["content"]["parts"][0]["text"]
+            cleaned_json = json.loads(json_text_out)
 
+            # Overwrite the temporary messy cv.json with clean structural arrays
+            with open(file_path, "w", encoding="utf-8") as f:
+                json.dump(cleaned_json, f, indent=2, ensure_ascii=False)
+                
+            print(f"Stage 2 Complete: Clean data saved back to {file_path}")
+
+    except urllib.error.HTTPError as e:
+        print(f"CRITICAL API HTTP Error: {e.code} - {e.read().decode('utf-8')}")
+        sys.exit(1)
     except Exception as e:
-        print(f"CRITICAL LLM Processing Error: {e}")
-        sys.exit(1) # Forces GitHub Actions to halt on this step and display the error log
+        print(f"CRITICAL Processing Error: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     clean_json_with_llm()
