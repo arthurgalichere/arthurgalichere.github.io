@@ -21,15 +21,15 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Processing Dependencies
-        run: pip install pdfplumber openai
+      - name: Install PDF Scraper Dependencies
+        run: pip install pdfplumber # We only need pdfplumber now since Gemini runs on native urllib!
 
       - name: Run Stage 1 - Raw Extraction
         run: python website/extract_pdf.py
 
-      - name: Run Stage 2 - LLM Processing
+      - name: Run Stage 2 - Gemini LLM Processing
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python website/llm_clean.py
 
       - name: Commit Perfect Outputs
@@ -39,8 +39,8 @@ jobs:
           
           git add website/cv.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore: AI-enhanced formatting and spacing repair [skip ci]"
+            git commit -m "chore: Gemini AI-enhanced layout repair [skip ci]"
             git push
           else
-            echo "No structural layout anomalies found. Skipping push."
+            echo "No structural content modifications required."
           fi
