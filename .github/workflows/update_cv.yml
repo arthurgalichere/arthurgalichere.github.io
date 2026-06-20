@@ -21,10 +21,15 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install PDF Parser
+      - name: Install System Dependencies
         run: pip install pdfplumber
 
-      - name: Run Local CV Parser Script
+      - name: Install Lightweight CPU PyTorch & Transformers
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install transformers
+
+      - name: Run Local Open-Source LLM Parser
         run: python parse_cv.py
 
       - name: Commit and Push Updated JSON
@@ -34,8 +39,8 @@ jobs:
           
           git add website/cv.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore: local spacing and milestone alignment fixes [skip ci]"
+            git commit -m "chore: local open-source AI layout clean [skip ci]"
             git push
           else
-            echo "No changes detected."
+            echo "No structural content differences found."
           fi
