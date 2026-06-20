@@ -6,43 +6,81 @@ import urllib.error
 
 def clean_json_with_llm():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, "cv.json")
+    temp_text_path = os.path.join(base_dir, "raw_cv.txt")
+    output_json_path = os.path.join(base_dir, "cv.json")
     
-    if not os.path.exists(file_path):
-        print(f"CRITICAL ERROR: Target file not found at {file_path}")
+    # Verify raw text exists
+    if not os.path.exists(temp_text_path):
+        print(f"CRITICAL ERROR: Temporary raw text file not found at {temp_text_path}")
         sys.exit(1)
 
-    with open(file_path, "r", encoding="utf-8") as f:
-        raw_data = json.load(f)
+    with open(temp_text_path, "r", encoding="utf-8") as f:
+        raw_text = f.read()
 
-    # Fetch your Gemini API key from the system environment
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print("CRITICAL ERROR: The GEMINI_API_KEY environment variable is empty or missing.")
-        print("Ensure you have added it to your GitHub Repository Secrets.")
         sys.exit(1)
 
     system_instruction = (
-        "You are an expert data cleaning assistant. Your task is to process a raw, messy JSON CV file.\n"
-        "Fix the following extraction errors:\n"
-        "1. Missing Spaces: Fix word spacing collisions caused by PDF font matrix conversion issues "
-        "(e.g., convert 'AssistantProfessor(TeachingFocussed)' to 'Assistant Professor (Teaching Focussed)', "
-        "and 'UniversityofWarwick' to 'University of Warwick').\n"
-        "2. Character Glitches: Fix text casing artifacts like 'UNIVErSITY' to 'University' or 'WArWICK' to 'Warwick'.\n"
-        "3. Structural Cleanup: Eliminate redundant duplicate sections (like repeated Education entries) and normalize dates.\n"
-        "4. Mapping: Output items matching a standardized array structure containing keys: 'role', 'institution', 'date', and 'details'.\n"
-        "Return ONLY the updated valid JSON object matching the input array style."
+        "You are an expert CV structuring engine. Parse this raw, messy academic CV text.\n"
+        "1. Fix Spacing Glitches: Separate any stuck words (e.g. 'AssistantProfessor' -> 'Assistant Professor', 'UniversityofWarwick' -> 'University of Warwick').\n"
+        "2. Structure Sections and Subsections:\n"
+        "   - Identify major sections (e.g. 'Employment', 'Education', 'Teaching Awards & Qualifications', 'Teaching Experience', 'Academic Leadership & Development', 'Administrative & Collegial Experience', 'Referees', 'Selected Presentations').\n"
+        "   - If a section contains sub-categories or groupings, organize them under a 'subsections' array (e.g. 'Teaching Experience' should have subsections for 'University of Warwick', 'University of Glasgow', and 'Additional Teaching and Supervisory Experience').\n"
+        "   - For 'Selected Presentations', group the items by year (e.g., '2026', '2025') as subsections.\n"
+        "   - If a section is flat and does not require subsections (like 'Employment' or 'Education'), map items directly to the section's 'items' array.\n"
+        "3. Clear Exclusions: DO NOT include any paragraphs, abstracts, or descriptions regarding 'Research Summary', 'Job Market Paper', 'Working Papers', or 'Work in Progress'. We want to skip those entirely.\n"
+        "4. Fix Institutional Alignments:\n"
+        "   - The 'Warwick Award for Teaching Excellence' (WATE) belongs to the 'University of Warwick'.\n"
+        "   - The 'Fellowship of the Higher Education Academy' belongs to the 'University of Warwick'.\n"
+        "   - The 'Associate Fellowship' / 'DAT HE' belongs to the 'University of Glasgow'."
     )
 
-    prompt = f"{system_instruction}\n\nClean this data thoroughly and return it as valid JSON:\n{json.dumps(raw_data)}"
+    prompt = f"""
+Clean, restore word spacing, and parse this raw academic CV text into structural Sections, Subsections, and Items.
 
-    # Set up the endpoint URL targeting gemini-2.5-flash
+Output strictly valid JSON matching this exact schema shape:
+{{
+  "sections": [
+    {{
+      "title": "Section Title",
+      "subsections": [
+        {{
+          "title": "Subsection Name (e.g., University of Warwick or 2026)",
+          "items": [
+            {{
+              "role": "Role title, award name, or presentation name",
+              "institution": "Institution name if applicable",
+              "date": "Date if applicable",
+              "details": "Paragraph description or supporting bullet text"
+            }}
+          ]
+        }}
+      ],
+      "items": [
+        // Populate this ONLY if there are NO subsections for this section
+        {{
+          "role": "Role title, award name, or presentation name",
+          "institution": "Institution name if applicable",
+          "date": "Date if applicable",
+          "details": "Paragraph description or supporting bullet text"
+        }}
+      ]
+    }}
+  ]
+}}
+
+Raw CV Text:
+-----------------------
+{raw_text}
+-----------------------
+"""
+
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-    
-    # Configure payload forcing a native application/json enforcement response
     payload = {
         "contents": [{
-            "parts": [{"text": prompt}]
+            "parts": [{"text": f"{system_instruction}\n\n{prompt}"}]
         }],
         "generationConfig": {
             "responseMimeType": "application/json",
@@ -57,21 +95,22 @@ def clean_json_with_llm():
         method="POST"
     )
 
-    print("Streaming raw extraction matrix to Gemini API for structural cleaning...")
+    print("Streaming structured data request to Google Gemini API...")
     try:
         with urllib.request.urlopen(req) as response:
             result = json.loads(response.read().decode("utf-8"))
-            
-            # Extract raw string block text from the nested Gemini response tree
             json_text_out = result["candidates"][0]["content"]["parts"][0]["text"]
             cleaned_json = json.loads(json_text_out)
 
-            # Overwrite the temporary messy cv.json with clean structural arrays
-            with open(file_path, "w", encoding="utf-8") as f:
+            with open(output_json_path, "w", encoding="utf-8") as f:
                 json.dump(cleaned_json, f, indent=2, ensure_ascii=False)
                 
-            print(f"Stage 2 Complete: Clean data saved back to {file_path}")
-
+            print(f"Stage 2 Complete: Structured sections and subsections saved to {output_json_path}")
+            
+            # Clean up temporary raw text file safely
+            if os.path.exists(temp_text_path):
+                os.remove(temp_text_path)
+                
     except urllib.error.HTTPError as e:
         print(f"CRITICAL API HTTP Error: {e.code} - {e.read().decode('utf-8')}")
         sys.exit(1)
