@@ -183,19 +183,38 @@
         const target = document.getElementById('cv-target');
         target.innerHTML = ''; 
 
-        if (!data.sections || !Array.isArray(data.sections)) {
-          throw new Error("Invalid schema tracking tree: Top-level 'sections' block is missing or not an array.");
+        // Resiliently locate the list of sections
+        let sections = [];
+        if (Array.isArray(data)) {
+          sections = data;
+        } else if (data && Array.isArray(data.sections)) {
+          sections = data.sections;
+        } else if (data && typeof data === 'object') {
+          // If the sections array is wrapped under an alternative property name
+          const potentialArray = Object.values(data).find(val => Array.isArray(val));
+          if (potentialArray) {
+            sections = potentialArray;
+          } else {
+            throw new Error("Invalid structure: Could not find any array property in the JSON file.");
+          }
+        } else {
+          throw new Error("Invalid format: The fetched JSON data must be an object or an array.");
         }
 
-        data.sections.forEach(section => {
-          if (!section.title || !section.items || !Array.isArray(section.items)) return;
+        sections.forEach(section => {
+          if (!section || typeof section !== 'object') return;
+          
+          const title = section.title ? String(section.title).trim() : "Untitled Section";
+          const items = Array.isArray(section.items) ? section.items : [];
 
           let sectionHTML = `
             <div class="cv-section">
-              <h2 class="cv-section-title">${section.title.trim()}</h2>
+              <h2 class="cv-section-title">${title}</h2>
           `;
           
-          section.items.forEach(item => {
+          items.forEach(item => {
+            if (!item || typeof item !== 'object') return;
+
             // Defensively convert any missing, null, or undefined values into clean string boundaries
             const role = item.role ? String(item.role).trim() : "";
             const institution = item.institution ? String(item.institution).trim() : "";
