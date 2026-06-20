@@ -3,7 +3,8 @@ name: Auto-Update CV Data
 on:
   push:
     paths:
-      - 'website/cv.pdf' # This workflow ONLY runs when cv.pdf changes
+      - 'website/cv.pdf'
+  workflow_dispatch: # <-- Add this line right here!
 
 jobs:
   parse-and-commit:
