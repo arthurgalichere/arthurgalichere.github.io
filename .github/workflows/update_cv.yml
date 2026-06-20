@@ -21,10 +21,10 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Advanced PDF Parser
+      - name: Install PDF Parser
         run: pip install pdfplumber
 
-      - name: Run CV Parser Script
+      - name: Run Local CV Parser Script
         run: python parse_cv.py
 
       - name: Commit and Push Updated JSON
@@ -34,8 +34,8 @@ jobs:
           
           git add website/cv.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore: auto-fix word spacing and sync cv.json [skip ci]"
+            git commit -m "chore: local spacing and milestone alignment fixes [skip ci]"
             git push
           else
-            echo "No structural content differences found."
+            echo "No changes detected."
           fi
