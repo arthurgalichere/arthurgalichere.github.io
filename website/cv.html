@@ -59,7 +59,6 @@
     }
     .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
 
-    /* Synchronized Navigation Matrix */
     .index-nav {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -88,10 +87,7 @@
     .index-card:hover { background: var(--accent); color: #fff; }
     .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
 
-    /* Dynamic CV Content Styling */
-    .cv-body {
-      padding: 3rem 2.5rem;
-    }
+    .cv-body { padding: 3rem 2.5rem; }
     .cv-header-block {
       display: flex;
       justify-content: space-between;
@@ -102,31 +98,18 @@
     }
     .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; }
     
-    .cv-section {
-      margin-bottom: 2.5rem;
-    }
+    .cv-section { margin-bottom: 2.5rem; }
     .cv-section-title {
       font-family: var(--display);
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: var(--accent-strong);
       border-bottom: 1px solid var(--line-strong);
-      padding-bottom: 0.3rem;
-      margin-bottom: 1.2rem;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
-    
-    .cv-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.5rem;
-      margin-bottom: 1.2rem;
-    }
-    .cv-item-role { font-weight: 600; color: var(--ink); font-size: 1.05rem; }
-    .cv-item-institution { color: var(--accent); font-weight: 500; font-size: 0.98rem; }
-    .cv-item-date { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); text-align: right; }
-    .cv-item-details { grid-column: 1 / -1; color: var(--ink-soft); font-size: 0.95rem; line-height: 1.5; margin-top: 0.2rem; }
 
     .foot {
       display: flex;
@@ -141,8 +124,6 @@
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .cv-body { padding: 2rem 1.5rem; }
-      .cv-item { grid-template-columns: 1fr; }
-      .cv-item-date { text-align: left; margin-bottom: 0.2rem; }
     }
     @media (max-width: 680px) {
       .index-nav { grid-template-columns: 1fr; }
@@ -156,7 +137,6 @@
   <main class="page">
     <article class="card">
       
-      <!-- Synchronized Navbar Links pointing back to main page anchor points -->
       <nav class="index-nav" aria-label="Academic Directory">
         <a href="../index.html" class="index-card">
           <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
@@ -178,12 +158,10 @@
       <section class="cv-body">
         <div class="cv-header-block">
           <h1 class="cv-title">Curriculum Vitae</h1>
-          <!-- Updated to refer to CV_Arthur_Galichere.pdf -->
           <a href="CV_Arthur_Galichere.pdf" target="_blank" style="color: var(--accent); font-weight: 600; font-size: 0.9rem;"><i class="fas fa-download"></i> Download PDF</a>
         </div>
 
-        <!-- The parsed JSON data injection point -->
-        <div id="cv-target">Loading CV data...</div>
+        <div id="cv-target">Loading layout matrix...</div>
       </section>
 
       <footer class="foot">
@@ -193,36 +171,53 @@
     </article>
   </main>
 
-  <!-- Client-side script reading the generated JSON structural array safely -->
   <script>
     async function loadCV() {
       try {
         const response = await fetch('cv.json');
+        if (!response.ok) {
+          throw new Error(`HTTP network error! Target server returned status: ${response.status}`);
+        }
+        
         const data = await response.json();
         const target = document.getElementById('cv-target');
         target.innerHTML = ''; 
 
+        if (!data.sections || !Array.isArray(data.sections)) {
+          throw new Error("Invalid schema tracking tree: Top-level 'sections' block is missing or not an array.");
+        }
+
         data.sections.forEach(section => {
+          if (!section.title || !section.items || !Array.isArray(section.items)) return;
+
           let sectionHTML = `
             <div class="cv-section">
-              <h2 class="cv-section-title">${section.title}</h2>
+              <h2 class="cv-section-title">${section.title.trim()}</h2>
           `;
           
           section.items.forEach(item => {
-            // Check if item fields are empty to alter layout patterns elegantly
-            const hasRole = item.role && item.role.trim() !== "";
-            const hasInstitution = item.institution && item.institution.trim() !== "";
-            const hasDate = item.date && item.date.trim() !== "";
-            const hasDetails = item.details && item.details.trim() !== "";
+            // Defensively convert any missing, null, or undefined values into clean string boundaries
+            const role = item.role ? String(item.role).trim() : "";
+            const institution = item.institution ? String(item.institution).trim() : "";
+            const date = item.date ? String(item.date).trim() : "";
+            const details = item.details ? String(item.details).trim() : "";
+
+            const hasRole = role !== "";
+            const hasInstitution = institution !== "";
+            const hasDate = date !== "";
+            const hasDetails = details !== "";
+
+            // Skip rendering completely empty structural node artifacts
+            if (!hasRole && !hasInstitution && !hasDate && !hasDetails) return;
 
             sectionHTML += `
-              <div class="cv-item" style="margin-bottom: 1.5rem;">
+              <div class="cv-item" style="display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; margin-bottom: 1.5rem; align-items: baseline;">
                 <div>
-                  ${hasRole ? `<div class="cv-item-role" style="font-weight:600; color:var(--ink);">${item.role}</div>` : ''}
-                  ${hasInstitution ? `<div class="cv-item-institution" style="color:var(--accent); font-weight:500;">${item.institution}</div>` : ''}
+                  ${hasRole ? `<div class="cv-item-role" style="font-weight: 600; color: var(--ink); font-size: 1.05rem; line-height: 1.4;">${role}</div>` : ''}
+                  ${hasInstitution ? `<div class="cv-item-institution" style="color: var(--accent); font-weight: 500; font-size: 0.96rem; margin-top: 0.1rem;">${institution}</div>` : ''}
                 </div>
-                ${hasDate ? `<div class="cv-item-date" style="font-family:var(--mono); font-size:0.88rem; color:var(--muted);">${item.date}</div>` : ''}
-                ${hasDetails ? `<div class="cv-item-details" style="grid-column: 1 / -1; margin-top: 0.3rem; line-height: 1.5; color:var(--ink-soft);">${item.details}</div>` : ''}
+                ${hasDate ? `<div class="cv-item-date" style="font-family: var(--mono); font-size: 0.88rem; color: var(--muted); text-align: right; font-weight: 500;">${date}</div>` : ''}
+                ${hasDetails ? `<div class="cv-item-details" style="grid-column: 1 / -1; margin-top: 0.4rem; line-height: 1.5; color: var(--ink-soft); font-size: 0.94rem; text-align: justify;">${details}</div>` : ''}
               </div>
             `;
           });
@@ -230,8 +225,21 @@
           sectionHTML += `</div>`;
           target.innerHTML += sectionHTML;
         });
+
+        if (target.innerHTML === '') {
+          target.innerHTML = '<p style="color: var(--muted);">No printable structural records discovered.</p>';
+        }
+
       } catch (error) {
-        document.getElementById('cv-target').innerHTML = '<p style="color: red;">Failed to parse structural cv.json content arrays.</p>';
+        console.error("CV Render Fault Trace:", error);
+        document.getElementById('cv-target').innerHTML = `
+          <div style="color: #c0392b; background: #fdf2f2; border: 1px solid #f5c6cb; padding: 1.2rem; border-radius: 4px; font-family: var(--sans); font-size: 0.95rem; line-height: 1.5;">
+            <p style="font-weight: 700; margin-bottom: 0.4rem;"><i class="fas fa-exclamation-triangle"></i> Render Initialization Blocked</p>
+            <p style="font-family: var(--mono); font-size: 0.85rem; color: var(--ink-soft); padding: 0.4rem; background: rgba(0,0,0,0.04); border-radius: 3px;">${error.message}</p>
+            <p style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--muted);"><strong>Troubleshooting steps:</strong><br>
+            • If reviewing locally on your desktop, standard security models block file queries. You must launch a development testing server or deploy directly onto <strong>GitHub Pages</strong> to allow secure network fetching transfers.</p>
+          </div>
+        `;
       }
     }
     loadCV();
