@@ -1,34 +1,38 @@
 import os
+import sys
 import json
 from openai import OpenAI
 
 def clean_json_with_llm():
-    # Automatically tracks down cv.json in the same folder as this script
     base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, "cv.json")
     
     if not os.path.exists(file_path):
-        print(f"Error: Target file not found at {file_path}")
-        return
+        print(f"CRITICAL ERROR: Target file not found at {file_path}")
+        sys.exit(1)
 
     with open(file_path, "r", encoding="utf-8") as f:
         raw_data = json.load(f)
 
-    client = OpenAI()
-
-    system_prompt = (
-        "You are an expert data cleaning assistant. Your task is to process a raw, messy JSON CV file.\n"
-        "Fix the following extraction errors:\n"
-        "1. Missing Spaces: Fix word spacing collisions caused by PDF font matrix conversion issues "
-        "(e.g., convert 'AssistantProfessor(TeachingFocussed)' to 'Assistant Professor (Teaching Focussed)', "
-        "and 'UniversityofWarwick' to 'University of Warwick').\n"
-        "2. Character Glitches: Fix text casing artifacts like 'UNIVErSITY' to 'University' or 'WArWICK' to 'Warwick'.\n"
-        "3. Structural Cleanup: Eliminate redundant duplicate sections (like repeated Education entries) and normalize dates.\n"
-        "4. Mapping: Output items matching a standardized array structure containing keys: 'role', 'institution', 'date', and 'details'.\n"
-        "Return ONLY the updated valid JSON object matching the input array style. Do not include markdown code block backticks or conversational text."
-    )
+    # Check if API Key is visible to the environment
+    if not os.environ.get("OPENAI_API_KEY"):
+        print("CRITICAL ERROR: The OPENAI_API_KEY environment variable is empty or missing.")
+        print("Ensure you have added it to your GitHub Repository Secrets.")
+        sys.exit(1)
 
     try:
+        client = OpenAI()
+
+        system_prompt = (
+            "You are an expert data cleaning assistant. Your task is to process a raw, messy JSON CV file.\n"
+            "Fix the following extraction errors:\n"
+            "1. Missing Spaces: Fix word spacing collisions caused by PDF font matrix conversion issues.\n"
+            "2. Character Glitches: Fix text casing artifacts like 'UNIVErSITY' to 'University'.\n"
+            "3. Structural Cleanup: Eliminate redundant duplicate sections and normalize dates.\n"
+            "4. Mapping: Output items matching a standardized array structure containing keys: 'role', 'institution', 'date', and 'details'.\n"
+            "Return ONLY the updated valid JSON object matching the input array style. Do not include markdown code block backticks or conversational text."
+        )
+
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
@@ -53,7 +57,8 @@ def clean_json_with_llm():
         print(f"Stage 2 Complete: Clean data saved back to {file_path}")
 
     except Exception as e:
-        print(f"LLM Processing Error: {e}")
+        print(f"CRITICAL LLM Processing Error: {e}")
+        sys.exit(1) # Forces GitHub Actions to halt on this step and display the error log
 
 if __name__ == "__main__":
     clean_json_with_llm()
