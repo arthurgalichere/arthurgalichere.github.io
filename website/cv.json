@@ -4,21 +4,21 @@
       "title": "Employment",
       "items": [
         {
-          "role": "Assistant Professor (Teaching Focussed)",
-          "institution": "University of Warwick, United Kingdom",
-          "date": "2024 – Present",
+          "role": "AssistantProfessor(TeachingFocussed)",
+          "institution": "UniversityofWarwick,UnitedKingdom",
+          "date": "2024–Present",
           "details": ""
         },
         {
-          "role": "Teaching Fellow in Macroeconomics",
-          "institution": "University of Warwick, United Kingdom",
-          "date": "2021 – 2024",
+          "role": "TeachingFellowinMacroeconomics",
+          "institution": "UniversityofWarwick,UnitedKingdom",
+          "date": "2021–2024",
           "details": ""
         },
         {
-          "role": "Graduate Teaching Assistant",
-          "institution": "University of Glasgow, United Kingdom",
-          "date": "2016 – 2021",
+          "role": "GraduateTeachingAssistant",
+          "institution": "UniversityofGlasgow,UnitedKingdom",
+          "date": "2016–2021",
           "details": ""
         }
       ]
@@ -27,142 +27,80 @@
       "title": "Education",
       "items": [
         {
-          "role": "Ph.D. in Economics",
-          "institution": "University of Glasgow, United Kingdom",
-          "date": "2017 – 2022",
-          "details": "Doctorate funded by the Economic and Social Research Council (ESRC) Supervisors: Professor Tatiana Kirsanova, Professor Charles Nolan and Professor Richard Dennis Thesis examiners: Doctor Kalin Nikolov and Professor Campbell Leith Thesis Title: “AssetPriceBubblesandMacroeconomicPolicies”"
+          "role": "Ph.D.inEconomics",
+          "institution": "UniversityofGlasgow,UnitedKingdom",
+          "date": "2017–2022",
+          "details": "DoctoratefundedbytheEconomicandSocialResearchCouncil(ESRC) Supervisors: ProfessorTatianaKirsanova,ProfessorCharlesNolanandProfessorRichardDennis Thesisexaminers: DoctorKalinNikolovandProfessorCampbellLeith ThesisTitle: “AssetPriceBubblesandMacroeconomicPolicies”"
         },
         {
-          "role": "MRes in Economics",
-          "institution": "University of Glasgow, United Kingdom. Graduated with Merit",
-          "date": "2015 – 2017",
-          "details": "Two-year programme in economics structured as a Doctoral training Master’s Dissertation: “HowtoModelCreditFrictions?”"
+          "role": "MResinEconomics",
+          "institution": "UniversityofGlasgow,UnitedKingdom. GraduatedwithMerit",
+          "date": "2015–2017",
+          "details": "Two-yearprogrammeineconomicsstructuredasaDoctoraltraining Master’sDissertation: “HowtoModelCreditFrictions?”"
         },
         {
-          "role": "Master 1 in Economics and Management",
-          "institution": "University of Caen, France. Graduated with Merit",
-          "date": "2014 – 2015",
-          "details": "Exchange programme: the programme was taught and assessed at Texas A&M University, USA The Master 1 is the French equivalent of the Master of Science Master’s Dissertation: “AComparativeAnalysisofFedandECBMonetaryPolicies”"
+          "role": "Master1inEconomicsandManagement",
+          "institution": "UniversityofCaen,France. GraduatedwithMerit",
+          "date": "2014–2015",
+          "details": "Exchangeprogramme: theprogrammewastaughtandassessedatTexasA&MUniversity,USA TheMaster1istheFrenchequivalentoftheMasterofScience Master’sDissertation: “AComparativeAnalysisofFedandECBMonetaryPolicies”"
         },
         {
-          "role": "Licence in Economics and Management",
-          "institution": "University of Caen, France",
-          "date": "2011 – 2014",
-          "details": "The Licence is the French equivalent of the Bachelor’s degree"
+          "role": "LicenceinEconomicsandManagement",
+          "institution": "UniversityofCaen,France",
+          "date": "2011–2014",
+          "details": "TheLicenceistheFrenchequivalentoftheBachelor’sdegree ArthurGalichère CurriculumVitæ"
         }
       ]
     },
     {
-      "title": "Research",
+      "title": "Research Summary",
       "items": [
         {
-          "role": "Research",
+          "role": "",
           "institution": "",
           "date": "",
-          "details": "I am primarily interested in theoretical macroeconomics, with research focusing on business cycle fluc- tuations, macro-finance, asset price bubbles, financial crises, and the design of macroeconomic policy. ResearchFields: Macroeconomics, Macro-Finance, Monetary Economics, Financial Stability"
+          "details": "Iamprimarilyinterestedintheoreticalmacroeconomics,withresearchfocusingonbusinesscyclefluctuations,macro-finance,assetpricebubbles,financialcrises,andthedesignofmacroeconomicpolicy. ResearchFields: Macroeconomics,Macro-Finance,MonetaryEconomics,FinancialStability JOBMArKETPAPEr WhenBanksRidetheBubble: FinancialStabilityandRealActivity Mypaperstudiestheimplicationsofthedynamicownershipofriskyassetpricebubblesbetweenbanks andretailinvestorsforfinancialstabilityandrealactivity. Theanalysisshowsthattheseverityofbankingcrisesandrecessionsdependsonboththeexposureofindividualbankstothebubbleandtheoverall contamination of the banking sector. The paper also highlights that the early stages of bubble growth increase the financial vulnerability of the economy, as banks increasingly invest in the bubble during thisperiod. Whilestricterbankingsupervisioncanreducetheeffectsofaburstingbubble,itmayalso weakenbanks’resiliencetoeconomicshocks. WOrKINGPAPEr StockMarketBubblesandMonetarypolicy: aBayesianAnalysis This paper develops and estimates a DSGE model with stock market bubbles and nominal rigidities usingBayesianmethods. Bubblesemergethroughapositivefeedbackloopmechanismsupportedbyselffulfillingbeliefs. Theirmovements,drivenbyasentimentshock,significantlycontributetofluctuations ininvestment,output,andinflation. WOrKINPrOGrESS StockMarketDynamicsintheRBCFramework ThispaperdevelopsaDSGEmodeltostudystockmarketdynamics. Akeynoveltyoftheframeworkis theintroductionoffirmexitandequityissuancebynewentrants. AssetPriceBubblesandMonetaryPolicy: DeflatetheBubble? This paper studies monetary policy in a New Keynesian model with asset price bubbles. It shows that monetarypolicytargetingassetpricescanpartiallydeflateanassetpricebubbleandaffectsthewaythe bubbleisfinanced. CONFErENCEPAPErREVIEWEr EuropeanAssociationofYoungEconomistsAnnualMeeting 2025-PrESENT PrOFESSIONALDEVELOPMENT TopicsinBayesianMacroeconometrics—taughtbyAndreaCarrieroandKristofferNimark 2026 ToolsforMacroeconomistsSummerSchool: TheEssentials—taughtbyPetrSedlacek 2024 ComputationalMethodsinEconomics—taughtbyPontusRendahl 2020 Continuous-TimeHeterogeneous-AgentModels—taughtbyChristosKoulovatianos 2020 Page2 ArthurGalichère CurriculumVitæ"
         }
       ]
     },
     {
-      "title": "Job Market Paper",
+      "title": "Teaching Awards & Qualifications",
       "items": [
         {
-          "role": "WhenBanksRidetheBubble: FinancialStabilityandRealActivity",
-          "institution": "",
-          "date": "Working Abstract",
-          "details": "My paper studies the implications of the dynamic ownership of risky asset price bubbles between banks and retail investors for financial stability and real activity. The analysis shows that the severity of bank- ing crises and recessions depends on both the exposure of individual banks to the bubble and the overall contamination of the banking sector. The paper also highlights that the early stages of bubble growth increase the financial vulnerability of the economy, as banks increasingly invest in the bubble during this period. While stricter banking supervision can reduce the effects of a bursting bubble, it may also weaken banks’ resilience to economic shocks."
-        }
-      ]
-    },
-    {
-      "title": "Working Papers",
-      "items": [
-        {
-          "role": "StockMarketBubblesandMonetarypolicy: aBayesianAnalysis",
-          "institution": "",
-          "date": "Working Abstract",
-          "details": "This paper develops and estimates a DSGE model with stock market bubbles and nominal rigidities using Bayesian methods. Bubbles emerge through a positive feedback loop mechanism supported by self- fulfilling beliefs. Their movements, driven by a sentiment shock, significantly contribute to fluctuations in investment, output, and inflation."
-        }
-      ]
-    },
-    {
-      "title": "Work In Progress",
-      "items": [
-        {
-          "role": "StockMarketDynamicsintheRBCFramework",
-          "institution": "",
-          "date": "Forthcoming",
-          "details": "This paper develops a DSGE model to study stock market dynamics. A key novelty of the framework is the introduction of firm exit and equity issuance by new entrants. AssetPriceBubblesandMonetaryPolicy: DeflatetheBubble? This paper studies monetary policy in a New Keynesian model with asset price bubbles. It shows that monetary policy targeting asset prices can partially deflate an asset price bubble and affects the way the bubble is financed."
-        }
-      ]
-    },
-    {
-      "title": "Professional Development",
-      "items": [
-        {
-          "role": "Topics in Bayesian Macroeconometrics — taught by Andrea Carriero and Kristoffer Nimark",
-          "institution": "",
-          "date": "2026",
-          "details": ""
-        },
-        {
-          "role": "Tools for Macroeconomists Summer School: The Essentials — taught by Petr Sedlacek",
-          "institution": "",
-          "date": "2024",
-          "details": ""
-        },
-        {
-          "role": "Computational Methods in Economics — taught by Pontus Rendahl",
-          "institution": "",
-          "date": "2020",
-          "details": ""
-        },
-        {
-          "role": "Continuous-Time Heterogeneous-Agent Models — taught by Christos Koulovatianos",
-          "institution": "",
-          "date": "2020",
-          "details": ""
-        }
-      ]
-    },
-    {
-      "title": "Teaching Awards And Qualifications",
-      "items": [
-        {
-          "role": "Excellence in Teaching",
+          "role": "ExcellenceinTeaching",
           "institution": "University of Glasgow",
           "date": "2025",
-          "details": "Winner of the Warwick Award for Teaching Excellence (Social Sciences Faculty Award), in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick’s outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive."
+          "details": "WinneroftheWarwickAwardforTeachingExcellence(SocialSciencesFacultyAward),inrecognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick’s outstanding educators who have enabled excellent learning, creatingtheconditionswithinwhichallstudentsaresupportedandempoweredtosucceedandthrive."
         },
         {
-          "role": "Fellowship of the Higher Education Academy",
+          "role": "FellowshipoftheHigherEducationAcademy",
           "institution": "University of Glasgow",
           "date": "2024",
-          "details": "Awarded the Fellowship of the Higher Education Academy Academic during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK’s Pro- fessional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
+          "details": "Awarded the Fellowship of the Higher Education Academy Academic during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK’s ProfessionalStandardsFramework2023andindemonstratingtheirinvolvementinteachingandlearning supportinhighereducation."
         },
         {
-          "role": "Excellence in Teaching",
+          "role": "ExcellenceinTeaching",
           "institution": "University of Glasgow",
           "date": "2023",
-          "details": "Nominated, shortlisted as finalist, and awarded a commendation ( 3rd prize) in the Warwick Award for Teaching Excellence (WATE Social Sciences Faculty Award), in recognition of outstanding contribu- tions to teaching and the support of student learning."
+          "details": "Nominated,shortlistedasfinalist,andawardedacommendation(3rd prize)intheWarwickAwardfor Teaching Excellence (WATE Social Sciences Faculty Award), in recognition of outstanding contributionstoteachingandthesupportofstudentlearning."
         },
         {
-          "role": "Excellence in Teaching",
+          "role": "ExcellenceinTeaching",
           "institution": "University of Glasgow",
           "date": "2021",
-          "details": "Nominated and shortlisted as a finalist in the Student Teaching Award for Best Graduate Teaching Assistant of the University of Glasgow. The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clear passion and excitement for their subject matter."
+          "details": "Nominated and shortlisted as a finalist in the Student Teaching Award for Best Graduate Teaching Assistant of the University of Glasgow. The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clearpassionandexcitementfortheirsubjectmatter."
         },
         {
-          "role": "Associate Fellowship",
+          "role": "AssociateFellowship",
           "institution": "University of Glasgow",
           "date": "2019",
-          "details": "Certificate of Excellence in Teaching for passing the Developing as a Teacher in Higher Education course"
+          "details": "CertificateofExcellenceinTeachingforpassingtheDevelopingasaTeacherinHigherEducationcourse"
         },
         {
-          "role": "(DAT HE) during the 2018-2019 academic year: The DAT HE course has been developed in alignment",
+          "role": "(DAT HE) during the 2018-2019 academic year The DAT HE course has been developed in alignment",
           "institution": "University of Glasgow",
-          "date": "",
-          "details": "with Descriptor I of the UK’s Professional Standards Framework for Teaching and Supporting Learning (Associate Fellowship)."
+          "date": "alignment",
+          "details": "withDescriptorIoftheUK’sProfessionalStandardsFrameworkforTeachingandSupportingLearning (AssociateFellowship)."
         }
       ]
     },
@@ -170,38 +108,32 @@
       "title": "Teaching Experience",
       "items": [
         {
-          "role": "Teaching Experience",
+          "role": "",
           "institution": "",
           "date": "",
-          "details": "MainTeachingInterests: Macroeconomics, Monetary Economics, Macro-Finance, Bayesian Macroecono- metrics, and Asset Pricing UNIVErSITY OF W ArWICK My teaching experience at Warwick mainly consists of teaching lectures and seminars, supervising UG and MSc dissertations, and marking and moderating tests, essays and exams. Lectures and Seminars: Macroeconomics 2 nd year Undergraduate (EC201) 2021 - PrESENT Lectures and Seminars: Advanced Macroeconomics MSc (EC9D5) 2021 - PrESENT Seminars: Topics in Financial Economics 3 rd year Undergraduate (EC333-EC334) 2021 - 2024 Seminars: Introductory Mathematics and Statistics MSc (EC961) 2025 - PrESENT Dissertations 3rd year Undergraduate (EC331) 2021 - PrESENT Dissertations MSc (EC959) 2021 - PrESENT UNIVErSITY OF GLASGOW My Graduate Teaching Assistant experience at Glasgow consisted of teaching face-to-face and online tutorials, and grading essays and exams. Online teaching included the delivery of live and prerecorded tutorials as well as live Q&A sessions. Macroeconomics 3rd year Undergraduate (ECON3022) 2020 - 2021 Macroeconomics 2nd year Undergraduate (ECON2002) 2017 - 2021 Microeconomics 2nd year Undergraduate (ECON2001) 2017 - 2021 Macroeconomics 1st year Undergraduate (ECON1002) 2016 - 2017 Microeconomics 1st year Undergraduate (ECON1001) 2016 - 2017 ADDITIONAL TEACHING AND SUPErVISOrY EXPErIENCE External MSc Dissertation Supervisor for the University of Glasgow 2022-PrESENT Project Supervisor in the Warwick Undergraduate Research Support Scheme 2022-PrESENT Warwick Summer School: 2022-PrESENT Money and Banking Warwick Pre-University Summer School: 2022 An Introduction to the History of Economic Thoughts An Introduction to Macroeconomics"
+          "details": "MainTeachingInterests: Macroeconomics,MonetaryEconomics,Macro-Finance,BayesianMacroeconometrics,andAssetPricing UNIVErSITYOFWArWICK MyteachingexperienceatWarwickmainlyconsistsofteachinglecturesandseminars,supervisingUG andMScdissertations,andmarkingandmoderatingtests,essaysandexams. LecturesandSeminars: Macroeconomics2nd yearUndergraduate(EC201) 2021-PrESENT LecturesandSeminars: AdvancedMacroeconomicsMSc(EC9D5) 2021-PrESENT Seminars: TopicsinFinancialEconomics3rd yearUndergraduate(EC333-EC334) 2021-2024 Seminars: IntroductoryMathematicsandStatisticsMSc(EC961) 2025-PrESENT Dissertations3rd yearUndergraduate(EC331) 2021-PrESENT DissertationsMSc(EC959) 2021-PrESENT Page3 ArthurGalichère CurriculumVitæ UNIVErSITYOFGLASGOW My Graduate Teaching Assistant experience at Glasgow consisted of teaching face-to-face and online tutorials,andgradingessaysandexams. Onlineteachingincludedthedeliveryofliveandprerecorded tutorialsaswellasliveQ&Asessions. Macroeconomics3rd yearUndergraduate(ECON3022) 2020-2021 Macroeconomics2nd yearUndergraduate(ECON2002) 2017-2021 Microeconomics2nd yearUndergraduate(ECON2001) 2017-2021 Macroeconomics1st yearUndergraduate(ECON1002) 2016-2017 Microeconomics1st yearUndergraduate(ECON1001) 2016-2017 ADDITIONALTEACHINGANDSUPErVISOrYEXPErIENCE ExternalMScDissertationSupervisorfortheUniversityofGlasgow 2022-PrESENT ProjectSupervisorintheWarwickUndergraduateResearchSupportScheme 2022-PrESENT WarwickSummerSchool: 2022-PrESENT MoneyandBanking WarwickPre-UniversitySummerSchool: 2022 AnIntroductiontotheHistoryofEconomicThoughts AnIntroductiontoMacroeconomics ACADEMICLEADErSHIP,TEACHINGSUPPOrTANDEDUCATIONALDEVELOPMENT JuryMember,WarwickAwardsforTeachingExcellence 2026-PrESENT Evaluate university staff nominations for teaching awards and contribute to the recognition of excellenceinteachingandstudentsupport. CurriculumReviewLead 2025 Ledthereviewofundergraduateandpostgraduatemacroeconomicscurricula. Conductedcomprehensivecurriculummappingtoidentifygapsandoverlapsacrossmodules,andbenchmarkedprogrammes againstcompetitorinstitutionstoinformrecommendationsforcurriculumdevelopment. Panelist,WarwickEducationForum 2025 Invited panelist at the Warwick Education Forum to contribute to discussions on teaching excellence andthefutureofeducationstrategyatWarwick. Coordinator,MScMacroandMonetaryEconomicsDissertationGroup 2023-PrESENT Support MSc students in developing dissertation topics, refining research questions, and identifying appropriatesupervisors, while providing ongoing academicand pastoral guidancethroughout the dissertationprocess. GTAAssessor 2023-PrESENT SupporttheprofessionaldevelopmentofGraduateTeachingAssistantsthroughteachingobservations, structuredfeedback,andreflectivediscussionsonpedagogicalpractice. Page4 ArthurGalichère CurriculumVitæ"
         }
       ]
     },
     {
-      "title": "Academic Leadership, Teaching Support And Educational Development",
+      "title": "Referees",
       "items": [
         {
-          "role": "Curriculum Review Lead",
-          "institution": "Led the review of undergraduate and postgraduate macroeconomics curricula. Conducted comprehen-",
-          "date": "2025",
-          "details": "sive curriculum mapping to identify gaps and overlaps across modules, and benchmarked programmes against competitor institutions to inform recommendations for curriculum development."
-        },
-        {
-          "role": "Panelist, Warwick Education Forum",
-          "institution": "Invited panelist at the Warwick Education Forum to contribute to discussions on teaching excellence",
-          "date": "2025",
-          "details": "and the future of education strategy at Warwick. Coordinator, MSc Macro and Monetary Economics Dissertation Group 2023 - PrESENT Support MSc students in developing dissertation topics, refining research questions, and identifying appropriate supervisors, while providing ongoing academic and pastoral guidance throughout the dis- sertation process. GTA Assessor 2023 - PrESENT Support the professional development of Graduate Teaching Assistants through teaching observations, structured feedback, and reflective discussions on pedagogical practice."
+          "role": "",
+          "institution": "",
+          "date": "",
+          "details": "RobertoPancrazi CarolineElliott MarijaVukotić Professor Professor(TeachingFocussed) AssociateProfessor UniversityofWarwick UniversityofWarwick UniversityofWarwick R.Pancrazi@warwick.ac.uk Caroline.Elliott@warwick.ac.uk M.Vukotic@warwick.ac.uk"
         }
       ]
     },
     {
-      "title": "Research",
+      "title": "Research Summary",
       "items": [
         {
-          "role": "Research",
+          "role": "",
           "institution": "",
           "date": "",
-          "details": "PrESENTATIONS 2026 Scottish Economic Society Annual Conference, Glasgow, UK International Conference on Macroeconomic Analysis and International Finance, Rethymno, Greece 2025 Money, Macro and Finance Annual Conference, Reading, UK International Conference on Computing in Economics and Finance, Santiago, Chile International Conference on Macroeconomic Analysis and International Finance, Rethymno, Greece 2024 International Conference on Economic Modeling and Data Science, Çeşme, Turkey International Conference on Computing in Economics and Finance, Singapore Scottish Economic Society Annual Conference, Glasgow, UK 2023 Annual Congress of the European Economic Association, Barcelona, Spain Warwick Macro and International Economics Workshop, Coventry, UK Symposium on Money, Banking and Finance, Lille, France Royal Economics Society PhD Annual Conference, Glasgow, UK International Conference on Macroeconomic Analysis and International Finance, Rethymno, Greece 2022 South-Eastern European Economic Research Workshop, Bank of Albania, Hybrid Conference Econometric Society European Summer Meeting, Milan, Italy International Conference on Computing in Economics and Finance, Dallas, USA International Conference on Macroeconomic Analysis and International Finance, Rethymno, Greece Scottish Economic Society Annual Conference, Glasgow, UK Money Macro and Finance PhD Annual Conference, Edinburgh, UK 2021 Money, Macro and Finance Annual Conference, Virtual International Conference on Macroeconomic Analysis and International Finance, Virtual European Economics and Finance Society, Virtual International Conference on Computing in Economics and Finance, Virtual Symposium on Money, Banking and Finance, Virtual Annual Southern PhD Economics Conference, Virtual Scottish Economic Society Annual Conference, Virtual 2020 Annual Congress of the European Economic Association, Virtual Money Macro and Finance PhD Conference, Virtual Scottish Graduate Programme in Economics Residential Conference, Crieff, UK 2019 Macroeconomics Seminar Series, University of Glasgow, UK Scottish Graduate Programme in Economics Residential Conference, Crieff, UK"
+          "details": "PrESENTATIONS 2026 ScottishEconomicSocietyAnnualConference,Glasgow,UK InternationalConferenceonMacroeconomicAnalysisandInternationalFinance,Rethymno,Greece 2025 Money,MacroandFinanceAnnualConference,Reading,UK InternationalConferenceonComputinginEconomicsandFinance,Santiago,Chile InternationalConferenceonMacroeconomicAnalysisandInternationalFinance,Rethymno,Greece 2024 InternationalConferenceonEconomicModelingandDataScience,Çeşme,Turkey InternationalConferenceonComputinginEconomicsandFinance,Singapore ScottishEconomicSocietyAnnualConference,Glasgow,UK Page5 ArthurGalichère CurriculumVitæ 2023 AnnualCongressoftheEuropeanEconomicAssociation,Barcelona,Spain WarwickMacroandInternationalEconomicsWorkshop,Coventry,UK SymposiumonMoney,BankingandFinance,Lille,France RoyalEconomicsSocietyPhDAnnualConference,Glasgow,UK InternationalConferenceonMacroeconomicAnalysisandInternationalFinance,Rethymno,Greece 2022 South-EasternEuropeanEconomicResearchWorkshop,BankofAlbania,HybridConference EconometricSocietyEuropeanSummerMeeting,Milan,Italy InternationalConferenceonComputinginEconomicsandFinance,Dallas,USA InternationalConferenceonMacroeconomicAnalysisandInternationalFinance,Rethymno,Greece ScottishEconomicSocietyAnnualConference,Glasgow,UK MoneyMacroandFinancePhDAnnualConference,Edinburgh,UK 2021 Money,MacroandFinanceAnnualConference,Virtual InternationalConferenceonMacroeconomicAnalysisandInternationalFinance,Virtual EuropeanEconomicsandFinanceSociety,Virtual InternationalConferenceonComputinginEconomicsandFinance,Virtual SymposiumonMoney,BankingandFinance,Virtual AnnualSouthernPhDEconomicsConference,Virtual ScottishEconomicSocietyAnnualConference,Virtual 2020 AnnualCongressoftheEuropeanEconomicAssociation,Virtual MoneyMacroandFinancePhDConference,Virtual ScottishGraduateProgrammeinEconomicsResidentialConference,Crieff,UK 2019 MacroeconomicsSeminarSeries,UniversityofGlasgow,UK ScottishGraduateProgrammeinEconomicsResidentialConference,Crieff,UK Page6"
         }
       ]
     }
