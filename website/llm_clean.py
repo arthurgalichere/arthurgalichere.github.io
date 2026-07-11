@@ -23,7 +23,7 @@ def clean_json_with_llm():
         if api_key:
             url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
             payload = {
-                "contents": [{"parts": [{"text": f"Extract 'Employment' and 'Selected Presentations' from this CV. Output ONLY as JSON.\n{raw_text}"}]}],
+                "contents": [{"parts": [{"text": f"Extract 'Employment' and 'Research Presentations' from this CV. Output ONLY as JSON.\n{raw_text}"}]}],
                 "generationConfig": {"responseMimeType": "application/json", "temperature": 0.1}
             }
             
@@ -41,7 +41,7 @@ def clean_json_with_llm():
                             break # Success, exit retry loop
                 except urllib.error.HTTPError as e:
                     if e.code == 429:
-                        wait = (attempt + 1) * 15
+                        wait = (attempt + 1) * 16
                         print(f"DEBUG: PDF extraction hit 429 error. Retrying in {wait}s...")
                         time.sleep(wait)
                     else:
