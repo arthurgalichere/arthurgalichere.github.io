@@ -38,23 +38,19 @@ def clean_json_with_llm():
                         if "sections" in gemini_data:
                             merged_sections.extend(gemini_data["sections"])
                             print(f"DEBUG: PDF extraction success. Added {len(gemini_data['sections'])} sections.")
-                            break # Success, exit retry loop
-                except urllib.error.HTTPError as e:
-                    if e.code == 429:
-                        wait = (attempt + 1) * 16
-                        print(f"DEBUG: PDF extraction hit 429 error. Retrying in {wait}s...")
-                        time.sleep(wait)
-                    else:
-                        print(f"DEBUG ERROR: PDF extraction failed: {e}")
-                        break
+                            break 
                 except Exception as e:
-                    print(f"DEBUG ERROR: PDF extraction failed: {e}")
-                    break
+                    print(f"DEBUG ERROR: PDF extraction failed attempt {attempt+1}: {e}")
+                    time.sleep(2)
         else:
             print("DEBUG: No API Key found.")
 
     # --- 2. Excel Parsing ---
     excel_url = "https://www.dropbox.com/scl/fi/z0dbe74ywv0ws3yw4l8gt/CV_Arthur_Galichere_excel.xlsx?rlkey=l736567qyln1ql0s7ws2nz21q&st=vx9y8fjx&dl=1"
+    
+    # Define which sections require University/Category grouping
+    GROUPED_SECTIONS = ["teaching experience", "additional teaching and supervisory experience"]
+
     try:
         with urllib.request.urlopen(excel_url) as response:
             with tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False) as tmp:
@@ -62,33 +58,62 @@ def clean_json_with_llm():
                 temp_excel_path = tmp.name
         
         wb = openpyxl.load_workbook(temp_excel_path, data_only=True)
+        
         for sheet_name in wb.sheetnames:
             sheet = wb[sheet_name]
             section_title = str(sheet.cell(row=1, column=1).value or sheet_name).strip()
             
+            # Identify columns
             header_map = {str(sheet.cell(row=2, column=col).value).strip().lower(): col 
                          for col in range(1, sheet.max_column + 1) if sheet.cell(row=2, column=col).value}
             
-            cols = ["role", "institution", "date", "details", "other_details"]
+            cols = ["role", "institution", "date", "category", "details", "other_details"]
             col_map = {k: header_map.get(k) for k in cols}
+            
             items = []
             for r in range(3, sheet.max_row + 1):
-                row = {k: str(sheet.cell(row=r, column=col_map[k]).value or "").strip() 
-                       if col_map.get(k) else "" for k in cols}
-                if any(row.values()):
-                    if row["other_details"]: row["details"] = f"{row['details']}\n{row['other_details']}".strip()
-                    items.append({"role": row["role"], "institution": row["institution"], "date": row["date"], "details": row["details"]})
+                # Safely get row values
+                row_vals = {k: str(sheet.cell(row=r, column=col_map[k]).value or "").strip() 
+                           if col_map.get(k) else "" for k in cols}
+                
+                if any(row_vals.values()):
+                    # Combine details and other_details safely
+                    combined_details = row_vals["details"]
+                    if row_vals.get("other_details"):
+                        combined_details = f"{combined_details}\n{row_vals['other_details']}".strip()
+                    
+                    items.append({
+                        "role": row_vals["role"], 
+                        "institution": row_vals["institution"], 
+                        "date": row_vals["date"], 
+                        "details": combined_details,
+                        "category": row_vals.get("category", "")
+                    })
             
             if items:
-                if section_title.lower() == "teaching experience":
+                # Check if this section needs grouping logic
+                if section_title.lower() in GROUPED_SECTIONS:
                     by_inst = {}
                     for item in items:
                         inst = item.get("institution") or "Other"
-                        if inst not in by_inst: by_inst[inst] = []
-                        by_inst[inst].append(item)
-                    subsections = [{"title": inst, "items": inst_items} for inst, inst_items in by_inst.items()]
+                        category = item.get("category") or "General"
+                        
+                        if inst not in by_inst: by_inst[inst] = {}
+                        if category not in by_inst[inst]: by_inst[inst][category] = []
+                        
+                        by_inst[inst][category].append(item)
+                    
+                    subsections = []
+                    for inst, categories in by_inst.items():
+                        inst_items = []
+                        for cat, cat_items in categories.items():
+                            inst_items.append({"isFormatHeader": True, "role": cat})
+                            inst_items.extend(cat_items)
+                        subsections.append({"title": inst, "items": inst_items})
+                    
                     merged_sections.append({"title": section_title, "subsections": subsections})
                 else:
+                    # Append as standard flat section
                     merged_sections.append({"title": section_title, "items": items})
         
         if os.path.exists(temp_excel_path): os.remove(temp_excel_path)
