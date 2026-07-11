@@ -209,11 +209,11 @@
           <div class="cv-item">
             <div>
               <div class="cv-item-role">MRes in Economics</div>
-              <div class="cv-item-institution">University of Glasgow, United Kingdom. Graduated with Merit</div>
+              <div class="cv-item-institution">University of Glasgow, United Kingdom </div>
             </div>
             <div class="cv-item-date">2015 – 2017</div>
             <div class="cv-item-details">
-              Two-year programme in economics structured as Doctoral training. <br>
+              Graduated with Merit. Two-year programme in economics structured as Doctoral training. <br>
               Master’s Dissertation: “How to Model Credit Frictions?”
             </div>
           </div>
@@ -221,11 +221,11 @@
           <div class="cv-item">
             <div>
               <div class="cv-item-role">Master 1 in Economics and Management</div>
-              <div class="cv-item-institution">University of Caen, France. Graduated with Merit</div>
+              <div class="cv-item-institution">University of Caen, Francet</div>
             </div>
             <div class="cv-item-date">2014 – 2015</div>
             <div class="cv-item-details">
-              Exchange programme: the programme was taught and assessed at Texas A&M University, USA. The Master 1 is the French equivalent of the Master of Science. <br>
+              Graduated with Merit. Exchange programme: the programme was taught and assessed at Texas A&M University, USA. The Master 1 is the French equivalent of the Master of Science. <br>
               Master’s Dissertation: “A Comparative Analysis of Fed and ECB Monetary Policies”
             </div>
           </div>
@@ -246,7 +246,7 @@
       </section>
 
       <footer class="foot">
-        <span class="foot-loc">University of Warwick · Coventry, UK</span>
+        <span class="foot-loc">University of Warwick · United Kingdom </span>
       </footer>
       
     </article>
