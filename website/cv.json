@@ -56,10 +56,10 @@
           "details": "Winner of the Warwick Award for Teaching Excellence (Social Sciences Faculty Award), in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick's outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive"
         },
         {
-          "role": "Fellowship of the Advance HE",
+          "role": "Fellowship of Advance HE",
           "institution": "University of Warwick",
           "date": "2024",
-          "details": "Awarded the Fellowship of the Advance HE during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK's Professional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
+          "details": "Awarded Fellowship of Advance HE following successful completion of the Professional Pathway for Experienced Staff (APP EXP) during the 2023–2024 academic year. The programme, accredited by Advance HE, supports experienced staff in demonstrating alignment with the UK Professional Standards Framework (UKPSF) 2023 and recognising their contribution to teaching and learning support in higher education."
         },
         {
           "role": "Excellence in Teaching",
@@ -91,49 +91,49 @@
               "role": "Macroeconomics 2nd year Undergraduate (EC201)",
               "institution": "University of Warwick",
               "date": "2023 - Present",
-              "details": "Lecture"
+              "details": ""
             },
             {
               "role": "Advanced Macroeconomics MSc (EC9D5)",
               "institution": "University of Warwick",
               "date": "2024 - Present",
-              "details": "Lecture"
+              "details": ""
             },
             {
               "role": "Macroeconomics 2nd year Undergraduate (EC201)",
               "institution": "University of Warwick",
               "date": "2021 - Present",
-              "details": "Seminars"
+              "details": ""
             },
             {
               "role": "Advanced Macroeconomics MSc (EC9D5)",
               "institution": "University of Warwick",
               "date": "2021 - Present",
-              "details": "Seminars"
+              "details": ""
             },
             {
               "role": "Topics in Financial Economics 3rd year Undergraduate (EC333-EC334)",
               "institution": "University of Warwick",
               "date": "2021 - 2024",
-              "details": "Seminars"
+              "details": ""
             },
             {
               "role": "Introductory Mathematics and Statistics MSc (EC961)",
               "institution": "University of Warwick",
               "date": "2025",
-              "details": "Seminars"
+              "details": ""
             },
             {
               "role": "Dissertations 3rd year Undergraduate (EC331)",
               "institution": "University of Warwick",
               "date": "2021 - Present",
-              "details": "Supervision"
+              "details": ""
             },
             {
               "role": "Dissertations MSc (EC959)",
               "institution": "University of Warwick",
               "date": "2022 - Present",
-              "details": "Supervision"
+              "details": ""
             }
           ]
         },
@@ -144,31 +144,31 @@
               "role": "Macroeconomics 3rd year Undergraduate (ECON3022)",
               "institution": "University of Glasgow",
               "date": "2020 - 2021",
-              "details": "Tutorials"
+              "details": ""
             },
             {
               "role": "Macroeconomics 2nd year Undergraduate (ECON2002)",
               "institution": "University of Glasgow",
               "date": "2017 - 2021",
-              "details": "Tutorials"
+              "details": ""
             },
             {
               "role": "Microeconomics 2nd year Undergraduate (ECON2001)",
               "institution": "University of Glasgow",
               "date": "2017 - 2021",
-              "details": "Tutorials"
+              "details": ""
             },
             {
               "role": "Microeconomics 1st year Undergraduate (ECON1001)",
               "institution": "University of Glasgow",
               "date": "2016 - 2017",
-              "details": "Tutorials"
+              "details": ""
             },
             {
               "role": "Macroeconomics 1st year Undergraduate (ECON1002)",
               "institution": "University of Glasgow",
               "date": "2016 - 2017",
-              "details": "Tutorials"
+              "details": ""
             }
           ]
         }
