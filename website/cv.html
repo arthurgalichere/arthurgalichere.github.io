@@ -144,17 +144,16 @@
 
     /* Styles specifically for custom subheaders (e.g. Lectures, Seminars) inside University blocks */
     .cv-format-header {
-      grid-column: 1 / -1;
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 0.94rem;
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--accent-strong);
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-bottom: 1px dashed var(--line);
-      padding-bottom: 0.15rem;
+      border-bottom: 1px dashed var(--line-strong);
+      padding-bottom: 0.2rem;
     }
 
     .foot {
@@ -284,11 +283,9 @@
     function renderCVItem(item) {
       if (!item || typeof item !== 'object') return '';
       
-      // Handle custom class headers gracefully
+      // NEW: Handle category headers
       if (item.isFormatHeader) {
-        return `
-          <div class="cv-format-header">${item.role}</div>
-        `;
+        return `<div class="cv-format-header">${item.role}</div>`;
       }
       
       const role = item.role ? String(item.role).stripSpacesOrArtifacts() : "";
@@ -300,8 +297,6 @@
       const hasInstitution = institution !== "";
       const hasDate = date !== "";
       const hasDetails = details !== "";
-
-      if (!hasRole && !hasInstitution && !hasDate && !hasDetails) return '';
 
       return `
         <div class="cv-item">
