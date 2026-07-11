@@ -4,7 +4,7 @@
       "title": "Professional Development",
       "items": [
         {
-          "role": "Bayesian Estimation of RANK and HANK Business Cyckle Models",
+          "role": "Bayesian Estimation of RANK and HANK Business Cycle Models",
           "institution": "taught by Kristoffer Nimark",
           "date": "2026",
           "details": ""
@@ -48,46 +48,36 @@
     },
     {
       "title": "Teaching Awards and Qualifications",
-      "subsections": [
+      "items": [
         {
-          "title": "University of Warwick",
-          "items": [
-            {
-              "role": "Excellence in Teaching",
-              "institution": "University of Warwick",
-              "date": "2025",
-              "details": "Winner of the Warwick Award for Teaching Excellence (Social Sciences Faculty Award), in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick's outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive"
-            },
-            {
-              "role": "Fellowship of the Advance HE",
-              "institution": "University of Warwick",
-              "date": "2024",
-              "details": "Awarded the Fellowship of the Advance HE during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK's Professional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
-            },
-            {
-              "role": "Excellence in Teaching",
-              "institution": "University of Warwick",
-              "date": "2023",
-              "details": "Nominated, shortlisted as finalist, and awarded a commendation (3rd prize) in the Warwick Award for Teaching Excellence (WATE Social Sciences Faculty Award), in recognition of outstanding contributions to teaching and the support of student learning."
-            }
-          ]
+          "role": "Excellence in Teaching",
+          "institution": "University of Warwick",
+          "date": "2025",
+          "details": "Winner of the Warwick Award for Teaching Excellence (Social Sciences Faculty Award), in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick's outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive"
         },
         {
-          "title": "University of Glasgow",
-          "items": [
-            {
-              "role": "Excellence in Teaching",
-              "institution": "University of Glasgow",
-              "date": "2021",
-              "details": "Nominated and shortlisted as a finalist in the Student Teaching Award for Best Graduate Teaching Assistant of the University of Glasgow. The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clear passion and excitement for their subject matter."
-            },
-            {
-              "role": "Associate Fellowship",
-              "institution": "University of Glasgow",
-              "date": "2020",
-              "details": "Certificate of Excellence in Teaching for passing the Developing as a Teacher in Higher Education course (DAT HE) during the 2018-2019 academic year: The DAT HE course has been developed in alignment with Descriptor I of the UK’s Professional Standards Framework for Teaching and Supporting Learning (Associate Fellowship)."
-            }
-          ]
+          "role": "Fellowship of the Advance HE",
+          "institution": "University of Warwick",
+          "date": "2024",
+          "details": "Awarded the Fellowship of the Advance HE during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK's Professional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
+        },
+        {
+          "role": "Excellence in Teaching",
+          "institution": "University of Warwick",
+          "date": "2023",
+          "details": "Nominated, shortlisted as finalist, and awarded a commendation (3rd prize) in the Warwick Award for Teaching Excellence (WATE Social Sciences Faculty Award), in recognition of outstanding contributions to teaching and the support of student learning."
+        },
+        {
+          "role": "Excellence in Teaching",
+          "institution": "University of Glasgow",
+          "date": "2021",
+          "details": "Nominated and shortlisted as a finalist in the Student Teaching Award for Best Graduate Teaching Assistant of the University of Glasgow. The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clear passion and excitement for their subject matter."
+        },
+        {
+          "role": "Associate Fellowship",
+          "institution": "University of Glasgow",
+          "date": "2020",
+          "details": "Certificate of Excellence in Teaching for passing the Developing as a Teacher in Higher Education course (DAT HE) during the 2018-2019 academic year: The DAT HE course has been developed in alignment with Descriptor I of the UK’s Professional Standards Framework for Teaching and Supporting Learning (Associate Fellowship)."
         }
       ]
     },
@@ -95,124 +85,89 @@
       "title": "Teaching Experience",
       "subsections": [
         {
-          "title": "2023 - Present",
+          "title": "University of Warwick",
           "items": [
             {
               "role": "Macroeconomics 2nd year Undergraduate (EC201)",
-              "institution": "2023 - Present",
-              "date": "University of Warwick",
+              "institution": "University of Warwick",
+              "date": "2023 - Present",
               "details": "Lecture"
-            }
-          ]
-        },
-        {
-          "title": "2024 - Present",
-          "items": [
+            },
             {
               "role": "Advanced Macroeconomics MSc (EC9D5)",
-              "institution": "2024 - Present",
-              "date": "University of Warwick",
+              "institution": "University of Warwick",
+              "date": "2024 - Present",
               "details": "Lecture"
-            }
-          ]
-        },
-        {
-          "title": "2021 - Present",
-          "items": [
+            },
             {
               "role": "Macroeconomics 2nd year Undergraduate (EC201)",
-              "institution": "2021 - Present",
-              "date": "University of Warwick",
+              "institution": "University of Warwick",
+              "date": "2021 - Present",
               "details": "Seminars"
             },
             {
               "role": "Advanced Macroeconomics MSc (EC9D5)",
-              "institution": "2021 - Present",
-              "date": "University of Warwick",
+              "institution": "University of Warwick",
+              "date": "2021 - Present",
+              "details": "Seminars"
+            },
+            {
+              "role": "Topics in Financial Economics 3rd year Undergraduate (EC333-EC334)",
+              "institution": "University of Warwick",
+              "date": "2021 - 2024",
+              "details": "Seminars"
+            },
+            {
+              "role": "Introductory Mathematics and Statistics MSc (EC961)",
+              "institution": "University of Warwick",
+              "date": "2025",
               "details": "Seminars"
             },
             {
               "role": "Dissertations 3rd year Undergraduate (EC331)",
-              "institution": "2021 - Present",
-              "date": "University of Warwick",
+              "institution": "University of Warwick",
+              "date": "2021 - Present",
               "details": "Supervision"
-            }
-          ]
-        },
-        {
-          "title": "2021 - 2024",
-          "items": [
-            {
-              "role": "Topics in Financial Economics 3rd year Undergraduate (EC333-EC334)",
-              "institution": "2021 - 2024",
-              "date": "University of Warwick",
-              "details": "Seminars"
-            }
-          ]
-        },
-        {
-          "title": "2025",
-          "items": [
-            {
-              "role": "Introductory Mathematics and Statistics MSc (EC961)",
-              "institution": "2025",
-              "date": "University of Warwick",
-              "details": "Seminars"
-            }
-          ]
-        },
-        {
-          "title": "2022 - Present",
-          "items": [
+            },
             {
               "role": "Dissertations MSc (EC959)",
-              "institution": "2022 - Present",
-              "date": "University of Warwick",
+              "institution": "University of Warwick",
+              "date": "2022 - Present",
               "details": "Supervision"
             }
           ]
         },
         {
-          "title": "2020 - 2021",
+          "title": "University of Glasgow",
           "items": [
             {
               "role": "Macroeconomics 3rd year Undergraduate (ECON3022)",
-              "institution": "2020 - 2021",
-              "date": "University of Glasgow",
+              "institution": "University of Glasgow",
+              "date": "2020 - 2021",
               "details": "Tutorials"
-            }
-          ]
-        },
-        {
-          "title": "2017 - 2021",
-          "items": [
+            },
             {
               "role": "Macroeconomics 2nd year Undergraduate (ECON2002)",
-              "institution": "2017 - 2021",
-              "date": "University of Glasgow",
+              "institution": "University of Glasgow",
+              "date": "2017 - 2021",
               "details": "Tutorials"
             },
             {
               "role": "Microeconomics 2nd year Undergraduate (ECON2001)",
-              "institution": "2017 - 2021",
-              "date": "University of Glasgow",
+              "institution": "University of Glasgow",
+              "date": "2017 - 2021",
               "details": "Tutorials"
-            }
-          ]
-        },
-        {
-          "title": "2016 - 2017",
-          "items": [
+            },
             {
               "role": "Microeconomics 1st year Undergraduate (ECON1001)",
-              "institution": "2016 - 2017",
-              "date": "University of Glasgow",
+              "institution": "University of Glasgow",
+              "date": "2016 - 2017",
               "details": "Tutorials"
             },
             {
               "role": "Macroeconomics 1st year Undergraduate (ECON1002)",
-              "institution": "2016 - 2017",
-              "date": "University of Glasgow",
+              "institution": "University of Glasgow",
+              "date": "2016 - 2017",
               "details": "Tutorials"
             }
           ]
@@ -221,52 +176,42 @@
     },
     {
       "title": "Additional Teaching and Supervisory Experience",
-      "subsections": [
+      "items": [
         {
-          "title": "University of Glasgow",
-          "items": [
-            {
-              "role": "External MSc Dissertation Supervisor",
-              "institution": "University of Glasgow",
-              "date": "2022 - PRESENT",
-              "details": "Supervisor"
-            }
-          ]
+          "role": "External MSc Dissertation Supervisor",
+          "institution": "University of Glasgow",
+          "date": "2022 - PRESENT",
+          "details": "Supervisor"
         },
         {
-          "title": "University of Warwick",
-          "items": [
-            {
-              "role": "Warwick Summer School: Money and Banking",
-              "institution": "University of Warwick",
-              "date": "2022 - PRESENT",
-              "details": "Lecturer"
-            },
-            {
-              "role": "Project Supervisor in the Undergraduate Research Support Scheme",
-              "institution": "University of Warwick",
-              "date": "2022 - PRESENT",
-              "details": "Supervisor"
-            },
-            {
-              "role": "MSc Finance & Economics: Economics Summer School",
-              "institution": "University of Warwick",
-              "date": "2025",
-              "details": "Designed and delivered a summer school programme in macroeconomics for non-economics students preparing to enter the MSc Finance & Economics, jointly offered by Warwick Business School and the Department of Economics."
-            },
-            {
-              "role": "Warwick Pre-University Summer School: An Introduction to the History of Economic Thoughts",
-              "institution": "University of Warwick",
-              "date": "2022",
-              "details": "Lecturer"
-            },
-            {
-              "role": "Warwick Pre-University Summer School: An Introduction to Macroeconomics",
-              "institution": "University of Warwick",
-              "date": "2022",
-              "details": "Lecturer"
-            }
-          ]
+          "role": "Warwick Summer School: Money and Banking",
+          "institution": "University of Warwick",
+          "date": "2022 - PRESENT",
+          "details": "Lecturer"
+        },
+        {
+          "role": "Project Supervisor in the Undergraduate Research Support Scheme",
+          "institution": "University of Warwick",
+          "date": "2022 - PRESENT",
+          "details": "Supervisor"
+        },
+        {
+          "role": "MSc Finance & Economics: Economics Summer School",
+          "institution": "University of Warwick",
+          "date": "2025",
+          "details": "Designed and delivered a summer school programme in macroeconomics for non-economics students preparing to enter the MSc Finance & Economics, jointly offered by Warwick Business School and the Department of Economics."
+        },
+        {
+          "role": "Warwick Pre-University Summer School: An Introduction to the History of Economic Thoughts",
+          "institution": "University of Warwick",
+          "date": "2022",
+          "details": "Lecturer"
+        },
+        {
+          "role": "Warwick Pre-University Summer School: An Introduction to Macroeconomics",
+          "institution": "University of Warwick",
+          "date": "2022",
+          "details": "Lecturer"
         }
       ]
     },
