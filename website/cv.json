@@ -1,150 +1,74 @@
 {
   "sections": [
     {
-      "title": "Employment",
-      "items": [
-        {
-          "role": "Assistant Professor (Teaching Focussed)",
-          "institution": "University of Warwick, United Kingdom",
-          "date": "2024 – PRESENT",
-          "details": ""
-        },
-        {
-          "role": "Teaching Fellow in Macroeconomics",
-          "institution": "University of Warwick, United Kingdom",
-          "date": "2021 – 2024",
-          "details": ""
-        },
-        {
-          "role": "Graduate Teaching Assistant",
-          "institution": "University of Glasgow, United Kingdom",
-          "date": "2016 – 2021",
-          "details": ""
-        }
-      ]
-    },
-    {
-      "title": "Professional Activities",
-      "items": [
-        {
-          "role": "Conference Paper Reviewer",
-          "institution": "European Association of Young Economists Annual Meeting",
-          "date": "2025 - PRESENT",
-          "details": ""
-        }
-      ]
-    },
-    {
       "title": "Professional Development",
       "items": [
         {
-          "role": "Bayesian Estimation of RANK and HANK Models",
-          "institution": "Kristoffer Nimark",
+          "role": "Bayesian Estimation of RANK and HANK Business Cyckle Models",
+          "institution": "taught by Kristoffer Nimark",
           "date": "2026",
           "details": ""
         },
         {
-          "role": "Bayesian Econometrics",
-          "institution": "Andrea Carriero",
+          "role": "Introduction to Bayesian Econometrics",
+          "institution": "taught by Andrea Carriero",
           "date": "2026",
           "details": ""
         },
         {
           "role": "Tools for Macroeconomists Summer School: The Essentials",
-          "institution": "Petr Sedlacek",
+          "institution": "taught by Petr Sedlacek",
           "date": "2024",
           "details": ""
         },
         {
           "role": "Computational Methods in Economics",
-          "institution": "Pontus Rendahl",
+          "institution": "taught by Pontus Rendahl",
           "date": "2020",
           "details": ""
         },
         {
           "role": "Continuous-Time Heterogeneous-Agent Models",
-          "institution": "Christos Koulovatianos",
+          "institution": "taught by Christos Koulovatianos",
           "date": "2020",
           "details": ""
         }
       ]
     },
     {
-      "title": "Teaching Awards & Qualifications",
+      "title": "Conference Paper Reviewer",
       "items": [
         {
-          "role": "Winner of the Warwick Award for Teaching Excellence (Social Sciences Faculty Award)",
-          "institution": "University of Warwick",
-          "date": "2025",
-          "details": "in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick’s outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive."
-        },
-        {
-          "role": "Fellowship of the Higher Education Academy",
-          "institution": "University of Warwick",
-          "date": "2024",
-          "details": "Awarded the Fellowship of the Higher Education Academy Academic during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK’s Professional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
-        },
-        {
-          "role": "Nominated, shortlisted as finalist, and awarded a commendation (3rd prize) in the Warwick Award for Teaching Excellence (WATE Social Sciences Faculty Award)",
-          "institution": "University of Warwick",
-          "date": "2023",
-          "details": "in recognition of outstanding contributions to teaching and the support of student learning."
-        },
-        {
-          "role": "Nominated and shortlisted as a finalist in the Student Teaching Award for Best Graduate Teaching Assistant",
-          "institution": "University of Glasgow",
-          "date": "2021",
-          "details": "The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clear passion and excitement for their subject matter."
-        },
-        {
-          "role": "Associate Fellowship",
-          "institution": "University of Glasgow",
-          "date": "2019",
-          "details": "Certificate of Excellence in Teaching for passing the Developing as a Teacher in Higher Education course (DAT HE) during the 2018-2019 academic year: The DAT HE course has been developed in alignment with Descriptor I of the UK’s Professional Standards Framework for Teaching and Supporting Learning (Associate Fellowship)."
+          "role": "European Association of Young Economists Annual Meeting",
+          "institution": "",
+          "date": "2025 - Present",
+          "details": ""
         }
       ]
     },
     {
-      "title": "Teaching Experience",
+      "title": "Teaching Awards and Qualifications",
       "subsections": [
         {
           "title": "University of Warwick",
           "items": [
             {
-              "role": "Lectures and Seminars: Macroeconomics 2nd year Undergraduate (EC201)",
-              "institution": "",
-              "date": "2021 - PRESENT",
-              "details": ""
+              "role": "Excellence in Teaching",
+              "institution": "University of Warwick",
+              "date": "2025",
+              "details": "Winner of the Warwick Award for Teaching Excellence (Social Sciences Faculty Award), in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick's outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive"
             },
             {
-              "role": "Lectures and Seminars: Advanced Macroeconomics MSc (EC9D5)",
-              "institution": "",
-              "date": "2021 - PRESENT",
-              "details": ""
+              "role": "Fellowship of the Advance HE",
+              "institution": "University of Warwick",
+              "date": "2024",
+              "details": "Awarded the Fellowship of the Advance HE during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK's Professional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
             },
             {
-              "role": "Seminars: Topics in Financial Economics 3rd year Undergraduate (EC333-EC334)",
-              "institution": "",
-              "date": "2021 - 2024",
-              "details": ""
-            },
-            {
-              "role": "Seminars: Introductory Mathematics and Statistics MSc (EC961)",
-              "institution": "",
-              "date": "2025 - PRESENT",
-              "details": ""
-            },
-            {
-              "role": "Dissertations 3rd year Undergraduate (EC331)",
-              "institution": "",
-              "date": "2021 - PRESENT",
-              "details": ""
-            },
-            {
-              "role": "Dissertations MSc (EC959)",
-              "institution": "",
-              "date": "2021 - PRESENT",
-              "details": ""
+              "role": "Excellence in Teaching",
+              "institution": "University of Warwick",
+              "date": "2023",
+              "details": "Nominated, shortlisted as finalist, and awarded a commendation (3rd prize) in the Warwick Award for Teaching Excellence (WATE Social Sciences Faculty Award), in recognition of outstanding contributions to teaching and the support of student learning."
             }
           ]
         },
@@ -152,85 +76,205 @@
           "title": "University of Glasgow",
           "items": [
             {
-              "role": "Macroeconomics 3rd year Undergraduate (ECON3022)",
-              "institution": "",
-              "date": "2020 - 2021",
-              "details": ""
-            },
-            {
-              "role": "Macroeconomics 2nd year Undergraduate (ECON2002)",
-              "institution": "",
-              "date": "2017 - 2021",
-              "details": ""
-            },
-            {
-              "role": "Microeconomics 2nd year Undergraduate (ECON2001)",
-              "institution": "",
-              "date": "2017 - 2021",
-              "details": ""
-            },
-            {
-              "role": "Macroeconomics 1st year Undergraduate (ECON1002)",
-              "institution": "",
-              "date": "2016 - 2017",
-              "details": ""
-            },
-            {
-              "role": "Microeconomics 1st year Undergraduate (ECON1001)",
-              "institution": "",
-              "date": "2016 - 2017",
-              "details": ""
-            }
-          ]
-        },
-        {
-          "title": "Additional Teaching and Supervisory Experience",
-          "items": [
-            {
-              "role": "External MSc Dissertation Supervisor",
+              "role": "Excellence in Teaching",
               "institution": "University of Glasgow",
-              "date": "2022-PRESENT",
-              "details": ""
+              "date": "2021",
+              "details": "Nominated and shortlisted as a finalist in the Student Teaching Award for Best Graduate Teaching Assistant of the University of Glasgow. The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clear passion and excitement for their subject matter."
             },
             {
-              "role": "Project Supervisor in the Warwick Undergraduate Research Support Scheme",
-              "institution": "",
-              "date": "2022-PRESENT",
-              "details": ""
-            },
-            {
-              "role": "Warwick Summer School: Money and Banking",
-              "institution": "",
-              "date": "2022-PRESENT",
-              "details": ""
-            },
-            {
-              "role": "Warwick MSc Finance & Economics: Economics Summer School",
-              "institution": "",
-              "date": "2025",
-              "details": ""
-            },
-            {
-              "role": "Warwick Pre-University Summer School: An Introduction to the History of Economic Thoughts",
-              "institution": "",
-              "date": "2022",
-              "details": ""
-            },
-            {
-              "role": "Warwick Pre-University Summer School: An Introduction to Macroeconomics",
-              "institution": "",
-              "date": "2022",
-              "details": ""
+              "role": "Associate Fellowship",
+              "institution": "University of Glasgow",
+              "date": "2020",
+              "details": "Certificate of Excellence in Teaching for passing the Developing as a Teacher in Higher Education course (DAT HE) during the 2018-2019 academic year: The DAT HE course has been developed in alignment with Descriptor I of the UK’s Professional Standards Framework for Teaching and Supporting Learning (Associate Fellowship)."
             }
           ]
         }
       ]
     },
     {
-      "title": "Academic Leadership & Development",
+      "title": "Teaching Experience",
+      "subsections": [
+        {
+          "title": "2023 - Present",
+          "items": [
+            {
+              "role": "Macroeconomics 2nd year Undergraduate (EC201)",
+              "institution": "2023 - Present",
+              "date": "University of Warwick",
+              "details": "Lecture"
+            }
+          ]
+        },
+        {
+          "title": "2024 - Present",
+          "items": [
+            {
+              "role": "Advanced Macroeconomics MSc (EC9D5)",
+              "institution": "2024 - Present",
+              "date": "University of Warwick",
+              "details": "Lecture"
+            }
+          ]
+        },
+        {
+          "title": "2021 - Present",
+          "items": [
+            {
+              "role": "Macroeconomics 2nd year Undergraduate (EC201)",
+              "institution": "2021 - Present",
+              "date": "University of Warwick",
+              "details": "Seminars"
+            },
+            {
+              "role": "Advanced Macroeconomics MSc (EC9D5)",
+              "institution": "2021 - Present",
+              "date": "University of Warwick",
+              "details": "Seminars"
+            },
+            {
+              "role": "Dissertations 3rd year Undergraduate (EC331)",
+              "institution": "2021 - Present",
+              "date": "University of Warwick",
+              "details": "Supervision"
+            }
+          ]
+        },
+        {
+          "title": "2021 - 2024",
+          "items": [
+            {
+              "role": "Topics in Financial Economics 3rd year Undergraduate (EC333-EC334)",
+              "institution": "2021 - 2024",
+              "date": "University of Warwick",
+              "details": "Seminars"
+            }
+          ]
+        },
+        {
+          "title": "2025",
+          "items": [
+            {
+              "role": "Introductory Mathematics and Statistics MSc (EC961)",
+              "institution": "2025",
+              "date": "University of Warwick",
+              "details": "Seminars"
+            }
+          ]
+        },
+        {
+          "title": "2022 - Present",
+          "items": [
+            {
+              "role": "Dissertations MSc (EC959)",
+              "institution": "2022 - Present",
+              "date": "University of Warwick",
+              "details": "Supervision"
+            }
+          ]
+        },
+        {
+          "title": "2020 - 2021",
+          "items": [
+            {
+              "role": "Macroeconomics 3rd year Undergraduate (ECON3022)",
+              "institution": "2020 - 2021",
+              "date": "University of Glasgow",
+              "details": "Tutorials"
+            }
+          ]
+        },
+        {
+          "title": "2017 - 2021",
+          "items": [
+            {
+              "role": "Macroeconomics 2nd year Undergraduate (ECON2002)",
+              "institution": "2017 - 2021",
+              "date": "University of Glasgow",
+              "details": "Tutorials"
+            },
+            {
+              "role": "Microeconomics 2nd year Undergraduate (ECON2001)",
+              "institution": "2017 - 2021",
+              "date": "University of Glasgow",
+              "details": "Tutorials"
+            }
+          ]
+        },
+        {
+          "title": "2016 - 2017",
+          "items": [
+            {
+              "role": "Microeconomics 1st year Undergraduate (ECON1001)",
+              "institution": "2016 - 2017",
+              "date": "University of Glasgow",
+              "details": "Tutorials"
+            },
+            {
+              "role": "Macroeconomics 1st year Undergraduate (ECON1002)",
+              "institution": "2016 - 2017",
+              "date": "University of Glasgow",
+              "details": "Tutorials"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Additional Teaching and Supervisory Experience",
+      "subsections": [
+        {
+          "title": "University of Glasgow",
+          "items": [
+            {
+              "role": "External MSc Dissertation Supervisor",
+              "institution": "University of Glasgow",
+              "date": "2022 - PRESENT",
+              "details": "Supervisor"
+            }
+          ]
+        },
+        {
+          "title": "University of Warwick",
+          "items": [
+            {
+              "role": "Warwick Summer School: Money and Banking",
+              "institution": "University of Warwick",
+              "date": "2022 - PRESENT",
+              "details": "Lecturer"
+            },
+            {
+              "role": "Project Supervisor in the Undergraduate Research Support Scheme",
+              "institution": "University of Warwick",
+              "date": "2022 - PRESENT",
+              "details": "Supervisor"
+            },
+            {
+              "role": "MSc Finance & Economics: Economics Summer School",
+              "institution": "University of Warwick",
+              "date": "2025",
+              "details": "Designed and delivered a summer school programme in macroeconomics for non-economics students preparing to enter the MSc Finance & Economics, jointly offered by Warwick Business School and the Department of Economics."
+            },
+            {
+              "role": "Warwick Pre-University Summer School: An Introduction to the History of Economic Thoughts",
+              "institution": "University of Warwick",
+              "date": "2022",
+              "details": "Lecturer"
+            },
+            {
+              "role": "Warwick Pre-University Summer School: An Introduction to Macroeconomics",
+              "institution": "University of Warwick",
+              "date": "2022",
+              "details": "Lecturer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Academic Leadership and Development",
       "items": [
         {
-          "role": "Jury Member, Warwick Awards for Teaching Excellence",
+          "role": "Jury Member, Warwick Awards for Teaching Excellence (WATE)",
           "institution": "",
           "date": "2026 - PRESENT",
           "details": "Evaluate university staff nominations for teaching awards and contribute to the recognition of excellence in teaching and student support."
@@ -262,7 +306,7 @@
       ]
     },
     {
-      "title": "Administrative & Collegial Experience",
+      "title": "Administrative and Collegial Experience",
       "items": [
         {
           "role": "Coordinator, Teaching Focussed Staff Group",
@@ -293,255 +337,6 @@
           "institution": "",
           "date": "2021 - PRESENT",
           "details": "Personal Tutor, providing academic guidance, mentoring, and pastoral support to approximately 27–30 students each year. Academic Referee, writing 25–45 comprehensive reference letters annually for current students and alumni."
-        }
-      ]
-    },
-    {
-      "title": "Selected Presentations",
-      "subsections": [
-        {
-          "title": "2026",
-          "items": [
-            {
-              "role": "Money, Macro and Finance Annual Conference",
-              "institution": "Lancaster, UK",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Scottish Economic Society Annual Conference",
-              "institution": "Glasgow, UK",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Symposium on Money, Banking and Finance",
-              "institution": "Rennes, France",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Rethymno, Greece",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Economic Modeling and Data Science",
-              "institution": "Luxembourg",
-              "date": "",
-              "details": ""
-            }
-          ]
-        },
-        {
-          "title": "2025",
-          "items": [
-            {
-              "role": "Money, Macro and Finance Annual Conference",
-              "institution": "Reading, UK",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Computing in Economics and Finance",
-              "institution": "Santiago, Chile",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Rethymno, Greece",
-              "date": "",
-              "details": ""
-            }
-          ]
-        },
-        {
-          "title": "2024",
-          "items": [
-            {
-              "role": "International Conference on Economic Modeling and Data Science",
-              "institution": "Çeşme, Turkey",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Computing in Economics and Finance",
-              "institution": "Singapore",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Scottish Economic Society Annual Conference",
-              "institution": "Glasgow, UK",
-              "date": "",
-              "details": ""
-            }
-          ]
-        },
-        {
-          "title": "2023",
-          "items": [
-            {
-              "role": "Annual Congress of the European Economic Association",
-              "institution": "Barcelona, Spain",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Warwick Macro and International Economics Workshop",
-              "institution": "Coventry, UK",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Symposium on Money, Banking and Finance",
-              "institution": "Lille, France",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Royal Economics Society PhD Annual Conference",
-              "institution": "Glasgow, UK",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Rethymno, Greece",
-              "date": "",
-              "details": ""
-            }
-          ]
-        },
-        {
-          "title": "2022",
-          "items": [
-            {
-              "role": "South-Eastern European Economic Research Workshop",
-              "institution": "Bank of Albania, Hybrid Conference",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Econometric Society European Summer Meeting",
-              "institution": "Milan, Italy",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Computing in Economics and Finance",
-              "institution": "Dallas, USA",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Rethymno, Greece",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Scottish Economic Society Annual Conference",
-              "institution": "Glasgow, UK",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Money Macro and Finance PhD Annual Conference",
-              "institution": "Edinburgh, UK",
-              "date": "",
-              "details": ""
-            }
-          ]
-        },
-        {
-          "title": "2021",
-          "items": [
-            {
-              "role": "Money, Macro and Finance Annual Conference",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "European Economics and Finance Society",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "International Conference on Computing in Economics and Finance",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Symposium on Money, Banking and Finance",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Annual Southern PhD Economics Conference",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Scottish Economic Society Annual Conference",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            }
-          ]
-        },
-        {
-          "title": "2020",
-          "items": [
-            {
-              "role": "Annual Congress of the European Economic Association",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Money Macro and Finance PhD Conference",
-              "institution": "Virtual",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Scottish Graduate Programme in Economics Residential Conference",
-              "institution": "Crieff, UK",
-              "date": "",
-              "details": ""
-            }
-          ]
-        },
-        {
-          "title": "2019",
-          "items": [
-            {
-              "role": "Macroeconomics Seminar Series",
-              "institution": "University of Glasgow, UK",
-              "date": "",
-              "details": ""
-            },
-            {
-              "role": "Scottish Graduate Programme in Economics Residential Conference",
-              "institution": "Crieff, UK",
-              "date": "",
-              "details": ""
-            }
-          ]
         }
       ]
     }
