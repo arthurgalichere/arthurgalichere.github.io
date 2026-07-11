@@ -26,15 +26,17 @@ def clean_json_with_llm():
         "You are an expert CV structuring engine. Parse this raw, messy academic CV text.\n"
         "1. Fix Spacing Glitches: Separate any stuck words (e.g. 'AssistantProfessor' -> 'Assistant Professor', 'UniversityofWarwick' -> 'University of Warwick').\n"
         "2. Structure Sections and Subsections:\n"
-        "   - Identify major sections (e.g. 'Employment', 'Education', 'Teaching Awards & Qualifications', 'Teaching Experience', 'Academic Leadership & Development', 'Administrative & Collegial Experience', 'Referees', 'Selected Presentations').\n"
+        "   - Identify major sections (e.g. 'Employment', 'Teaching Awards & Qualifications', 'Teaching Experience', 'Academic Leadership & Development', 'Administrative & Collegial Experience', 'Referees', 'Selected Presentations').\n"
         "   - If a section contains sub-categories or groupings, organize them under a 'subsections' array (e.g. 'Teaching Experience' should have subsections for 'University of Warwick', 'University of Glasgow', and 'Additional Teaching and Supervisory Experience').\n"
         "   - For 'Selected Presentations', group the items by year (e.g., '2026', '2025') as subsections.\n"
-        "   - If a section is flat and does not require subsections (like 'Employment' or 'Education'), map items directly to the section's 'items' array.\n"
-        "3. Clear Exclusions: DO NOT include any paragraphs, abstracts, or descriptions regarding 'Research Summary', 'Job Market Paper', 'Working Papers', or 'Work in Progress'. We want to skip those entirely.\n"
-        "4. Fix Institutional Alignments:\n"
+        "   - If a section is flat and does not require subsections (like 'Employment'), map items directly to the section's 'items' array.\n"
+        "3. Clear Exclusions: DO NOT include any paragraphs, abstracts, or descriptions regarding 'Research Summary', 'Job Market Paper', 'Working Papers', or 'Work in Progress'.\n"
+        "4. EXCLUDE EDUCATION: Completely skip the 'Education' section because it is hardcoded on the page.\n"
+        "5. Fix Institutional Alignments:\n"
         "   - The 'Warwick Award for Teaching Excellence' (WATE) belongs to the 'University of Warwick'.\n"
         "   - The 'Fellowship of the Higher Education Academy' belongs to the 'University of Warwick'.\n"
-        "   - The 'Associate Fellowship' / 'DAT HE' belongs to the 'University of Glasgow'."
+        "   - The 'Associate Fellowship' / 'DAT HE' belongs to the 'University of Glasgow'.\n"
+        "6. Professional Development / Courses: Put ONLY the name of the course in the 'role' field. Information such as 'taught by [Name]' MUST be moved to the 'institution' or 'details' field so it is not bolded."
     )
 
     prompt = f"""
@@ -65,9 +67,9 @@ Output strictly valid JSON matching this exact schema shape:
           "institution": "Institution name if applicable",
           "date": "Date if applicable",
           "details": "Paragraph description or supporting bullet text"
+            }}
+          ]
         }}
-      ]
-    }}
   ]
 }}
 
@@ -105,7 +107,7 @@ Raw CV Text:
             with open(output_json_path, "w", encoding="utf-8") as f:
                 json.dump(cleaned_json, f, indent=2, ensure_ascii=False)
                 
-            print(f"Stage 2 Complete: Structured sections and subsections saved to {output_json_path}")
+            print(f"Stage 2 Complete: Structured sections saved to {output_json_path}")
             
             # Clean up temporary raw text file safely
             if os.path.exists(temp_text_path):
