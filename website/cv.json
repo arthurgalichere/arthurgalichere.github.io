@@ -6,7 +6,7 @@
         {
           "role": "Assistant Professor (Teaching Focussed)",
           "institution": "University of Warwick, United Kingdom",
-          "date": "2024 – Present",
+          "date": "2024 – PRESENT",
           "details": null
         },
         {
@@ -24,41 +24,12 @@
       ]
     },
     {
-      "title": "Education",
-      "items": [
-        {
-          "role": "Ph.D. in Economics",
-          "institution": "University of Glasgow, United Kingdom",
-          "date": "2017 – 2022",
-          "details": "Doctorate funded by the Economic and Social Research Council (ESRC). Supervisors: Professor Tatiana Kirsanova, Professor Charles Nolan and Professor Richard Dennis. Thesis examiners: Doctor Kalin Nikolov and Professor Campbell Leith. Thesis Title: “Asset Price Bubbles and Macroeconomic Policies”"
-        },
-        {
-          "role": "MRes in Economics",
-          "institution": "University of Glasgow, United Kingdom",
-          "date": "2015 – 2017",
-          "details": "Graduated with Merit. Two-year programme in economics structured as a Doctoral training. Master’s Dissertation: “How to Model Credit Frictions?”"
-        },
-        {
-          "role": "Master 1 in Economics and Management",
-          "institution": "University of Caen, France",
-          "date": "2014 – 2015",
-          "details": "Graduated with Merit. Exchange programme: the programme was taught and assessed at Texas A&M University, USA. The Master 1 is the French equivalent of the Master of Science. Master’s Dissertation: “A Comparative Analysis of Fed and ECB Monetary Policies”"
-        },
-        {
-          "role": "Licence in Economics and Management",
-          "institution": "University of Caen, France",
-          "date": "2011 – 2014",
-          "details": "The Licence is the French equivalent of the Bachelor’s degree"
-        }
-      ]
-    },
-    {
       "title": "Conference Paper Reviewer",
       "items": [
         {
           "role": "European Association of Young Economists Annual Meeting",
           "institution": null,
-          "date": "2025 - Present",
+          "date": "2025 - PRESENT",
           "details": null
         }
       ]
@@ -67,26 +38,32 @@
       "title": "Professional Development",
       "items": [
         {
-          "role": "Topics in Bayesian Macroeconometrics — taught by Andrea Carriero and Kristoffer Nimark",
-          "institution": null,
+          "role": "Bayesian Estimation of RANK and HANK Models",
+          "institution": "taught by Kristoffer Nimark",
           "date": "2026",
           "details": null
         },
         {
-          "role": "Tools for Macroeconomists Summer School: The Essentials — taught by Petr Sedlacek",
-          "institution": null,
+          "role": "Bayesian Econometrics",
+          "institution": "taught by Andrea Carriero",
+          "date": "2026",
+          "details": null
+        },
+        {
+          "role": "Tools for Macroeconomists Summer School: The Essentials",
+          "institution": "taught by Petr Sedlacek",
           "date": "2024",
           "details": null
         },
         {
-          "role": "Computational Methods in Economics — taught by Pontus Rendahl",
-          "institution": null,
+          "role": "Computational Methods in Economics",
+          "institution": "taught by Pontus Rendahl",
           "date": "2020",
           "details": null
         },
         {
-          "role": "Continuous-Time Heterogeneous-Agent Models — taught by Christos Koulovatianos",
-          "institution": null,
+          "role": "Continuous-Time Heterogeneous-Agent Models",
+          "institution": "taught by Christos Koulovatianos",
           "date": "2020",
           "details": null
         }
@@ -96,28 +73,28 @@
       "title": "Teaching Awards & Qualifications",
       "items": [
         {
-          "role": "Excellence in Teaching",
+          "role": "Warwick Award for Teaching Excellence (Social Sciences Faculty Award)",
           "institution": "University of Warwick",
           "date": "2025",
-          "details": "Winner of the Warwick Award for Teaching Excellence (Social Sciences Faculty Award), in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick’s outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive."
+          "details": "Winner, in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick’s outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive."
         },
         {
           "role": "Fellowship of the Higher Education Academy",
           "institution": "University of Warwick",
           "date": "2024",
-          "details": "Awarded the Fellowship of the Higher Education Academy Academic during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK’s Professional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
+          "details": "Awarded during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK’s Professional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
         },
         {
-          "role": "Excellence in Teaching",
+          "role": "Warwick Award for Teaching Excellence (WATE Social Sciences Faculty Award)",
           "institution": "University of Warwick",
           "date": "2023",
-          "details": "Nominated, shortlisted as finalist, and awarded a commendation (3rd prize) in the Warwick Award for Teaching Excellence (WATE Social Sciences Faculty Award), in recognition of outstanding contributions to teaching and the support of student learning."
+          "details": "Nominated, shortlisted as finalist, and awarded a commendation (3rd prize) in recognition of outstanding contributions to teaching and the support of student learning."
         },
         {
-          "role": "Excellence in Teaching",
+          "role": "Student Teaching Award for Best Graduate Teaching Assistant",
           "institution": "University of Glasgow",
           "date": "2021",
-          "details": "Nominated and shortlisted as a finalist in the Student Teaching Award for Best Graduate Teaching Assistant of the University of Glasgow. The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clear passion and excitement for their subject matter."
+          "details": "Nominated and shortlisted as a finalist. The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clear passion and excitement for their subject matter."
         },
         {
           "role": "Associate Fellowship",
@@ -129,22 +106,20 @@
     },
     {
       "title": "Teaching Experience",
-      "details": "Main Teaching Interests: Macroeconomics, Monetary Economics, Macro-Finance, Bayesian Macroeconometrics, and Asset Pricing",
       "subsections": [
         {
           "title": "University of Warwick",
-          "details": "My teaching experience at Warwick mainly consists of teaching lectures and seminars, supervising UG and MSc dissertations, and marking and moderating tests, essays and exams.",
           "items": [
             {
               "role": "Lectures and Seminars: Macroeconomics 2nd year Undergraduate (EC201)",
               "institution": null,
-              "date": "2021 - Present",
+              "date": "2021 - PRESENT",
               "details": null
             },
             {
               "role": "Lectures and Seminars: Advanced Macroeconomics MSc (EC9D5)",
               "institution": null,
-              "date": "2021 - Present",
+              "date": "2021 - PRESENT",
               "details": null
             },
             {
@@ -156,26 +131,25 @@
             {
               "role": "Seminars: Introductory Mathematics and Statistics MSc (EC961)",
               "institution": null,
-              "date": "2025 - Present",
+              "date": "2025 - PRESENT",
               "details": null
             },
             {
               "role": "Dissertations 3rd year Undergraduate (EC331)",
               "institution": null,
-              "date": "2021 - Present",
+              "date": "2021 - PRESENT",
               "details": null
             },
             {
               "role": "Dissertations MSc (EC959)",
               "institution": null,
-              "date": "2021 - Present",
+              "date": "2021 - PRESENT",
               "details": null
             }
           ]
         },
         {
           "title": "University of Glasgow",
-          "details": "My Graduate Teaching Assistant experience at Glasgow consisted of teaching face-to-face and online tutorials, and grading essays and exams. Online teaching included the delivery of live and prerecorded tutorials as well as live Q&A sessions.",
           "items": [
             {
               "role": "Macroeconomics 3rd year Undergraduate (ECON3022)",
@@ -213,21 +187,21 @@
           "title": "Additional Teaching and Supervisory Experience",
           "items": [
             {
-              "role": "External MSc Dissertation Supervisor",
-              "institution": "University of Glasgow",
-              "date": "2022-Present",
+              "role": "External MSc Dissertation Supervisor for the University of Glasgow",
+              "institution": null,
+              "date": "2022-PRESENT",
               "details": null
             },
             {
               "role": "Project Supervisor in the Warwick Undergraduate Research Support Scheme",
               "institution": null,
-              "date": "2022-Present",
+              "date": "2022-PRESENT",
               "details": null
             },
             {
               "role": "Warwick Summer School: Money and Banking",
               "institution": null,
-              "date": "2022-Present",
+              "date": "2022-PRESENT",
               "details": null
             },
             {
@@ -253,12 +227,12 @@
       ]
     },
     {
-      "title": "Academic Leadership, Teaching Support and Educational Development",
+      "title": "Academic Leadership & Development",
       "items": [
         {
           "role": "Jury Member, Warwick Awards for Teaching Excellence",
           "institution": null,
-          "date": "2026 - Present",
+          "date": "2026 - PRESENT",
           "details": "Evaluate university staff nominations for teaching awards and contribute to the recognition of excellence in teaching and student support."
         },
         {
@@ -276,58 +250,64 @@
         {
           "role": "Coordinator, MSc Macro and Monetary Economics Dissertation Group",
           "institution": null,
-          "date": "2023 - Present",
+          "date": "2023 - PRESENT",
           "details": "Support MSc students in developing dissertation topics, refining research questions, and identifying appropriate supervisors, while providing ongoing academic and pastoral guidance throughout the dissertation process."
         },
         {
           "role": "GTA Assessor",
           "institution": null,
-          "date": "2023 - Present",
+          "date": "2023 - PRESENT",
           "details": "Support the professional development of Graduate Teaching Assistants through teaching observations, structured feedback, and reflective discussions on pedagogical practice."
         }
       ]
     },
     {
-      "title": "Administrative and Collegial Experience",
+      "title": "Administrative & Collegial Experience",
       "items": [
         {
           "role": "Coordinator, Teaching Focussed Staff Group",
           "institution": null,
-          "date": "2026 - Present",
+          "date": "2026 - PRESENT",
           "details": "Support communication and engagement between TF colleagues and departmental leadership, organise meetings, coordinate evidence-based initiatives and feedback mechanisms, and contribute to the improvement of departmental culture and operations."
         },
         {
           "role": "Exam Invigilation",
           "institution": null,
-          "date": "2022 - Present",
+          "date": "2022 - PRESENT",
           "details": "Senior invigilator in main examination halls and invigilator for mitigating circumstances examinations."
         },
         {
           "role": "Recruitment and Departmental Engagement Activities",
           "institution": null,
-          "date": "2022 - Present",
+          "date": "2022 - PRESENT",
           "details": "Contribute to MSc and undergraduate recruitment and marketing activities through student feedback analysis, participation in Open Days, and attendance at graduation ceremonies."
         },
         {
           "role": "Co-lead, Warwick Internship Scheme for Economists",
           "institution": null,
-          "date": "2021 - Present",
+          "date": "2021 - PRESENT",
           "details": "Review and shortlist research internship proposals, support colleagues with recruitment processes, and participate in student interviews."
         },
         {
           "role": "Student Support and Academic Service",
           "institution": null,
-          "date": "2021 - Present",
+          "date": "2021 - PRESENT",
           "details": "Personal Tutor, providing academic guidance, mentoring, and pastoral support to approximately 27–30 students each year. Academic Referee, writing 25–45 comprehensive reference letters annually for current students and alumni."
         }
       ]
     },
     {
-      "title": "Research Presentations",
+      "title": "Selected Presentations",
       "subsections": [
         {
           "title": "2026",
           "items": [
+            {
+              "role": "Money, Macro and Finance Annual Conference",
+              "institution": "Lancaster, UK",
+              "date": null,
+              "details": null
+            },
             {
               "role": "Scottish Economic Society Annual Conference",
               "institution": "Glasgow, UK",
