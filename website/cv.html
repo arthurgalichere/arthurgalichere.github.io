@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
+  <!-- -->
   <style>
     :root {
       --paper:        #f4f5f7;
@@ -115,7 +116,7 @@
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--accent);
-      margin-top: 2rem;       /* Margins increased to separate layout sections */
+      margin-top: 2rem;
       margin-bottom: 0.8rem;
       border-left: 3px solid var(--accent);
       padding-left: 0.6rem;
@@ -124,8 +125,8 @@
     .cv-item {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 0.3rem;             /* Space gap reduced by ~2.5mm between title lines */
-      margin-bottom: 1.2rem;   /* Space gap reduced between sibling items */
+      gap: 0.3rem;
+      margin-bottom: 1.2rem;
       align-items: baseline;
     }
     .cv-item-role { font-weight: 600; color: var(--ink); font-size: 1.05rem; line-height: 1.4; }
@@ -133,11 +134,26 @@
     .cv-item-date { font-family: var(--mono); font-size: 0.88rem; color: var(--muted); text-align: right; font-weight: 500; }
     .cv-item-details { 
       grid-column: 1 / -1; 
-      margin-top: 0.15rem;     /* Space gap reduced strictly by 2-3mm to details text */
+      margin-top: 0.15rem;
       line-height: 1.5; 
       color: var(--ink-soft); 
       font-size: 0.94rem; 
       text-align: justify; 
+    }
+
+    /* Styles specifically for custom subheaders (e.g. Lectures, Seminars) inside University blocks */
+    .cv-format-header {
+      grid-column: 1 / -1;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: var(--accent-strong);
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 0.15rem;
     }
 
     .foot {
@@ -186,6 +202,7 @@
         </a>
       </nav>
 
+      <!-- -->
       <section class="cv-body">
         <div class="cv-header-block">
           <h1 class="cv-title">Curriculum Vitae</h1>
@@ -232,7 +249,8 @@
             </div>
             <div class="cv-item-date">2014 – 2015</div>
             <div class="cv-item-details">
-              Graduated with Merit. Exchange programme: the programme was taught and assessed at Texas A&M University, USA. The Master 1 is the French equivalent of the Master of Science. <br>
+              Graduated with Merit. Exchange programme: the programme was taught and assessed at Texas A&M University, USA. <br>
+              The Master 1 is the French equivalent of the Master of Science. <br>
               Master’s Dissertation: <i>“A Comparative Analysis of Fed and ECB Monetary Policies”</i>
             </div>
           </div>
@@ -260,9 +278,17 @@
     </article>
   </main>
 
+  <!-- -->
   <script>
     function renderCVItem(item) {
       if (!item || typeof item !== 'object') return '';
+      
+      // Handle custom class headers gracefully
+      if (item.isFormatHeader) {
+        return `
+          <div class="cv-format-header">${item.role}</div>
+        `;
+      }
       
       const role = item.role ? String(item.role).stripSpacesOrArtifacts() : "";
       const institution = item.institution ? String(item.institution).stripSpacesOrArtifacts() : "";
@@ -294,7 +320,6 @@
 
     async function loadCV() {
       try {
-        // Force browser to bypass cache using cache-busting timestamp parameter
         const cacheBuster = `?v=${Date.now()}`;
         let response;
         
@@ -334,15 +359,11 @@
           }
         }
 
-        let hasBeforeContent = false;
-        let hasAfterContent = false;
-
         sections.forEach(section => {
           if (!section || typeof section !== 'object') return;
           
           const title = section.title ? String(section.title).trim() : "Untitled Section";
           
-          // CRITICAL BLOCK FILTER: Never render "Education" dynamically if it exists in the JSON
           if (title.toLowerCase() === 'education') {
             return;
           }
@@ -372,13 +393,10 @@
 
           sectionHTML += `</div>`;
           
-          // Placement mapping: Employment goes above Education, everything else goes below
           if (title.toLowerCase().includes('employment')) {
             targetBefore.innerHTML += sectionHTML;
-            hasBeforeContent = true;
           } else {
             targetAfter.innerHTML += sectionHTML;
-            hasAfterContent = true;
           }
         });
 
@@ -393,7 +411,6 @@
       }
     }
     
-    // Initialize
     loadCV();
   </script>
 </body>
