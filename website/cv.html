@@ -92,31 +92,30 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-bottom: 2px solid var(--line-strong);
       padding-bottom: 1rem;
       margin-bottom: 2.5rem;
     }
     .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; }
     
-    .cv-section { margin-bottom: 3.5rem; }
+    .cv-section { margin-bottom: 2.5rem; }
     .cv-section-title {
       font-family: var(--display);
       font-size: 1.35rem;
       font-weight: 700;
       color: var(--accent-strong);
-      border-bottom: 2px solid var(--line-strong);
+      border-bottom: 1px solid var(--line-strong);
       padding-bottom: 0.4rem;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
 
     .cv-subsection-title {
-      font-family: var(--display);
-      font-size: 1.15rem;
+      font-family: var(--sans);
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--accent);
-      margin-top: 1.5rem;
+      margin-top: 2.2rem;
       margin-bottom: 1rem;
       border-left: 3px solid var(--accent);
       padding-left: 0.6rem;
@@ -132,7 +131,7 @@
     .cv-item-role { font-weight: 600; color: var(--ink); font-size: 1.05rem; line-height: 1.4; }
     .cv-item-institution { color: var(--accent); font-weight: 500; font-size: 0.96rem; margin-top: 0.1rem; }
     .cv-item-date { font-family: var(--mono); font-size: 0.88rem; color: var(--muted); text-align: right; font-weight: 500; }
-    .cv-item-details { grid-column: 1 / -1; margin-top: 0.4rem; line-height: 1.5; color: var(--ink-soft); font-size: 0.94rem; text-align: justify; }
+    .cv-item-details { grid-column: 1 / -1; margin-top: 0.15rem; line-height: 1.5; color: var(--ink-soft); font-size: 0.94rem; text-align: justify; }
 
     .foot {
       display: flex;
@@ -186,7 +185,64 @@
           <a href="CV_Arthur_Galichere.pdf" target="_blank" style="color: var(--accent); font-weight: 600; font-size: 0.9rem;"><i class="fas fa-download"></i> Download PDF</a>
         </div>
 
-        <div id="cv-target">Loading layout matrix...</div>
+        <!-- Placeholder for Employment or other items that render before Education if needed, or we render all dynamic sections in our target container -->
+        <div id="cv-target-before"></div>
+
+        <!-- Hardcoded Education Section -->
+        <div class="cv-section">
+          <h2 class="cv-section-title">Education</h2>
+          
+          <div class="cv-item">
+            <div>
+              <div class="cv-item-role">Ph.D. in Economics</div>
+              <div class="cv-item-institution">University of Glasgow, United Kingdom</div>
+            </div>
+            <div class="cv-item-date">2017 – 2022</div>
+            <div class="cv-item-details">
+              Doctorate funded by the Economic and Social Research Council (ESRC). <br>
+              <strong>Supervisors:</strong> Professor Tatiana Kirsanova, Professor Charles Nolan and Professor Richard Dennis. <br>
+              <strong>Thesis Examiners:</strong> Doctor Kalin Nikolov and Professor Campbell Leith. <br>
+              <strong>Thesis Title:</strong> “Asset Price Bubbles and Macroeconomic Policies”
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div>
+              <div class="cv-item-role">MRes in Economics</div>
+              <div class="cv-item-institution">University of Glasgow, United Kingdom. Graduated with Merit</div>
+            </div>
+            <div class="cv-item-date">2015 – 2017</div>
+            <div class="cv-item-details">
+              Two-year programme in economics structured as Doctoral training. <br>
+              <strong>Master’s Dissertation:</strong> “How to Model Credit Frictions?”
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div>
+              <div class="cv-item-role">Master 1 in Economics and Management</div>
+              <div class="cv-item-institution">University of Caen, France. Graduated with Merit</div>
+            </div>
+            <div class="cv-item-date">2014 – 2015</div>
+            <div class="cv-item-details">
+              Exchange programme: the programme was taught and assessed at Texas A&M University, USA. The Master 1 is the French equivalent of the Master of Science. <br>
+              <strong>Master’s Dissertation:</strong> “A Comparative Analysis of Fed and ECB Monetary Policies”
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div>
+              <div class="cv-item-role">Licence in Economics and Management</div>
+              <div class="cv-item-institution">University of Caen, France</div>
+            </div>
+            <div class="cv-item-date">2011 – 2014</div>
+            <div class="cv-item-details">
+              The Licence is the French equivalent of the Bachelor’s degree.
+            </div>
+          </div>
+        </div>
+
+        <div id="cv-target-after"></div>
       </section>
 
       <footer class="foot">
@@ -224,7 +280,6 @@
       `;
     }
 
-    // Help function to eliminate double spaces and line gaps
     String.prototype.stripSpacesOrArtifacts = function() {
       return this.replace(/\s+/g, ' ').trim();
     };
@@ -237,8 +292,11 @@
         }
         
         const data = await response.json();
-        const target = document.getElementById('cv-target');
-        target.innerHTML = ''; 
+        const targetBefore = document.getElementById('cv-target-before');
+        const targetAfter = document.getElementById('cv-target-after');
+        
+        targetBefore.innerHTML = ''; 
+        targetAfter.innerHTML = ''; 
 
         let sections = [];
         if (Array.isArray(data)) {
@@ -257,7 +315,7 @@
         sections.forEach(section => {
           if (!section || typeof section !== 'object') return;
           
-          const title = section.title ? String(section.title).stripSpacesOrArtifacts() : "Untitled Section";
+          const title = section.title ? String(section.title).trim() : "Untitled Section";
           const items = Array.isArray(section.items) ? section.items : [];
           const subsections = Array.isArray(section.subsections) ? section.subsections : [];
 
@@ -266,20 +324,40 @@
               <h2 class="cv-section-title">${title}</h2>
           `;
           
-          // Render flat items first (if any)
+          const renderItem = (item) => {
+            if (!item || typeof item !== 'object') return '';
+            
+            const role = item.role ? String(item.role).trim() : "";
+            const institution = item.institution ? String(item.institution).trim() : "";
+            const date = item.date ? String(item.date).trim() : "";
+            const details = item.details ? String(item.details).trim() : "";
+
+            if (!role && !institution && !date && !details) return '';
+
+            return `
+              <div class="cv-item">
+                <div>
+                  ${role ? `<div class="cv-item-role">${role}</div>` : ''}
+                  ${institution ? `<div class="cv-item-institution">${institution}</div>` : ''}
+                </div>
+                ${date ? `<div class="cv-item-date">${date}</div>` : ''}
+                ${details ? `<div class="cv-item-details">${details}</div>` : ''}
+              </div>
+            `;
+          };
+
           items.forEach(item => {
-            sectionHTML += renderCVItem(item);
+            sectionHTML += renderItem(item);
           });
 
-          // Render nested subsections next
           subsections.forEach(sub => {
             if (!sub || typeof sub !== 'object') return;
-            const subTitle = sub.title ? String(sub.title).stripSpacesOrArtifacts() : "Untitled Category";
+            const subTitle = sub.title ? String(sub.title).trim() : "Untitled Category";
             const subItems = Array.isArray(sub.items) ? sub.items : [];
             
             sectionHTML += `<h3 class="cv-subsection-title">${subTitle}</h3>`;
             subItems.forEach(item => {
-              sectionHTML += renderCVItem(item);
+              sectionHTML += renderItem(item);
             });
           });
 
@@ -288,20 +366,6 @@
         });
 
         if (target.innerHTML === '') {
-          target.innerHTML = '<p style="color: var(--muted);">No printable records found.</p>';
-        }
-
-      } catch (error) {
-        console.error("CV Render Fault Trace:", error);
-        document.getElementById('cv-target').innerHTML = `
-          <div style="color: #c0392b; background: #fdf2f2; border: 1px solid #f5c6cb; padding: 1.2rem; border-radius: 4px; font-family: var(--sans); font-size: 0.95rem; line-height: 1.5;">
-            <p style="font-weight: 700; margin-bottom: 0.4rem;"><i class="fas fa-exclamation-triangle"></i> Render Initialization Blocked</p>
-            <p style="font-family: var(--mono); font-size: 0.85rem; color: var(--ink-soft); padding: 0.4rem; background: rgba(0,0,0,0.04); border-radius: 3px;">${error.message}</p>
-          </div>
-        `;
-      }
-    }
-    loadCV();
   </script>
 </body>
 </html>
