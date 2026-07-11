@@ -1,49 +1,48 @@
-name: LLM-Powered CV Update
+name: Update CV Data
 
 on:
-  push:
-    paths:
-      - 'website/CV_Arthur_Galichere.pdf'
-      - 'requirements.txt'
-  workflow_dispatch:
+push:
+paths:
+- 'website/CV_Arthur_Galichere.pdf'
+- 'website/CV_Arthur_Galichere_excel.xlsx'
+workflow_dispatch:
+
+permissions:
+contents: write
 
 jobs:
-  llm-clean-pipeline:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
+update-cv:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout Repository
+uses: actions/checkout@v4
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+  - name: Setup Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: '3.10'
 
-      - name: Set up Python Engine
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+  - name: Install Dependencies
+    run: pip install pdfplumber openpyxl
 
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+  - name: Run Extraction and Cleaning
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    run: |
+      python website/extract_pdf.py
+      python website/llm_clean.py
 
-      - name: Run Stage 1 - Raw Extraction
-        run: python website/extract_pdf.py
-
-      - name: Run Stage 2 - Gemini LLM Processing
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python website/llm_clean.py
-
-      - name: Commit Perfect Outputs
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add website/cv.json
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: Gemini AI-enhanced layout repair [skip ci]"
-            git push
-          else
-            echo "No structural content modifications required."
-          fi
+  - name: Commit and Push Changes
+    run: |
+      git config user.name "GitHub Actions"
+      git config user.email "github-actions@github.com"
+      git add website/cv.json
+      
+      # Check if there are changes
+      if git diff --quiet && git diff --staged --quiet; then
+        echo "No changes detected to cv.json."
+      else
+        git commit -m "chore: Update CV data [skip ci]"
+        git push
+        echo "Changes committed and pushed."
+      fi
