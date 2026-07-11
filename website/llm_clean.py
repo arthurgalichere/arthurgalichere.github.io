@@ -3,13 +3,57 @@ import sys
 import json
 import urllib.request
 import urllib.error
+import openpyxl
+import tempfile # ... existing code ...
 
-def clean_json_with_llm():
+# ... existing code ...
+    # --- PART B: Parse Local Excel Database ---
+    excel_url = "https://www.dropbox.com/scl/fi/z0dbe74ywv0ws3yw4l8gt/CV_Arthur_Galichere_excel.xlsx?rlkey=l736567qyln1ql0s7ws2nz21q&st=vx9y8fjx&dl=1"
+    
+    print(f"Fetching Excel data from Dropbox...")
+    try:
+        req = urllib.request.Request(excel_url)
+        with urllib.request.urlopen(req) as response:
+            with tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False) as tmp:
+                tmp.write(response.read())
+                temp_excel_path = tmp.name
+        
+        wb = openpyxl.load_workbook(temp_excel_path, data_only=True)
+        print(f"Loaded sheets from remote data: {wb.sheetnames}")
+        
+        for sheet_name in wb.sheetnames:
+            sheet = wb[sheet_name]
+            
+            # Fetch full Section Name from Row 1
+# ... existing code ...
+
+            #def clean_json_with_llm():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     temp_text_path = os.path.join(base_dir, "raw_cv.txt")
     output_json_path = os.path.join(base_dir, "cv.json")
     
-    # Verify raw text exists
+    # Locate the verbatim Excel file
+    excel_name = "CV_Arthur_Galichere_excel.xlsx"
+    excel_path = None
+    
+    # Try searching relative paths recursively
+    search_paths = [
+        os.path.join(base_dir, excel_name),
+        os.path.join(os.path.dirname(base_dir), excel_name),
+        excel_name
+    ]
+    for path in search_paths:
+        if os.path.exists(path):
+            excel_path = path
+            break
+            
+    if not excel_path:
+        # Recursive scan for safety fallback
+        for root, dirs, files in os.walk(os.path.dirname(base_dir)):
+            if excel_name in files:
+                excel_path = os.path.join(root, excel_name)
+                break
+
     if not os.path.exists(temp_text_path):
         print(f"CRITICAL ERROR: Temporary raw text file not found at {temp_text_path}")
         sys.exit(1)
@@ -22,54 +66,35 @@ def clean_json_with_llm():
         print("CRITICAL ERROR: The GEMINI_API_KEY environment variable is empty or missing.")
         sys.exit(1)
 
-    system_instruction = (
-        "You are an expert CV structuring engine. Parse this raw, messy academic CV text.\n"
-        "1. Fix Spacing Glitches: Separate any stuck words (e.g. 'AssistantProfessor' -> 'Assistant Professor', 'UniversityofWarwick' -> 'University of Warwick').\n"
-        "2. Structure Sections and Subsections:\n"
-        "   - Identify major sections (e.g. 'Employment', 'Teaching Awards & Qualifications', 'Teaching Experience', 'Academic Leadership & Development', 'Administrative & Collegial Experience', 'Referees', 'Selected Presentations').\n"
-        "   - If a section contains sub-categories or groupings, organize them under a 'subsections' array (e.g. 'Teaching Experience' should have subsections for 'University of Warwick', 'University of Glasgow', and 'Additional Teaching and Supervisory Experience').\n"
-        "   - For 'Selected Presentations', group the items by year (e.g., '2026', '2025') as subsections.\n"
-        "   - If a section is flat and does not require subsections (like 'Employment'), map items directly to the section's 'items' array.\n"
-        "3. Clear Exclusions: DO NOT include any paragraphs, abstracts, or descriptions regarding 'Research Summary', 'Job Market Paper', 'Working Papers', or 'Work in Progress'.\n"
-        "4. EXCLUDE EDUCATION: Completely skip the 'Education' section because it is hardcoded on the page.\n"
-        "5. Fix Institutional Alignments:\n"
-        "   - The 'Warwick Award for Teaching Excellence' (WATE) belongs to the 'University of Warwick'.\n"
-        "   - The 'Fellowship of the Higher Education Academy' belongs to the 'University of Warwick'.\n"
-        "   - The 'Associate Fellowship' / 'DAT HE' belongs to the 'University of Glasgow'.\n"
-        "6. Professional Development / Courses: Put ONLY the name of the course in the 'role' field. Information such as 'taught by [Name]' MUST be moved to the 'institution' or 'details' field so it is not bolded."
+    #    system_instruction = (
+        "You are an expert CV data extraction engine.\n"
+        "Extract ONLY the following two sections from the raw CV text:\n"
+        "1. 'Employment'\n"
+        "2. 'Selected Presentations' / 'Research Presentations'\n\n"
+        "DO NOT extract Education, Teaching, Admin, Leadership, or Referees sections. Skip those completely.\n"
+        "For the extracted sections:\n"
+        "- Fix word spacing issues (e.g., 'AssistantProfessor' -> 'Assistant Professor').\n"
+        "- Maintain literal wording and exact titles.\n"
+        "Format the output strictly as a JSON object with a single 'sections' array."
     )
 
     prompt = f"""
-Clean, restore word spacing, and parse this raw academic CV text into structural Sections, Subsections, and Items.
+Clean, restore word spacing, and extract ONLY the Employment and Selected Presentations sections from the text.
 
-Output strictly valid JSON matching this exact schema shape:
+Output strictly valid JSON matching this schema:
 {{
   "sections": [
     {{
       "title": "Section Title",
-      "subsections": [
-        {{
-          "title": "Subsection Name (e.g., University of Warwick or 2026)",
-          "items": [
-            {{
-              "role": "Role title, award name, or presentation name",
-              "institution": "Institution name if applicable",
-              "date": "Date if applicable",
-              "details": "Paragraph description or supporting bullet text"
-            }}
-          ]
-        }}
-      ],
       "items": [
-        // Populate this ONLY if there are NO subsections for this section
         {{
-          "role": "Role title, award name, or presentation name",
-          "institution": "Institution name if applicable",
-          "date": "Date if applicable",
-          "details": "Paragraph description or supporting bullet text"
-            }}
-          ]
+          "role": "Role Title",
+          "institution": "University / Institution",
+          "date": "Date Range",
+          "details": "Details description"
         }}
+      ]
+    }}
   ]
 }}
 
@@ -79,6 +104,10 @@ Raw CV Text:
 -----------------------
 """
 
+    merged_sections = []
+
+    # --- PART A: Call Gemini for PDF data ---
+    print("Streaming structured PDF data request to Gemini...")
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
     payload = {
         "contents": [{
@@ -90,34 +119,188 @@ Raw CV Text:
         }
     }
     
-    req = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
-        method="POST"
-    )
-
-    print("Streaming structured data request to Google Gemini API...")
     try:
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST"
+        )
         with urllib.request.urlopen(req) as response:
             result = json.loads(response.read().decode("utf-8"))
             json_text_out = result["candidates"][0]["content"]["parts"][0]["text"]
-            cleaned_json = json.loads(json_text_out)
-
-            with open(output_json_path, "w", encoding="utf-8") as f:
-                json.dump(cleaned_json, f, indent=2, ensure_ascii=False)
-                
-            print(f"Stage 2 Complete: Structured sections saved to {output_json_path}")
+            gemini_data = json.loads(json_text_out)
             
-            # Clean up temporary raw text file safely
-            if os.path.exists(temp_text_path):
-                os.remove(temp_text_path)
+            if isinstance(gemini_data, dict) and "sections" in gemini_data:
+                merged_sections.extend(gemini_data["sections"])
+            elif isinstance(gemini_data, list):
+                merged_sections.extend(gemini_data)
                 
-    except urllib.error.HTTPError as e:
-        print(f"CRITICAL API HTTP Error: {e.code} - {e.read().decode('utf-8')}")
-        sys.exit(1)
+            print(f"Part A Complete: Extracted {len(merged_sections)} dynamic sections from PDF.")
+            
     except Exception as e:
-        print(f"CRITICAL Processing Error: {e}")
+        print(f"CRITICAL ERROR during Gemini parsing: {e}")
+        sys.exit(1)
+
+    # --- PART B: Parse Local Excel Database ---
+    #    if not excel_path:
+        print(f"WARNING: local Excel file '{excel_name}' not found. Skipping Excel merge.")
+    else:
+        print(f"Successfully located Excel file at {excel_path}. Loading sheets...")
+        try:
+            wb = openpyxl.load_workbook(excel_path, data_only=True)
+            print(f"Loaded sheets: {wb.sheetnames}")
+            
+            for sheet_name in wb.sheetnames:
+                sheet = wb[sheet_name]
+                
+                # Fetch full Section Name from Row 1
+                section_title = None
+                for col in range(1, sheet.max_column + 1):
+                    val = sheet.cell(row=1, column=col).value
+                    if val:
+                        section_title = str(val).strip()
+                        break
+                
+                if not section_title:
+                    section_title = sheet_name.strip()
+                
+                # Row 2 contains column headers
+                header_map = {}
+                for col in range(1, sheet.max_column + 1):
+                    val = sheet.cell(row=2, column=col).value
+                    if val:
+                        header_map[str(val).strip().lower()] = col
+                
+                # Find closest matching column indices dynamically
+                col_mappings = {}
+                for key in ["role", "institution", "date", "details"]:
+                    for h_name, idx in header_map.items():
+                        if key in h_name:
+                            col_mappings[key] = idx
+                            break
+                
+                # Extract actual data starting from Row 3
+                items = []
+                for r in range(3, sheet.max_row + 1):
+                    row_vals = {}
+                    for key in ["role", "institution", "date", "details"]:
+                        col_idx = col_mappings.get(key)
+                        if col_idx:
+                            val = sheet.cell(row=r, column=col_idx).value
+                            row_vals[key] = str(val or "").strip()
+                        else:
+                            row_vals[key] = ""
+                    
+                    # Skip completely empty rows
+                    if not any(row_vals.values()):
+                        continue
+                        
+                    items.append(row_vals)
+                
+                if not items:
+                    continue
+
+                #                # Special Grouping Logic for "Teaching Experience"
+                if "teaching" in section_title.lower():
+                    by_inst = {}
+                    inst_order = []  # Maintain visual order of entry
+                    
+                    for item in items:
+                        inst = item.get("institution") or "Other"
+                        inst = inst.strip()
+                        if not inst:
+                            inst = "Other"
+                        if inst not in by_inst:
+                            by_inst[inst] = []
+                            inst_order.append(inst)
+                        by_inst[inst].append(item)
+                    
+                    subsections = []
+                    for inst in inst_order:
+                        inst_items = by_inst[inst]
+                        by_format = {}
+                        
+                        # Group by class formats
+                        for item in inst_items:
+                            fmt = item.get("details") or "Other"
+                            fmt_lower = fmt.lower().strip()
+                            
+                            # Normalize plural format names
+                            if "lecture" in fmt_lower:
+                                fmt_clean = "Lectures"
+                            elif "seminar" in fmt_lower:
+                                fmt_clean = "Seminars"
+                            elif "tutorial" in fmt_lower:
+                                fmt_clean = "Tutorials"
+                            elif "supervision" in fmt_lower:
+                                fmt_clean = "Supervision"
+                            else:
+                                fmt_clean = fmt.strip() if fmt.strip() else "Other"
+                                
+                            if fmt_clean not in by_format:
+                                by_format[fmt_clean] = []
+                            by_format[fmt_clean].append(item)
+                        
+                        # Set custom academic sorting order for Teaching blocks
+                        format_order = ["Lectures", "Seminars", "Tutorials", "Supervision"]
+                        sorted_formats = sorted(
+                            by_format.keys(),
+                            key=lambda x: format_order.index(x) if x in format_order else len(format_order)
+                        )
+                        
+                        nested_items = []
+                        for fmt in sorted_formats:
+                            # Insert category subheader row
+                            nested_items.append({
+                                "role": fmt,
+                                "isFormatHeader": True
+                            })
+                            # Append courses under this category
+                            for item in by_format[fmt]:
+                                nested_items.append({
+                                    "role": item.get("role") or "",
+                                    "institution": "",  # Hidden (handled by Subsection Name)
+                                    "date": item.get("date") or "",
+                                    "details": ""       # Hidden (handled by Format Header)
+                                })
+                        
+                        subsections.append({
+                            "title": inst,
+                            "items": nested_items
+                        })
+                    
+                    merged_sections.append({
+                        "title": section_title,
+                        "subsections": subsections
+                    })
+                    print(f"Merged section '{section_title}' with {len(subsections)} grouped sub-categories from Excel.")
+                
+                else:
+                    # Generic flat sections (Admin, Leadership, Referees, Professional Development)
+                    merged_sections.append({
+                        "title": section_title,
+                        "items": items
+                    })
+                    print(f"Merged section '{section_title}' with {len(items)} items from Excel.")
+                    
+        except Exception as e:
+            print(f"CRITICAL ERROR parsing Excel workbook: {e}")
+            sys.exit(1)
+
+    # --- PART C: Output Merged cv.json file ---
+    #    try:
+        final_output = {"sections": merged_sections}
+        with open(output_json_path, "w", encoding="utf-8") as f:
+            json.dump(final_output, f, indent=2, ensure_ascii=False)
+        print(f"Pipeline Complete: Merged output saved to {output_json_path}")
+        
+        # Clean up raw text extraction safely
+        if os.path.exists(temp_text_path):
+            os.remove(temp_text_path)
+            
+    except Exception as e:
+        print(f"CRITICAL ERROR saving final JSON output: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
