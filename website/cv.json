@@ -1,549 +1,391 @@
-{
-  "sections": [
-    {
-      "title": "Employment",
-      "items": [
-        {
-          "role": "Assistant Professor (Teaching Focussed)",
-          "institution": "University of Warwick, United Kingdom",
-          "date": "2024 – PRESENT",
-          "details": null
-        },
-        {
-          "role": "Teaching Fellow in Macroeconomics",
-          "institution": "University of Warwick, United Kingdom",
-          "date": "2021 – 2024",
-          "details": null
-        },
-        {
-          "role": "Graduate Teaching Assistant",
-          "institution": "University of Glasgow, United Kingdom",
-          "date": "2016 – 2021",
-          "details": null
-        }
-      ]
-    },
-    {
-      "title": "Conference Paper Reviewer",
-      "items": [
-        {
-          "role": "European Association of Young Economists Annual Meeting",
-          "institution": null,
-          "date": "2025 - PRESENT",
-          "details": null
-        }
-      ]
-    },
-    {
-      "title": "Professional Development",
-      "items": [
-        {
-          "role": "Bayesian Estimation of RANK and HANK Models",
-          "institution": "taught by Kristoffer Nimark",
-          "date": "2026",
-          "details": null
-        },
-        {
-          "role": "Bayesian Econometrics",
-          "institution": "taught by Andrea Carriero",
-          "date": "2026",
-          "details": null
-        },
-        {
-          "role": "Tools for Macroeconomists Summer School: The Essentials",
-          "institution": "taught by Petr Sedlacek",
-          "date": "2024",
-          "details": null
-        },
-        {
-          "role": "Computational Methods in Economics",
-          "institution": "taught by Pontus Rendahl",
-          "date": "2020",
-          "details": null
-        },
-        {
-          "role": "Continuous-Time Heterogeneous-Agent Models",
-          "institution": "taught by Christos Koulovatianos",
-          "date": "2020",
-          "details": null
-        }
-      ]
-    },
-    {
-      "title": "Teaching Awards & Qualifications",
-      "items": [
-        {
-          "role": "Warwick Award for Teaching Excellence (Social Sciences Faculty Award)",
-          "institution": "University of Warwick",
-          "date": "2025",
-          "details": "Winner, in recognition of an outstanding contribution to teaching and student support. The Social Sciences Faculty Award recognises the achievements of Warwick’s outstanding educators who have enabled excellent learning, creating the conditions within which all students are supported and empowered to succeed and thrive."
-        },
-        {
-          "role": "Fellowship of the Higher Education Academy",
-          "institution": "University of Warwick",
-          "date": "2024",
-          "details": "Awarded during the 2023-2024 academic year upon completion of the Professional Pathway for Experienced Staff (APP EXP). This program, recognised by the Higher Education Academy, assists experienced staff in aligning with the UK’s Professional Standards Framework 2023 and in demonstrating their involvement in teaching and learning support in higher education."
-        },
-        {
-          "role": "Warwick Award for Teaching Excellence (WATE Social Sciences Faculty Award)",
-          "institution": "University of Warwick",
-          "date": "2023",
-          "details": "Nominated, shortlisted as finalist, and awarded a commendation (3rd prize) in recognition of outstanding contributions to teaching and the support of student learning."
-        },
-        {
-          "role": "Student Teaching Award for Best Graduate Teaching Assistant",
-          "institution": "University of Glasgow",
-          "date": "2021",
-          "details": "Nominated and shortlisted as a finalist. The award recognises teachers who have made an excellent contribution to the learning experience, inspired students to study beyond the classroom, and show clear passion and excitement for their subject matter."
-        },
-        {
-          "role": "Associate Fellowship",
-          "institution": "University of Glasgow",
-          "date": "2019",
-          "details": "Certificate of Excellence in Teaching for passing the Developing as a Teacher in Higher Education course (DAT HE) during the 2018-2019 academic year: The DAT HE course has been developed in alignment with Descriptor I of the UK’s Professional Standards Framework for Teaching and Supporting Learning (Associate Fellowship)."
-        }
-      ]
-    },
-    {
-      "title": "Teaching Experience",
-      "subsections": [
-        {
-          "title": "University of Warwick",
-          "items": [
-            {
-              "role": "Lectures and Seminars: Macroeconomics 2nd year Undergraduate (EC201)",
-              "institution": null,
-              "date": "2021 - PRESENT",
-              "details": null
-            },
-            {
-              "role": "Lectures and Seminars: Advanced Macroeconomics MSc (EC9D5)",
-              "institution": null,
-              "date": "2021 - PRESENT",
-              "details": null
-            },
-            {
-              "role": "Seminars: Topics in Financial Economics 3rd year Undergraduate (EC333-EC334)",
-              "institution": null,
-              "date": "2021 - 2024",
-              "details": null
-            },
-            {
-              "role": "Seminars: Introductory Mathematics and Statistics MSc (EC961)",
-              "institution": null,
-              "date": "2025 - PRESENT",
-              "details": null
-            },
-            {
-              "role": "Dissertations 3rd year Undergraduate (EC331)",
-              "institution": null,
-              "date": "2021 - PRESENT",
-              "details": null
-            },
-            {
-              "role": "Dissertations MSc (EC959)",
-              "institution": null,
-              "date": "2021 - PRESENT",
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "University of Glasgow",
-          "items": [
-            {
-              "role": "Macroeconomics 3rd year Undergraduate (ECON3022)",
-              "institution": null,
-              "date": "2020 - 2021",
-              "details": null
-            },
-            {
-              "role": "Macroeconomics 2nd year Undergraduate (ECON2002)",
-              "institution": null,
-              "date": "2017 - 2021",
-              "details": null
-            },
-            {
-              "role": "Microeconomics 2nd year Undergraduate (ECON2001)",
-              "institution": null,
-              "date": "2017 - 2021",
-              "details": null
-            },
-            {
-              "role": "Macroeconomics 1st year Undergraduate (ECON1002)",
-              "institution": null,
-              "date": "2016 - 2017",
-              "details": null
-            },
-            {
-              "role": "Microeconomics 1st year Undergraduate (ECON1001)",
-              "institution": null,
-              "date": "2016 - 2017",
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "Additional Teaching and Supervisory Experience",
-          "items": [
-            {
-              "role": "External MSc Dissertation Supervisor for the University of Glasgow",
-              "institution": null,
-              "date": "2022-PRESENT",
-              "details": null
-            },
-            {
-              "role": "Project Supervisor in the Warwick Undergraduate Research Support Scheme",
-              "institution": null,
-              "date": "2022-PRESENT",
-              "details": null
-            },
-            {
-              "role": "Warwick Summer School: Money and Banking",
-              "institution": null,
-              "date": "2022-PRESENT",
-              "details": null
-            },
-            {
-              "role": "Warwick MSc Finance & Economics: Economics Summer School",
-              "institution": null,
-              "date": "2025",
-              "details": null
-            },
-            {
-              "role": "Warwick Pre-University Summer School: An Introduction to the History of Economic Thoughts",
-              "institution": null,
-              "date": "2022",
-              "details": null
-            },
-            {
-              "role": "Warwick Pre-University Summer School: An Introduction to Macroeconomics",
-              "institution": null,
-              "date": "2022",
-              "details": null
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Academic Leadership & Development",
-      "items": [
-        {
-          "role": "Jury Member, Warwick Awards for Teaching Excellence",
-          "institution": null,
-          "date": "2026 - PRESENT",
-          "details": "Evaluate university staff nominations for teaching awards and contribute to the recognition of excellence in teaching and student support."
-        },
-        {
-          "role": "Curriculum Review Lead",
-          "institution": null,
-          "date": "2025",
-          "details": "Led the review of undergraduate and postgraduate macroeconomics curricula. Conducted comprehensive curriculum mapping to identify gaps and overlaps across modules, and benchmarked programmes against competitor institutions to inform recommendations for curriculum development."
-        },
-        {
-          "role": "Panelist, Warwick Education Forum",
-          "institution": null,
-          "date": "2025",
-          "details": "Invited panelist at the Warwick Education Forum to contribute to discussions on teaching excellence and the future of education strategy at Warwick."
-        },
-        {
-          "role": "Coordinator, MSc Macro and Monetary Economics Dissertation Group",
-          "institution": null,
-          "date": "2023 - PRESENT",
-          "details": "Support MSc students in developing dissertation topics, refining research questions, and identifying appropriate supervisors, while providing ongoing academic and pastoral guidance throughout the dissertation process."
-        },
-        {
-          "role": "GTA Assessor",
-          "institution": null,
-          "date": "2023 - PRESENT",
-          "details": "Support the professional development of Graduate Teaching Assistants through teaching observations, structured feedback, and reflective discussions on pedagogical practice."
-        }
-      ]
-    },
-    {
-      "title": "Administrative & Collegial Experience",
-      "items": [
-        {
-          "role": "Coordinator, Teaching Focussed Staff Group",
-          "institution": null,
-          "date": "2026 - PRESENT",
-          "details": "Support communication and engagement between TF colleagues and departmental leadership, organise meetings, coordinate evidence-based initiatives and feedback mechanisms, and contribute to the improvement of departmental culture and operations."
-        },
-        {
-          "role": "Exam Invigilation",
-          "institution": null,
-          "date": "2022 - PRESENT",
-          "details": "Senior invigilator in main examination halls and invigilator for mitigating circumstances examinations."
-        },
-        {
-          "role": "Recruitment and Departmental Engagement Activities",
-          "institution": null,
-          "date": "2022 - PRESENT",
-          "details": "Contribute to MSc and undergraduate recruitment and marketing activities through student feedback analysis, participation in Open Days, and attendance at graduation ceremonies."
-        },
-        {
-          "role": "Co-lead, Warwick Internship Scheme for Economists",
-          "institution": null,
-          "date": "2021 - PRESENT",
-          "details": "Review and shortlist research internship proposals, support colleagues with recruitment processes, and participate in student interviews."
-        },
-        {
-          "role": "Student Support and Academic Service",
-          "institution": null,
-          "date": "2021 - PRESENT",
-          "details": "Personal Tutor, providing academic guidance, mentoring, and pastoral support to approximately 27–30 students each year. Academic Referee, writing 25–45 comprehensive reference letters annually for current students and alumni."
-        }
-      ]
-    },
-    {
-      "title": "Selected Presentations",
-      "subsections": [
-        {
-          "title": "2026",
-          "items": [
-            {
-              "role": "Money, Macro and Finance Annual Conference",
-              "institution": "Lancaster, UK",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Scottish Economic Society Annual Conference",
-              "institution": "Glasgow, UK",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Symposium on Money, Banking and Finance",
-              "institution": "Rennes, France",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Rethymno, Greece",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Economic Modeling and Data Science",
-              "institution": "Luxembourg",
-              "date": null,
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "2025",
-          "items": [
-            {
-              "role": "Money, Macro and Finance Annual Conference",
-              "institution": "Reading, UK",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Computing in Economics and Finance",
-              "institution": "Santiago, Chile",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Rethymno, Greece",
-              "date": null,
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "2024",
-          "items": [
-            {
-              "role": "International Conference on Economic Modeling and Data Science",
-              "institution": "Çeşme, Turkey",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Computing in Economics and Finance",
-              "institution": "Singapore",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Scottish Economic Society Annual Conference",
-              "institution": "Glasgow, UK",
-              "date": null,
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "2023",
-          "items": [
-            {
-              "role": "Annual Congress of the European Economic Association",
-              "institution": "Barcelona, Spain",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Warwick Macro and International Economics Workshop",
-              "institution": "Coventry, UK",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Symposium on Money, Banking and Finance",
-              "institution": "Lille, France",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Royal Economics Society PhD Annual Conference",
-              "institution": "Glasgow, UK",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Rethymno, Greece",
-              "date": null,
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "2022",
-          "items": [
-            {
-              "role": "South-Eastern European Economic Research Workshop",
-              "institution": "Bank of Albania, Hybrid Conference",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Econometric Society European Summer Meeting",
-              "institution": "Milan, Italy",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Computing in Economics and Finance",
-              "institution": "Dallas, USA",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Rethymno, Greece",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Scottish Economic Society Annual Conference",
-              "institution": "Glasgow, UK",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Money Macro and Finance PhD Annual Conference",
-              "institution": "Edinburgh, UK",
-              "date": null,
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "2021",
-          "items": [
-            {
-              "role": "Money, Macro and Finance Annual Conference",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Macroeconomic Analysis and International Finance",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "European Economics and Finance Society",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "International Conference on Computing in Economics and Finance",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Symposium on Money, Banking and Finance",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Annual Southern PhD Economics Conference",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Scottish Economic Society Annual Conference",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "2020",
-          "items": [
-            {
-              "role": "Annual Congress of the European Economic Association",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Money Macro and Finance PhD Conference",
-              "institution": "Virtual",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Scottish Graduate Programme in Economics Residential Conference",
-              "institution": "Crieff, UK",
-              "date": null,
-              "details": null
-            }
-          ]
-        },
-        {
-          "title": "2019",
-          "items": [
-            {
-              "role": "Macroeconomics Seminar Series",
-              "institution": "University of Glasgow, UK",
-              "date": null,
-              "details": null
-            },
-            {
-              "role": "Scottish Graduate Programme in Economics Residential Conference",
-              "institution": "Crieff, UK",
-              "date": null,
-              "details": null
-            }
-          ]
-        }
-      ]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arthur Galichère — Curriculum Vitae</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --paper:        #f4f5f7;
+      --paper-soft:   #fafbfc;
+      --sheet:        #ffffff;
+      --panel:        #ebeeec;
+      --panel-deep:   #e2e5e9;
+      --line:         rgba(28, 28, 30, 0.08);
+      --line-strong:  rgba(28, 28, 30, 0.15);
+      --ink:          #1c1c1e;
+      --ink-soft:     #3a3a3c;
+      --muted:        #71717a;
+      --accent:       #3b5a75;
+      --accent-strong:#25394b;
+      --accent-soft:  #edf2f6;
+
+      --display: 'Bitter', Georgia, serif;
+      --sans:    'Montserrat', system-ui, sans-serif;
+      --mono:    'JetBrains Mono', monospace;
     }
-  ]
-}
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: var(--paper); }
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+    }
+
+    .card {
+      width: min(100%, 1100px);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
+      overflow: hidden;
+    }
+    .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
+
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      border-left: 1px solid var(--line);
+      color: var(--ink);
+      text-decoration: none;
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+    .index-card:first-child { border-left: none; }
+    .index-nav .idx-label {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--display); font-size: 1.15rem; font-weight: 600;
+    }
+    .index-nav .idx-label i { font-size: 0.85rem; color: var(--accent); width: 1.1rem; text-align: center; }
+    
+    .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
+    .index-card:hover { background: var(--accent); color: #fff; }
+    .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
+
+    .cv-body { padding: 3rem 2.5rem; }
+    .cv-header-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; }
+    
+    .cv-section { margin-bottom: 2.5rem; }
+    .cv-section-title {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-strong);
+      border-bottom: 1px solid var(--line-strong);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .cv-subsection-title {
+      font-family: var(--sans);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 2.2rem;
+      margin-bottom: 1rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 0.6rem;
+    }
+
+    .cv-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      align-items: baseline;
+    }
+    .cv-item-role { font-weight: 600; color: var(--ink); font-size: 1.05rem; line-height: 1.4; }
+    .cv-item-institution { color: var(--accent); font-weight: 500; font-size: 0.96rem; margin-top: 0.1rem; }
+    .cv-item-date { font-family: var(--mono); font-size: 0.88rem; color: var(--muted); text-align: right; font-weight: 500; }
+    .cv-item-details { grid-column: 1 / -1; margin-top: 0.15rem; line-height: 1.5; color: var(--ink-soft); font-size: 0.94rem; text-align: justify; }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      background: var(--panel-deep);
+      border-top: 1px solid var(--line);
+    }
+    .foot-loc { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .cv-body { padding: 2rem 1.5rem; }
+      .cv-item { grid-template-columns: 1fr; }
+      .cv-item-date { text-align: left; margin-bottom: 0.2rem; }
+    }
+    @media (max-width: 680px) {
+      .index-nav { grid-template-columns: 1fr; }
+      .index-card { border-left: none; border-top: 1px solid var(--line); }
+      .index-card:first-child { border-top: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+    <article class="card">
+      
+      <nav class="index-nav" aria-label="Academic Directory">
+        <a href="../index.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
+        </a>
+        <a href="cv.html" class="index-card is-current" aria-current="page">
+          <span class="idx-label"><i class="fas fa-file" aria-hidden="true"></i> CV</span>
+        </a>
+        <a href="../index.html#research" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-line" aria-hidden="true"></i> Research</span>
+        </a>
+        <a href="../index.html#teaching" class="index-card">
+          <span class="idx-label"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Teaching</span>
+        </a>
+        <a href="../index.html#economics" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
+        </a>
+      </nav>
+
+      <section class="cv-body">
+        <div class="cv-header-block">
+          <h1 class="cv-title">Curriculum Vitae</h1>
+          <a href="CV_Arthur_Galichere.pdf" target="_blank" style="color: var(--accent); font-weight: 600; font-size: 0.9rem;"><i class="fas fa-download"></i> Download PDF</a>
+        </div>
+
+        <!-- Placeholder for Employment or other items that render before Education if needed, or we render all dynamic sections in our target container -->
+        <div id="cv-target-before"></div>
+
+        <!-- Hardcoded Education Section -->
+        <div class="cv-section">
+          <h2 class="cv-section-title">Education</h2>
+          
+          <div class="cv-item">
+            <div>
+              <div class="cv-item-role">Ph.D. in Economics</div>
+              <div class="cv-item-institution">University of Glasgow, United Kingdom</div>
+            </div>
+            <div class="cv-item-date">2017 – 2022</div>
+            <div class="cv-item-details">
+              Doctorate funded by the Economic and Social Research Council (ESRC). <br>
+              Supervisors: Professor Tatiana Kirsanova, Professor Charles Nolan and Professor Richard Dennis. <br>
+              Thesis Examiners: Doctor Kalin Nikolov and Professor Campbell Leith. <br>
+              Thesis Title: “Asset Price Bubbles and Macroeconomic Policies”
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div>
+              <div class="cv-item-role">MRes in Economics</div>
+              <div class="cv-item-institution">University of Glasgow, United Kingdom. Graduated with Merit</div>
+            </div>
+            <div class="cv-item-date">2015 – 2017</div>
+            <div class="cv-item-details">
+              Two-year programme in economics structured as Doctoral training. <br>
+              Master’s Dissertation: “How to Model Credit Frictions?”
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div>
+              <div class="cv-item-role">Master 1 in Economics and Management</div>
+              <div class="cv-item-institution">University of Caen, France. Graduated with Merit</div>
+            </div>
+            <div class="cv-item-date">2014 – 2015</div>
+            <div class="cv-item-details">
+              Exchange programme: the programme was taught and assessed at Texas A&M University, USA. The Master 1 is the French equivalent of the Master of Science. <br>
+              Master’s Dissertation: “A Comparative Analysis of Fed and ECB Monetary Policies”
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div>
+              <div class="cv-item-role">Licence in Economics and Management</div>
+              <div class="cv-item-institution">University of Caen, France</div>
+            </div>
+            <div class="cv-item-date">2011 – 2014</div>
+            <div class="cv-item-details">
+              The Licence is the French equivalent of the Bachelor’s degree.
+            </div>
+          </div>
+        </div>
+
+        <div id="cv-target-after"></div>
+      </section>
+
+      <footer class="foot">
+        <span class="foot-loc">University of Warwick · Coventry, UK</span>
+      </footer>
+      
+    </article>
+  </main>
+
+  <script>
+    function renderCVItem(item) {
+      if (!item || typeof item !== 'object') return '';
+      
+      const role = item.role ? String(item.role).stripSpacesOrArtifacts() : "";
+      const institution = item.institution ? String(item.institution).stripSpacesOrArtifacts() : "";
+      const date = item.date ? String(item.date).stripSpacesOrArtifacts() : "";
+      const details = item.details ? String(item.details).stripSpacesOrArtifacts() : "";
+
+      const hasRole = role !== "";
+      const hasInstitution = institution !== "";
+      const hasDate = date !== "";
+      const hasDetails = details !== "";
+
+      if (!hasRole && !hasInstitution && !hasDate && !hasDetails) return '';
+
+      return `
+        <div class="cv-item">
+          <div>
+            ${hasRole ? `<div class="cv-item-role">${role}</div>` : ''}
+            ${hasInstitution ? `<div class="cv-item-institution">${institution}</div>` : ''}
+          </div>
+          ${hasDate ? `<div class="cv-item-date">${date}</div>` : ''}
+          ${hasDetails ? `<div class="cv-item-details">${details}</div>` : ''}
+        </div>
+      `;
+    }
+
+    String.prototype.stripSpacesOrArtifacts = function() {
+      return this.replace(/\s+/g, ' ').trim();
+    };
+
+    async function loadCV() {
+      try {
+        // Robust fetch strategy to handle sandboxed/blob preview environments
+        let response;
+        try {
+          // Attempt standard relative fetch
+          response = await fetch('./cv.json');
+        } catch (err) {
+          // Fallback 1: Absolute path lookup
+          try {
+            response = await fetch('/website/cv.json');
+          } catch (err2) {
+            // Fallback 2: Construct a valid URL from the sandboxed environment's origin
+            const baseUrl = window.location.href.split('?')[0].replace(/\/[^\/]*$/, '');
+            response = await fetch(baseUrl + '/cv.json');
+          }
+        }
+
+        if (!response || !response.ok) {
+          throw new Error(`HTTP network error! Target server returned status: ${response ? response.status : 'Failed to Resolve'}`);
+        }
+        
+        const data = await response.json();
+        const targetBefore = document.getElementById('cv-target-before');
+        const targetAfter = document.getElementById('cv-target-after');
+        
+        targetBefore.innerHTML = ''; 
+        targetAfter.innerHTML = ''; 
+
+        let sections = [];
+        if (Array.isArray(data)) {
+          sections = data;
+        } else if (data && Array.isArray(data.sections)) {
+          sections = data.sections;
+        } else if (data && typeof data === 'object') {
+          const potentialArray = Object.values(data).find(val => Array.isArray(val));
+          if (potentialArray) {
+            sections = potentialArray;
+          } else {
+            throw new Error("Could not map structural keys.");
+          }
+        }
+
+        let hasBeforeContent = false;
+        let hasAfterContent = false;
+
+        sections.forEach(section => {
+          if (!section || typeof section !== 'object') return;
+          
+          const title = section.title ? String(section.title).trim() : "Untitled Section";
+          const items = Array.isArray(section.items) ? section.items : [];
+          const subsections = Array.isArray(section.subsections) ? section.subsections : [];
+
+          let sectionHTML = `
+            <div class="cv-section">
+              <h2 class="cv-section-title">${title}</h2>
+          `;
+          
+          items.forEach(item => {
+            sectionHTML += renderCVItem(item);
+          });
+
+          subsections.forEach(sub => {
+            if (!sub || typeof sub !== 'object') return;
+            const subTitle = sub.title ? String(sub.title).trim() : "Untitled Category";
+            const subItems = Array.isArray(sub.items) ? sub.items : [];
+            
+            sectionHTML += `<h3 class="cv-subsection-title">${subTitle}</h3>`;
+            subItems.forEach(item => {
+              sectionHTML += renderCVItem(item);
+            });
+          });
+
+          sectionHTML += `</div>`;
+          
+          // Route the Employment section to the top, and all other sections underneath Education
+          if (title.toLowerCase().includes('employment')) {
+            targetBefore.innerHTML += sectionHTML;
+            hasBeforeContent = true;
+          } else {
+            targetAfter.innerHTML += sectionHTML;
+            hasAfterContent = true;
+          }
+        });
+
+        if (!hasBeforeContent && !hasAfterContent) {
+          targetAfter.innerHTML = '<p style="color: var(--muted);">No printable records found.</p>';
+        }
+
+      } catch (error) {
+        console.error("CV Render Fault Trace:", error);
+        document.getElementById('cv-target-after').innerHTML = `
+          <div style="color: #c0392b; background: #fdf2f2; border: 1px solid #f5c6cb; padding: 1.2rem; border-radius: 4px; font-family: var(--sans); font-size: 0.95rem; line-height: 1.5;">
+            <p style="font-weight: 700; margin-bottom: 0.4rem;"><i class="fas fa-exclamation-triangle"></i> Render Initialization Blocked</p>
+            <p style="font-family: var(--mono); font-size: 0.85rem; color: var(--ink-soft); padding: 0.4rem; background: rgba(0,0,0,0.04); border-radius: 3px;">${error.message}</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Initialize
+    loadCV();
+  </script>
+</body>
+</html>
