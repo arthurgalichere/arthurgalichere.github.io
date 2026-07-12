@@ -389,7 +389,9 @@
             
             // Determine if we should hide the institution.
             // Only hide it if the parent section is "Teaching Experience"
-            const shouldHideInstitution = title.toLowerCase().includes('teaching experience');
+            // OLD: const shouldHideInstitution = title.toLowerCase().includes('teaching experience');
+            // NEW: Make sure we only hide institutions for the exact "Teaching Experience" section
+            const shouldHideInstitution = (title.toLowerCase() === 'teaching experience');
             
             subItems.forEach(item => {
               sectionHTML += renderCVItem(item, shouldHideInstitution);
