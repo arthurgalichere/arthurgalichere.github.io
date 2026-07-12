@@ -218,15 +218,18 @@
       "title": "Additional Teaching and Supervisory Experience",
       "subsections": [
         {
-          "title": "University of Glasgow",
+          "title": "Supervision",
           "items": [
-            {
-              "isFormatHeader": true,
-              "role": "Supervision"
-            },
             {
               "role": "External MSc Dissertation Supervisor",
               "institution": "University of Glasgow",
+              "date": "2022 - PRESENT",
+              "details": "Supervisor",
+              "category": "Supervision"
+            },
+            {
+              "role": "Project Supervisor in the Undergraduate Research Support Scheme",
+              "institution": "University of Warwick",
               "date": "2022 - PRESENT",
               "details": "Supervisor",
               "category": "Supervision"
@@ -234,12 +237,8 @@
           ]
         },
         {
-          "title": "University of Warwick",
+          "title": "Lectures",
           "items": [
-            {
-              "isFormatHeader": true,
-              "role": "Lectures"
-            },
             {
               "role": "Warwick Summer School: Money and Banking",
               "institution": "University of Warwick",
@@ -267,17 +266,6 @@
               "date": "2022",
               "details": "Lecturer",
               "category": "Lectures"
-            },
-            {
-              "isFormatHeader": true,
-              "role": "Supervision"
-            },
-            {
-              "role": "Project Supervisor in the Undergraduate Research Support Scheme",
-              "institution": "University of Warwick",
-              "date": "2022 - PRESENT",
-              "details": "Supervisor",
-              "category": "Supervision"
             }
           ]
         }
