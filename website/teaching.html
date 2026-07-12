@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +12,23 @@
 
   <style>
     :root {
-      --paper:        #f4f5f7; --paper-soft:   #fafbfc; --sheet:        #ffffff;
-      --line:         rgba(28, 28, 30, 0.08); --line-strong:  rgba(28, 28, 30, 0.15);
-      --ink:          #1c1c1e; --ink-soft:     #3a3a3c; --muted:        #71717a;
-      --accent:       #3b5a75; --accent-strong:#25394b; --accent-soft:  #edf2f6;
-      --display: 'Bitter', Georgia, serif; --sans: 'Montserrat', system-ui, sans-serif; --mono: 'JetBrains Mono', monospace;
+      --paper:        #f4f5f7;
+      --paper-soft:   #fafbfc;
+      --sheet:        #ffffff;
+      --panel:        #ebeeec;
+      --panel-deep:   #e2e5e9;
+      --line:         rgba(28, 28, 30, 0.08);
+      --line-strong:  rgba(28, 28, 30, 0.15);
+      --ink:          #1c1c1e;
+      --ink-soft:     #3a3a3c;
+      --muted:        #71717a;
+      --accent:       #3b5a75;
+      --accent-strong:#25394b;
+      --accent-soft:  #edf2f6;
+
+      --display: 'Bitter', Georgia, serif;
+      --sans:    'Montserrat', system-ui, sans-serif;
+      --mono:    'JetBrains Mono', monospace;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,29 +41,50 @@
 
     .index-nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--line-strong); }
     .index-card { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 1.4rem; border-left: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: background-color 0.16s ease, color 0.16s ease; }
-    .index-card:first-child { border-left: none; }
     .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
     .index-card:hover { background: var(--accent); color: #fff; }
     
     .cv-body { padding: 3rem 2.5rem; }
     .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; }
-    .cv-section { margin-bottom: 3rem; }
+    
+    .cv-section { margin-bottom: 3.5rem; }
     .cv-section-title { font-family: var(--display); font-size: 1.35rem; font-weight: 700; color: var(--accent-strong); border-bottom: 2px solid var(--line-strong); padding-bottom: 0.4rem; margin-bottom: 1.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .intro-text { color: var(--ink-soft); line-height: 1.7; margin-bottom: 2rem; }
-    .intro-links { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
+    
+    .cv-item-details { color: var(--ink-soft); font-size: 0.94rem; text-align: justify; margin-bottom: 2rem; }
+    
+    /* Collapsible Ribbon Styles */
+    .collapsible-ribbon {
+      background: #fff;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .collapsible-ribbon[open] {
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .collapsible-ribbon summary {
+      list-style: none;
+      padding: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--accent-strong);
+    }
+    .collapsible-ribbon summary::-webkit-details-marker { display: none; }
+    .ribbon-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+    .ribbon-title { font-size: 1.1rem; }
+    .ribbon-date { font-size: 0.9rem; color: var(--muted); font-family: var(--mono); }
+    .ribbon-icon { transition: transform 0.2s; font-size: 0.8rem; margin-left: 1rem; }
+    .collapsible-ribbon[open] .ribbon-icon { transform: rotate(180deg); }
+    .ribbon-content { padding: 0 1.2rem 1.2rem; color: var(--ink-soft); font-size: 0.94rem; line-height: 1.6; }
+    .ribbon-content h4 { margin-top: 1rem; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--accent); text-transform: uppercase; }
     .link-text { color: var(--accent); text-decoration: none; font-weight: 600; }
     .link-text:hover { text-decoration: underline; }
-
-    /* Collapsible Ribbon Styles */
-    .collapsible-ribbon { background: var(--sheet); border: 1px solid var(--line-strong); border-radius: 6px; margin-bottom: 0.8rem; transition: all 0.2s ease; }
-    .collapsible-ribbon summary { padding: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; outline: none; }
-    .ribbon-header { display: grid; grid-template-columns: 1fr auto; align-items: baseline; width: 100%; gap: 1rem; }
-    .ribbon-title { font-weight: 700; color: var(--accent-strong); font-size: 1.05rem; }
-    .ribbon-date { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); font-weight: 500; }
-    .ribbon-icon { color: var(--accent); transition: transform 0.2s ease; font-size: 0.8rem; }
-    .collapsible-ribbon[open] .ribbon-icon { transform: rotate(180deg); }
-    .ribbon-content { padding: 0 1.1rem 1.1rem 1.1rem; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.94rem; line-height: 1.6; }
-    .ribbon-content h4 { margin: 1rem 0 0.5rem; color: var(--accent-strong); font-size: 0.9rem; text-transform: uppercase; }
   </style>
 </head>
 <body>
@@ -69,18 +101,8 @@
 
       <section class="cv-body">
         <h1 class="cv-title">Teaching</h1>
-        
-        <div class="intro-text">
-          <p>Welcome to my teaching page. Below you will find the modules I have taught, usually with additional information and resources.</p>
-        </div>
 
-        <div class="intro-links">
-          <a href="officehours.html" class="link-text">→ Advice and Feedback Hours</a>
-          <a href="supervision.html" class="link-text">→ Dissertation Supervision</a>
-        </div>
-
-        <!-- University of Warwick Section -->
-        <section class="cv-section">
+        <div class="cv-section">
           <h2 class="cv-section-title">University of Warwick</h2>
           
           <details class="collapsible-ribbon">
@@ -113,14 +135,84 @@
             </div>
           </details>
 
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">EC331: Research in Applied Economics 3rd year UG</span>
+                <span class="ribbon-date">2021 - Present</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>You can find <a href="supervision.html" class="link-text">here</a> my statement about dissertation supervision.</p>
+              <h4>Resources</h4>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
+                <a href="supervision.html" class="link-text">Dissertation supervision statement</a>
+                <a href="https://warwick.ac.uk/fac/soc/economics/current/modules/ec331/raeprojects" target="_blank" class="link-text">Sample of past dissertations</a>
+                <a href="https://drive.google.com/drive/folders/12UmILgSmMVpDgbFJ9C5UHaz9inTqu0U8?usp=sharing" target="_blank" class="link-text">Short notes on how to write your Dissertation</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">EC333-EC334: Topics in Financial Economics 3rd year UG</span>
+                <span class="ribbon-date">2021 - 2024</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <h4>Resources</h4>
+              <a href="https://drive.google.com/drive/folders/1nCmKq-FrTN24RNWTz0PAPf0kXY8dDa7J?usp=sharing" target="_blank" class="link-text">Short notes</a>
+            </div>
+          </details>
+
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">EC961: Introductory Mathematics and Statistics MSc</span>
+                <span class="ribbon-date">2025</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>This module, EC961 Introductory Mathematics and Statistics, is intended to provide a working background knowledge of the mathematical and statistical techniques necessary for MSc programmes in the Department of Economics at the University of Warwick.</p>
+              <p style="margin-top: 0.5rem;">The module is in four parts:</p>
+              <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li>Calculus and Dynamics</li>
+                <li>Linear Algebra</li>
+                <li>Multivariate Calculus</li>
+                <li>Statistics and Probability</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">EC959: MSc Dissertations</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>You can find <a href="supervision.html" class="link-text">here</a> my statement about dissertation supervision.</p>
+              <h4>Resources</h4>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
+                <a href="supervision.html" class="link-text">Dissertation supervision statement</a>
+                <a href="https://drive.google.com/drive/folders/12UmILgSmMVpDgbFJ9C5UHaz9inTqu0U8?usp=sharing" target="_blank" class="link-text">Short notes on how to write your Dissertation</a>
+              </div>
+            </div>
+          </details>
+
           <!-- Add other modules here... -->
 
         </section>
 
-        <!-- University of Glasgow Section -->
+<!-- University of Glasgow Section -->
         <section class="cv-section">
           <h2 class="cv-section-title">University of Glasgow</h2>
-          
+
           <details class="collapsible-ribbon">
             <summary>
               <div class="ribbon-header">
@@ -130,7 +222,125 @@
               <span class="ribbon-icon">▼</span>
             </summary>
             <div class="ribbon-content">
-              <p>Economics 3 'Economic Policies and Growth' focuses on the theory of business cycles and economic growth, covering topics like Output, Employment, and the IS-PC-MR Model.</p>
+              <p>Economics 3 'Economic Policies and Growth' focuses on the theory of business cycles and economic growth.</p>
+              <h4>Central Topics</h4>
+              <ul>
+                <li>Business Cycles Theory</li>
+                <li>Output and Employment</li>
+                <li>Monetary Theory</li>
+                <li>IS-PC-MR Model</li>
+                <li>Monetary and Fiscal Policies</li>
+                <li>Income and Market Policies</li>
+              </ul>
+              <h4>Books</h4>
+              <p>Carlin, W. and Soskice, D. W. (2005). <em>Macroeconomics: Imperfections, Institutions, and Policies</em>. Oxford University Press.</p>
+              <p>Carlin, W. and Soskice, D. (2014). <em>Macroeconomics: Institutions, Instability, and the Financial System</em>. Oxford University Press, USA.</p>
+            </div>
+          </details>
+
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">ECON2001: Microeconomics 2nd year UG</span>
+                <span class="ribbon-date">2018 - 2021</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>Economics 2A focuses on intermediate microeconomic analyses and familiarises students with an economic thinking and model-based approach to the analysis of the markets.</p>
+              <h4>Central Topics</h4>
+              <ul>
+                <li>Consumer Theory</li>
+                <li>Market Structure</li>
+                <li>Intertemporal Choice</li>
+                <li>Introduction to Game Theory</li>
+                <li>Uncertainty</li>
+                <li>Technology and Profit Maximisation</li>
+                <li>Monopoly and Oligopoly</li>
+              </ul>
+              <h4>Books</h4>
+              <p>Varian, H. R. (2014). <em>Intermediate microeconomics with calculus: a modern approach</em>. WW Norton & Company. 1st edition (or later).</p>
+              <h4>Informal Notes</h4>
+              <div style="display: flex; flex-direction: column; gap: 0.3rem; align-items: flex-start;">
+                <a href="https://drive.google.com/file/d/1WPEoHSjS0lkr12AxqLEA-hDT7vkJvCqj/view?usp=sharing" target="_blank" class="link-text">Comparison of consumer and producer theories</a>
+                <a href="https://drive.google.com/file/d/1122mxprh1HyJI29z2yCBrzidujrjV-25/view?usp=sharing" target="_blank" class="link-text">Optimisation in microeconomics</a>
+                <a href="https://drive.google.com/file/d/1bW8g2uKR5SczjTO84LvI83Pl5Wg8R0Lh/view?usp=sharing" target="_blank" class="link-text">Decomposition methods</a>
+                <a href="https://drive.google.com/file/d/1D21hNBh8YJDKSKE9f0139sTnhilnjG2Y/view?usp=sharing" target="_blank" class="link-text">Math: Extrema</a>
+              </div>
+            </div>
+          </details>
+
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">ECON2002: Macroeconomics 2nd year UG</span>
+                <span class="ribbon-date">2018 - 2021</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>Economics 2B provides a solid foundation in macroeconomic theory at an intermediate level.</p>
+              <h4>Central Topics</h4>
+              <ul>
+                <li>Goods Markets</li>
+                <li>Financial Markets</li>
+                <li>IS-LM Model</li>
+                <li>The Labour Market and the Phillips Curve</li>
+                <li>IS-LM-PC Model</li>
+                <li>Expectations, Output and Policy Makers</li>
+                <li>Monetary and Fiscal Policies</li>
+                <li>The IS-LM Model in an Open Economy</li>
+                <li>Exchange Rate Regimes, Currency Crises</li>
+              </ul>
+              <h4>Books</h4>
+              <p>Blanchard, O. J. (2017). <em>Macroeconomics</em>. Pearson Education Limited, 7th ed.</p>
+              <h4>Resources</h4>
+              <a href="https://drive.google.com/drive/folders/18aodWnukE9dv2J0cbM1UtCrImNJCmhjo?usp=sharing" target="_blank" class="link-text">Tutorial notes</a>
+            </div>
+          </details>
+
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">Microeconomics 1st year UG</span>
+                <span class="ribbon-date">2016 - 2017</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>Economics 1A provides an introduction and overview of important topics in microeconomics.</p>
+              <h4>Central Topics</h4>
+              <ul>
+                <li>Markets and Consumers</li>
+                <li>Markets and Firms</li>
+                <li>Public Policy</li>
+                <li>Factor Markets and Risk</li>
+              </ul>
+              <h4>Books</h4>
+              <p>Krugman, P. and Wells, R. (2015). <em>Economics</em>. Worth Publisher, 4th ed.</p>
+            </div>
+          </details>
+
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">Macroeconomics 1st year UG</span>
+                <span class="ribbon-date">2016 - 2017</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>Economics 1B provides an introduction and overview of important topics in macroeconomics.</p>
+              <h4>Central Topics</h4>
+              <ul>
+                <li>National Income Accounting, Unemployment and Inflation</li>
+                <li>AS-AD Model</li>
+                <li>Long Run Macroeconomic Equilibrium</li>
+                <li>Fiscal and Monetary Policies</li>
+                <li>Money, Banking and the Federal Reserve System</li>
+              </ul>
+              <h4>Books</h4>
+              <p>Krugman, P. and Wells, R. (2015). <em>Economics</em>. Worth Publisher, 4th ed.</p>
             </div>
           </details>
         </section>
