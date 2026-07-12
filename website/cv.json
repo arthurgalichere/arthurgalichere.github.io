@@ -1,6 +1,32 @@
 {
   "sections": [
     {
+      "title": "Employment",
+      "items": [
+        {
+          "role": "Assistant Professor (Teaching Focussed)",
+          "institution": "University of Warwick, United Kingdom",
+          "date": "2024 – PRESENT",
+          "details": "",
+          "category": ""
+        },
+        {
+          "role": "Teaching Fellow in Macroeconomics",
+          "institution": "University of Warwick, United Kingdom",
+          "date": "2021 – 2024",
+          "details": "",
+          "category": ""
+        },
+        {
+          "role": "Graduate Teaching Assistant",
+          "institution": "University of Glasgow, United Kingdom",
+          "date": "2016 – 2021",
+          "details": "",
+          "category": ""
+        }
+      ]
+    },
+    {
       "title": "Professional Development",
       "items": [
         {
