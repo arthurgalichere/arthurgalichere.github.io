@@ -40,9 +40,16 @@
     .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
 
     .index-nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--line-strong); }
-    .index-card { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 1.4rem; border-left: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: background-color 0.16s ease, color 0.16s ease; }
+    .index-card { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 1.4rem; border-left: 1px solid var(--line);
+                 color: var(--ink); text-decoration: none; transition: background-color 0.16s ease, color 0.16s ease; }
+    .index-card:first-child { border-left: none; }
+    .index-nav .idx-label { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--display); font-size: 1.15rem; font-weight: 600; }
+    .index-nav .idx-label i { font-size: 0.85rem; color: var(--accent); width: 1.1rem; text-align: center; }
+    
     .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
     .index-card:hover { background: var(--accent); color: #fff; }
+    .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
     
     .cv-body { padding: 3rem 2.5rem; }
     .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; }
