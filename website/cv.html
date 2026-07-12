@@ -386,9 +386,13 @@
             const subItems = Array.isArray(sub.items) ? sub.items : [];
             
             sectionHTML += `<h3 class="cv-subsection-title">${subTitle}</h3>`;
+            
+            // Determine if we should hide the institution.
+            // Only hide it if the parent section is "Teaching Experience"
+            const shouldHideInstitution = title.toLowerCase().includes('teaching experience');
+            
             subItems.forEach(item => {
-              // Pass 'true' to hide the institution for grouped items
-              sectionHTML += renderCVItem(item, true);
+              sectionHTML += renderCVItem(item, shouldHideInstitution);
             });
           });
 
