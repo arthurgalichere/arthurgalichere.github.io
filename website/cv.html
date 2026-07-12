@@ -111,6 +111,10 @@
       letter-spacing: 0.06em;
     }
 
+    .cv-section.teaching-tight .cv-item {
+      margin-bottom: 0.5rem; /* Tighter spacing for Teaching Experience items */
+    }
+
     .cv-subsection-title {
       font-family: var(--display);
       font-size: 1.3rem;
@@ -371,8 +375,11 @@
           const items = Array.isArray(section.items) ? section.items : [];
           const subsections = Array.isArray(section.subsections) ? section.subsections : [];
 
+          // Add a conditional class if this is the "Teaching Experience" section
+          const isTeaching = title.toLowerCase() === 'teaching experience';
+
           let sectionHTML = `
-            <div class="cv-section">
+            <div class="cv-section ${isTeaching ? 'teaching-tight' : ''}">
               <h2 class="cv-section-title">${title}</h2>
           `;
           
