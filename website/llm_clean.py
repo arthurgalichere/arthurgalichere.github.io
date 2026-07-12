@@ -67,7 +67,7 @@ def clean_json_with_llm():
             header_map = {str(sheet.cell(row=2, column=col).value).strip().lower(): col 
                          for col in range(1, sheet.max_column + 1) if sheet.cell(row=2, column=col).value}
             
-            cols = ["role", "institution", "date", "category", "details", "other_details"]
+            cols = ["role", "institution", "date", "details", "category", "other_details"]
             col_map = {k: header_map.get(k) for k in cols}
             
             items = []
@@ -92,7 +92,10 @@ def clean_json_with_llm():
             
             if items:
                 # Check if this section needs grouping logic
-                if section_title.lower() in GROUPED_SECTIONS:
+                section_lower = section_title.lower()
+                
+                if section_lower == "teaching experience":
+                    # Grouping by Institution -> Category
                     by_inst = {}
                     for item in items:
                         inst = item.get("institution") or "Other"
@@ -110,8 +113,22 @@ def clean_json_with_llm():
                             inst_items.append({"isFormatHeader": True, "role": cat})
                             inst_items.extend(cat_items)
                         subsections.append({"title": inst, "items": inst_items})
+                    merged_sections.append({"title": section_title, "subsections": subsections})
+                
+                elif section_lower == "additional teaching and supervisory experience":
+                    # Grouping by Category ONLY
+                    by_cat = {}
+                    for item in items:
+                        cat = item.get("category") or "General"
+                        if cat not in by_cat: by_cat[cat] = []
+                        by_cat[cat].append(item)
+                    
+                    subsections = []
+                    for cat, cat_items in by_cat.items():
+                        subsections.append({"title": cat, "items": cat_items})
                     
                     merged_sections.append({"title": section_title, "subsections": subsections})
+                
                 else:
                     # Append as standard flat section
                     merged_sections.append({"title": section_title, "items": items})
