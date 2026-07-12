@@ -41,7 +41,7 @@ def clean_json_with_llm():
                             break 
                 except Exception as e:
                     print(f"DEBUG ERROR: PDF extraction failed attempt {attempt+1}: {e}")
-                    time.sleep(2)
+                    time.sleep(16)
         else:
             print("DEBUG: No API Key found.")
 
