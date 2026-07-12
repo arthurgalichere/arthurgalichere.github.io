@@ -75,6 +75,8 @@
       font-weight: 600;
       color: var(--accent-strong);
     }
+    
+    /* Collapsible Ribbon Styles */
     .collapsible-ribbon summary::-webkit-details-marker { display: none; }
     .ribbon-header { display: flex; justify-content: space-between; width: 100%; align-items: center; }
     .ribbon-title { font-size: 1.1rem; }
@@ -96,20 +98,30 @@
         <a href="cv.html" class="index-card"><span class="idx-label">CV</span></a>
         <a href="research.html" class="index-card"><span class="idx-label">Research</span></a>
         <a href="teaching.html" class="index-card is-current"><span class="idx-label">Teaching</span></a>
-        <a href="../index.html#economics" class="index-card"><span class="idx-label">Economics</span></a>
+        <a href="economics.html" class="index-card"><span class="idx-label">Economics</span></a>
       </nav>
 
-      <section class="cv-body">
+<section class="cv-body">
         <h1 class="cv-title">Teaching</h1>
+        
+        <div class="intro-text">
+          <p>Welcome to my teaching page. Below you will find the modules I have taught, usually with additional information and resources.</p>
+        </div>
 
-        <div class="cv-section">
+        <div class="intro-links">
+          <a href="officehours.html" class="link-text">→ Advice and Feedback Hours</a>
+          <a href="supervision.html" class="link-text">→ Dissertation Supervision</a>
+        </div>
+
+        <!-- University of Warwick Section -->
+        <section class="cv-section">
           <h2 class="cv-section-title">University of Warwick</h2>
           
           <details class="collapsible-ribbon">
             <summary>
               <div class="ribbon-header">
                 <span class="ribbon-title">EC201: Macroeconomics 2nd year UG</span>
-                <span class="ribbon-date">2021 - Present</span>
+                <span class="ribbon-date">2021 - PRESENT</span>
               </div>
               <span class="ribbon-icon">▼</span>
             </summary>
@@ -124,7 +136,7 @@
             <summary>
               <div class="ribbon-header">
                 <span class="ribbon-title">EC9D5: Advanced Macroeconomics MSc</span>
-                <span class="ribbon-date">2021 - Present</span>
+                <span class="ribbon-date">2021 - PRESENT</span>
               </div>
               <span class="ribbon-icon">▼</span>
             </summary>
@@ -139,7 +151,7 @@
             <summary>
               <div class="ribbon-header">
                 <span class="ribbon-title">EC331: Research in Applied Economics 3rd year UG</span>
-                <span class="ribbon-date">2021 - Present</span>
+                <span class="ribbon-date">2021 - PRESENT</span>
               </div>
               <span class="ribbon-icon">▼</span>
             </summary>
@@ -210,7 +222,7 @@
         </section>
 
 <!-- University of Glasgow Section -->
-        <section class="cv-section">
+        <section class="cv-section"> 
           <h2 class="cv-section-title">University of Glasgow</h2>
 
           <details class="collapsible-ribbon">
