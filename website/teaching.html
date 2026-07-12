@@ -1,1 +1,142 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arthur Galichère — Teaching</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --paper:        #f4f5f7; --paper-soft:   #fafbfc; --sheet:        #ffffff;
+      --line:         rgba(28, 28, 30, 0.08); --line-strong:  rgba(28, 28, 30, 0.15);
+      --ink:          #1c1c1e; --ink-soft:     #3a3a3c; --muted:        #71717a;
+      --accent:       #3b5a75; --accent-strong:#25394b; --accent-soft:  #edf2f6;
+      --display: 'Bitter', Georgia, serif; --sans: 'Montserrat', system-ui, sans-serif; --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { font-family: var(--sans); color: var(--ink); min-height: 100vh; background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%); }
+
+    .page { width: 100%; display: flex; flex-direction: column; align-items: center; padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem; }
+    .card { width: min(100%, 1100px); background: var(--sheet); border: 1px solid var(--line-strong); border-radius: 6px; box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08); overflow: hidden; }
+    .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
+
+    .index-nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--line-strong); }
+    .index-card { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 1.4rem; border-left: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: background-color 0.16s ease, color 0.16s ease; }
+    .index-card:first-child { border-left: none; }
+    .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
+    .index-card:hover { background: var(--accent); color: #fff; }
+    
+    .cv-body { padding: 3rem 2.5rem; }
+    .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; }
+    .cv-section { margin-bottom: 3rem; }
+    .cv-section-title { font-family: var(--display); font-size: 1.35rem; font-weight: 700; color: var(--accent-strong); border-bottom: 2px solid var(--line-strong); padding-bottom: 0.4rem; margin-bottom: 1.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .intro-text { color: var(--ink-soft); line-height: 1.7; margin-bottom: 2rem; }
+    .intro-links { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
+    .link-text { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .link-text:hover { text-decoration: underline; }
+
+    /* Collapsible Ribbon Styles */
+    .collapsible-ribbon { background: var(--sheet); border: 1px solid var(--line-strong); border-radius: 6px; margin-bottom: 0.8rem; transition: all 0.2s ease; }
+    .collapsible-ribbon summary { padding: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; outline: none; }
+    .ribbon-header { display: grid; grid-template-columns: 1fr auto; align-items: baseline; width: 100%; gap: 1rem; }
+    .ribbon-title { font-weight: 700; color: var(--accent-strong); font-size: 1.05rem; }
+    .ribbon-date { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+    .ribbon-icon { color: var(--accent); transition: transform 0.2s ease; font-size: 0.8rem; }
+    .collapsible-ribbon[open] .ribbon-icon { transform: rotate(180deg); }
+    .ribbon-content { padding: 0 1.1rem 1.1rem 1.1rem; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.94rem; line-height: 1.6; }
+    .ribbon-content h4 { margin: 1rem 0 0.5rem; color: var(--accent-strong); font-size: 0.9rem; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+    <article class="card">
+      <nav class="index-nav">
+        <a href="../index.html" class="index-card"><span class="idx-label">Profile</span></a>
+        <a href="cv.html" class="index-card"><span class="idx-label">CV</span></a>
+        <a href="research.html" class="index-card"><span class="idx-label">Research</span></a>
+        <a href="teaching.html" class="index-card is-current"><span class="idx-label">Teaching</span></a>
+        <a href="../index.html#economics" class="index-card"><span class="idx-label">Economics</span></a>
+      </nav>
+
+      <section class="cv-body">
+        <h1 class="cv-title">Teaching</h1>
+        
+        <div class="intro-text">
+          <p>Welcome to my teaching page. Below you will find the modules I have taught, usually with additional information and resources.</p>
+        </div>
+
+        <div class="intro-links">
+          <a href="officehours.html" class="link-text">→ Advice and Feedback Hours</a>
+          <a href="supervision.html" class="link-text">→ Dissertation Supervision</a>
+        </div>
+
+        <!-- University of Warwick Section -->
+        <section class="cv-section">
+          <h2 class="cv-section-title">University of Warwick</h2>
+          
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">EC201: Macroeconomics 2nd year UG</span>
+                <span class="ribbon-date">2021 - Present</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>This module builds on the first-year Macroeconomics module, EC108, and deepens the understanding of how modern economies function. It covers both closed and open economies, focusing on economic growth, inflation, and unemployment.</p>
+              <h4>Resources</h4>
+              <a href="https://drive.google.com/drive/folders/1eLn5tb0oAyWjyZDtofn3qDHBgHEKyAuy?usp=sharing" target="_blank" class="link-text">Short notes</a>
+            </div>
+          </details>
+
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">EC9D5: Advanced Macroeconomics MSc</span>
+                <span class="ribbon-date">2021 - Present</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>This module covers Business Cycles and Economic Growth, introducing key facts, models, and methods used to analyse short-run fluctuations and long-run development.</p>
+              <h4>Resources</h4>
+              <a href="https://drive.google.com/drive/folders/10texI9_CFltIQPHDJ2Ts3UQrQ_5xs0Ay?usp=sharing" target="_blank" class="link-text">Short notes</a>
+            </div>
+          </details>
+
+          <!-- Add other modules here... -->
+
+        </section>
+
+        <!-- University of Glasgow Section -->
+        <section class="cv-section">
+          <h2 class="cv-section-title">University of Glasgow</h2>
+          
+          <details class="collapsible-ribbon">
+            <summary>
+              <div class="ribbon-header">
+                <span class="ribbon-title">ECON3022: Macroeconomics 3rd year UG</span>
+                <span class="ribbon-date">2020 - 2021</span>
+              </div>
+              <span class="ribbon-icon">▼</span>
+            </summary>
+            <div class="ribbon-content">
+              <p>Economics 3 'Economic Policies and Growth' focuses on the theory of business cycles and economic growth, covering topics like Output, Employment, and the IS-PC-MR Model.</p>
+            </div>
+          </details>
+        </section>
+
+      </section>
+    </article>
+  </main>
+</body>
+</html>
