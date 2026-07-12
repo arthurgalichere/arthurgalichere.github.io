@@ -278,18 +278,20 @@
     </article>
   </main>
 
-  <!-- -->
   <script>
-    function renderCVItem(item) {
+    function renderCVItem(item, hideInstitution = false) {
       if (!item || typeof item !== 'object') return '';
       
-      // NEW: Handle category headers
+      // Handle custom class headers gracefully
       if (item.isFormatHeader) {
-        return `<div class="cv-format-header">${item.role}</div>`;
+        return `
+          <div class="cv-format-header">${item.role}</div>
+        `;
       }
       
       const role = item.role ? String(item.role).stripSpacesOrArtifacts() : "";
-      const institution = item.institution ? String(item.institution).stripSpacesOrArtifacts() : "";
+      // Only show institution if we are not hiding it
+      const institution = hideInstitution ? "" : (item.institution ? String(item.institution).stripSpacesOrArtifacts() : "");
       const date = item.date ? String(item.date).stripSpacesOrArtifacts() : "";
       const details = item.details ? String(item.details).stripSpacesOrArtifacts() : "";
 
@@ -297,6 +299,8 @@
       const hasInstitution = institution !== "";
       const hasDate = date !== "";
       const hasDetails = details !== "";
+
+      if (!hasRole && !hasInstitution && !hasDate && !hasDetails) return '';
 
       return `
         <div class="cv-item">
@@ -383,7 +387,8 @@
             
             sectionHTML += `<h3 class="cv-subsection-title">${subTitle}</h3>`;
             subItems.forEach(item => {
-              sectionHTML += renderCVItem(item);
+              // Pass 'true' to hide the institution for grouped items
+              sectionHTML += renderCVItem(item, true);
             });
           });
 
