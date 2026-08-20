@@ -267,29 +267,29 @@
           "title": "Lectures",
           "items": [
             {
-              "role": "Money and Banking",
-              "institution": "Warwick Summer School, University of Warwick",
+              "role": "Warwick Summer School: Money and Banking",
+              "institution": "University of Warwick",
               "date": "2022 - Present",
               "details": "Designed and have been delivering a course on Money and Banking, comprising four three-hour lectures, at the Warwick Summer School.",
               "category": "Lectures"
             },
             {
-              "role": "MSc Finance & Economics: Macroeconomics",
-              "institution": "Economics Summer School, University of Warwick",
+              "role": "MSc Finance & Economics: Economics Summer School",
+              "institution": "University of Warwick",
               "date": "2025",
               "details": "Designed and delivered asynchronous online learning materials in macroeconomics for non-economics students preparing to enter the MSc Finance & Economics, jointly offered by Warwick Business School and the Department of Economics.",
               "category": "Lectures"
             },
             {
-              "role": "An Introduction to the History of Economic Thoughts",
-              "institution": "Warwick Pre-University Summer School, University of Warwick",
+              "role": "Warwick Pre-University Summer School: An Introduction to the History of Economic Thoughts",
+              "institution": "University of Warwick",
               "date": "2022",
               "details": "Designed and delivered a mini-lecture for prospective economics students at the Warwick Pre-University Summer School.",
               "category": "Lectures"
             },
             {
-              "role": "An Introduction to Macroeconomics",
-              "institution": "Warwick Pre-University Summer School, University of Warwick",
+              "role": "Warwick Pre-University Summer School: An Introduction to Macroeconomics",
+              "institution": "University of Warwick",
               "date": "2022",
               "details": "Designed and delivered a mini-lecture for prospective economics students at the Warwick Pre-University Summer School.",
               "category": "Lectures"
@@ -302,14 +302,7 @@
       "title": "Academic Leadership and Development",
       "items": [
         {
-          "role": "GTA Coordinator",
-          "institution": "",
-          "date": "2026 - Present",
-          "details": "Serve as the main departmental contact for Graduate Teaching Assistants, coordinating induction, training, forums and teaching observations while providing ongoing guidance, feedback and professional development support to enhance their teaching experience and integration within the department.",
-          "category": ""
-        },
-        {
-          "role": "Jury Member of the Warwick Awards for Teaching Excellence (WATE)",
+          "role": "Jury Member, Warwick Awards for Teaching Excellence (WATE)",
           "institution": "",
           "date": "2026 - Present",
           "details": "Evaluate university staff nominations for teaching awards and contribute to the recognition of excellence in teaching and student support.",
@@ -323,14 +316,14 @@
           "category": ""
         },
         {
-          "role": "Panelist in the Warwick Education Forum",
+          "role": "Panelist, Warwick Education Forum",
           "institution": "",
           "date": "2025",
           "details": "Invited panelist at the Warwick Education Forum to contribute to discussions on teaching excellence and the future of education strategy at Warwick.",
           "category": ""
         },
         {
-          "role": "Coordinator of MSc Macro and Monetary Economics Dissertation Group",
+          "role": "Coordinator, MSc Macro and Monetary Economics Dissertation Group",
           "institution": "",
           "date": "2023 - Present",
           "details": "Support MSc students in developing dissertation topics, refining research questions, and identifying appropriate supervisors, while providing ongoing academic and pastoral guidance throughout the dissertation process.",
@@ -349,7 +342,7 @@
       "title": "Administrative and Collegial Experience",
       "items": [
         {
-          "role": "Coordinator of the Teaching Focussed Staff Group",
+          "role": "Coordinator, Teaching Focussed Staff Group",
           "institution": "",
           "date": "2026 - Present",
           "details": "Support communication and engagement between TF colleagues and departmental leadership, organise meetings, coordinate evidence-based initiatives and feedback mechanisms, and contribute to the improvement of departmental culture and operations.",
@@ -370,7 +363,7 @@
           "category": ""
         },
         {
-          "role": "Co-lead of the Warwick Internship Scheme for Economists",
+          "role": "Co-lead, Warwick Internship Scheme for Economists",
           "institution": "",
           "date": "2021 - Present",
           "details": "Review and shortlist research internship proposals, support colleagues with recruitment processes, and participate in student interviews.",
@@ -627,48 +620,6 @@
           "category": ""
         }
       ]
-    }
-  ],
-  "papers": [
-    {
-      "title": "When Banks Ride the Bubble: Financial Stability and Real Activity",
-      "category": "Working Papers",
-      "journal": "",
-      "date": "",
-      "coauthors": "",
-      "abstract": "My paper studies the implications of the dynamic ownership of risky asset price bubbles between banks and retail investors for financial stability and real activity. The analysis shows that the severity of banking crises and recessions depends on both the exposure of individual banks to the bubble and the overall contamination of the banking sector. The paper also highlights that the early stages of bubble growth increase the financial vulnerability of the economy, as banks increasingly invest in the bubble during this period. While stricter banking supervision can reduce the effects of a bursting bubble, it may also weaken banks’ resilience to economic shocks.",
-      "url": "https://drive.google.com/file/d/1juFNMigDmWnCyn0tO5le4GfdkXocdNQ0/view?usp=sharing",
-      "status": ""
-    },
-    {
-      "title": "Stock Market Bubbles and Monetary Policy: a Bayesian Analysis",
-      "category": "Working Papers",
-      "journal": "",
-      "date": "",
-      "coauthors": "",
-      "abstract": "This paper develops and estimates a DSGE model with stock market bubbles and nominal rigidities using Bayesian methods. Bubbles emerge through a positive feedback loop mechanism supported by self-fulfilling beliefs. Their movements, driven by a sentiment shock, significantly contribute to fluctuations in investment, output, and inflation.",
-      "url": "",
-      "status": ""
-    },
-    {
-      "title": "Stock Market Dynamics in the RBC Framework",
-      "category": "Work in Progress",
-      "journal": "",
-      "date": "",
-      "coauthors": "",
-      "abstract": "This paper develops a DSGE model to study stock market dynamics. A key novelty of the framework is the introduction of firm exit and equity issuance by new entrants.",
-      "url": "",
-      "status": ""
-    },
-    {
-      "title": "Asset Price Bubbles and Monetary Policy: Deflate the Bubble?",
-      "category": "Work in Progress",
-      "journal": "",
-      "date": "",
-      "coauthors": "",
-      "abstract": "This paper studies monetary policy in a New Keynesian model with asset price bubbles. It shows that monetary policy targeting asset prices can partially deflate an asset price bubble and affects the way the bubble is financed.",
-      "url": "",
-      "status": ""
     }
   ]
 }
