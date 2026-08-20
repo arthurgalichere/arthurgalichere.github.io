@@ -1,48 +1,173 @@
 name: Update CV Data
 
 on:
-  push:
-    paths:
-      - 'website/CV_Arthur_Galichere.pdf'
-      - 'website/CV_Arthur_Galichere_excel.xlsx'
+  schedule:
+    # Run at 06:00 UTC on the 15th of every month.
+    - cron: '0 6 15 * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: update-cv-data
+  cancel-in-progress: false
+
 jobs:
   update-cv:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+          cache: pip
 
-      - name: Install Dependencies
-        run: pip install pdfplumber openpyxl
+      - name: Install dependencies
+        run: python -m pip install openpyxl
 
-      - name: Run Extraction and Cleaning
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: Preserve current CV data
         run: |
-          python website/extract_pdf.py
-          python website/llm_clean.py
+          python - <<'PY'
+          import json
+          from datetime import date
+          from pathlib import Path
 
-      - name: Commit and Push Changes
+          path = Path("website/cv.json")
+          if not path.is_file() or path.stat().st_size < 100:
+              raise SystemExit("The existing website/cv.json is missing or unexpectedly small.")
+
+          with path.open(encoding="utf-8") as file:
+              data = json.load(file)
+
+          if not isinstance(data, dict):
+              raise SystemExit("The existing cv.json must be a JSON object.")
+
+          try:
+              date.fromisoformat(data.get("last_updated", ""))
+          except (TypeError, ValueError):
+              raise SystemExit("The existing cv.json has no valid last_updated date.")
+
+          sections = data.get("sections")
+          if not isinstance(sections, list) or not sections:
+              raise SystemExit("The existing cv.json has no valid sections list.")
+
+          print(
+              f"Preserving cv.json with {len(sections)} sections, "
+              f"updated on {data['last_updated']}."
+          )
+          PY
+
+          mkdir -p "$RUNNER_TEMP/cv-safety"
+          cp website/cv.json "$RUNNER_TEMP/cv-safety/cv.json"
+
+      - name: Download Excel data and rebuild CV JSON
+        id: rebuild
+        continue-on-error: true
+        env:
+          CV_EXCEL_URL: "https://www.dropbox.com/scl/fi/z0dbe74ywv0ws3yw4l8gt/CV_Arthur_Galichere_excel.xlsx?rlkey=l736567qyln1ql0s7ws2nz21q&st=vx9y8fjx&dl=1"
+        run: python website/cv_excel_extract.py
+
+      - name: Validate generated CV JSON
+        id: validate
+        if: steps.rebuild.outcome == 'success'
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import date
+          from pathlib import Path
+
+          expected_sections = {
+              "Employment",
+              "Professional Development",
+              "Conference Paper Reviewer",
+              "Teaching Awards and Qualifications",
+              "Teaching Experience",
+              "Additional Teaching and Supervisory Experience",
+              "Academic Leadership and Development",
+              "Administrative and Collegial Experience",
+              "Research Presentations",
+          }
+
+          path = Path("website/cv.json")
+          if not path.is_file() or path.stat().st_size < 100:
+              raise SystemExit("Generated cv.json is missing or unexpectedly small.")
+
+          with path.open(encoding="utf-8") as file:
+              data = json.load(file)
+
+          if not isinstance(data, dict):
+              raise SystemExit("Generated cv.json must be a JSON object.")
+
+          try:
+              date.fromisoformat(data.get("last_updated", ""))
+          except (TypeError, ValueError):
+              raise SystemExit("Generated cv.json has no valid last_updated date.")
+
+          sections = data.get("sections")
+          if not isinstance(sections, list) or not sections:
+              raise SystemExit("Generated cv.json has no valid sections list.")
+
+          titles = {
+              section.get("title")
+              for section in sections
+              if isinstance(section, dict)
+          }
+          missing = expected_sections - titles
+          if missing:
+              raise SystemExit(
+                  "Generated cv.json is missing sections: " + ", ".join(sorted(missing))
+              )
+
+          for section in sections:
+              if not isinstance(section, dict) or not section.get("title"):
+                  raise SystemExit("Every CV section must be an object with a title.")
+
+              entries = section.get("items", section.get("subsections"))
+              if not isinstance(entries, list) or not entries:
+                  raise SystemExit(
+                      f"Section '{section['title']}' contains no items or subsections."
+                  )
+
+          print(
+              f"Validated cv.json with {len(sections)} sections, "
+              f"updated on {data['last_updated']}."
+          )
+          PY
+
+      - name: Restore previous CV data after failure
+        if: steps.rebuild.outcome != 'success' || steps.validate.outcome != 'success'
+        run: |
+          cp "$RUNNER_TEMP/cv-safety/cv.json" website/cv.json
+          echo "The CV update failed. The previous valid cv.json has been restored."
+          exit 1
+
+      - name: Archive previous version when CV data changes
+        id: changes
+        run: |
+          if cmp -s "$RUNNER_TEMP/cv-safety/cv.json" website/cv.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No CV data changes detected."
+          else
+            timestamp="$(date -u +'%Y-%m-%dT%H%M%SZ')"
+            mkdir -p website/backups
+            cp \
+              "$RUNNER_TEMP/cv-safety/cv.json" \
+              "website/backups/cv_${timestamp}.json"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "CV data changed; the previous valid version was archived."
+          fi
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "GitHub Actions"
           git config user.email "github-actions@github.com"
-          git add website/cv.json
-          
-          # Check if there are changes
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No changes detected to cv.json."
-          else
-            git commit -m "chore: Update CV data [skip ci]"
-            git push
-            echo "Changes committed and pushed."
-          fi
+          git add website/cv.json website/backups/
+          git commit -m "chore: update CV data [skip ci]"
+          git push
