@@ -1,4 +1,4 @@
-name: Update CV Data
+name: Update CV and Papers Data
 
 on:
   schedule:
@@ -16,6 +16,7 @@ concurrency:
 jobs:
   update-cv:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repository
@@ -39,7 +40,9 @@ jobs:
 
           path = Path("website/cv.json")
           if not path.is_file() or path.stat().st_size < 100:
-              raise SystemExit("The existing website/cv.json is missing or unexpectedly small.")
+              raise SystemExit(
+                  "The existing website/cv.json is missing or unexpectedly small."
+              )
 
           with path.open(encoding="utf-8") as file:
               data = json.load(file)
@@ -56,14 +59,27 @@ jobs:
               try:
                   date.fromisoformat(previous_date)
               except (TypeError, ValueError):
-                  raise SystemExit("The existing cv.json has an invalid last_updated date.")
+                  raise SystemExit(
+                      "The existing cv.json has an invalid last_updated date."
+                  )
               date_message = f"updated on {previous_date}"
           else:
-              # Allow the pre-migration cv.json through once. The extractor will
-              # add last_updated after a successful Excel extraction.
+              # Permit a legacy file through once. A successful extraction will
+              # add last_updated to the newly generated cv.json.
               date_message = "with no legacy last_updated date"
 
-          print(f"Preserving cv.json with {len(sections)} sections, {date_message}.")
+          papers = data.get("papers")
+          if papers is None:
+              paper_message = "no legacy papers array"
+          elif isinstance(papers, list):
+              paper_message = f"{len(papers)} papers"
+          else:
+              raise SystemExit("The existing cv.json papers value must be a list.")
+
+          print(
+              f"Preserving cv.json with {len(sections)} sections, "
+              f"{paper_message}, {date_message}."
+          )
           PY
 
           mkdir -p "$RUNNER_TEMP/cv-safety"
@@ -85,6 +101,7 @@ jobs:
           import json
           from datetime import date
           from pathlib import Path
+          from urllib.parse import urlparse
 
           expected_sections = {
               "Employment",
@@ -96,6 +113,12 @@ jobs:
               "Academic Leadership and Development",
               "Administrative and Collegial Experience",
               "Research Presentations",
+          }
+
+          allowed_paper_categories = {
+              "Working Papers",
+              "Work in Progress",
+              "Published",
           }
 
           path = Path("website/cv.json")
@@ -111,7 +134,9 @@ jobs:
           try:
               date.fromisoformat(data.get("last_updated", ""))
           except (TypeError, ValueError):
-              raise SystemExit("Generated cv.json has no valid last_updated date.")
+              raise SystemExit(
+                  "Generated cv.json has no valid ISO last_updated date."
+              )
 
           sections = data.get("sections")
           if not isinstance(sections, list) or not sections:
@@ -125,12 +150,26 @@ jobs:
           missing = expected_sections - titles
           if missing:
               raise SystemExit(
-                  "Generated cv.json is missing sections: " + ", ".join(sorted(missing))
+                  "Generated cv.json is missing sections: "
+                  + ", ".join(sorted(missing))
+              )
+
+          unexpected_papers_section = {
+              title for title in titles
+              if isinstance(title, str) and title.casefold() in {
+                  "papers", "research papers"
+              }
+          }
+          if unexpected_papers_section:
+              raise SystemExit(
+                  "The papers worksheet was incorrectly added to sections."
               )
 
           for section in sections:
               if not isinstance(section, dict) or not section.get("title"):
-                  raise SystemExit("Every CV section must be an object with a title.")
+                  raise SystemExit(
+                      "Every CV section must be an object with a title."
+                  )
 
               entries = section.get("items", section.get("subsections"))
               if not isinstance(entries, list) or not entries:
@@ -138,9 +177,72 @@ jobs:
                       f"Section '{section['title']}' contains no items or subsections."
                   )
 
+              if "subsections" in section:
+                  for subsection in section["subsections"]:
+                      if (
+                          not isinstance(subsection, dict)
+                          or not subsection.get("title")
+                          or not isinstance(subsection.get("items"), list)
+                          or not subsection["items"]
+                      ):
+                          raise SystemExit(
+                              f"Section '{section['title']}' has an invalid subsection."
+                          )
+
+          papers = data.get("papers")
+          if not isinstance(papers, list) or not papers:
+              raise SystemExit(
+                  "Generated cv.json has no valid non-empty papers list."
+              )
+
+          seen_titles = set()
+          for index, paper in enumerate(papers, start=1):
+              if not isinstance(paper, dict):
+                  raise SystemExit(f"Paper {index} must be a JSON object.")
+
+              title = paper.get("title")
+              category = paper.get("category")
+
+              if not isinstance(title, str) or not title.strip():
+                  raise SystemExit(f"Paper {index} has no valid title.")
+
+              normalized_title = title.strip().casefold()
+              if normalized_title in seen_titles:
+                  raise SystemExit(f"Duplicate paper title found: {title}")
+              seen_titles.add(normalized_title)
+
+              if category not in allowed_paper_categories:
+                  allowed = ", ".join(sorted(allowed_paper_categories))
+                  raise SystemExit(
+                      f"Paper '{title}' has invalid category '{category}'. "
+                      f"Expected one of: {allowed}."
+                  )
+
+              for field in (
+                  "journal",
+                  "date",
+                  "coauthors",
+                  "abstract",
+                  "url",
+                  "status",
+              ):
+                  value = paper.get(field, "")
+                  if not isinstance(value, str):
+                      raise SystemExit(
+                          f"Paper '{title}' field '{field}' must be text."
+                      )
+
+              url = paper.get("url", "").strip()
+              if url:
+                  parsed = urlparse(url)
+                  if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+                      raise SystemExit(
+                          f"Paper '{title}' has an invalid URL: {url}"
+                      )
+
           print(
               f"Validated cv.json with {len(sections)} sections, "
-              f"updated on {data['last_updated']}."
+              f"{len(papers)} papers, updated on {data['last_updated']}."
           )
           PY
 
@@ -151,12 +253,12 @@ jobs:
           echo "The CV update failed. The previous cv.json has been restored unchanged."
           exit 1
 
-      - name: Archive previous version when CV data changes
+      - name: Archive previous version when data changes
         id: changes
         run: |
           if cmp -s "$RUNNER_TEMP/cv-safety/cv.json" website/cv.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No CV data changes detected."
+            echo "No CV or research data changes detected."
           else
             timestamp="$(date -u +'%Y-%m-%dT%H%M%SZ')"
             mkdir -p website/backups
@@ -164,7 +266,7 @@ jobs:
               "$RUNNER_TEMP/cv-safety/cv.json" \
               "website/backups/cv_${timestamp}.json"
             echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "CV data changed; the previous version was archived."
+            echo "CV or research data changed; the previous version was archived."
           fi
 
       - name: Commit and push changes
@@ -173,5 +275,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "github-actions@github.com"
           git add website/cv.json website/backups/
-          git commit -m "chore: update CV data [skip ci]"
+          git commit -m "chore: update CV and research data [skip ci]"
           git push
