@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arthur Galichère — Research</title>
-  
+  <meta name="description" content="Research by Arthur Galichère on macroeconomics, finance, asset price bubbles, financial stability, and monetary policy." />
+
+  <link rel="icon" type="image/png" href="images/favicon_transparant.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -12,63 +14,337 @@
 
   <style>
     :root {
-      --paper:        #f4f5f7;
-      --paper-soft:   #fafbfc;
-      --sheet:        #ffffff;
-      --panel:        #ebeeec;
-      --panel-deep:   #e2e5e9;
-      --line:         rgba(28, 28, 30, 0.08);
-      --line-strong:  rgba(28, 28, 30, 0.15);
-      --ink:          #1c1c1e;
-      --ink-soft:     #3a3a3c;
-      --muted:        #71717a;
-      --accent:       #3b5a75;
-      --accent-strong:#25394b;
-      --accent-soft:  #edf2f6;
+      --paper: #f4f5f7;
+      --paper-soft: #fafbfc;
+      --sheet: #ffffff;
+      --panel-deep: #e2e5e9;
+      --line: rgba(28, 28, 30, 0.08);
+      --line-strong: rgba(28, 28, 30, 0.15);
+      --ink: #1c1c1e;
+      --ink-soft: #3a3a3c;
+      --muted: #71717a;
+      --accent: #3b5a75;
+      --accent-strong: #25394b;
+      --accent-soft: #edf2f6;
+      --error: #9f2d25;
+      --error-background: #fdf2f2;
+      --error-border: #f5c6cb;
 
       --display: 'Bitter', Georgia, serif;
-      --sans:    'Montserrat', system-ui, sans-serif;
-      --mono:    'JetBrains Mono', monospace;
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
     }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     html { background: var(--paper); }
-    body { font-family: var(--sans); color: var(--ink); min-height: 100vh; background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%); }
 
-    .page { width: 100%; display: flex; flex-direction: column; align-items: center; padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem; }
-    .card { width: min(100%, 1100px); background: var(--sheet); border: 1px solid var(--line-strong); border-radius: 6px; box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08); overflow: hidden; }
-    .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
 
-    .index-nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--line-strong); }
-    .index-card { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 1.4rem; border-left: 1px solid var(--line);
-                 color: var(--ink); text-decoration: none; transition: background-color 0.16s ease, color 0.16s ease; }
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+    }
+
+    .card {
+      width: min(100%, 1100px);
+      overflow: hidden;
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
+    }
+
+    .card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-left: 1px solid var(--line);
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+
     .index-card:first-child { border-left: none; }
-    .index-nav .idx-label { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--display); font-size: 1.15rem; font-weight: 600; }
-    .index-nav .idx-label i { font-size: 0.85rem; color: var(--accent); width: 1.1rem; text-align: center; }
-    
-    .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
+
+    .index-nav .idx-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .index-nav .idx-label i {
+      width: 1.1rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .index-card.is-current {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
     .index-card.is-current .idx-label i { color: var(--accent-strong); }
-    .index-card:hover { background: var(--accent); color: #fff; }
-    .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
-    
-    .cv-body { padding: 3rem 2.5rem; }
-    .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; }
-    
-    .cv-section { margin-bottom: 3.5rem; }
-    .cv-section-title { font-family: var(--display); font-size: 1.35rem; font-weight: 700; color: var(--accent-strong); border-bottom: 2px solid var(--line-strong); padding-bottom: 0.4rem; margin-bottom: 1.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    
-    .cv-item { display: grid; margin-bottom: 1.5rem; line-height: 1.5; }
-    .cv-item-title { font-weight: 700; font-size: 1.05rem; color: var(--accent-strong); margin-bottom: 0.4rem; }
-    .cv-item-details { color: var(--ink-soft); font-size: 0.94rem; text-align: justify; }
-    .link-text { color: var(--accent); text-decoration: none; font-weight: 600; }
-    .link-text:hover { text-decoration: underline; }
+
+    .index-card:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .index-card:hover .idx-label,
+    .index-card:hover .idx-label i {
+      color: #fff;
+    }
+
+    .research-body { padding: 3rem 2.5rem; }
+
+    .page-title {
+      margin-bottom: 2rem;
+      font-family: var(--display);
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .research-introduction {
+      margin-bottom: 3.5rem;
+      color: var(--ink);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    .research-section { margin-bottom: 3.5rem; }
+    .research-section:last-child { margin-bottom: 0; }
+
+    .research-section-title {
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.8rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .paper-item {
+      margin-bottom: 1.8rem;
+      line-height: 1.5;
+    }
+
+    .paper-item:last-child { margin-bottom: 0; }
+
+    .paper-title {
+      margin-bottom: 0.35rem;
+      color: var(--accent-strong);
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .paper-title a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.16s ease;
+    }
+
+    .paper-title a:hover { color: var(--accent-strong); }
+
+    .paper-title a i {
+      margin-left: 0.3rem;
+      font-size: 0.72em;
+    }
+
+    .paper-meta {
+      margin-bottom: 0.45rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .paper-abstract {
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+      line-height: 1.55;
+      text-align: justify;
+      white-space: pre-line;
+    }
+
+    .cv-subsection-title {
+      padding-top: 1.25rem;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-top: 1px dashed var(--line-strong);
+    }
+
+    .cv-subsection-title.is-first {
+      padding-top: 0;
+      margin-top: 0;
+      border-top: none;
+    }
+
+    .presentation-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.45;
+    }
+
+    .presentation-role {
+      color: var(--ink);
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    .presentation-institution {
+      color: var(--accent);
+      font-size: 0.96rem;
+      font-weight: 500;
+    }
+
+    .presentation-details {
+      margin-top: 0.1rem;
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+      line-height: 1.5;
+      text-align: justify;
+      white-space: pre-line;
+    }
+
+    .empty-message {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-style: italic;
+    }
+
+    .render-error {
+      padding: 1.2rem;
+      color: var(--error);
+      background: var(--error-background);
+      border: 1px solid var(--error-border);
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--panel-deep);
+      border-top: 1px solid var(--line);
+    }
+
+    .foot-loc {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .socials a {
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .socials a:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .research-body { padding: 2rem 1.5rem; }
+    }
+
+    @media (max-width: 680px) {
+      .index-nav { grid-template-columns: 1fr; }
+      .index-card {
+        border-top: 1px solid var(--line);
+        border-left: none;
+      }
+      .index-card:first-child { border-top: none; }
+      .page-title { font-size: 2.15rem; }
+      .foot {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.8rem;
+      }
+    }
   </style>
 </head>
 <body>
-
-<main class="page">
+  <main class="page">
     <article class="card">
-      
       <nav class="index-nav" aria-label="Academic Directory">
         <a href="../index.html" class="index-card">
           <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
@@ -85,87 +361,297 @@
         <a href="economics.html" class="index-card">
           <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
         </a>
-      </nav> 
+      </nav>
 
-      <section class="cv-body">
-        <h1 class="cv-title">Research</h1>
+      <section class="research-body">
+        <h1 class="page-title">Research</h1>
 
-        <div class="cv-section">
-          <p class="cv-item-details" style="font-size: 1.05rem; line-height: 1.7; color: var(--ink);">
-            At the intersection of macroeconomics and finance, my research develops and estimates theoretical models to explain business cycle fluctuations and financial market phenomena. I study how financing activities, shaped by market structure, financial frictions, and investor behaviour, affect credit, aggregate investment, and economic activity within general equilibrium frameworks. My work seeks to improve our understanding of financial crises and risk-premium-driven recessions, while informing the design of monetary and macroprudential policies.
-          </p>
+        <p class="research-introduction">
+          At the intersection of macroeconomics and finance, my research develops and estimates theoretical models to explain business cycle fluctuations and financial market phenomena. I study how financing activities, shaped by market structure, financial frictions, and investor behaviour, affect credit, aggregate investment, and economic activity within general equilibrium frameworks. My work seeks to improve our understanding of financial crises and risk-premium-driven recessions, while informing the design of monetary and macroprudential policies.
+        </p>
+
+        <div id="papers-target">
+          <section class="research-section">
+            <h2 class="research-section-title">Working Papers</h2>
+
+            <article class="paper-item">
+              <h3 class="paper-title">
+                <a href="https://drive.google.com/file/d/1juFNMigDmWnCyn0tO5le4GfdkXocdNQ0/view?usp=sharing" target="_blank" rel="noreferrer">
+                  When Banks Ride the Bubble: Financial Stability and Real Activity
+                  <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </h3>
+              <p class="paper-abstract">My paper studies the implications of the dynamic ownership of risky asset price bubbles between banks and retail investors for financial stability and real activity. The analysis shows that the severity of banking crises and recessions depends on both the exposure of individual banks to the bubble and the overall contamination of the banking sector. The paper also highlights that the early stages of bubble growth increase the financial vulnerability of the economy, as banks increasingly invest in the bubble during this period. While stricter banking supervision can reduce the effects of a bursting bubble, it may also weaken banks’ resilience to economic shocks.</p>
+            </article>
+
+            <article class="paper-item">
+              <h3 class="paper-title">Stock Market Bubbles and Monetary policy: a Bayesian Analysis</h3>
+              <p class="paper-abstract">This paper develops and estimates a DSGE model with stock market bubbles and nominal rigidities using Bayesian methods. Bubbles emerge through a positive feedback loop mechanism supported by self-fulfilling beliefs. Their movements, driven by a sentiment shock, significantly contribute to fluctuations in investment, output, and inflation.</p>
+            </article>
+          </section>
+
+          <section class="research-section">
+            <h2 class="research-section-title">Work in Progress</h2>
+
+            <article class="paper-item">
+              <h3 class="paper-title">Stock Market Dynamics in the RBC Framework</h3>
+              <p class="paper-abstract">This paper develops a DSGE model to study stock market dynamics. A key novelty of the framework is the introduction of firm exit and equity issuance by new entrants.</p>
+            </article>
+
+            <article class="paper-item">
+              <h3 class="paper-title">Asset Price Bubbles and Monetary Policy: Deflate the Bubble?</h3>
+              <p class="paper-abstract">This paper studies monetary policy in a New Keynesian model with asset price bubbles. It shows that monetary policy targeting asset prices can partially deflate an asset price bubble and affects the way the bubble is financed.</p>
+            </article>
+          </section>
         </div>
 
-        <div class="cv-section">
-          <h2 class="cv-section-title">Working Papers</h2>
-          <div class="cv-item">
-            <div class="cv-item-title"><a href="https://drive.google.com/file/d/1juFNMigDmWnCyn0tO5le4GfdkXocdNQ0/view?usp=sharing" target="_blank" class="link-text">When Banks Ride the Bubble: Financial Stability and Real Activity</a></div>
-            <div class="cv-item-details">
-              My paper studies the implications of the dynamic ownership of risky asset price bubbles between banks and retail investors for financial stability and real activity. The analysis shows that the severity of banking crises and recessions depends on both the exposure of individual banks to the bubble and the overall contamination of the banking sector. The paper also highlights that the early stages of bubble growth increase the financial vulnerability of the economy, as banks increasingly invest in the bubble during this period. While stricter banking supervision can reduce the effects of a bursting bubble, it may also weaken banks’ resilience to economic shocks.
-            </div>
+        <section class="research-section" id="presentation-target">
+          <h2 class="research-section-title">Research Presentations</h2>
+          <div id="presentation-list" aria-live="polite">
+            <p class="empty-message">Loading presentations…</p>
           </div>
-          <div class="cv-item">
-            <div class="cv-item-title">Stock Market Bubbles and Monetary policy: a Bayesian Analysis</div>
-            <div class="cv-item-details">
-              This paper develops and estimates a DSGE model with stock market bubbles and nominal rigidities using Bayesian methods. Bubbles emerge through a positive feedback loop mechanism supported by self-fulfilling beliefs. Their movements, driven by a sentiment shock, significantly contribute to fluctuations in investment, output, and inflation.
-            </div>
-          </div>
-        </div>
-
-        <div class="cv-section">
-          <h2 class="cv-section-title">Work in Progress</h2>
-          <div class="cv-item">
-            <div class="cv-item-title">Stock Market Dynamics in the RBC Framework</div>
-            <div class="cv-item-details">This paper develops a DSGE model to study stock market dynamics. A key novelty of the framework is the introduction of firm exit and equity issuance by new entrants.</div>
-          </div>
-          <div class="cv-item">
-            <div class="cv-item-title">Asset Price Bubbles and Monetary Policy: Deflate the Bubble?</div>
-            <div class="cv-item-details">This paper studies monetary policy in a New Keynesian model with asset price bubbles. It shows that monetary policy targeting asset prices can partially deflate an asset price bubble and affects the way the bubble is financed.</div>
-          </div>
-        </div>
-
-        <div id="presentation-target" class="cv-section">
-            <h2 class="cv-section-title">Research Presentations</h2>
-            <div id="presentation-list">Loading presentations...</div>
-        </div>
+        </section>
       </section>
+
+      <footer class="foot">
+        <div class="socials">
+          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichere's CV">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          </a>
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University Profile">
+            <i class="fas fa-university" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+        <span class="foot-loc">University of Warwick · Coventry, UK</span>
+      </footer>
     </article>
   </main>
 
   <script>
-    async function loadResearchPresentations() {
-      try {
-        const response = await fetch('cv.json');
-        const data = await response.json();
-        
-        // Find the "Research Presentations" section in the data
-        const sections = data.sections || [];
-        const presSection = sections.find(s => s.title.toLowerCase().includes('research presentations'));
-        
-        const list = document.getElementById('presentation-list');
-        list.innerHTML = '';
+    function cleanText(value) {
+      return value == null ? '' : String(value).replace(/\s+/g, ' ').trim();
+    }
 
-        if (presSection && presSection.items) {
-          presSection.items.forEach(item => {
-             // Reuse your existing rendering logic
-             list.innerHTML += `
-               <div class="cv-item" style="grid-template-columns: 1fr auto; gap: 1rem; margin-bottom: 1rem; align-items: baseline;">
-                  <div>
-                    <div style="font-weight: 600;">${item.role || ''}</div>
-                    <div style="color: var(--accent); font-size: 0.9rem;">${item.institution || ''}</div>
-                  </div>
-                  <div style="font-family: var(--mono); color: var(--muted);">${item.date || ''}</div>
-               </div>
-             `;
-          });
-        } else {
-          list.innerHTML = '<p class="cv-item-details">No records found.</p>';
-        }
-      } catch (err) {
-        document.getElementById('presentation-list').innerHTML = '<p>Could not load presentations.</p>';
+    function escapeHTML(value) {
+      return cleanText(value).replace(/[&<>'"]/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      })[character]);
+    }
+
+    function safeURL(value) {
+      const url = cleanText(value);
+      if (!url) return '';
+
+      try {
+        const parsed = new URL(url, window.location.href);
+        return ['http:', 'https:'].includes(parsed.protocol) ? parsed.href : '';
+      } catch {
+        return '';
       }
     }
-    loadResearchPresentations();
+
+    function categoryLabel(value) {
+      const category = cleanText(value);
+      const normalized = category.toLowerCase().replace(/[_-]+/g, ' ');
+
+      if (normalized === 'published' || normalized === 'publication' || normalized === 'publications') {
+        return 'Published';
+      }
+      if (normalized === 'working paper' || normalized === 'working papers') {
+        return 'Working Papers';
+      }
+      if (normalized === 'work in progress' || normalized === 'works in progress') {
+        return 'Work in Progress';
+      }
+
+      return category || 'Other Research';
+    }
+
+    function renderPaper(paper) {
+      const title = cleanText(paper.title);
+      const journal = cleanText(paper.journal);
+      const date = cleanText(paper.date);
+      const abstract = cleanText(paper.abstract);
+      const url = safeURL(paper.url || paper.link);
+      const rawCoauthors = paper.coauthors;
+      const coauthors = Array.isArray(rawCoauthors)
+        ? rawCoauthors.map(cleanText).filter(Boolean).join(', ')
+        : cleanText(rawCoauthors);
+
+      const titleHTML = url
+        ? `<a href="${escapeHTML(url)}" target="_blank" rel="noreferrer">${escapeHTML(title)} <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>`
+        : escapeHTML(title);
+
+      const metadata = [];
+      if (coauthors) metadata.push(`With ${escapeHTML(coauthors)}`);
+      if (journal) metadata.push(escapeHTML(journal));
+      if (date) metadata.push(escapeHTML(date));
+
+      return `
+        <article class="paper-item">
+          <h3 class="paper-title">${titleHTML}</h3>
+          ${metadata.length ? `<p class="paper-meta">${metadata.join(' · ')}</p>` : ''}
+          ${abstract ? `<p class="paper-abstract">${escapeHTML(abstract)}</p>` : ''}
+        </article>
+      `;
+    }
+
+    function renderPapers(papers) {
+      const target = document.getElementById('papers-target');
+      const validPapers = Array.isArray(papers)
+        ? papers.filter(paper => paper && typeof paper === 'object' && cleanText(paper.title))
+        : [];
+
+      if (!validPapers.length) {
+        target.innerHTML = '';
+        return;
+      }
+
+      const groups = new Map();
+      validPapers.forEach(paper => {
+        const label = categoryLabel(paper.category);
+        if (!groups.has(label)) groups.set(label, []);
+        groups.get(label).push(paper);
+      });
+
+      const preferredOrder = ['Working Papers', 'Work in Progress', 'Published'];
+      const orderedCategories = [...groups.keys()].sort((a, b) => {
+        const aIndex = preferredOrder.indexOf(a);
+        const bIndex = preferredOrder.indexOf(b);
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+        if (aIndex !== -1) return -1;
+        if (bIndex !== -1) return 1;
+        return a.localeCompare(b);
+      });
+
+      target.innerHTML = orderedCategories.map(category => `
+        <section class="research-section">
+          <h2 class="research-section-title">${escapeHTML(category)}</h2>
+          ${groups.get(category).map(renderPaper).join('')}
+        </section>
+      `).join('');
+    }
+
+    function presentationYear(item) {
+      const date = cleanText(item && item.date);
+      const match = date.match(/\b(?:19|20)\d{2}\b/);
+      return match ? match[0] : (date || 'Other');
+    }
+
+    function renderPresentation(item) {
+      if (!item || typeof item !== 'object') return '';
+
+      const role = cleanText(item.role);
+      const institution = cleanText(item.institution);
+      const details = cleanText(item.details);
+
+      if (!role && !institution && !details) return '';
+
+      return `
+        <article class="presentation-item">
+          ${role ? `<div class="presentation-role">${escapeHTML(role)}</div>` : ''}
+          ${institution ? `<div class="presentation-institution">${escapeHTML(institution)}</div>` : ''}
+          ${details ? `<div class="presentation-details">${escapeHTML(details)}</div>` : ''}
+        </article>
+      `;
+    }
+
+    function renderResearchPresentations(items) {
+      const target = document.getElementById('presentation-list');
+      const validItems = Array.isArray(items)
+        ? items.filter(item => item && typeof item === 'object')
+        : [];
+
+      if (!validItems.length) {
+        target.innerHTML = '<p class="empty-message">No presentation records found.</p>';
+        return;
+      }
+
+      const groups = new Map();
+      validItems.forEach(item => {
+        const year = presentationYear(item);
+        if (!groups.has(year)) groups.set(year, []);
+        groups.get(year).push(item);
+      });
+
+      const orderedYears = [...groups.keys()].sort((a, b) => {
+        const aIsYear = /^\d{4}$/.test(a);
+        const bIsYear = /^\d{4}$/.test(b);
+        if (aIsYear && bIsYear) return Number(b) - Number(a);
+        if (aIsYear) return -1;
+        if (bIsYear) return 1;
+        return a.localeCompare(b);
+      });
+
+      target.innerHTML = orderedYears.map((year, index) => `
+        <h3 class="cv-subsection-title${index === 0 ? ' is-first' : ''}">${escapeHTML(year)}</h3>
+        ${groups.get(year).map(renderPresentation).join('')}
+      `).join('');
+    }
+
+    async function fetchCVData() {
+      const cacheBuster = `?v=${Date.now()}`;
+      const paths = [
+        `./cv.json${cacheBuster}`,
+        `/website/cv.json${cacheBuster}`,
+        `${window.location.href.split('?')[0].replace(/\/[^/]*$/, '')}/cv.json${cacheBuster}`
+      ];
+
+      let lastError;
+      for (const path of paths) {
+        try {
+          const response = await fetch(path);
+          if (!response.ok) throw new Error(`Server returned status ${response.status}`);
+          return await response.json();
+        } catch (error) {
+          lastError = error;
+        }
+      }
+
+      throw lastError || new Error('Unable to load cv.json.');
+    }
+
+    async function loadResearchData() {
+      const fallbackPapers = document.getElementById('papers-target').innerHTML;
+
+      try {
+        const data = await fetchCVData();
+        const sections = data && Array.isArray(data.sections) ? data.sections : [];
+        const presentationSection = sections.find(section =>
+          cleanText(section && section.title).toLowerCase() === 'research presentations'
+        );
+
+        if (Array.isArray(data && data.papers) && data.papers.length) {
+          renderPapers(data.papers);
+        }
+
+        renderResearchPresentations(
+          presentationSection && Array.isArray(presentationSection.items)
+            ? presentationSection.items
+            : []
+        );
+      } catch (error) {
+        console.error('Research data could not be loaded:', error);
+        document.getElementById('papers-target').innerHTML = fallbackPapers;
+        document.getElementById('presentation-list').innerHTML = `
+          <div class="render-error" role="alert">
+            Research presentations could not be loaded. ${escapeHTML(error.message)}
+          </div>
+        `;
+      }
+    }
+
+    loadResearchData();
   </script>
 </body>
 </html>
