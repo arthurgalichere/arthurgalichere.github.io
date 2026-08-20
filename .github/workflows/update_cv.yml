@@ -47,19 +47,23 @@ jobs:
           if not isinstance(data, dict):
               raise SystemExit("The existing cv.json must be a JSON object.")
 
-          try:
-              date.fromisoformat(data.get("last_updated", ""))
-          except (TypeError, ValueError):
-              raise SystemExit("The existing cv.json has no valid last_updated date.")
-
           sections = data.get("sections")
           if not isinstance(sections, list) or not sections:
               raise SystemExit("The existing cv.json has no valid sections list.")
 
-          print(
-              f"Preserving cv.json with {len(sections)} sections, "
-              f"updated on {data['last_updated']}."
-          )
+          previous_date = data.get("last_updated")
+          if previous_date:
+              try:
+                  date.fromisoformat(previous_date)
+              except (TypeError, ValueError):
+                  raise SystemExit("The existing cv.json has an invalid last_updated date.")
+              date_message = f"updated on {previous_date}"
+          else:
+              # Allow the pre-migration cv.json through once. The extractor will
+              # add last_updated after a successful Excel extraction.
+              date_message = "with no legacy last_updated date"
+
+          print(f"Preserving cv.json with {len(sections)} sections, {date_message}.")
           PY
 
           mkdir -p "$RUNNER_TEMP/cv-safety"
@@ -144,7 +148,7 @@ jobs:
         if: steps.rebuild.outcome != 'success' || steps.validate.outcome != 'success'
         run: |
           cp "$RUNNER_TEMP/cv-safety/cv.json" website/cv.json
-          echo "The CV update failed. The previous valid cv.json has been restored."
+          echo "The CV update failed. The previous cv.json has been restored unchanged."
           exit 1
 
       - name: Archive previous version when CV data changes
@@ -160,7 +164,7 @@ jobs:
               "$RUNNER_TEMP/cv-safety/cv.json" \
               "website/backups/cv_${timestamp}.json"
             echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "CV data changed; the previous valid version was archived."
+            echo "CV data changed; the previous version was archived."
           fi
 
       - name: Commit and push changes
