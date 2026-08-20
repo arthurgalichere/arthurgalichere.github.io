@@ -29,53 +29,105 @@ EXPECTED_SECTIONS = {
     "Research Presentations",
 }
 
-FIELDS = ("role", "institution", "date", "details", "category", "other_details")
+CV_FIELDS = (
+    "role",
+    "institution",
+    "date",
+    "details",
+    "category",
+    "other_details",
+)
+
+PAPER_FIELDS = (
+    "title",
+    "category",
+    "journal",
+    "date",
+    "coauthors",
+    "abstract",
+    "url",
+    "status",
+)
+
+PAPER_CATEGORIES = {
+    "working paper": "Working Papers",
+    "working papers": "Working Papers",
+    "work in progress": "Work in Progress",
+    "published": "Published",
+    "publication": "Published",
+    "publications": "Published",
+}
 
 
 def cell_text(value):
     return "" if value is None else str(value).strip()
 
 
+def normalized_header(value):
+    return cell_text(value).casefold().replace(" ", "_")
+
+
+def header_map(sheet):
+    return {
+        normalized_header(sheet.cell(row=2, column=column).value): column
+        for column in range(1, sheet.max_column + 1)
+        if cell_text(sheet.cell(row=2, column=column).value)
+    }
+
+
+def row_values(sheet, row, fields, columns):
+    return {
+        field: cell_text(sheet.cell(row=row, column=columns[field]).value)
+        if columns.get(field)
+        else ""
+        for field in fields
+    }
+
+
 def download_workbook(url):
     request = urllib.request.Request(
         url,
-        headers={"User-Agent": "Arthur-Galichere-CV-Updater/1.0"},
+        headers={"User-Agent": "Arthur-Galichere-CV-Updater/2.0"},
     )
 
     try:
         with urllib.request.urlopen(request, timeout=60) as response:
             content = response.read()
-    except (urllib.error.URLError, TimeoutError) as exc:
+    except (urllib.error.URLError, TimeoutError, OSError) as exc:
         raise RuntimeError(f"Could not download the Excel workbook: {exc}") from exc
 
     if len(content) < 1_000:
         raise RuntimeError("The downloaded Excel workbook is unexpectedly small.")
 
     try:
-        return openpyxl.load_workbook(BytesIO(content), data_only=True, read_only=True)
+        return openpyxl.load_workbook(
+            BytesIO(content),
+            data_only=True,
+            read_only=True,
+        )
     except Exception as exc:
-        raise RuntimeError(f"The downloaded file is not a readable Excel workbook: {exc}") from exc
+        raise RuntimeError(
+            f"The downloaded file is not a readable Excel workbook: {exc}"
+        ) from exc
 
 
-def read_sheet(sheet):
+def is_papers_sheet(sheet):
+    sheet_name = cell_text(sheet.title).casefold()
+    section_title = cell_text(sheet.cell(row=1, column=1).value).casefold()
+    return sheet_name == "p" or section_title in {"papers", "research papers"}
+
+
+def read_cv_sheet(sheet):
     section_title = cell_text(sheet.cell(row=1, column=1).value) or sheet.title
+    headers = header_map(sheet)
+    columns = {field: headers.get(field) for field in CV_FIELDS}
 
-    header_map = {
-        cell_text(sheet.cell(row=2, column=column).value).lower(): column
-        for column in range(1, sheet.max_column + 1)
-        if cell_text(sheet.cell(row=2, column=column).value)
-    }
-    column_map = {field: header_map.get(field) for field in FIELDS}
-
-    if not column_map["role"]:
+    if not columns["role"]:
         raise ValueError(f"Worksheet '{sheet.title}' has no 'role' column.")
 
     items = []
     for row in range(3, sheet.max_row + 1):
-        values = {
-            field: cell_text(sheet.cell(row=row, column=column).value) if column else ""
-            for field, column in column_map.items()
-        }
+        values = row_values(sheet, row, CV_FIELDS, columns)
 
         if not any(values.values()):
             continue
@@ -94,7 +146,69 @@ def read_sheet(sheet):
             }
         )
 
+    if not items:
+        raise ValueError(f"Worksheet '{sheet.title}' contains no CV records.")
+
     return section_title, items
+
+
+def canonical_paper_category(value):
+    category = cell_text(value)
+    canonical = PAPER_CATEGORIES.get(category.casefold())
+    if not canonical:
+        allowed = ", ".join(sorted(set(PAPER_CATEGORIES.values())))
+        raise ValueError(
+            f"Unknown paper category '{category}'. Expected one of: {allowed}."
+        )
+    return canonical
+
+
+def read_papers_sheet(sheet):
+    headers = header_map(sheet)
+    columns = {field: headers.get(field) for field in PAPER_FIELDS}
+
+    missing_headers = [
+        field for field in ("title", "category") if not columns.get(field)
+    ]
+    if missing_headers:
+        raise ValueError(
+            f"Papers worksheet '{sheet.title}' is missing required columns: "
+            + ", ".join(missing_headers)
+        )
+
+    papers = []
+    for row in range(3, sheet.max_row + 1):
+        values = row_values(sheet, row, PAPER_FIELDS, columns)
+
+        if not any(values.values()):
+            continue
+
+        if not values["title"]:
+            raise ValueError(
+                f"Papers worksheet '{sheet.title}', row {row}, has no title."
+            )
+        if not values["category"]:
+            raise ValueError(
+                f"Papers worksheet '{sheet.title}', row {row}, has no category."
+            )
+
+        papers.append(
+            {
+                "title": values["title"],
+                "category": canonical_paper_category(values["category"]),
+                "journal": values["journal"],
+                "date": values["date"],
+                "coauthors": values["coauthors"],
+                "abstract": values["abstract"],
+                "url": values["url"],
+                "status": values["status"],
+            }
+        )
+
+    if not papers:
+        raise ValueError(f"Papers worksheet '{sheet.title}' contains no papers.")
+
+    return papers
 
 
 def group_teaching_experience(section_title, items):
@@ -132,15 +246,20 @@ def group_additional_teaching(section_title, items):
     }
 
 
-def build_sections(workbook):
+def build_data(workbook):
     sections = []
+    papers = None
 
     for sheet in workbook.worksheets:
-        section_title, items = read_sheet(sheet)
-        if not items:
-            raise ValueError(f"Worksheet '{sheet.title}' contains no CV records.")
+        if is_papers_sheet(sheet):
+            if papers is not None:
+                raise ValueError("The workbook contains more than one papers worksheet.")
+            papers = read_papers_sheet(sheet)
+            continue
 
+        section_title, items = read_cv_sheet(sheet)
         section_lower = section_title.casefold()
+
         if section_lower == "teaching experience":
             section = group_teaching_experience(section_title, items)
         elif section_lower == "additional teaching and supervisory experience":
@@ -154,9 +273,20 @@ def build_sections(workbook):
     missing_sections = EXPECTED_SECTIONS - found_sections
     if missing_sections:
         missing = ", ".join(sorted(missing_sections))
-        raise ValueError(f"The workbook is missing expected sections: {missing}")
+        raise ValueError(f"The workbook is missing expected CV sections: {missing}")
 
-    return sections
+    unexpected_sections = found_sections - EXPECTED_SECTIONS
+    if unexpected_sections:
+        unexpected = ", ".join(sorted(unexpected_sections))
+        raise ValueError(f"The workbook contains unexpected CV sections: {unexpected}")
+
+    if papers is None:
+        raise ValueError(
+            "The workbook has no papers worksheet. Add a worksheet named 'P' "
+            "with 'Papers' or 'Research Papers' in cell A1."
+        )
+
+    return sections, papers
 
 
 def read_previous_data(output_path):
@@ -172,35 +302,112 @@ def read_previous_data(output_path):
     return data if isinstance(data, dict) else None
 
 
-def choose_update_date(new_sections, previous_data):
-    if previous_data and previous_data.get("sections") == new_sections:
+def choose_update_date(new_sections, new_papers, previous_data):
+    if previous_data:
+        content_unchanged = (
+            previous_data.get("sections") == new_sections
+            and previous_data.get("papers") == new_papers
+        )
         previous_date = previous_data.get("last_updated")
-        try:
-            date.fromisoformat(previous_date)
-            return previous_date
-        except (TypeError, ValueError):
-            pass
+
+        if content_unchanged:
+            try:
+                date.fromisoformat(previous_date)
+                return previous_date
+            except (TypeError, ValueError):
+                pass
 
     return date.today().isoformat()
 
 
+def validate_items(items, location):
+    if not isinstance(items, list) or not items:
+        raise ValueError(f"{location} contains no items.")
+
+    for index, item in enumerate(items, start=1):
+        if not isinstance(item, dict):
+            raise ValueError(f"{location}, item {index}, must be an object.")
+
+        if item.get("isFormatHeader"):
+            if not cell_text(item.get("role")):
+                raise ValueError(
+                    f"{location}, format header {index}, has no role text."
+                )
+            continue
+
+        if not any(
+            cell_text(item.get(field))
+            for field in ("role", "institution", "date", "details")
+        ):
+            raise ValueError(f"{location}, item {index}, is empty.")
+
+
 def validate_cv_data(data):
+    if not isinstance(data, dict):
+        raise ValueError("CV data must be a JSON object.")
+
     try:
         date.fromisoformat(data.get("last_updated", ""))
     except (TypeError, ValueError) as exc:
-        raise ValueError("CV data must contain a valid ISO 'last_updated' date.") from exc
+        raise ValueError(
+            "CV data must contain a valid ISO 'last_updated' date."
+        ) from exc
 
     sections = data.get("sections")
     if not isinstance(sections, list) or not sections:
         raise ValueError("CV data must contain a non-empty 'sections' list.")
 
+    found_sections = set()
     for section in sections:
-        if not isinstance(section, dict) or not section.get("title"):
-            raise ValueError("Every CV section must have a title.")
+        if not isinstance(section, dict) or not cell_text(section.get("title")):
+            raise ValueError("Every CV section must be an object with a title.")
 
-        entries = section.get("items", section.get("subsections"))
-        if not isinstance(entries, list) or not entries:
-            raise ValueError(f"Section '{section['title']}' contains no entries.")
+        title = cell_text(section["title"])
+        found_sections.add(title)
+
+        if "subsections" in section:
+            subsections = section["subsections"]
+            if not isinstance(subsections, list) or not subsections:
+                raise ValueError(f"Section '{title}' contains no subsections.")
+
+            for subsection in subsections:
+                if not isinstance(subsection, dict) or not cell_text(
+                    subsection.get("title")
+                ):
+                    raise ValueError(
+                        f"Every subsection in '{title}' must have a title."
+                    )
+                validate_items(
+                    subsection.get("items"),
+                    f"Section '{title}', subsection '{subsection['title']}'",
+                )
+        else:
+            validate_items(section.get("items"), f"Section '{title}'")
+
+    missing_sections = EXPECTED_SECTIONS - found_sections
+    if missing_sections:
+        missing = ", ".join(sorted(missing_sections))
+        raise ValueError(f"CV data is missing expected sections: {missing}")
+
+    papers = data.get("papers")
+    if not isinstance(papers, list) or not papers:
+        raise ValueError("CV data must contain a non-empty 'papers' list.")
+
+    allowed_categories = set(PAPER_CATEGORIES.values())
+    for index, paper in enumerate(papers, start=1):
+        if not isinstance(paper, dict):
+            raise ValueError(f"Paper {index} must be an object.")
+
+        title = cell_text(paper.get("title"))
+        category = cell_text(paper.get("category"))
+        if not title:
+            raise ValueError(f"Paper {index} has no title.")
+        if category not in allowed_categories:
+            allowed = ", ".join(sorted(allowed_categories))
+            raise ValueError(
+                f"Paper '{title}' has invalid category '{category}'. "
+                f"Expected one of: {allowed}."
+            )
 
 
 def write_json_atomically(data, output_path):
@@ -239,21 +446,24 @@ def main():
 
     previous_data = read_previous_data(output_path)
     workbook = download_workbook(excel_url)
+
     try:
-        sections = build_sections(workbook)
+        sections, papers = build_data(workbook)
     finally:
         workbook.close()
 
     cv_data = {
-        "last_updated": choose_update_date(sections, previous_data),
+        "last_updated": choose_update_date(sections, papers, previous_data),
         "sections": sections,
+        "papers": papers,
     }
 
     validate_cv_data(cv_data)
     write_json_atomically(cv_data, output_path)
+
     print(
-        f"Updated {output_path} with {len(cv_data['sections'])} sections. "
-        f"Information date: {cv_data['last_updated']}."
+        f"Updated {output_path} with {len(sections)} CV sections and "
+        f"{len(papers)} papers; information date: {cv_data['last_updated']}."
     )
 
 
@@ -261,5 +471,5 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as exc:
-        print(f"CV update failed: {exc}", file=sys.stderr)
-        raise
+        print(f"CV extraction failed: {exc}", file=sys.stderr)
+        sys.exit(1)
