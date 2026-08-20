@@ -4,42 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arthur Galichère — Curriculum Vitae</title>
-  
+  <meta name="description" content="Curriculum vitae of Arthur Galichère, Assistant Professor (Teaching Focussed) at the University of Warwick." />
+
+  <link rel="icon" type="image/png" href="images/favicon_transparant.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <!-- -->
   <style>
     :root {
-      --paper:        #f4f5f7;
-      --paper-soft:   #fafbfc;
-      --sheet:        #ffffff;
-      --panel:        #ebeeec;
-      --panel-deep:   #e2e5e9;
-      --line:         rgba(28, 28, 30, 0.08);
-      --line-strong:  rgba(28, 28, 30, 0.15);
-      --ink:          #1c1c1e;
-      --ink-soft:     #3a3a3c;
-      --muted:        #71717a;
-      --accent:       #3b5a75;
-      --accent-strong:#25394b;
-      --accent-soft:  #edf2f6;
+      --paper: #f4f5f7;
+      --paper-soft: #fafbfc;
+      --sheet: #ffffff;
+      --panel-deep: #e2e5e9;
+      --line: rgba(28, 28, 30, 0.08);
+      --line-strong: rgba(28, 28, 30, 0.15);
+      --ink: #1c1c1e;
+      --ink-soft: #3a3a3c;
+      --muted: #71717a;
+      --accent: #3b5a75;
+      --accent-strong: #25394b;
+      --accent-soft: #edf2f6;
+      --error: #9f2d25;
+      --error-background: #fdf2f2;
+      --error-border: #f5c6cb;
 
       --display: 'Bitter', Georgia, serif;
-      --sans:    'Montserrat', system-ui, sans-serif;
-      --mono:    'JetBrains Mono', monospace;
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
     }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     html { background: var(--paper); }
+
     body {
+      min-height: 100vh;
       font-family: var(--sans);
       color: var(--ink);
-      min-height: 100vh;
       background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
       -webkit-font-smoothing: antialiased;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
     }
 
     .page {
@@ -52,96 +67,215 @@
 
     .card {
       width: min(100%, 1100px);
+      overflow: hidden;
       background: var(--sheet);
       border: 1px solid var(--line-strong);
       border-radius: 6px;
       box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
-      overflow: hidden;
     }
-    .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
 
-    .index-nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--line-strong); }
-    .index-card { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 1.1rem 1.4rem; border-left: 1px solid var(--line);
-                 color: var(--ink); text-decoration: none; transition: background-color 0.16s ease, color 0.16s ease; }
+    .card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-left: 1px solid var(--line);
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+
     .index-card:first-child { border-left: none; }
-    .index-nav .idx-label { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--display); font-size: 1.15rem; font-weight: 600; }
-    .index-nav .idx-label i { font-size: 0.85rem; color: var(--accent); width: 1.1rem; text-align: center; }
-    
-    .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
+
+    .index-nav .idx-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .index-nav .idx-label i {
+      width: 1.1rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .index-card.is-current {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
     .index-card.is-current .idx-label i { color: var(--accent-strong); }
-    .index-card:hover { background: var(--accent); color: #fff; }
-    .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
+
+    .index-card:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .index-card:hover .idx-label,
+    .index-card:hover .idx-label i {
+      color: #fff;
+    }
 
     .cv-body { padding: 3rem 2.5rem; }
+
     .cv-header-block {
       display: flex;
-      justify-content: space-between;
       align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
       padding-bottom: 1rem;
       margin-bottom: 2.5rem;
     }
-    .cv-title { font-family: var(--display); font-size: 2.5rem; font-weight: 700; }
-    
+
+    .cv-title {
+      font-family: var(--display);
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .download-link {
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .download-link:hover { color: var(--accent-strong); }
+    .download-link i { margin-right: 0.3rem; }
+
     .cv-section { margin-bottom: 2.5rem; }
+
     .cv-section-title {
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-strong);
       font-family: var(--display);
       font-size: 1.45rem;
       font-weight: 700;
-      color: var(--accent-strong);
-      border-bottom: 1px solid var(--line-strong);
-      padding-bottom: 0.4rem;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
       letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line-strong);
     }
 
-    .cv-section.teaching-tight .cv-item {
-      margin-bottom: 0.45rem; /* Tighter spacing for Teaching Experience items */
-    }
+    .cv-section.teaching-tight .cv-item { margin-bottom: 0.45rem; }
 
     .cv-subsection-title {
+      padding-bottom: 0.2rem;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent-strong);
       font-family: var(--display);
       font-size: 1.25rem;
       font-weight: 700;
-      color: var(--accent-strong);
-      margin-top: 2rem;
-      margin-bottom: 0.8rem;
-      text-transform: uppercase;
       letter-spacing: 0.05em;
+      text-transform: uppercase;
       border-bottom: 1px dashed var(--line-strong);
-      padding-bottom: 0.2rem;
     }
 
-     /* Styles specifically for custom subheaders (e.g. Lectures, Seminars) inside Teaching blocks */
+    .research-year:first-of-type { margin-top: 0; }
+
     .cv-format-header {
-      font-family: var(--display);
-      font-size: 1.20rem;
-      font-weight: 600;
-      color: var(--accent);
+      padding-left: 0.6rem;
       margin-top: 1.75rem;
       margin-bottom: 0.8rem;
+      color: var(--accent);
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 600;
       border-left: 3px solid var(--accent);
-      padding-left: 0.6rem;
-    }    
+    }
 
     .cv-item {
       display: grid;
       grid-template-columns: 1fr auto;
+      align-items: baseline;
       gap: 0.3rem;
       margin-bottom: 1.2rem;
-      align-items: baseline;
     }
-    .cv-item-role { font-weight: 600; color: var(--ink); font-size: 1.05rem; line-height: 1.4; }
-    .cv-item-institution { color: var(--accent); font-weight: 500; font-size: 0.96rem; margin-top: 0.1rem; }
-    .cv-item-date { font-family: var(--mono); font-size: 0.88rem; color: var(--muted); text-align: right; font-weight: 500; }
-    .cv-item-details { 
-      grid-column: 1 / -1; 
+
+    .cv-item-role {
+      color: var(--ink);
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .cv-item-institution {
+      margin-top: 0.1rem;
+      color: var(--accent);
+      font-size: 0.96rem;
+      font-weight: 500;
+    }
+
+    .cv-item-date {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .cv-item-details {
+      grid-column: 1 / -1;
       margin-top: 0.15rem;
-      line-height: 1.5; 
-      color: var(--ink-soft); 
-      font-size: 0.94rem; 
-      text-align: justify; 
-      <!-- white-space: pre-line; Added this line -->
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+      line-height: 1.5;
+      text-align: justify;
+      white-space: pre-line;
+    }
+
+    .cv-update {
+      margin-top: 3rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-align: center;
+    }
+
+    .render-error {
+      padding: 1.2rem;
+      color: var(--error);
+      background: var(--error-background);
+      border: 1px solid var(--error-border);
+      border-radius: 4px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .render-error-title {
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+    }
+
+    .render-error-message {
+      padding: 0.4rem;
+      color: var(--ink-soft);
+      background: rgba(0, 0, 0, 0.04);
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 0.85rem;
     }
 
     .foot {
@@ -152,26 +286,35 @@
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
-    .foot-loc { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    .foot-loc {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .cv-body { padding: 2rem 1.5rem; }
+      .cv-header-block { align-items: flex-start; }
       .cv-item { grid-template-columns: 1fr; }
-      .cv-item-date { text-align: left; margin-bottom: 0.2rem; }
+      .cv-item-date { margin-bottom: 0.2rem; text-align: left; }
     }
+
     @media (max-width: 680px) {
       .index-nav { grid-template-columns: 1fr; }
-      .index-card { border-left: none; border-top: 1px solid var(--line); }
+      .index-card { border-top: 1px solid var(--line); border-left: none; }
       .index-card:first-child { border-top: none; }
+      .cv-header-block { flex-direction: column; }
+      .cv-title { font-size: 2.15rem; }
     }
   </style>
 </head>
 <body>
-
   <main class="page">
     <article class="card">
-      
       <nav class="index-nav" aria-label="Academic Directory">
         <a href="../index.html" class="index-card">
           <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
@@ -188,34 +331,31 @@
         <a href="economics.html" class="index-card">
           <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
         </a>
-      </nav> 
+      </nav>
 
-      <!-- -->
       <section class="cv-body">
         <div class="cv-header-block">
           <h1 class="cv-title">Curriculum Vitae</h1>
-          <a href="CV_Arthur_Galichere.pdf" target="_blank" style="color: var(--accent); font-weight: 600; font-size: 0.9rem;"><i class="fas fa-download"></i> Download PDF</a>
+          <a
+            href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1"
+            class="download-link"
+          >
+            <i class="fas fa-download" aria-hidden="true"></i> Download PDF
+          </a>
         </div>
 
-        <!-- Target Container for Employment Section (Rendered BEFORE Education) -->
         <div id="cv-target-before"></div>
 
-        <!-- Hardcoded Education Section (Zero Bold tags on Supervisors/Examiners/Titles) -->
         <div class="cv-section">
           <h2 class="cv-section-title">Education</h2>
-          
+
           <div class="cv-item">
             <div>
               <div class="cv-item-role">Ph.D. in Economics</div>
               <div class="cv-item-institution">University of Glasgow, United Kingdom</div>
             </div>
             <div class="cv-item-date">2017 – 2022</div>
-            <div class="cv-item-details">
-              Doctorate funded by the Economic and Social Research Council (ESRC). <br>
-              Supervisors: Professor Tatiana Kirsanova, Professor Charles Nolan and Professor Richard Dennis. <br>
-              Thesis Examiners: Doctor Kalin Nikolov and Professor Campbell Leith. <br>
-              Thesis Title: <i>“Asset Price Bubbles and Macroeconomic Policies”</i>
-            </div>
+            <div class="cv-item-details">Doctorate funded by the Economic and Social Research Council (ESRC).<br>Supervisors: Professor Tatiana Kirsanova, Professor Charles Nolan and Professor Richard Dennis.<br>Thesis Examiners: Doctor Kalin Nikolov and Professor Campbell Leith.<br>Thesis Title: <i>“Asset Price Bubbles and Macroeconomic Policies”</i></div>
           </div>
 
           <div class="cv-item">
@@ -224,10 +364,7 @@
               <div class="cv-item-institution">University of Glasgow, United Kingdom</div>
             </div>
             <div class="cv-item-date">2015 – 2017</div>
-            <div class="cv-item-details">
-              Graduated with Merit. Two-year programme in economics structured as Doctoral training. <br>
-              Master’s Dissertation: <i>“How to Model Credit Frictions?”</i>
-            </div>
+            <div class="cv-item-details">Graduated with Merit. Two-year programme in economics structured as Doctoral training.<br>Master’s Dissertation: <i>“How to Model Credit Frictions?”</i></div>
           </div>
 
           <div class="cv-item">
@@ -236,11 +373,7 @@
               <div class="cv-item-institution">University of Caen, France</div>
             </div>
             <div class="cv-item-date">2014 – 2015</div>
-            <div class="cv-item-details">
-              Graduated with Merit. Exchange programme: the programme was taught and assessed at Texas A&M University, USA. <br>
-              The Master 1 is the French equivalent of the Master of Science. <br>
-              Master’s Dissertation: <i>“A Comparative Analysis of Fed and ECB Monetary Policies”</i>
-            </div>
+            <div class="cv-item-details">Graduated with Merit. Exchange programme: the programme was taught and assessed at Texas A&amp;M University, USA.<br>The Master 1 is the French equivalent of the Master of Science.<br>Master’s Dissertation: <i>“A Comparative Analysis of Fed and ECB Monetary Policies”</i></div>
           </div>
 
           <div class="cv-item">
@@ -249,166 +382,202 @@
               <div class="cv-item-institution">University of Caen, France</div>
             </div>
             <div class="cv-item-date">2011 – 2014</div>
-            <div class="cv-item-details">
-              The Licence is the French equivalent of the Bachelor’s degree.
-            </div>
+            <div class="cv-item-details">The Licence is the French equivalent of the Bachelor’s degree.</div>
           </div>
         </div>
 
-        <!-- Target Container for remaining layout sections (Rendered AFTER Education) -->
         <div id="cv-target-after"></div>
+        <p id="cv-update" class="cv-update" aria-live="polite"></p>
       </section>
 
       <footer class="foot">
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
-      
     </article>
   </main>
 
   <script>
-    function renderCVItem(item, hideInstitution = false) {
+    function cleanText(value) {
+      return value == null ? '' : String(value).replace(/\s+/g, ' ').trim();
+    }
+
+    function escapeHTML(value) {
+      return cleanText(value).replace(/[&<>'"]/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      })[character]);
+    }
+
+    function renderCVItem(item, options = {}) {
       if (!item || typeof item !== 'object') return '';
-      
-      // Handle custom class headers gracefully
+
       if (item.isFormatHeader) {
-        return `
-          <div class="cv-format-header">${item.role}</div>
-        `;
+        return `<div class="cv-format-header">${escapeHTML(item.role)}</div>`;
       }
-      
-      const role = item.role ? String(item.role).stripSpacesOrArtifacts() : "";
-      // Only show institution if we are not hiding it
-      const institution = hideInstitution ? "" : (item.institution ? String(item.institution).stripSpacesOrArtifacts() : "");
-      const date = item.date ? String(item.date).stripSpacesOrArtifacts() : "";
-      const details = item.details ? String(item.details).stripSpacesOrArtifacts() : "";
 
-      const hasRole = role !== "";
-      const hasInstitution = institution !== "";
-      const hasDate = date !== "";
-      const hasDetails = details !== "";
+      const role = cleanText(item.role);
+      const institution = options.hideInstitution ? '' : cleanText(item.institution);
+      const date = options.hideDate ? '' : cleanText(item.date);
+      const details = cleanText(item.details);
 
-      if (!hasRole && !hasInstitution && !hasDate && !hasDetails) return '';
+      if (!role && !institution && !date && !details) return '';
 
       return `
         <div class="cv-item">
           <div>
-            ${hasRole ? `<div class="cv-item-role">${role}</div>` : ''}
-            ${hasInstitution ? `<div class="cv-item-institution">${institution}</div>` : ''}
+            ${role ? `<div class="cv-item-role">${escapeHTML(role)}</div>` : ''}
+            ${institution ? `<div class="cv-item-institution">${escapeHTML(institution)}</div>` : ''}
           </div>
-          ${hasDate ? `<div class="cv-item-date">${date}</div>` : ''}
-          ${hasDetails ? `<div class="cv-item-details">${details}</div>` : ''}
+          ${date ? `<div class="cv-item-date">${escapeHTML(date)}</div>` : ''}
+          ${details ? `<div class="cv-item-details">${escapeHTML(details)}</div>` : ''}
         </div>
       `;
     }
 
-    String.prototype.stripSpacesOrArtifacts = function() {
-      return this.replace(/\s+/g, ' ').trim();
-    };
+    function presentationYear(item) {
+      const date = cleanText(item && item.date);
+      const match = date.match(/\b(?:19|20)\d{2}\b/);
+      return match ? match[0] : (date || 'Other');
+    }
+
+    function renderResearchPresentations(items) {
+      const groups = new Map();
+
+      items.forEach(item => {
+        const year = presentationYear(item);
+        if (!groups.has(year)) groups.set(year, []);
+        groups.get(year).push(item);
+      });
+
+      const orderedYears = [...groups.keys()].sort((a, b) => {
+        const aIsYear = /^\d{4}$/.test(a);
+        const bIsYear = /^\d{4}$/.test(b);
+        if (aIsYear && bIsYear) return Number(b) - Number(a);
+        if (aIsYear) return -1;
+        if (bIsYear) return 1;
+        return a.localeCompare(b);
+      });
+
+      return orderedYears.map(year => `
+        <h3 class="cv-subsection-title research-year">${escapeHTML(year)}</h3>
+        ${groups.get(year).map(item => renderCVItem(item, { hideDate: true })).join('')}
+      `).join('');
+    }
+
+    function formatUpdateDate(value) {
+      const match = cleanText(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      return match ? `${match[3]}/${match[2]}/${match[1]}` : '';
+    }
+
+    function showUpdateDate(value) {
+      const updateElement = document.getElementById('cv-update');
+      const formattedDate = formatUpdateDate(value);
+      updateElement.textContent = formattedDate
+        ? `Information updated on ${formattedDate}`
+        : '';
+    }
+
+    function renderSection(section) {
+      const title = cleanText(section.title) || 'Untitled Section';
+      const titleLower = title.toLowerCase();
+      const items = Array.isArray(section.items) ? section.items : [];
+      const subsections = Array.isArray(section.subsections) ? section.subsections : [];
+      const isTeaching = titleLower === 'teaching experience';
+      const isResearchPresentations = titleLower === 'research presentations';
+
+      let sectionHTML = `
+        <div class="cv-section ${isTeaching ? 'teaching-tight' : ''}">
+          <h2 class="cv-section-title">${escapeHTML(title)}</h2>
+      `;
+
+      if (isResearchPresentations) {
+        sectionHTML += renderResearchPresentations(items);
+      } else {
+        sectionHTML += items.map(item => renderCVItem(item)).join('');
+      }
+
+      subsections.forEach(subsection => {
+        if (!subsection || typeof subsection !== 'object') return;
+
+        const subsectionTitle = cleanText(subsection.title) || 'Untitled Category';
+        const subsectionItems = Array.isArray(subsection.items) ? subsection.items : [];
+
+        sectionHTML += `<h3 class="cv-subsection-title">${escapeHTML(subsectionTitle)}</h3>`;
+        sectionHTML += subsectionItems
+          .map(item => renderCVItem(item, { hideInstitution: isTeaching }))
+          .join('');
+      });
+
+      return `${sectionHTML}</div>`;
+    }
+
+    async function fetchCVData() {
+      const cacheBuster = `?v=${Date.now()}`;
+      const paths = [
+        `./cv.json${cacheBuster}`,
+        `/website/cv.json${cacheBuster}`,
+        `${window.location.href.split('?')[0].replace(/\/[^/]*$/, '')}/cv.json${cacheBuster}`
+      ];
+
+      let lastError;
+      for (const path of paths) {
+        try {
+          const response = await fetch(path);
+          if (!response.ok) throw new Error(`Server returned status ${response.status}`);
+          return await response.json();
+        } catch (error) {
+          lastError = error;
+        }
+      }
+
+      throw lastError || new Error('Unable to load cv.json.');
+    }
 
     async function loadCV() {
+      const targetBefore = document.getElementById('cv-target-before');
+      const targetAfter = document.getElementById('cv-target-after');
+
       try {
-        const cacheBuster = `?v=${Date.now()}`;
-        let response;
-        
-        try {
-          response = await fetch(`./cv.json${cacheBuster}`);
-        } catch (err) {
-          try {
-            response = await fetch(`/website/cv.json${cacheBuster}`);
-          } catch (err2) {
-            const baseUrl = window.location.href.split('?')[0].replace(/\/[^\/]*$/, '');
-            response = await fetch(`${baseUrl}/cv.json${cacheBuster}`);
-          }
-        }
+        const data = await fetchCVData();
+        const sections = Array.isArray(data)
+          ? data
+          : (data && Array.isArray(data.sections) ? data.sections : null);
 
-        if (!response || !response.ok) {
-          throw new Error(`HTTP network error! Target server returned status: ${response ? response.status : 'Failed to Resolve'}`);
-        }
-        
-        const data = await response.json();
-        const targetBefore = document.getElementById('cv-target-before');
-        const targetAfter = document.getElementById('cv-target-after');
-        
-        targetBefore.innerHTML = ''; 
-        targetAfter.innerHTML = ''; 
+        if (!sections) throw new Error('cv.json does not contain a valid sections array.');
 
-        let sections = [];
-        if (Array.isArray(data)) {
-          sections = data;
-        } else if (data && Array.isArray(data.sections)) {
-          sections = data.sections;
-        } else if (data && typeof data === 'object') {
-          const potentialArray = Object.values(data).find(val => Array.isArray(val));
-          if (potentialArray) {
-            sections = potentialArray;
-          } else {
-            throw new Error("Could not map structural keys.");
-          }
-        }
+        targetBefore.innerHTML = '';
+        targetAfter.innerHTML = '';
 
         sections.forEach(section => {
           if (!section || typeof section !== 'object') return;
-          
-          const title = section.title ? String(section.title).trim() : "Untitled Section";
-          
-          if (title.toLowerCase() === 'education') {
-            return;
-          }
-          
-          const items = Array.isArray(section.items) ? section.items : [];
-          const subsections = Array.isArray(section.subsections) ? section.subsections : [];
 
-          // Add a conditional class if this is the "Teaching Experience" section
-          const isTeaching = title.toLowerCase() === 'teaching experience';
+          const titleLower = cleanText(section.title).toLowerCase();
+          if (titleLower === 'education') return;
 
-          let sectionHTML = `
-            <div class="cv-section ${isTeaching ? 'teaching-tight' : ''}">
-              <h2 class="cv-section-title">${title}</h2>
-          `;
-          
-          items.forEach(item => {
-            sectionHTML += renderCVItem(item);
-          });
-
-          subsections.forEach(sub => {
-            if (!sub || typeof sub !== 'object') return;
-            const subTitle = sub.title ? String(sub.title).trim() : "Untitled Category";
-            const subItems = Array.isArray(sub.items) ? sub.items : [];
-            
-            sectionHTML += `<h3 class="cv-subsection-title">${subTitle}</h3>`;
-            
-            // Determine if we should hide the institution.
-            // Only hide it if the parent section is "Teaching Experience"
-            // OLD: const shouldHideInstitution = title.toLowerCase().includes('teaching experience');
-            // NEW: Make sure we only hide institutions for the exact "Teaching Experience" section
-            const shouldHideInstitution = (title.toLowerCase() === 'teaching experience');
-            
-            subItems.forEach(item => {
-              sectionHTML += renderCVItem(item, shouldHideInstitution);
-            });
-          });
-
-          sectionHTML += `</div>`;
-          
-          if (title.toLowerCase().includes('employment')) {
-            targetBefore.innerHTML += sectionHTML;
+          const sectionHTML = renderSection(section);
+          if (titleLower === 'employment') {
+            targetBefore.insertAdjacentHTML('beforeend', sectionHTML);
           } else {
-            targetAfter.innerHTML += sectionHTML;
+            targetAfter.insertAdjacentHTML('beforeend', sectionHTML);
           }
         });
 
+        showUpdateDate(data && !Array.isArray(data) ? data.last_updated : '');
       } catch (error) {
-        console.error("CV Render Fault Trace:", error);
-        document.getElementById('cv-target-after').innerHTML = `
-          <div style="color: #c0392b; background: #fdf2f2; border: 1px solid #f5c6cb; padding: 1.2rem; border-radius: 4px; font-family: var(--sans); font-size: 0.95rem; line-height: 1.5;">
-            <p style="font-weight: 700; margin-bottom: 0.4rem;"><i class="fas fa-exclamation-triangle"></i> Render Initialization Blocked</p>
-            <p style="font-family: var(--mono); font-size: 0.85rem; color: var(--ink-soft); padding: 0.4rem; background: rgba(0,0,0,0.04); border-radius: 3px;">${error.message}</p>
+        console.error('CV render fault:', error);
+        document.getElementById('cv-update').textContent = '';
+        targetAfter.innerHTML = `
+          <div class="render-error" role="alert">
+            <p class="render-error-title"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> CV data could not be loaded</p>
+            <p class="render-error-message">${escapeHTML(error.message)}</p>
           </div>
         `;
       }
     }
-    
+
     loadCV();
   </script>
 </body>
