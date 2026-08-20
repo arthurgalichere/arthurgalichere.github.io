@@ -154,6 +154,8 @@
     .research-section { margin-bottom: 3.5rem; }
     .research-section:last-child { margin-bottom: 0; }
 
+    #papers-target:not(:empty) { margin-bottom: 3.5rem; }
+
     .research-section-title {
       padding-bottom: 0.4rem;
       margin-bottom: 1.8rem;
@@ -335,9 +337,7 @@
       .page-title { font-size: 2.15rem; }
       .foot {
         flex-direction: column;
-        align-items: center;
         text-align: center;
-        gap: 0.8rem;
       }
     }
   </style>
@@ -370,43 +370,10 @@
           At the intersection of macroeconomics and finance, my research develops and estimates theoretical models to explain business cycle fluctuations and financial market phenomena. I study how financing activities, shaped by market structure, financial frictions, and investor behaviour, affect credit, aggregate investment, and economic activity within general equilibrium frameworks. My work seeks to improve our understanding of financial crises and risk-premium-driven recessions, while informing the design of monetary and macroprudential policies.
         </p>
 
-        <div id="papers-target">
-          <section class="research-section">
-            <h2 class="research-section-title">Working Papers</h2>
+        <div id="papers-target" aria-live="polite"></div>
 
-            <article class="paper-item">
-              <h3 class="paper-title">
-                <a href="https://drive.google.com/file/d/1juFNMigDmWnCyn0tO5le4GfdkXocdNQ0/view?usp=sharing" target="_blank" rel="noreferrer">
-                  When Banks Ride the Bubble: Financial Stability and Real Activity
-                  <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                </a>
-              </h3>
-              <p class="paper-abstract">My paper studies the implications of the dynamic ownership of risky asset price bubbles between banks and retail investors for financial stability and real activity. The analysis shows that the severity of banking crises and recessions depends on both the exposure of individual banks to the bubble and the overall contamination of the banking sector. The paper also highlights that the early stages of bubble growth increase the financial vulnerability of the economy, as banks increasingly invest in the bubble during this period. While stricter banking supervision can reduce the effects of a bursting bubble, it may also weaken banks’ resilience to economic shocks.</p>
-            </article>
-
-            <article class="paper-item">
-              <h3 class="paper-title">Stock Market Bubbles and Monetary policy: a Bayesian Analysis</h3>
-              <p class="paper-abstract">This paper develops and estimates a DSGE model with stock market bubbles and nominal rigidities using Bayesian methods. Bubbles emerge through a positive feedback loop mechanism supported by self-fulfilling beliefs. Their movements, driven by a sentiment shock, significantly contribute to fluctuations in investment, output, and inflation.</p>
-            </article>
-          </section>
-
-          <section class="research-section">
-            <h2 class="research-section-title">Work in Progress</h2>
-
-            <article class="paper-item">
-              <h3 class="paper-title">Stock Market Dynamics in the RBC Framework</h3>
-              <p class="paper-abstract">This paper develops a DSGE model to study stock market dynamics. A key novelty of the framework is the introduction of firm exit and equity issuance by new entrants.</p>
-            </article>
-
-            <article class="paper-item">
-              <h3 class="paper-title">Asset Price Bubbles and Monetary Policy: Deflate the Bubble?</h3>
-              <p class="paper-abstract">This paper studies monetary policy in a New Keynesian model with asset price bubbles. It shows that monetary policy targeting asset prices can partially deflate an asset price bubble and affects the way the bubble is financed.</p>
-            </article>
-          </section>
-        </div>
-
-        <section class="research-section" id="presentation-target">
-          <h2 class="research-section-title">Research Presentations</h2>
+        <section class="research-section" aria-labelledby="presentations-title">
+          <h2 id="presentations-title" class="research-section-title">Research Presentations</h2>
           <div id="presentation-list" aria-live="polite">
             <p class="empty-message">Loading presentations…</p>
           </div>
@@ -418,13 +385,13 @@
           <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
             <i class="fas fa-envelope" aria-hidden="true"></i>
           </a>
-          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichere's CV">
+          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV">
             <i class="fas fa-file-pdf" aria-hidden="true"></i>
           </a>
-          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University Profile">
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
             <i class="fas fa-university" aria-hidden="true"></i>
           </a>
-          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
             <i class="fab fa-linkedin" aria-hidden="true"></i>
           </a>
         </div>
@@ -434,12 +401,55 @@
   </main>
 
   <script>
+    const fallbackPapers = [
+      {
+        title: 'When Banks Ride the Bubble: Financial Stability and Real Activity',
+        category: 'Working Papers',
+        journal: '',
+        date: '',
+        coauthors: '',
+        abstract: 'My paper studies the implications of the dynamic ownership of risky asset price bubbles between banks and retail investors for financial stability and real activity. The analysis shows that the severity of banking crises and recessions depends on both the exposure of individual banks to the bubble and the overall contamination of the banking sector. The paper also highlights that the early stages of bubble growth increase the financial vulnerability of the economy, as banks increasingly invest in the bubble during this period. While stricter banking supervision can reduce the effects of a bursting bubble, it may also weaken banks’ resilience to economic shocks.',
+        url: 'https://drive.google.com/file/d/1juFNMigDmWnCyn0tO5le4GfdkXocdNQ0/view?usp=sharing',
+        status: ''
+      },
+      {
+        title: 'Stock Market Bubbles and Monetary policy: a Bayesian Analysis',
+        category: 'Working Papers',
+        journal: '',
+        date: '',
+        coauthors: '',
+        abstract: 'This paper develops and estimates a DSGE model with stock market bubbles and nominal rigidities using Bayesian methods. Bubbles emerge through a positive feedback loop mechanism supported by self-fulfilling beliefs. Their movements, driven by a sentiment shock, significantly contribute to fluctuations in investment, output, and inflation.',
+        url: '',
+        status: ''
+      },
+      {
+        title: 'Stock Market Dynamics in the RBC Framework',
+        category: 'Work in Progress',
+        journal: '',
+        date: '',
+        coauthors: '',
+        abstract: 'This paper develops a DSGE model to study stock market dynamics. A key novelty of the framework is the introduction of firm exit and equity issuance by new entrants.',
+        url: '',
+        status: ''
+      },
+      {
+        title: 'Asset Price Bubbles and Monetary Policy: Deflate the Bubble?',
+        category: 'Work in Progress',
+        journal: '',
+        date: '',
+        coauthors: '',
+        abstract: 'This paper studies monetary policy in a New Keynesian model with asset price bubbles. It shows that monetary policy targeting asset prices can partially deflate an asset price bubble and affects the way the bubble is financed.',
+        url: '',
+        status: ''
+      }
+    ];
+
     function cleanText(value) {
       return value == null ? '' : String(value).replace(/\s+/g, ' ').trim();
     }
 
     function escapeHTML(value) {
-      return cleanText(value).replace(/[&<>'"]/g, character => ({
+      return String(value == null ? '' : value).replace(/[&<>'"]/g, character => ({
         '&': '&amp;',
         '<': '&lt;',
         '>': '&gt;',
@@ -448,30 +458,18 @@
       })[character]);
     }
 
-    function safeURL(value) {
-      const url = cleanText(value);
-      if (!url) return '';
-
-      try {
-        const parsed = new URL(url, window.location.href);
-        return ['http:', 'https:'].includes(parsed.protocol) ? parsed.href : '';
-      } catch {
-        return '';
-      }
-    }
-
-    function categoryLabel(value) {
+    function normalizeCategory(value) {
       const category = cleanText(value);
-      const normalized = category.toLowerCase().replace(/[_-]+/g, ' ');
+      const normalized = category.toLowerCase();
 
-      if (normalized === 'published' || normalized === 'publication' || normalized === 'publications') {
-        return 'Published';
-      }
-      if (normalized === 'working paper' || normalized === 'working papers') {
+      if (['working paper', 'working papers'].includes(normalized)) {
         return 'Working Papers';
       }
-      if (normalized === 'work in progress' || normalized === 'works in progress') {
+      if (normalized === 'work in progress') {
         return 'Work in Progress';
+      }
+      if (['published', 'publication', 'publications'].includes(normalized)) {
+        return 'Published';
       }
 
       return category || 'Other Research';
@@ -481,26 +479,27 @@
       const title = cleanText(paper.title);
       const journal = cleanText(paper.journal);
       const date = cleanText(paper.date);
+      const coauthors = cleanText(paper.coauthors);
       const abstract = cleanText(paper.abstract);
-      const url = safeURL(paper.url || paper.link);
-      const rawCoauthors = paper.coauthors;
-      const coauthors = Array.isArray(rawCoauthors)
-        ? rawCoauthors.map(cleanText).filter(Boolean).join(', ')
-        : cleanText(rawCoauthors);
+      const status = cleanText(paper.status);
+      const url = cleanText(paper.url);
+
+      if (!title) return '';
 
       const titleHTML = url
-        ? `<a href="${escapeHTML(url)}" target="_blank" rel="noreferrer">${escapeHTML(title)} <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>`
+        ? `<a href="${escapeHTML(url)}" target="_blank" rel="noreferrer">${escapeHTML(title)}</a>`
         : escapeHTML(title);
 
       const metadata = [];
-      if (coauthors) metadata.push(`With ${escapeHTML(coauthors)}`);
-      if (journal) metadata.push(escapeHTML(journal));
-      if (date) metadata.push(escapeHTML(date));
+      if (journal) metadata.push(journal);
+      if (date) metadata.push(date);
+      if (coauthors) metadata.push(`With ${coauthors}`);
+      if (status) metadata.push(status);
 
       return `
         <article class="paper-item">
           <h3 class="paper-title">${titleHTML}</h3>
-          ${metadata.length ? `<p class="paper-meta">${metadata.join(' · ')}</p>` : ''}
+          ${metadata.length ? `<p class="paper-meta">${metadata.map(escapeHTML).join(' · ')}</p>` : ''}
           ${abstract ? `<p class="paper-abstract">${escapeHTML(abstract)}</p>` : ''}
         </article>
       `;
@@ -519,15 +518,15 @@
 
       const groups = new Map();
       validPapers.forEach(paper => {
-        const label = categoryLabel(paper.category);
-        if (!groups.has(label)) groups.set(label, []);
-        groups.get(label).push(paper);
+        const category = normalizeCategory(paper.category);
+        if (!groups.has(category)) groups.set(category, []);
+        groups.get(category).push(paper);
       });
 
-      const preferredOrder = ['Working Papers', 'Work in Progress', 'Published'];
+      const categoryOrder = ['Working Papers', 'Work in Progress', 'Published'];
       const orderedCategories = [...groups.keys()].sort((a, b) => {
-        const aIndex = preferredOrder.indexOf(a);
-        const bIndex = preferredOrder.indexOf(b);
+        const aIndex = categoryOrder.indexOf(a);
+        const bIndex = categoryOrder.indexOf(b);
         if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
         if (aIndex !== -1) return -1;
         if (bIndex !== -1) return 1;
@@ -549,11 +548,9 @@
     }
 
     function renderPresentation(item) {
-      if (!item || typeof item !== 'object') return '';
-
-      const role = cleanText(item.role);
-      const institution = cleanText(item.institution);
-      const details = cleanText(item.details);
+      const role = cleanText(item && item.role);
+      const institution = cleanText(item && item.institution);
+      const details = cleanText(item && item.details);
 
       if (!role && !institution && !details) return '';
 
@@ -566,7 +563,7 @@
       `;
     }
 
-    function renderResearchPresentations(items) {
+    function renderPresentations(items) {
       const target = document.getElementById('presentation-list');
       const validItems = Array.isArray(items)
         ? items.filter(item => item && typeof item === 'object')
@@ -622,30 +619,27 @@
     }
 
     async function loadResearchData() {
-      const fallbackPapers = document.getElementById('papers-target').innerHTML;
+      const presentationTarget = document.getElementById('presentation-list');
 
       try {
         const data = await fetchCVData();
         const sections = data && Array.isArray(data.sections) ? data.sections : [];
         const presentationSection = sections.find(section =>
-          cleanText(section && section.title).toLowerCase() === 'research presentations'
+          section && cleanText(section.title).toLowerCase() === 'research presentations'
         );
 
-        if (Array.isArray(data && data.papers) && data.papers.length) {
-          renderPapers(data.papers);
-        }
+        const papers = data && Array.isArray(data.papers) && data.papers.length
+          ? data.papers
+          : fallbackPapers;
 
-        renderResearchPresentations(
-          presentationSection && Array.isArray(presentationSection.items)
-            ? presentationSection.items
-            : []
-        );
+        renderPapers(papers);
+        renderPresentations(presentationSection && presentationSection.items);
       } catch (error) {
-        console.error('Research data could not be loaded:', error);
-        document.getElementById('papers-target').innerHTML = fallbackPapers;
-        document.getElementById('presentation-list').innerHTML = `
+        console.error('Research data render fault:', error);
+        renderPapers(fallbackPapers);
+        presentationTarget.innerHTML = `
           <div class="render-error" role="alert">
-            Research presentations could not be loaded. ${escapeHTML(error.message)}
+            Research presentations could not be loaded: ${escapeHTML(error.message)}
           </div>
         `;
       }
