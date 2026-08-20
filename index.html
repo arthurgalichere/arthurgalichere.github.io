@@ -6,35 +6,37 @@
   <title>Arthur Galichère</title>
   <meta name="description" content="Arthur Galichère is an Assistant Professor (Teaching Focussed) at the University of Warwick specialising in macroeconomics, asset price bubbles, and DSGE modelling." />
   <meta name="author" content="Arthur Galichère" />
-  
+
   <meta property="og:title" content="Arthur Galichère — Portfolio" />
-  <meta property="og:description" content="Assistant Professor of Macroeconomics at the University of Warwick." />
+  <meta property="og:description" content="Assistant Professor (Teaching Focussed) at the University of Warwick." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.arthurgalichere.com/" />
+
+  <link rel="icon" type="image/png" href="website/images/favicon_transparant.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
     :root {
       /* Arthur's Branding Colors: Dark Charcoal, Slate Blue, Light Gray */
-      --paper:        #f4f5f7;      /* Light Gray Canvas */
-      --paper-soft:   #fafbfc;      /* Soft Highlight Gradient */
-      --sheet:        #ffffff;      /* Pure Card White */
-      --panel:        #ebeeec;      /* Subdued Dividers */
-      --panel-deep:   #e2e5e9;      /* Footer Tone */
+      --paper:        #f4f5f7;
+      --paper-soft:   #fafbfc;
+      --sheet:        #ffffff;
+      --panel:        #ebeeec;
+      --panel-deep:   #e2e5e9;
       --line:         rgba(28, 28, 30, 0.08);
       --line-strong:  rgba(28, 28, 30, 0.15);
-      --ink:          #1c1c1e;      /* Dark Charcoal Main Text */
-      --ink-soft:     #3a3a3c;      /* Muted Body Copy */
-      --muted:        #71717a;      /* Metadata Labels */
-      
-      --accent:       #3b5a75;      /* Slate Blue Core Brand Color */
-      --accent-strong:#25394b;      /* Hover State Dark Blue */
-      --accent-soft:  #edf2f6;      /* Active Element Background Tint */
+      --ink:          #1c1c1e;
+      --ink-soft:     #3a3a3c;
+      --muted:        #71717a;
+
+      --accent:       #3b5a75;
+      --accent-strong:#25394b;
+      --accent-soft:  #edf2f6;
       --accent-line:  rgba(59, 90, 117, 0.35);
 
       --display: 'Bitter', Georgia, serif;
@@ -48,7 +50,7 @@
       min-width: 0;
       min-height: 100vh;
       font-family: var(--sans);
-      background: 
+      background:
         radial-gradient(circle 840px at 50% -16%, #ffffff 0%, transparent 52%),
         linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
       color: var(--ink);
@@ -61,11 +63,17 @@
 
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
     .skip {
-      position: absolute; left: -9999px; top: 0;
-      background: var(--ink); color: #fff;
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--ink);
+      color: #fff;
       padding: 0.55rem 0.9rem;
-      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
-      z-index: 200; border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      z-index: 200;
+      border-radius: 3px;
     }
     .skip:focus { left: 1rem; top: 1rem; }
     a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
@@ -91,10 +99,8 @@
       box-shadow: 0 1px 2px rgba(28, 28, 30, 0.03), 0 20px 48px rgba(28, 28, 30, 0.08);
       overflow: hidden;
     }
-    /* Top Brand Spine */
     .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
 
-    /* Top Navigation Matrix */
     .index-nav {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -112,18 +118,25 @@
     }
     .index-card:first-child { border-left: none; }
     .index-nav .idx-label {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      font-family: var(--display); font-size: 1.15rem; font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
     }
-    .index-nav .idx-label i { font-size: 0.85rem; color: var(--accent); width: 1.1rem; text-align: center; }
-    
+    .index-nav .idx-label i {
+      width: 1.1rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-align: center;
+    }
     .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
     .index-card.is-current .idx-label i { color: var(--accent-strong); }
-    
     .index-card:hover { background: var(--accent); color: #fff; }
-    .index-card:hover .idx-label, .index-card:hover .idx-label i { color: #fff; }
+    .index-card:hover .idx-label,
+    .index-card:hover .idx-label i { color: #fff; }
 
-    /* 2-Column Grid Setup with Header Protection Row */
     .hero-section {
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(320px, 1fr);
@@ -132,25 +145,16 @@
       padding: 3rem 2.5rem 2.5rem;
       align-items: start;
     }
-
-    /* Spans across both columns so row 2 starts aligned */
-    .hero-header {
-      grid-column: 1 / -1;
-    }
-
-    .in-a-few-words-wrapper {
-      grid-column: 1;
-    }
-    
-    .hero-right { 
+    .hero-header { grid-column: 1 / -1; }
+    .in-a-few-words-wrapper { grid-column: 1; }
+    .hero-right {
       grid-column: 2;
-      min-width: 0; 
+      min-width: 0;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
     }
 
-    /* Landscape Portrait Modification */
     .portrait-landscape {
       width: 100%;
       height: auto;
@@ -170,40 +174,33 @@
       line-height: 1.1;
       color: var(--ink);
     }
-
     .subtitle {
       margin-top: 0.4rem;
+      margin-bottom: 1.5rem;
       font-family: var(--sans);
       font-size: 1.2rem;
       font-weight: 500;
       line-height: 1.4;
       color: var(--accent);
-      margin-bottom: 1.5rem;
     }
 
-    /* Cleaned Inline Link Style (No Underline) */
     .inline-link {
       color: var(--accent);
       text-decoration: none;
       transition: color 0.16s ease;
     }
-    .inline-link:hover {
-      color: var(--accent-strong);
-      text-decoration: none;
-    }
+    .inline-link:hover { color: var(--accent-strong); text-decoration: none; }
 
-    /* Subsections Design */
     .section-label {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      margin-bottom: 1rem;
       font-family: var(--display);
       font-size: 1.4rem;
       font-weight: 700;
       color: var(--ink);
-      margin-bottom: 1rem;
     }
-    
     .in-a-few-words-content {
       font-family: var(--sans);
       font-size: 0.98rem;
@@ -211,6 +208,7 @@
       color: var(--ink-soft);
       text-align: justify;
     }
+    .paragraph-spaced { margin-top: 0.6rem; }
 
     .interest-list {
       list-style: none;
@@ -237,17 +235,10 @@
       background: var(--accent);
     }
 
-    /* Bottom About Me Architecture */
-    .about-container {
-      padding: 0 2.5rem 3rem;
-    }
+    .about-container { padding: 0 2.5rem 3rem; }
     .about-wrapper {
       border-top: 1px solid var(--line-strong);
       padding-top: 2.5rem;
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.9fr);
-      column-gap: 3rem;
-      row-gap: 2rem;
     }
     .about-text {
       display: grid;
@@ -258,8 +249,6 @@
       color: var(--ink-soft);
       text-align: justify;
     }
-    
-    /* Academic Underline Elements within Biography blocks */
     .about-wrapper a:not(.inline-link) {
       color: var(--accent);
       text-decoration-line: underline;
@@ -273,45 +262,7 @@
       text-decoration-color: var(--accent-strong);
       text-decoration-thickness: 2px;
     }
-    
-    /* Side Highlights Box layout (Fatih Style) */
-    .highlights-panel {
-      background: var(--paper-soft);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      padding: 1.5rem;
-      align-self: start;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);
-    }
-    .h-title {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .h-title i { color: var(--accent); }
-    
-    .award-card {
-      font-family: var(--sans);
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: var(--ink-soft);
-    }
-    .award-title {
-      font-family: var(--display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--accent-strong);
-      margin-bottom: 0.4rem;
-    }
 
-    /* Structural Base Footer */
     .foot {
       display: flex;
       align-items: center;
@@ -321,11 +272,20 @@
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
-    .foot-loc { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .foot-loc {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
     .socials { display: flex; align-items: center; gap: 0.4rem; }
     .socials a {
-      width: 2rem; height: 2rem;
-      display: inline-flex; align-items: center; justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border: 1px solid var(--line-strong);
       border-radius: 4px;
       background: var(--sheet);
@@ -333,35 +293,45 @@
       font-size: 0.85rem;
       transition: all 0.16s ease;
     }
-    .socials a:hover { color: #fff; background: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
+    .socials a:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
 
-    /* Kinetic Reveal Animations */
-    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .reveal { animation: rise 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both; animation-delay: var(--d, 0ms); }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      animation: rise 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+      animation-delay: var(--reveal-delay, 0ms);
+    }
+    .delay-40 { --reveal-delay: 40ms; }
+    .delay-80 { --reveal-delay: 80ms; }
+    .delay-140 { --reveal-delay: 140ms; }
+    .delay-160 { --reveal-delay: 160ms; }
+    .delay-220 { --reveal-delay: 220ms; }
+    .delay-340 { --reveal-delay: 340ms; }
 
-    /* Responsive Adaptation Breakpoints */
     @media (max-width: 960px) {
       .hero-section {
         grid-template-columns: 1fr;
         padding: 2.5rem 1.5rem 2rem;
         row-gap: 2rem;
       }
-      /* Reordered elements explicitly via CSS Order on mobile */
       .hero-header { grid-column: auto; order: 1; }
       .hero-right { grid-column: auto; order: 2; align-items: flex-start; }
       .in-a-few-words-wrapper { grid-column: auto; order: 3; }
-      
       .portrait-landscape { aspect-ratio: 16 / 9; max-width: 550px; }
-      .about-wrapper {
-        grid-template-columns: 1fr;
-        column-gap: 0;
-        row-gap: 2.5rem;
-      }
       .about-container { padding: 0 1.5rem 2.5rem; }
     }
+
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
+
     @media (max-width: 680px) {
       .name { font-size: 2.5rem; }
       .index-nav { grid-template-columns: 1fr; }
@@ -373,19 +343,17 @@
   </style>
 </head>
 <body>
-
   <a href="#main" class="skip">Skip to main content</a>
 
   <main id="main" class="page">
     <article class="card">
-      
       <nav class="index-nav" aria-label="Academic Directory">
         <a href="/" class="index-card is-current" aria-current="page">
           <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
         </a>
-       <a href="website/cv.html" class="index-card">
+        <a href="website/cv.html" class="index-card">
           <span class="idx-label"><i class="fas fa-file" aria-hidden="true"></i> CV</span>
-       </a>
+        </a>
         <a href="website/research.html" class="index-card">
           <span class="idx-label"><i class="fas fa-chart-line" aria-hidden="true"></i> Research</span>
         </a>
@@ -398,29 +366,25 @@
       </nav>
 
       <section class="hero-section">
-          
         <div class="hero-header">
-          <h1 class="name reveal" style="--d:40ms">Arthur Galichère</h1>
-          <p class="subtitle reveal" style="--d:80ms">Assistant Professor (Teaching Focussed)</p>
+          <h1 class="name reveal delay-40">Arthur Galichère</h1>
+          <p class="subtitle reveal delay-80">Assistant Professor (Teaching Focussed)</p>
         </div>
 
-        <div class="in-a-few-words-wrapper reveal" style="--d:160ms">
+        <div class="in-a-few-words-wrapper reveal delay-160">
           <h2 class="section-label">In a few words</h2>
           <div class="in-a-few-words-content">
             <p>
-              I am an Assistant Professor at the 
-              <a href="https://warwick.ac.uk/fac/soc/economics/" target="_blank" rel="noreferrer" class="inline-link">
-                University of Warwick</a>, where I lecture on the core 2nd year undergraduate Macroeconomics module and the core MSc module Advanced Macroeconomics.
-            </p>
-            
-            <p style="margin-top: 0.6rem;">
-              I joined the <a href="https://warwick.ac.uk/fac/soc/economics/" target="_blank" rel="noreferrer" class="inline-link">
-              University of Warwick</a> as a Teaching Fellow in Macroeconomics in 2021 and received my PhD in Economics from the
-              <a href="https://www.gla.ac.uk/schools/business/" target="_blank" rel="noreferrer" class="inline-link">
-              University of Glasgow</a> in 2022.
+              I am an Assistant Professor at the
+              <a href="https://warwick.ac.uk/fac/soc/economics/" target="_blank" rel="noreferrer" class="inline-link">University of Warwick</a>, where I lecture on the core 2nd year undergraduate Macroeconomics module and the core MSc module Advanced Macroeconomics.
             </p>
 
-            <p style="margin-top: 0.6rem;">
+            <p class="paragraph-spaced">
+              I joined the <a href="https://warwick.ac.uk/fac/soc/economics/" target="_blank" rel="noreferrer" class="inline-link">University of Warwick</a> as a Teaching Fellow in Macroeconomics in 2021 and received my PhD in Economics from the
+              <a href="https://www.gla.ac.uk/schools/business/" target="_blank" rel="noreferrer" class="inline-link">University of Glasgow</a> in 2022.
+            </p>
+
+            <p class="paragraph-spaced">
               My research lies at the intersection of macroeconomics and finance, with a particular focus on:
             </p>
             <ul class="interest-list">
@@ -432,28 +396,26 @@
           </div>
         </div>
 
-        <div class="hero-right reveal" style="--d:140ms">
-          <img src="website/images/arthur_galichere.png" alt="Arthur Galichère landscape view" class="portrait-landscape">
-        </div> 
-
+        <div class="hero-right reveal delay-140">
+          <img src="website/images/arthur_galichere.png" alt="Portrait of Arthur Galichere" class="portrait-landscape" />
+        </div>
       </section>
 
       <section class="about-container">
         <div class="about-wrapper">
-          
-          <div class="about-text reveal" style="--d:220ms">
+          <div class="about-text reveal delay-220">
             <h2 class="section-label">About me</h2>
             <p>
               I am an Assistant Professor at the University of Warwick studying macroeconomics. My main research interests in this field focus on themes related to financial crises and macroeconomic policies, such as asset pricing, monetary policy, heterogeneous investments, financial intermediation and stability. I design theoretical models and apply empirical methods to evaluate the effects of asset price bubbles on the economy to provide policy recommendations. My job market paper studies the dynamic ownership of bubbles and its effects on the real economy and financial stability. In contrast, my current projects focus on the Bayesian estimation of DSGE models with stock market bubbles and nominal rigidities.
             </p>
             <p>
-              My profound interest in economics was awakened by a sequence of economic events that changed the lives of many. The first main event that sparked my curiosity was the burst of the subprime mortgage bubble. I was young, but still, I remember the news being incessantly focused on the financial crisis and the great uncertainty it brought to people. At that time, I was wondering what caused such a situation and how to remedy it.              
+              My profound interest in economics was awakened by a sequence of economic events that changed the lives of many. The first main event that sparked my curiosity was the burst of the subprime mortgage bubble. I was young, but still, I remember the news being incessantly focused on the financial crisis and the great uncertainty it brought to people. At that time, I was wondering what caused such a situation and how to remedy it.
             </p>
             <p>
-              This curiosity led me to study economics after my Baccalaureate. I started my undergraduate studies at the University of Caen in France and met many great people there. At the same moment, the European debt crisis was in full swing and raised many interrogations in the minds of Europeans. I had the chance to have a very eloquent macroeconomic professor who was narrating his understanding of the crisis, and made me think about what would be the best macroeconomic policy.              
+              This curiosity led me to study economics after my Baccalaureate. I started my undergraduate studies at the University of Caen in France and met many great people there. At the same moment, the European debt crisis was in full swing and raised many interrogations in the minds of Europeans. I had the chance to have a very eloquent macroeconomic professor who was narrating his understanding of the crisis, and made me think about what would be the best macroeconomic policy.
             </p>
             <p>
-              After my undergraduate studies, I went abroad for one year in an exchange programme with Texas A&M University in the US. I discovered a very different culture and educational system, where I learnt many new things. During this year, my interest was focused on unconventional monetary policies, which were the themes of my dissertation on the evolution of the monetary policies of the ECB and the Fed since the beginning of the financial crisis. These cultural and academic experiences were very beneficial to me, and this was the moment I decided I wanted to do research in economics.
+              After my undergraduate studies, I went abroad for one year in an exchange programme with Texas A&amp;M University in the US. I discovered a very different culture and educational system, where I learnt many new things. During this year, my interest was focused on unconventional monetary policies, which were the themes of my dissertation on the evolution of the monetary policies of the ECB and the Fed since the beginning of the financial crisis. These cultural and academic experiences were very beneficial to me, and this was the moment I decided I wanted to do research in economics.
             </p>
             <p>
               Before starting my PhD, I wanted to acquire a better understanding of the research tools and techniques required for economic analyses. Therefore, I went to Glasgow and started my MRes in economics. Since then, I have learnt a lot about modern macroeconomic theory and economics. I also met very interesting and supportive people through my MRes and PhD.
@@ -471,35 +433,19 @@
               Nowadays, I am enjoying teaching macroeconomics and doing my research.
             </p>
           </div>
-
-          <div class="highlights-panel reveal" style="--d:280ms">
-            <div class="h-title"><i class="fas fa-award"></i> Test</div>
-            <div class="award-card">
-              <h3 class="award-title">TEST (2025)</h3>
-              <p style="font-size: 0.88rem; line-height: 1.5; color: var(--ink-soft);">
-                Recipient of the <strong>TEST</strong> for the test. 
-              </p>
-              <p style="font-size: 0.85rem; line-height: 1.5; color: var(--muted); margin-top: 0.5rem; font-style: italic;">
-                "test"
-              </p>
-            </div>
-          </div>
-
         </div>
       </section>
 
-      <footer class="foot reveal" style="--d:340ms">
+      <footer class="foot reveal delay-340">
         <div class="socials">
           <a href="mailto:arthur.Galichere@warwick.ac.uk" aria-label="Email Arthur"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-          <a href="#" aria-label="CV Link"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>
+          <a href="website/CV_Arthur_Galichere.pdf" aria-label="Download Arthur Galichere's CV"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>
           <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University Profile"><i class="fas fa-university" aria-hidden="true"></i></a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
         </div>
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
-      
     </article>
   </main>
-
 </body>
 </html>
