@@ -179,7 +179,7 @@
     .cv-section.teaching-tight .cv-item { margin-bottom: 0.45rem; }
 
     .cv-subsection-title {
-      padding-bottom: 0.2rem;
+      padding-top: 1.25rem;
       margin-top: 2rem;
       margin-bottom: 0.8rem;
       color: var(--accent-strong);
@@ -188,10 +188,14 @@
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      border-bottom: 1px dashed var(--line-strong);
+      border-top: 1px dashed var(--line-strong);
     }
 
-    .research-year:first-of-type { margin-top: 0; }
+    .cv-subsection-title.is-first {
+      padding-top: 0;
+      margin-top: 0;
+      border-top: none;
+    }
 
     .cv-format-header {
       padding-left: 0.6rem;
@@ -215,7 +219,7 @@
     .cv-item-role {
       color: var(--ink);
       font-size: 1.05rem;
-      font-weight: 485;
+      font-weight: 500;
       line-height: 1.4;
     }
 
@@ -282,6 +286,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1rem;
       padding: 0.9rem 1.5rem;
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
@@ -293,6 +298,55 @@
       font-size: 0.68rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .socials a {
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .socials a:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      animation: rise 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+    }
+
+    .delay-340 { animation-delay: 340ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        animation: none;
+      }
+
+      .socials a {
+        transition: none;
+      }
     }
 
     @media (max-width: 768px) {
@@ -309,6 +363,7 @@
       .index-card:first-child { border-top: none; }
       .cv-header-block { flex-direction: column; }
       .cv-title { font-size: 2.15rem; }
+      .foot { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -392,10 +447,21 @@
 
       <footer class="foot reveal delay-340">
         <div class="socials">
-          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&st=hik4skpl&dl=1" aria-label="Download Arthur Galichere's CV"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>
-          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University Profile"><i class="fas fa-university" aria-hidden="true"></i></a>
-          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1"
+            aria-label="Download Arthur Galichère's CV"
+          >
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          </a>
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
+            <i class="fas fa-university" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+          </a>
         </div>
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
@@ -407,8 +473,20 @@
       return value == null ? '' : String(value).replace(/\s+/g, ' ').trim();
     }
 
-    function escapeHTML(value) {
-      return cleanText(value).replace(/[&<>'"]/g, character => ({
+    function cleanMultilineText(value) {
+      if (value == null) return '';
+
+      return String(value)
+        .replace(/\r\n?/g, '\n')
+        .split('\n')
+        .map(line => line.replace(/[\t ]+/g, ' ').trim())
+        .filter(Boolean)
+        .join('\n');
+    }
+
+    function escapeHTML(value, preserveLineBreaks = false) {
+      const text = preserveLineBreaks ? cleanMultilineText(value) : cleanText(value);
+      return text.replace(/[&<>'"]/g, character => ({
         '&': '&amp;',
         '<': '&lt;',
         '>': '&gt;',
@@ -427,7 +505,7 @@
       const role = cleanText(item.role);
       const institution = options.hideInstitution ? '' : cleanText(item.institution);
       const date = options.hideDate ? '' : cleanText(item.date);
-      const details = cleanText(item.details);
+      const details = cleanMultilineText(item.details);
 
       if (!role && !institution && !date && !details) return '';
 
@@ -438,7 +516,7 @@
             ${institution ? `<div class="cv-item-institution">${escapeHTML(institution)}</div>` : ''}
           </div>
           ${date ? `<div class="cv-item-date">${escapeHTML(date)}</div>` : ''}
-          ${details ? `<div class="cv-item-details">${escapeHTML(details)}</div>` : ''}
+          ${details ? `<div class="cv-item-details">${escapeHTML(details, true)}</div>` : ''}
         </div>
       `;
     }
@@ -467,8 +545,8 @@
         return a.localeCompare(b);
       });
 
-      return orderedYears.map(year => `
-        <h3 class="cv-subsection-title research-year">${escapeHTML(year)}</h3>
+      return orderedYears.map((year, index) => `
+        <h3 class="cv-subsection-title research-year${index === 0 ? ' is-first' : ''}">${escapeHTML(year)}</h3>
         ${groups.get(year).map(item => renderCVItem(item, { hideDate: true })).join('')}
       `).join('');
     }
@@ -505,13 +583,14 @@
         sectionHTML += items.map(item => renderCVItem(item)).join('');
       }
 
-      subsections.forEach(subsection => {
+      subsections.forEach((subsection, index) => {
         if (!subsection || typeof subsection !== 'object') return;
 
         const subsectionTitle = cleanText(subsection.title) || 'Untitled Category';
         const subsectionItems = Array.isArray(subsection.items) ? subsection.items : [];
+        const firstClass = index === 0 ? ' is-first' : '';
 
-        sectionHTML += `<h3 class="cv-subsection-title">${escapeHTML(subsectionTitle)}</h3>`;
+        sectionHTML += `<h3 class="cv-subsection-title${firstClass}">${escapeHTML(subsectionTitle)}</h3>`;
         sectionHTML += subsectionItems
           .map(item => renderCVItem(item, { hideInstitution: isTeaching }))
           .join('');
