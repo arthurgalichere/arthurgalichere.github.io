@@ -1,9 +1,8 @@
 # GTA Coordinator Handbook
-
-**Department of Economics, University of Warwick**  
+ 
 **Working Draft**  
 **Prepared for:** GTA Coordinator  
-**Current working version:** August 2026
+**Current working version:** August 2026 — updated with current 2026/27 plans
 
 ---
 
@@ -18,6 +17,17 @@ It is not intended to be a handbook for GTAs themselves, although some sections 
 ### 1.1 Working Principle
 
 This is a live operational handbook. Where information is based on legacy documents or previous-year slides, it should be treated as **useful but not automatically current**. Items relating to contracts, pay, visa restrictions, workload calculations, online teaching, and named administrative contacts should be checked before being circulated to GTAs.
+
+### 1.2 Status Language Used in This Handbook
+
+To avoid confusing established practice with developing proposals, this handbook uses the following distinctions:
+
+- **Confirmed:** supported by the official role description, current departmental guidance, or direct confirmation from the responsible colleague.
+- **Agreed working plan for 2026/27:** agreed in principle for the coming year but still dependent on practical arrangements such as rooms, invitations, payment approval, or timetables.
+- **Proposed / to confirm:** an idea that requires further discussion, approval, or governance work before implementation.
+- **Longer-term possibility:** a potential future development that is not part of the current role.
+
+Where a proposal concerns pay, contracts, line management, personal data, or the use of developmental records, it must not be presented as settled policy until confirmed by the appropriate departmental or University authority.
 
 ---
 
@@ -42,6 +52,8 @@ The role currently includes:
 - Signposting GTAs to relevant departmental contacts where issues fall outside the GTA Coordinator's remit.
 - Escalating issues to the appropriate departmental lead when required.
 - Building institutional memory around GTA training, observation, and developmental feedback.
+- Helping facilitate good working conditions, clear expectations, and efficient coordination for GTAs.
+- Seeking to align GTA and departmental incentives by making training, observation, and communication practically useful to both.
 - Organising and chairing two GTA forums during the year, usually one in Term 1 and one in Term 2.
 - Representing the Department at University-wide GTA Coordinator meetings, where relevant.
 - Reviewing and updating GTA resources in coordination with professional services colleagues.
@@ -56,7 +68,6 @@ The formal role description identifies three principal duties:
 
 These formal duties are consistent with the operational role developed in this handbook, but the practical implementation depends on current departmental processes, professional services support, and the annual teaching calendar.
 
-
 ### 2.2 Responsibilities Currently Outside the Role
 
 Based on current understanding, the GTA Coordinator is not responsible for:
@@ -66,8 +77,21 @@ Based on current understanding, the GTA Coordinator is not responsible for:
 - Resolving disputes or substantive issues between GTAs and module leaders.
 - Making decisions about GTA contracts, pay, visa rules, or HR matters.
 - Providing official interpretation of employment policy, immigration rules, or payroll arrangements.
+- Line-managing Teaching Fellows or individuals teaching through other contractual routes such as STP, unless formally confirmed otherwise.
 
-Issues between GTAs and module leaders should be referred to the Deputy Head of Teaching, currently Claudia Rey. The GTA Coordinator may nevertheless remain the initial contact point for GTAs and should signpost or escalate appropriately.
+Issues between GTAs and module leaders should be referred to the Deputy Head of Department (Teaching and Learning), currently Claudia Rei. The GTA Coordinator may nevertheless remain the initial contact point for GTAs and should signpost or escalate appropriately.
+
+### 2.3 Potential Longer-Term Development of the Role
+
+A possible medium-term development, perhaps after one to three years of successfully establishing the coordination, training, and observation processes, is for the GTA Coordinator to contribute to matching or allocating GTAs to modules and seminar teaching. This is **not a current responsibility**.
+
+Any future allocation role would need:
+
+- explicit departmental approval;
+- coordination with the Director of Undergraduate Studies, PGT/MRes leadership, module leaders, and professional services;
+- transparent criteria covering expertise, experience, preferences, timetable constraints, workload, and fairness;
+- a clear distinction between developmental feedback and performance-management information; and
+- appropriate consent and data-governance arrangements before observation material could inform allocation.
 
 ---
 
@@ -77,20 +101,37 @@ Issues between GTAs and module leaders should be referred to the Deputy Head of 
 |---|---|---|
 | GTAs | Graduate Teaching Assistants | Primary group supported by the role. |
 | GTA Assessors | Academics or experienced teachers observing GTAs | Conduct GTA observations and provide developmental feedback. |
-| Claudia Rey | Deputy Head of Teaching | Escalation contact for issues between GTAs and module leaders. |
-| Elizabeth | Director of Undergraduate Studies | Contact regarding undergraduate teaching matters, GTA lists, new GTAs, and possible strategic teaching considerations. |
+| Claudia Rei | Deputy Head of Department (Teaching and Learning) | Escalation contact for issues between GTAs and module leaders; key contact for strategic development of the GTA role, training, and quality processes. |
+| Elizabeth Jones | Director of Undergraduate Studies | Contact regarding undergraduate teaching matters and any future strategic contribution to GTA allocation. |
+| Pablo Beker | Director of the MRes Programme | Important contact because MRes students form a large share of the GTA community; coordinate induction timing around MRes lectures and seminars. |
 | Juliana | Disability and Accessibility Lead | Potential contributor to GTA training on accessibility, reasonable adjustments, inclusive teaching, and student support boundaries. |
 | Caroline Elliott | Professor, Department of Economics; involved with GTA training and the Economics Network | Contact for information about Economics Network GTA training. |
 | Sarah Duggan | Professional Services / departmental administration contact; payments/contracts | Sarah has confirmed that her involvement, with Monika, is with GTA payments. The GTA Coordinator does not need to be involved in the payment process, but may signpost pay/payment questions to the appropriate professional services contact. |
 | Monika | Professional Services / payments | Works with Sarah on GTA payments. Full role and surname to confirm before adding to external communications. |
 | Carolyn Andrews | Professional Services / teaching support | Supports the teaching side of GTA processes. Carolyn has provided useful resources, including the GTA Coordinator role description, GTA Forum agenda, Class Tutors Handbook, GTA webpage, and GTA Team location. Carolyn and Robin will help update the Handbook/webpages and create the 2026/27 MS Team. |
-| Robin Flint | Professional Services / teaching support | Supports the teaching side of GTA processes. Carolyn indicated that Robin and Carolyn will help update the Handbook/webpages and create the 2026/27 MS Team. |
+| Robin Flint | Academic Services Manager / teaching support | Supports GTA resources, room and timetable practicalities, invitations, webpages, the Class Tutors Handbook, and creation of the 2026/27 MS Team. |
+| Robin Naylor | Academic colleague associated with the development of the existing observation form/process | Consult before substantially redesigning the GTA observation form; exact historical role to confirm. |
 | Gianna Boero | Previous GTA Coordinator | Useful handover contact. Sarah indicated that Gianna's last day is 30 September. Capture institutional memory before then if possible. |
 | Module Leaders | Academic leads for individual modules | Responsible for module-specific teaching expectations, seminar content, assessment guidance, marking expectations, and module-level GTA meetings. |
 | Lead Tutors | Experienced tutors on large modules, where used | May coordinate other class tutors, forum monitoring rotas, marking meetings, generic feedback, and module-level tutor queries. |
 | Programme Managers / Professional Services Staff | Administrative colleagues | May support GTA lists, room bookings, Moodle/Tabula guidance, attendance monitoring, contracts, payments, communications, and other administrative processes. |
 
 Further contacts should be added as they are confirmed.
+
+### 3.1 Staff Categories and Line-Management Clarification
+
+Not everyone who teaches a class is necessarily a GTA. Teaching Fellows and individuals teaching through STP or other arrangements may fall under different management and contractual structures.
+
+Claudia indicated that the GTA Coordinator may be the line manager for GTAs, while other categories may be line-managed by Claudia, Jeremy, or another academic lead. This requires formal confirmation before it is communicated as policy.
+
+The Coordinator should therefore maintain a clear distinction between:
+
+- GTAs;
+- Teaching Fellows;
+- STP teachers or other hourly paid teachers; and
+- other class tutors.
+
+The GTA Coordinator should not assume responsibility for every seminar teacher solely because their duties resemble GTA work.
 
 ---
 
@@ -113,7 +154,7 @@ Because GTAs may naturally approach the GTA Coordinator as their first point of 
 
 ### 4.2 The GTA Coordinator Should Usually Signpost or Escalate
 
-- Disputes between GTAs and module leaders: Deputy Head of Teaching.
+- Disputes between GTAs and module leaders: Deputy Head of Department (Teaching and Learning).
 - Contract, pay, payroll, or visa questions: professional services / HR / relevant official contact.
 - Questions about module-specific content or marking: module leader or Lead Tutor.
 - Student welfare or accessibility issues: relevant student support, disability/accessibility lead, programme team, or personal tutor.
@@ -138,18 +179,19 @@ The exact timing will depend on the academic calendar and departmental arrangeme
 
 ### 5.1 Summer / Pre-Term Preparation
 
-- Obtain the latest list of GTAs.
+- Obtain the latest authoritative list of GTAs; Claudia may hold a working list, but confirm the source and categories with the relevant professional-services colleagues.
 - Identify new and returning GTAs.
 - Obtain module allocation information where available, even though allocation is outside the Coordinator's remit.
-- Confirm internal induction date, time, room, and contributors.
+- Confirm the Week 2 Teaching Induction date, time, room, delivery mode, eligible participants, and contributors.
 - Confirm Economics Network workshop date and venue.
 - Confirm whether GTAs register themselves or are registered centrally.
 - Confirm which training is mandatory and for whom.
+- Contact Pablo Beker and coordinate the induction around MRes lectures and seminars.
 - Update induction slides.
 - Update the GTA MS Team and GTA webpages with professional services colleagues.
 - Review the Class Tutors Handbook and GTA Information for Teaching in Economics.
 - Confirm GTA Assessor list.
-- Redesign/update observation form.
+- Review and redesign the observation form only after consulting relevant colleagues and users of the existing form.
 - Establish observation timeline.
 - Prepare welcome email and key reminders.
 - Arrange handover meeting with outgoing Coordinator where possible.
@@ -161,18 +203,18 @@ The formal role description specifically allocates the summer period to:
 
 ### 5.2 Term 1
 
-- Deliver or coordinate the departmental GTA induction, expected in Week 1.
-- Ensure new GTAs attend Economics Network training.
+- Deliver or coordinate the departmental Teaching Induction at the beginning or middle of Week 2.
+- Ensure new GTAs attend Economics Network training without missing scheduled classes.
 - Ensure GTAs know their module leader / Lead Tutor and have had a module meeting.
 - Launch the observation process.
 - Match GTAs with GTA Assessors.
 - Send observation documentation and deadlines.
 - Check that GTAs know how to use Moodle and Tabula and record attendance.
 - Remind GTAs about marking expectations and escalation routes.
-- Hold a Term 1 GTA Forum / mid-term meeting.
+- Consult GTAs on whether and how the GTA Forum should continue, while meeting the current requirement to organise a Term 1 Forum unless formally changed.
 - Monitor recurring questions and update guidance.
 
-The official role description states that the Week 1 induction should cover:
+The official role description refers to a Week 1 induction. The 2026/27 working plan deliberately moves it to the beginning or middle of Week 2 to support in-person delivery and coordination; this departure should be documented and confirmed. The official description says the induction should cover:
 
 - Essential aspects of teaching and learning in the Department.
 - Support available at module level.
@@ -189,14 +231,15 @@ The official role description states that the Week 1 induction should cover:
 ### 5.4 Term 2
 
 - Complete outstanding observations if necessary.
-- Hold the second GTA Forum.
+- Hold the second GTA Forum under the existing role requirement, while testing any revised format agreed after consultation.
 - Share professional development opportunities.
 - Review emerging issues around assessment, feedback, student engagement, and module evaluation.
-- Begin planning for Economics Network marking and feedback training if relevant.
+- Share the Economics Network marking and feedback workshop and finalise the departmental mandatory marking-standardisation session for all GTAs undertaking marking.
 
 ### 5.5 Term 3 / Summer
 
-- Circulate relevant exam marking or assessment training information, without becoming involved in payment administration.
+- Deliver or coordinate a short mandatory departmental marking-standardisation session for all GTAs undertaking marking, subject to confirmation of payment and practical arrangements.
+- Circulate relevant Economics Network marking and feedback training information, without becoming involved in payment administration.
 - Review the observation cycle and gather feedback from Assessors and GTAs.
 - Review GTA resources and induction materials.
 - Update handbook and templates.
@@ -208,14 +251,15 @@ The official role description states that the Week 1 induction should cover:
 
 ### 6.1 Overview
 
-The GTA Coordinator is responsible for preparing and delivering the departmental Welcome/Induction session in Week 1 and for coordinating relevant training opportunities with other colleagues and the Economics Network.
+The GTA Coordinator is responsible for preparing and delivering the departmental **Teaching Induction** and for coordinating relevant training opportunities with colleagues and the Economics Network.
 
-The training provision has at least two distinct components:
+The 2026/27 training provision has three distinct components:
 
-1. **Departmental / internal induction and administrative training.**
-2. **Economics Network GTA workshop.**
+1. **Departmental Teaching Induction and administrative guidance** at the beginning or middle of Week 2.
+2. **Economics Network GTA Teaching Workshop** for new GTAs.
+3. **Departmental marking-standardisation training** for every GTA undertaking marking, planned for the beginning of Term 3.
 
-These should be coordinated to avoid unnecessary duplication.
+These components should be coordinated to avoid unnecessary duplication while ensuring that Warwick Economics procedures are covered.
 
 ### 6.2 Internal Departmental Induction
 
@@ -235,7 +279,7 @@ Potential topics:
 - Student communication boundaries.
 - Class switching.
 - Illness and absence procedures.
-- Assessment, marking, moderation, and feedback.
+- Assessment, the Warwick 20-point scale, marking, moderation, and feedback.
 - Teaching observations.
 - GTA forums.
 - Teaching prizes and professional development.
@@ -244,15 +288,38 @@ Potential topics:
 - Accessibility and inclusive teaching.
 - Academic integrity and AI guidance.
 
+#### 6.2.1 Agreed Working Plan for 2026/27
+
+Previous departmental induction was typically a one-hour Teams session. Following discussion with Claudia and correspondence with Carolyn and Robin, the working plan is:
+
+- The Teaching Induction will be **mandatory for new GTAs and new Teaching Fellows**.
+- It will be **optional for returning GTAs**.
+- It should be held **in person at the beginning or middle of Week 2**.
+- If a new GTA is unable to attend because they are still remote, the session may be made hybrid for 2026/27.
+- From the following year, the intention is for the event to be in person only, potentially with a recording or alternative arrangement for a legitimate absence.
+- The room and clash-free timing remain practical constraints to be resolved with Robin and Carolyn.
+- Returning GTAs who attend voluntarily are not expected to be paid merely for re-attending.
+- If one or two returning GTAs are specifically invited to contribute their experience, the expectation is that those contributors should be paid. Feasibility and the payment route should be confirmed before invitations are issued.
+- GTA attendance at required induction is paid.
+- The payment or workload treatment for new Teaching Fellows should follow their own employment arrangements and should be confirmed separately.
+
+The induction should be presented as a combined event for new GTAs and new Teaching Fellows where shared content is relevant, while preserving role-specific guidance where necessary.
+
+#### 6.2.2 Relationship with MRes Teaching
+
+MRes students constitute a substantial proportion of the Department's GTA community. The Coordinator should contact the Director of the MRes Programme, Pablo Beker, before finalising the induction timetable and should seek to avoid clashes with MRes lectures and seminars.
+
+New GTAs should not be expected to miss scheduled academic teaching in order to attend training where the clash could reasonably have been avoided.
+
 ### 6.3 Economics Network GTA Workshop
 
 Caroline Elliott confirmed by email that the Economics Network GTA workshop is scheduled for:
 
-- **Date:** 16 October
-- **Time:** 10am-4pm
+- **Date:** Friday 16 October 2026
+- **Time:** 10am–4pm
 - **Venue:** Radcliffe, Space 12
 
-Attendance is mandatory for new GTAs.
+Attendance is mandatory for new GTAs. GTAs should not miss their scheduled classes to attend the workshop; teaching and training timetables should therefore be checked and coordinated in advance, and any unavoidable clash should be resolved through the appropriate departmental route rather than by an informal class cancellation.
 
 Caroline indicated that the GTA Coordinator would be welcome to attend and could contribute to the discussion on the design of macro seminars.
 
@@ -275,14 +342,23 @@ Potential Vevox questions/scenarios:
 - How should a GTA encourage participation?
 - How should a GTA respond when students have not prepared?
 
-### 6.4 Training Attendance
+### 6.4 Training Attendance and Payment
 
-Current understanding:
+Current 2026/27 working arrangements:
 
-- Economics Network workshop: mandatory for new GTAs.
-- Departmental induction: likely expected for all tutors annually, but exact attendance requirement should be confirmed.
-- New GTAs and those new to marking may be encouraged to attend the Economics Network Marking and Feedback workshop, usually held before summer exam marking.
-- Mandatory online training listed in previous guidance may include Information Security, Health and Safety, Fire Safety, Display Screen Equipment, and Social Inclusion. Current requirements should be checked annually.
+- **Departmental Teaching Induction:** mandatory for new GTAs and new Teaching Fellows; optional for returning GTAs.
+- **Economics Network Teaching Workshop:** mandatory for new GTAs.
+- **Departmental marking-standardisation training:** planned as mandatory for every GTA who undertakes marking.
+- **Economics Network Marking and Feedback workshop:** useful supplementary training, normally held in May, particularly for new markers, but not a substitute for Warwick-specific standardisation.
+- Mandatory online training may include Information Security, Health and Safety, Fire Safety, Display Screen Equipment, and Social Inclusion. Current requirements should be checked annually.
+
+Payment and workload points:
+
+- GTAs are paid for required GTA induction.
+- Returning GTAs who voluntarily re-attend are not expected to be paid unless specifically invited to contribute.
+- A beginning-of-term module-team meeting is already included within the preparation allowance for the module and is not separately claimable.
+- Before making the departmental marking session mandatory, confirm that attendance time will be paid and identify the correct administrative route.
+- The Coordinator should not calculate or authorise individual claims; payment questions should be referred to Sarah, Monika, or the current professional-services contact.
 
 ### 6.5 Moodle, Tabula, Forums, and Teaching Materials
 
@@ -357,7 +433,7 @@ Topics to confirm:
 - Feedback and moderation expectations.
 - Escalation routes.
 
-If the meeting has not occurred, the GTA should contact the module leader. The GTA Coordinator can help signpost, but should not replace module-level support.
+If the meeting has not occurred, the GTA should contact the module leader. The GTA Coordinator can help signpost, but should not replace module-level support. Carolyn has clarified that attendance at the beginning-of-term module meeting is included within the module's preparation time and is not claimed separately.
 
 ### 6.9 Lead Tutors
 
@@ -468,18 +544,34 @@ Avoid:
 - Excessive negative criticism without constructive guidance.
 - Generic phrases without identifying what should be expanded or improved.
 
-#### Marking Consistency
+#### Marking Consistency and Mandatory Training
 
-A longer internal assessment/marking session may be useful, especially for new markers. Topics could include:
+The working plan is to introduce a short **mandatory departmental marking-standardisation session at the beginning of Term 3 for every GTA undertaking marking**. A likely duration is 30–60 minutes.
 
-- Departmental marking scales.
-- UG and PGT differences.
-- Marking meetings.
-- Sample marking and calibration.
-- Moderation.
-- Feedback quality.
-- How to handle uncertainty.
-- Consistency across markers.
+The session should cover the Warwick-specific essentials:
+
+- the 20-point scale and when it applies;
+- UG and PGT differences;
+- aligning comments with marks;
+- marking criteria and benchmark answers;
+- sample marking and calibration;
+- moderation;
+- feedback quality;
+- common sources of inconsistency;
+- what to do when uncertain;
+- academic integrity escalation; and
+- Tabula and deadline procedures where relevant.
+
+The Coordinator should attend or review the Economics Network Marking and Feedback workshop to understand its content. The Economics Network session is valuable supplementary development, but a departmental session may still be required to ensure consistent Warwick Economics practice.
+
+The general session must not replace module-specific marking meetings. Module leaders or Lead Tutors should hold a marking meeting where GTAs mark an assessment, explain the assessment-specific criteria, and calibrate markers using examples where appropriate.
+
+Before implementation, confirm:
+
+- that attendance is paid;
+- who issues invitations and records attendance;
+- whether Teaching Fellows or other markers should attend under their own workload arrangements; and
+- who leads each part of the session.
 
 #### AI and Academic Integrity
 
@@ -512,7 +604,33 @@ Purpose:
 
 Based on Carolyn's note, the 2025/26 forums took place in weeks 7 and 20 on Wednesday afternoons. This may be a useful model for future scheduling.
 
-#### 6.15.1 GTA Forum Agenda Template
+#### 6.15.1 Current Effectiveness and 2026/27 Consultation
+
+The Forums were originally intended to provide a channel through which GTAs could speak openly, particularly where tensions existed between GTAs and the Department. Recent attendance has reportedly been very low—around one to three attendees from a population of roughly 30 GTAs—so the current whole-group Teams format does not appear to be working effectively.
+
+The first step should be to ask GTAs what they want rather than impose a redesign. Questions should include:
+
+- Do you want the GTA Forums to continue?
+- Are they useful in their current form?
+- What purpose should they serve?
+- What format, timing, or topics would make attendance worthwhile?
+- Would you prefer an alternative mechanism such as anonymous questions, a short survey, drop-ins, smaller groups, or themed workshops?
+- Even if attendance remains low, do you value retaining the Forum as a channel that can be activated when a collective issue arises?
+
+Possible improvements include:
+
+- collecting anonymous questions before the meeting;
+- opening with “What would you change?”;
+- using short polls;
+- holding smaller or themed discussions;
+- separating new and experienced GTA discussion where helpful;
+- using an in-person or hybrid format;
+- publishing clear actions after the meeting; and
+- aligning the Forum with issues GTAs are currently facing.
+
+The official role description currently requires two Forums, one in Term 1 and one in Term 2. They should therefore continue unless the Department formally agrees a different mechanism. Any redesign should preserve a safe route for GTAs to raise concerns and should not turn the Forum into a performance-management exercise.
+
+#### 6.15.2 GTA Forum Agenda Template
 
 The February 2026 GTA Forum agenda provides a useful reusable template.
 
@@ -526,7 +644,7 @@ The February 2026 GTA Forum agenda provides a useful reusable template.
 | 6 | Teaching prizes: timing and process for confirming awards | Deputy HoD Teaching and Learning / relevant academic lead |
 | 7 | Any other business: feedback on forum, future topics of interest | GTA Coordinator |
 
-#### 6.15.2 Preparing a GTA Forum
+#### 6.15.3 Preparing a GTA Forum
 
 Before each forum:
 
@@ -546,11 +664,11 @@ After each forum:
 - Escalate recurring issues to the appropriate departmental lead.
 - Update the handbook if a new process or recurring issue emerges.
 
-#### 6.15.3 Forum Principles
+#### 6.15.4 Forum Principles
 
 The forum should be developmental rather than punitive. It should allow GTAs to raise practical issues without feeling that they are being judged. Where sensitive issues arise, the GTA Coordinator should avoid discussing identifiable students or staff in the open forum and instead arrange appropriate follow-up.
 
-#### 6.15.4 GTA MS Teams Communication Templates
+#### 6.15.5 GTA MS Teams Communication Templates
 
 Gianna's 2025/26 MS Teams posts provide a useful model for forum reminders and end-of-term developmental check-ins. The messages should remain warm, concise, and supportive, while making the purpose of each activity clear. Dates, times, delivery mode, evaluation windows, and agenda items must be updated each year.
 
@@ -654,6 +772,7 @@ Reusable topics from the 2025/26 slides:
 - Teaching observations.
 - Illness and emergencies.
 - Assessment and feedback.
+- The Warwick 20-point scale.
 - Good feedback practice.
 - GTA forums.
 - Teaching prizes.
@@ -665,7 +784,7 @@ Items requiring annual verification:
 
 - Named contacts and titles.
 - Economics Network date and venue.
-- Departmental induction date and format.
+- Departmental induction date, audience, and format.
 - League-table positions.
 - Teaching-prize amounts and criteria.
 - Contract/workload examples.
@@ -718,6 +837,13 @@ The process should be described as **GTA teaching observation**, conducted by **
 
 The observation is not primarily a punitive or disciplinary process. It should support reflection, improvement, confidence, and professional development.
 
+The Department also needs, over time, a coherent developmental picture across two distinct dimensions:
+
+1. **classroom teaching**; and
+2. **marking and feedback**.
+
+Some GTAs teach but do not mark, while others may mark without teaching. The two dimensions should therefore be considered separately. The system should recognise strengths, identify support needs, and detect significant outliers without assuming that performance in one dimension predicts performance in the other.
+
 ### 7.2 Current / Previous Procedure
 
 Previous guidance indicates:
@@ -735,7 +861,7 @@ The official role description confirms that the GTA Coordinator is responsible f
 
 ### 7.3 Developmental Record
 
-A medium- to long-run aim is to build a developmental history of GTA teaching feedback.
+A medium- to long-run aim is to build a developmental history of GTA teaching and, where relevant, marking development.
 
 Potential uses, subject to appropriate consent, confidentiality, and data governance:
 
@@ -745,7 +871,7 @@ Potential uses, subject to appropriate consent, confidentiality, and data govern
 - Supporting Associate Fellowship / HEA applications.
 - Identifying training needs.
 - Helping the Department understand GTA teaching experience and strengths.
-- Potentially informing strategic teaching allocation.
+- Potentially informing strategic teaching or marking allocation.
 
 ### 7.4 Governance Questions to Resolve
 
@@ -760,6 +886,8 @@ Before observation records are used beyond immediate developmental feedback, cla
 - Is separate consent required for allocation decisions?
 - How can GTAs correct or contextualise records?
 - How is confidentiality protected?
+- What lawful basis, privacy notice, and retention schedule apply under UK GDPR?
+- How can the Department avoid converting a developmental process into undisclosed performance management?
 
 ### 7.5 Recommended Observation Workflow
 
@@ -777,11 +905,36 @@ Before observation records are used beyond immediate developmental feedback, cla
 12. Gather process feedback.
 13. Review themes for future training without identifying individuals.
 
+### 7.6 Administrative Tracking Versus Confidential Feedback
+
+Maintain two conceptually separate records:
+
+**Administrative observation record**
+
+- GTA name;
+- Assessor;
+- module or teaching context;
+- agreed date;
+- completion status; and
+- whether the feedback conversation occurred.
+
+**Confidential developmental material**
+
+- detailed observation comments;
+- strengths;
+- development areas;
+- GTA reflection; and
+- agreed actions.
+
+The Coordinator can maintain the administrative record. Access to substantive developmental material must follow the agreed confidentiality and consent framework. No longitudinal database of detailed feedback should be created until data protection, access, retention, and future-use questions have been resolved.
+
 ---
 
 ## 8. Redesigning the GTA Observation Form
 
 ### 8.1 Design Principles
+
+Before redesign begins, consult the people involved in creating and using the existing form, including Robin Naylor if appropriate, and ask GTAs and Assessors what they would change and why.
 
 The redesigned form should:
 
@@ -969,6 +1122,60 @@ Many thanks,
 
 Arthur
 
+### 9.7 Introductory Email to Pablo Beker
+
+Subject: GTA coordination and MRes students
+
+Dear Pablo,
+
+I hope you are well.
+
+I wanted to let you know that I will be taking over from Gianna as GTA Coordinator for the coming academic year. As MRes students constitute a large proportion of the Department's GTA community, I thought it would be useful to introduce myself and establish a direct line of communication with you.
+
+The departmental Teaching Induction will be mandatory for new GTAs and optional for returning GTAs. We are planning to hold it in person around the beginning or middle of Week 2. I will work with Robin and Carolyn to avoid clashes with MRes lectures and seminars as far as possible; if a new GTA is unable to attend because they are not yet in Warwick, we may provide a hybrid option this year.
+
+As I am still learning the details of the role and reviewing the existing arrangements, I would be very grateful for any recommendations or concerns you may have, particularly regarding the needs and academic commitments of MRes GTAs. I will do what I can to ensure that the arrangements work well for both the students and the Department.
+
+Best wishes,
+
+Arthur
+
+### 9.8 Introductory Email to Current GTAs
+
+Subject: Introduction from the new GTA Coordinator
+
+Dear all,
+
+I hope you are having a good summer. I am writing to introduce myself as the Department's new GTA Coordinator, taking over from Gianna for the coming academic year.
+
+I am still familiarising myself with the role and reviewing the existing arrangements, but my aim is to help teaching and marking run well for both GTAs and the Department. Please feel free to contact me if you have a question, encounter a problem or think that something could be improved. I will either help directly or put you in touch with the appropriate person.
+
+A few initial points:
+
+- The departmental Teaching Induction will be mandatory for new GTAs and optional for returning GTAs.
+- It is provisionally planned as an in-person session around the beginning or middle of Week 2. Further details will follow.
+- Returning GTAs may attend voluntarily, although this optional re-attendance will not normally be paid unless a returning GTA is specifically invited to contribute to the session.
+
+I will contact you separately about the GTA Forums. Attendance under the current format has been low, so before making changes I would like to hear whether you value the Forums, what would make them useful, or whether another mechanism would work better.
+
+I look forward to working with you during the year.
+
+Best wishes,
+
+Arthur
+
+### 9.9 Communication Style for the New Coordinator
+
+Initial communications should be concise, approachable, and honest without undermining confidence. The key message is:
+
+- the Coordinator is learning the detail of the role;
+- GTAs should report unclear guidance, practical problems, or suggestions;
+- the Coordinator will act where the issue is within remit;
+- otherwise, the Coordinator will identify the correct route; and
+- feedback will be used to improve future coordination.
+
+Avoid promising that every issue can be resolved. A useful formulation is: “I will do what I can within the constraints of the role, or put you in touch with the person best placed to help.”
+
 ---
 
 ## 10. Core Resources and Document Locations
@@ -988,7 +1195,7 @@ Arthur
 
 ### 10.2 Resources to Request or Confirm
 
-- Latest GTA list.
+- Latest GTA list, with contractual category where appropriate.
 - New GTA list.
 - Module allocation list.
 - GTA Assessor list.
@@ -998,6 +1205,7 @@ Arthur
 - MS Team ownership and permissions.
 - Standard emails used for induction, observations, and forums.
 - Current guidance on AI and academic integrity.
+- Current data-protection guidance for observation and developmental records.
 
 ---
 
@@ -1006,24 +1214,27 @@ Arthur
 ### 11.1 Role and Governance
 
 - Who does the GTA Coordinator formally report to?
+- Is the GTA Coordinator formally the line manager of GTAs, and what does that mean in practice?
+- Which teaching staff are GTAs, Teaching Fellows, STP teachers, or another category?
 - What decisions can the GTA Coordinator make independently?
-- What issues should be copied to Claudia Rey?
+- What issues should be copied to Claudia Rei?
 - Should the GTA Coordinator attend any regular departmental teaching meetings?
 
 ### 11.2 GTA Training
 
-- What is the exact date and format of internal induction?
-- Who sends invitations?
-- Is attendance tracked?
-- Is induction paid?
-- Are returning GTAs required to attend any part?
+- Confirm the exact Week 2 date, room, and whether a hybrid facility is required.
+- Confirm who sends invitations and records attendance.
+- Confirm the payment treatment for invited returning-GTA contributors.
+- Confirm the workload/payment arrangement for new Teaching Fellows.
+- Confirm payment for the mandatory departmental marking-standardisation session.
+- Confirm whether the intended new-GTA/new-TF attendance rule requires any further formal approval.
 
 ### 11.3 Economics Network Workshop
 
 - Is the date fixed annually by Economics Network?
 - Who registers GTAs?
 - Is attendance tracked?
-- What happens if a new GTA cannot attend?
+- What happens if a new GTA cannot attend without missing a class?
 - Are returning GTAs invited?
 
 ### 11.4 Observations
@@ -1035,14 +1246,16 @@ Arthur
 - Where are forms stored?
 - Who sees completed forms?
 - Can forms be used for references or HEA applications?
+- How should marking development be recorded separately from classroom teaching observation?
 
 ### 11.5 GTA Forums
 
-- Should there be one forum in Term 1 and one in Term 2 every year?
-- Are forums mandatory or optional?
-- Should module leaders attend?
-- Should professional services attend?
-- Should notes be circulated?
+- What do current GTAs want the Forums to achieve?
+- Which format would make participation useful?
+- Are Forums optional, and should an alternative confidential channel be offered?
+- Should selected module leaders or professional-services colleagues attend only for relevant agenda items?
+- What summary or action log should be circulated?
+- If GTAs prefer another mechanism, should the official role description be revised?
 
 ### 11.6 Pay, Contracts, and Workload
 
@@ -1050,12 +1263,33 @@ Arthur
 - What payment queries should be redirected immediately?
 - What workload information can be safely included in induction?
 - What should be excluded or caveated?
+- How should paid attendance at new mandatory training be recorded?
 
 ---
 
-## 12. Legacy Source Material: What Can Be Reused
+## 12. 2026/27 Planned Processes at a Glance
 
-### 12.1 Useful Topics from 2021/22 Slides
+| Process | 2026/27 working position | Remaining action |
+|---|---|---|
+| Teaching Induction | Mandatory for new GTAs and new TFs; optional for returning GTAs | Confirm date, room, invitations, attendance tracking, and payment details |
+| Delivery mode | In person in early/mid Week 2; hybrid only if a new GTA is remote and cannot attend | Assess room and technology |
+| Returning GTA attendance | Normally unpaid if voluntary; paid if specifically invited to contribute | Confirm feasibility |
+| Economics Network Teaching Workshop | Mandatory for new GTAs; 16 October, 10am–4pm, Radcliffe Space 12 | Avoid teaching/MRes clashes and confirm registration |
+| Module-team meeting | Expected before teaching; included in module preparation time | Reinforce through communications |
+| Marking training | Mandatory departmental session for every GTA who marks, planned for early Term 3 | Confirm payment, content, lead, and attendance tracking |
+| Economics Network marking workshop | Useful supplementary session, normally in May | Review content and promote |
+| GTA Forums | Two currently required, but format is under review because attendance has been very low | Consult GTAs before redesign |
+| Teaching observations | Developmental, coordinated by GTA Coordinator and GTA Assessors | Review form and workflow; consult Robin Naylor |
+| Marking development | Separate from classroom observation | Design a proportionate calibration/development process |
+| Developmental history | Administrative tracking can begin; substantive records require governance | Resolve consent, confidentiality, GDPR, access, and retention |
+| Future allocation role | Possible longer-term development only | Do not implement without departmental approval |
+| MRes coordination | Direct contact with Pablo Beker; avoid clashes with MRes academic commitments | Send introductory email and coordinate timetable |
+
+---
+
+## 13. Legacy Source Material: What Can Be Reused
+
+### 13.1 Useful Topics from 2021/22 Slides
 
 Although outdated in some areas, the 2021/22 slides contain useful topics:
 
@@ -1069,7 +1303,7 @@ Although outdated in some areas, the 2021/22 slides contain useful topics:
 - Assessment and feedback.
 - Contracts/signposting.
 
-### 12.2 Topics That Must Not Be Reused Without Updating
+### 13.2 Topics That Must Not Be Reused Without Updating
 
 - COVID-era face-covering and social-distancing guidance.
 - Online learning and self-isolation arrangements.
@@ -1081,7 +1315,7 @@ Although outdated in some areas, the 2021/22 slides contain useful topics:
 - Old workload calculations.
 - Old Turnitin thresholds or named plagiarism contacts.
 
-### 12.3 Useful Topics from Version 3.1 GTA Information
+### 13.3 Useful Topics from Version 3.1 GTA Information
 
 The 2025 document provides a more recent reference for:
 
@@ -1096,7 +1330,7 @@ The 2025 document provides a more recent reference for:
 
 However, Sarah has explicitly said that payment arrangements are complex and outside the GTA Coordinator's role. The Coordinator should use the document for context but should not advise GTAs on individual pay calculations.
 
-### 12.4 Meeting Notes from Caroline Discussion
+### 13.4 Meeting Notes from Caroline Discussion
 
 Items extracted from handwritten notes:
 
@@ -1119,7 +1353,7 @@ Items extracted from handwritten notes:
 
 ---
 
-## 13. Version Notes
+## 14. Version Notes
 
 This handbook currently integrates information from:
 
@@ -1133,7 +1367,9 @@ This handbook currently integrates information from:
 - Older GTA Information for Teaching in Economics, Version 1.0.
 - GTA Forum agenda dated 18 February 2026, including agenda items on welcome/introduction, professional development, teaching and learning, assessment and feedback, evaluation, teaching prizes, and any other business.
 - 2025/26 GTA Induction Slides, including induction agenda, GTA resources, standard teaching model, Moodle/forums, support and feedback classes, lead tutors, attendance rules, student behaviour, recording student progress, Advice and Feedback hours, illness/emergency protocol, assessment and feedback, GTA observations, teaching prizes, Economics Network session content, marking, invigilation, and contracts.
-
 - Current GTA Information webpage and Class Tutors Handbook 2025/26 content, including training resources, role of class tutors/module leaders, attendance, Advice and Feedback hours, absence protocol, assessment/feedback rules, private tutoring restriction, module evaluation, Annual Module Review, teaching observation confidentiality, and departmental Who's Who.
 - Department Teaching and Learning "Your First Few Weeks" page, including first-week teaching FAQs, teaching-hour convention, Mass Mailing, Advice and Feedback hours, Support and Feedback class terminology, Tabula, Moodle, Turnitin, monitoring points, and reference guidance.
 - Gianna Boero's 2025/26 GTA MS Teams posts, including Term 1 and Term 2 Forum reminders and the end-of-term optional developmental check-in.
+- Meeting with Claudia Rei on induction scope, GTA Forum effectiveness, marking training, observation strategy, staff categories, possible line-management arrangements, and longer-term allocation possibilities.
+- Correspondence with Carolyn Andrews and Robin Flint on the 2026/27 Teaching Induction, payment for induction, and treatment of module-team meetings within preparation time.
+- Planned introductory communications to Pablo Beker and all current GTAs.
