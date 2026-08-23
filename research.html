@@ -6,7 +6,7 @@
   <title>Arthur Galichère — Research</title>
   <meta name="description" content="Research by Arthur Galichère on macroeconomics, finance, asset price bubbles, financial stability, and monetary policy." />
 
-  <link rel="icon" type="image/png" href="images/favicon_transparant.png" />
+  <link rel="icon" type="image/png" href="website/images/favicon_transparant.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -191,11 +191,6 @@
 
     .paper-title a:hover { color: var(--accent-strong); }
 
-    .paper-title a i {
-      margin-left: 0.3rem;
-      font-size: 0.72em;
-    }
-
     .paper-meta {
       margin-bottom: 0.45rem;
       color: var(--muted);
@@ -346,7 +341,7 @@
   <main class="page">
     <article class="card">
       <nav class="index-nav" aria-label="Academic Directory">
-        <a href="../index.html" class="index-card">
+        <a href="index.html" class="index-card">
           <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
         </a>
         <a href="cv.html" class="index-card">
@@ -599,9 +594,9 @@
     async function fetchCVData() {
       const cacheBuster = `?v=${Date.now()}`;
       const paths = [
-        `./cv.json${cacheBuster}`,
+        `website/cv.json${cacheBuster}`,
         `/website/cv.json${cacheBuster}`,
-        `${window.location.href.split('?')[0].replace(/\/[^/]*$/, '')}/cv.json${cacheBuster}`
+        `${window.location.href.split('?')[0].replace(/\/[^/]*$/, '')}/website/cv.json${cacheBuster}`
       ];
 
       let lastError;
