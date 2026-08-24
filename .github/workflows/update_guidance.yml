@@ -1,0 +1,308 @@
+name: Update Dissertation Guidance
+
+on:
+  schedule:
+    # Check Dropbox every Monday at 06:20 UTC.
+    - cron: '20 6 1 1,4,7,10 *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'teaching/guidance/update_guidance.py'
+      - 'teaching/supervision.html'
+      - '.github/workflows/update_guidance.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-dissertation-guidance
+  cancel-in-progress: false
+
+jobs:
+  update-guidance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends pandoc
+          pandoc --version
+
+      - name: Verify required source files
+        run: |
+          test -f teaching/guidance/update_guidance.py || {
+            echo "ERROR [SETUP] Missing teaching/guidance/update_guidance.py."
+            exit 1
+          }
+
+          test -f teaching/supervision.html || {
+            echo "ERROR [SETUP] Missing teaching/supervision.html, which is used as the page template."
+            exit 1
+          }
+
+      - name: Preserve current published guidance bundle
+        run: |
+          mkdir -p "$RUNNER_TEMP/guidance-safety"
+          rsync -a teaching/guidance/ "$RUNNER_TEMP/guidance-safety/"
+
+          echo "Preserved the current teaching/guidance directory for this workflow run."
+
+      - name: Download, convert, and publish guidance pages
+        id: generate
+        continue-on-error: true
+        run: python teaching/guidance/update_guidance.py
+
+      - name: Validate published guidance bundle
+        id: validate
+        if: steps.generate.outcome == 'success'
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import re
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import unquote, urlsplit
+
+          guidance_dir = Path("teaching/guidance")
+
+          expected_pages = {
+              "getting-started.html": "Getting Started with Your Dissertation",
+              "writing-dissertation.html": "A Guide to Writing Your Dissertation",
+              "literature-review.html": "A Guide to Writing Your Literature Review",
+              "dissertation-structure.html": "Structure of the Dissertation",
+          }
+
+          class ImageParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.sources = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag.lower() != "img":
+                      return
+                  source = dict(attrs).get("src")
+                  if source:
+                      self.sources.append(source)
+
+          errors = []
+
+          for filename, expected_title in expected_pages.items():
+              path = guidance_dir / filename
+
+              if not path.is_file():
+                  errors.append(f"{filename}: generated page is missing")
+                  continue
+
+              if path.stat().st_size < 2_000:
+                  errors.append(
+                      f"{filename}: page is unexpectedly small "
+                      f"({path.stat().st_size} bytes)"
+                  )
+                  continue
+
+              try:
+                  content = path.read_text(encoding="utf-8")
+              except (OSError, UnicodeError) as exc:
+                  errors.append(f"{filename}: could not read UTF-8 HTML: {exc}")
+                  continue
+
+              required_fragments = (
+                  "<!DOCTYPE html>",
+                  expected_title,
+                  'class="index-nav"',
+                  'href="../dissertation.html"',
+                  'class="guidance-content"',
+                  'class="guidance-update"',
+                  'class="foot',
+                  'name="guidance-source-digest"',
+                  'name="guidance-updated"',
+                  "Download PDF",
+              )
+
+              for fragment in required_fragments:
+                  if fragment not in content:
+                      errors.append(
+                          f"{filename}: required fragment is missing: {fragment!r}"
+                      )
+
+              digest_match = re.search(
+                  r'<meta\s+name="guidance-source-digest"\s+'
+                  r'content="([0-9a-f]{64})"',
+                  content,
+                  re.IGNORECASE,
+              )
+              if not digest_match:
+                  errors.append(f"{filename}: invalid or missing source digest")
+
+              date_match = re.search(
+                  r'<meta\s+name="guidance-updated"\s+'
+                  r'content="(\d{4}-\d{2}-\d{2})"',
+                  content,
+                  re.IGNORECASE,
+              )
+              if not date_match:
+                  errors.append(f"{filename}: invalid or missing update date")
+
+              body_match = re.search(
+                  r'<div class="guidance-content">(.*?)'
+                  r'<p class="guidance-update">',
+                  content,
+                  re.IGNORECASE | re.DOTALL,
+              )
+              if not body_match:
+                  errors.append(f"{filename}: guidance body could not be located")
+              else:
+                  visible_text = re.sub(r"<[^>]+>", " ", body_match.group(1))
+                  visible_text = re.sub(r"\s+", " ", visible_text).strip()
+                  if len(visible_text) < 120:
+                      errors.append(
+                          f"{filename}: guidance body contains only "
+                          f"{len(visible_text)} visible characters"
+                      )
+
+              parser = ImageParser()
+              parser.feed(content)
+
+              for source in parser.sources:
+                  parsed = urlsplit(source)
+                  if parsed.scheme or parsed.netloc or source.startswith("data:"):
+                      continue
+
+                  image_path_text = unquote(parsed.path)
+                  if not image_path_text.startswith("images/"):
+                      continue
+
+                  image_path = guidance_dir / image_path_text
+                  if not image_path.is_file():
+                      errors.append(
+                          f"{filename}: referenced image is missing: {source}"
+                      )
+
+          temporary_files = [
+              path.name
+              for path in guidance_dir.iterdir()
+              if path.name.startswith(".")
+              and (".previous." in path.name or ".next." in path.name)
+          ]
+          if temporary_files:
+              errors.append(
+                  "transactional temporary files remain: "
+                  + ", ".join(sorted(temporary_files))
+              )
+
+          if errors:
+              raise SystemExit(
+                  "Guidance bundle validation failed:\n- " + "\n- ".join(errors)
+              )
+
+          print("Validated all four guidance pages and their local images.")
+          PY
+
+      - name: Restore previous bundle after failure
+        if: >-
+          always() &&
+          (steps.generate.outcome != 'success' || steps.validate.outcome != 'success')
+        run: |
+          echo "The guidance update failed. Restoring the bundle preserved at the start of the run."
+          rsync -a --delete "$RUNNER_TEMP/guidance-safety/" teaching/guidance/
+          echo "Previous guidance content restored successfully."
+
+      - name: Stop workflow after restored failure
+        if: >-
+          always() &&
+          (steps.generate.outcome != 'success' || steps.validate.outcome != 'success')
+        run: |
+          echo "ERROR [WORKFLOW] Guidance generation or validation failed."
+          echo "The previously published pages were restored and no changes will be committed."
+          exit 1
+
+      - name: Detect published guidance changes
+        id: changes
+        if: steps.validate.outcome == 'success'
+        shell: bash
+        run: |
+          status="$({
+            git status --porcelain -- \
+              teaching/guidance/getting-started.html \
+              teaching/guidance/writing-dissertation.html \
+              teaching/guidance/literature-review.html \
+              teaching/guidance/dissertation-structure.html \
+              teaching/guidance/images
+          } || true)"
+
+          if [[ -n "$status" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "The published guidance bundle has changed:"
+            printf '%s\n' "$status"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No guidance content changes were detected."
+          fi
+
+      - name: Archive previous published bundle
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          timestamp="$(date -u +'%Y-%m-%dT%H%M%SZ')"
+          backup_dir="backups/guidance/$timestamp"
+          safety_dir="$RUNNER_TEMP/guidance-safety"
+          copied=false
+
+          mkdir -p "$backup_dir"
+
+          for page in \
+            getting-started.html \
+            writing-dissertation.html \
+            literature-review.html \
+            dissertation-structure.html
+          do
+            if [[ -f "$safety_dir/$page" ]]; then
+              cp -p "$safety_dir/$page" "$backup_dir/$page"
+              copied=true
+            fi
+          done
+
+          if [[ -d "$safety_dir/images" ]]; then
+            cp -a "$safety_dir/images" "$backup_dir/images"
+            copied=true
+          fi
+
+          if [[ "$copied" == true ]]; then
+            printf 'Previous guidance bundle archived before the update at %s UTC.\n' \
+              "$(date -u +'%Y-%m-%d %H:%M:%S')" \
+              > "$backup_dir/BACKUP_INFO.txt"
+            echo "Archived the previous published bundle in $backup_dir."
+          else
+            rmdir "$backup_dir"
+            echo "No previous generated guidance bundle existed; no persistent backup was required."
+          fi
+
+      - name: Commit and push valid changes
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A -- teaching/guidance backups/guidance
+
+          if git diff --cached --quiet; then
+            echo "No staged changes remain after validation."
+            exit 0
+          fi
+
+          git commit -m "chore: update dissertation guidance [skip ci]"
+          git push
+          echo "Published and committed the updated dissertation guidance bundle."
