@@ -32,7 +32,7 @@ DROPBOX_FOLDER_URL = (
 IGNORED_DIRECTORY_NAMES = {"guidance notes online"}
 WEB_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}
 MINIMUM_CONVERTED_TEXT_LENGTH = 120
-TEMPLATE_VERSION = "2"
+TEMPLATE_VERSION = "3"
 
 
 @dataclass(frozen=True)
@@ -228,7 +228,7 @@ def safe_extract_zip(archive: Path, destination: Path) -> None:
                         continue
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
-                        f"Unsafe root-level file entry rejected: {raw_name!r}.",
+                        f"Unsafe archive root file rejected: {raw_name!r}.",
                     )
 
                 pure_path = PurePosixPath(normalized_name)
@@ -238,47 +238,44 @@ def safe_extract_zip(archive: Path, destination: Path) -> None:
                         f"Unsafe archive path rejected: {raw_name!r}.",
                     )
 
-                if re.match(r"^[A-Za-z]:", normalized_name):
+                if pure_path.parts and re.fullmatch(r"[A-Za-z]:", pure_path.parts[0]):
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
                         f"Windows drive path rejected: {raw_name!r}.",
                     )
 
-                mode = member.external_attr >> 16
-                if stat.S_ISLNK(mode):
+                unix_mode = member.external_attr >> 16
+                if stat.S_ISLNK(unix_mode):
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
                         f"Symbolic link rejected: {raw_name!r}.",
                     )
 
-                output_path = destination.joinpath(*pure_path.parts)
+                target = destination.joinpath(*pure_path.parts).resolve()
                 try:
-                    output_path.resolve().relative_to(destination_resolved)
+                    target.relative_to(destination_resolved)
                 except ValueError as exc:
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
-                        f"Archive path escapes the extraction directory: {raw_name!r}.",
+                        f"Archive entry escapes the extraction directory: {raw_name!r}.",
                     ) from exc
 
                 validated_members.append(member)
 
             for member in validated_members:
                 normalized_name = member.filename.replace("\\", "/")
-                relative_path = PurePosixPath(normalized_name)
-                output_path = destination.joinpath(*relative_path.parts)
-
+                target = destination.joinpath(*PurePosixPath(normalized_name).parts)
                 if member.is_dir():
-                    output_path.mkdir(parents=True, exist_ok=True)
+                    target.mkdir(parents=True, exist_ok=True)
                     continue
 
-                output_path.parent.mkdir(parents=True, exist_ok=True)
-                with zipped.open(member) as source, output_path.open("wb") as target:
-                    shutil.copyfileobj(source, target)
-
-    except zipfile.BadZipFile as exc:
-        raise GuidanceUpdateError("ZIP_EXTRACT", f"The ZIP archive is corrupt: {exc}.") from exc
-    except OSError as exc:
-        raise GuidanceUpdateError("ZIP_EXTRACT", f"Could not extract the archive: {exc}.") from exc
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with zipped.open(member) as source, target.open("wb") as output:
+                    shutil.copyfileobj(source, output)
+    except GuidanceUpdateError:
+        raise
+    except (zipfile.BadZipFile, OSError) as exc:
+        raise GuidanceUpdateError("ZIP_EXTRACT", f"Could not extract the ZIP archive: {exc}.") from exc
 
     message = f"Extracted {len(validated_members)} validated archive entries safely."
     if skipped_root_entries:
@@ -286,54 +283,42 @@ def safe_extract_zip(archive: Path, destination: Path) -> None:
     log("ZIP_EXTRACT", message)
 
 
-def should_ignore_path(path: Path) -> bool:
-    return any(part.casefold() in IGNORED_DIRECTORY_NAMES for part in path.parts)
+def should_ignore_path(relative_path: Path) -> bool:
+    return any(part.casefold() in IGNORED_DIRECTORY_NAMES for part in relative_path.parts)
 
 
-def locate_source_root(extracted: Path) -> Path:
+def locate_source_root(extracted_root: Path) -> Path:
     log("SOURCE_DISCOVERY", "Locating the four allowlisted TeX source files.")
-    required = {note.source.casefold(): note.source for note in NOTES}
-    matches: dict[str, list[Path]] = {key: [] for key in required}
+    required = {note.source for note in NOTES}
+    candidates: list[Path] = []
 
-    for candidate in extracted.rglob("*.tex"):
-        relative = candidate.relative_to(extracted)
+    directories = [extracted_root]
+    directories.extend(path for path in extracted_root.rglob("*") if path.is_dir())
+
+    for directory in directories:
+        try:
+            relative = directory.relative_to(extracted_root)
+        except ValueError:
+            continue
         if should_ignore_path(relative):
             continue
-        key = candidate.name.casefold()
-        if key in matches:
-            matches[key].append(candidate)
+        if all((directory / filename).is_file() for filename in required):
+            candidates.append(directory)
 
-    missing = [required[key] for key, candidates in matches.items() if not candidates]
-    if missing:
-        raise GuidanceUpdateError(
-            "SOURCE_DISCOVERY",
-            "Required TeX source file(s) not found outside ignored directories: " + ", ".join(missing) + ".",
-        )
-
-    duplicates = {
-        required[key]: candidates
-        for key, candidates in matches.items()
-        if len(candidates) > 1
-    }
-    if duplicates:
-        detail = "; ".join(
-            f"{name}: {', '.join(str(path.relative_to(extracted)) for path in paths)}"
-            for name, paths in duplicates.items()
+    if not candidates:
+        found = sorted(
+            path.name
+            for path in extracted_root.rglob("*.tex")
+            if not should_ignore_path(path.relative_to(extracted_root))
         )
         raise GuidanceUpdateError(
             "SOURCE_DISCOVERY",
-            "Multiple copies of an allowlisted source file were found: " + detail + ".",
+            "Could not find one directory containing all four required TeX files. "
+            f"Visible TeX files: {found or 'none'}.",
         )
 
-    parents = {candidates[0].parent for candidates in matches.values()}
-    if len(parents) != 1:
-        locations = ", ".join(str(path.relative_to(extracted)) for path in sorted(parents))
-        raise GuidanceUpdateError(
-            "SOURCE_DISCOVERY",
-            f"The four TeX source files are not in the same directory. Located directories: {locations}.",
-        )
-
-    source_root = parents.pop()
+    candidates.sort(key=lambda path: (len(path.relative_to(extracted_root).parts), str(path)))
+    source_root = candidates[0]
     log("SOURCE_DISCOVERY", f"Using source directory: {source_root}.")
     return source_root
 
@@ -368,24 +353,14 @@ def require_pandoc() -> str:
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as source:
-        for block in iter(lambda: source.read(1024 * 1024), b""):
-            digest.update(block)
+        for chunk in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(chunk)
     return digest.hexdigest()
 
 
-def extract_style_block(template: str) -> str:
-    match = re.search(r"<style>(.*?)</style>", template, flags=re.IGNORECASE | re.DOTALL)
-    if not match:
-        raise GuidanceUpdateError(
-            "TEMPLATE",
-            "Could not find a <style> block in teaching/supervision.html.",
-        )
-    return match.group(1).strip("\n")
-
-
-def strip_tex_comments(source: str) -> str:
+def strip_tex_comments(tex_source: str) -> str:
     lines: list[str] = []
-    for line in source.splitlines():
+    for line in tex_source.splitlines():
         output: list[str] = []
         index = 0
         while index < len(line):
@@ -436,6 +411,126 @@ def referenced_local_images(tex_source: str) -> set[str]:
     return references
 
 
+def tex_image_widths(tex_source: str) -> dict[str, float]:
+    """Return relative image widths declared with common LaTeX width units."""
+    without_comments = strip_tex_comments(tex_source)
+    widths: dict[str, float] = {}
+    pattern = re.compile(
+        r"\\includegraphics\s*(?:\[([^\]]*)\])?\s*\{([^}]+)\}",
+        re.IGNORECASE,
+    )
+
+    for match in pattern.finditer(without_comments):
+        options = match.group(1) or ""
+        normalized = normalize_tex_image_reference(match.group(2))
+        if not normalized:
+            continue
+
+        width_match = re.search(
+            r"(?:^|,)\s*width\s*=\s*"
+            r"(?:(\d*\.?\d+)\s*\\(?:line|text|column)width"
+            r"|(\d*\.?\d+)\s*%)",
+            options,
+            re.IGNORECASE,
+        )
+        if not width_match:
+            continue
+
+        if width_match.group(1) is not None:
+            percentage = float(width_match.group(1)) * 100
+        else:
+            percentage = float(width_match.group(2))
+
+        if 0 < percentage <= 500:
+            widths[normalized.casefold()] = percentage
+            widths[PurePosixPath(normalized).with_suffix("").as_posix().casefold()] = percentage
+
+    return widths
+
+
+def image_reference_keys(source: str) -> tuple[str, ...]:
+    normalized = normalize_image_reference(source)
+    if not normalized:
+        return ()
+
+    path = PurePosixPath(normalized)
+    return (
+        path.as_posix().casefold(),
+        path.with_suffix("").as_posix().casefold(),
+    )
+
+
+def set_style_width(attributes: str, percentage: float) -> str:
+    width_value = f"{percentage:g}%"
+    stripped = attributes.rstrip()
+    self_closing = stripped.endswith("/")
+    working = stripped[:-1].rstrip() if self_closing else stripped
+    style_match = re.search(
+        r"\sstyle\s*=\s*([\"'])(.*?)\1",
+        working,
+        re.IGNORECASE | re.DOTALL,
+    )
+
+    if style_match:
+        declarations = [
+            declaration.strip()
+            for declaration in style_match.group(2).split(";")
+            if declaration.strip()
+            and not re.match(r"^width\s*:", declaration, re.IGNORECASE)
+        ]
+        declarations.append(f"width: {width_value}")
+        replacement = f' style="{html.escape("; ".join(declarations), quote=True)}"'
+        working = working[: style_match.start()] + replacement + working[style_match.end() :]
+    else:
+        working += f' style="width: {width_value};"'
+
+    return working + (" /" if self_closing else "")
+
+
+def apply_tex_image_widths(fragment: str, tex_source: str, note: Note) -> str:
+    """Apply LaTeX image width fractions to the corresponding HTML images."""
+    widths = tex_image_widths(tex_source)
+    if not widths:
+        return fragment
+
+    applied = 0
+    image_pattern = re.compile(r"<img\b(?P<attrs>[^>]*)>", re.IGNORECASE | re.DOTALL)
+
+    def replace_image(match: re.Match[str]) -> str:
+        nonlocal applied
+        attributes = match.group("attrs")
+        source_match = re.search(
+            r"\bsrc\s*=\s*([\"'])(.*?)\1",
+            attributes,
+            re.IGNORECASE | re.DOTALL,
+        )
+        if not source_match:
+            return match.group(0)
+
+        percentage = next(
+            (
+                widths[key]
+                for key in image_reference_keys(html.unescape(source_match.group(2)))
+                if key in widths
+            ),
+            None,
+        )
+        if percentage is None:
+            return match.group(0)
+
+        applied += 1
+        return f"<img{set_style_width(attributes, percentage)}>"
+
+    adjusted = image_pattern.sub(replace_image, fragment)
+    if applied:
+        log(
+            "IMAGE_SCALE",
+            f"Applied LaTeX width settings to {applied} converted image(s).",
+            note.slug,
+        )
+    return adjusted
+
+
 def case_insensitive_file(root: Path, reference: str) -> Path | None:
     target = PurePosixPath(reference)
     current = root
@@ -470,18 +565,17 @@ def resolve_image_for_digest(reference: str, source_root: Path) -> Path | None:
 
 
 def source_digest(source_path: Path, source_root: Path) -> str:
+    tex_bytes = source_path.read_bytes()
     digest = hashlib.sha256()
-    source_bytes = source_path.read_bytes()
     digest.update(f"template-version:{TEMPLATE_VERSION}\n".encode("utf-8"))
-    digest.update(source_bytes)
+    digest.update(tex_bytes)
 
     try:
-        tex_source = source_bytes.decode("utf-8")
+        tex_source = tex_bytes.decode("utf-8")
     except UnicodeDecodeError as exc:
         raise GuidanceUpdateError(
-            "SOURCE_ENCODING",
-            f"The TeX source is not valid UTF-8: {exc}.",
-            source_path.name,
+            "SOURCE_READ",
+            f"TeX source is not valid UTF-8: {source_path.name}.",
         ) from exc
 
     for reference in sorted(referenced_local_images(tex_source)):
@@ -490,7 +584,7 @@ def source_digest(source_path: Path, source_root: Path) -> str:
         if image_path and image_path.is_file():
             digest.update(image_path.read_bytes())
         else:
-            digest.update(b"<missing>")
+            digest.update(b"MISSING")
 
     return digest.hexdigest()
 
@@ -505,24 +599,23 @@ def current_page_metadata(path: Path) -> tuple[str | None, str | None]:
         return None, None
 
     digest_match = re.search(
-        r'<meta\s+name=["\']guidance-source-digest["\']\s+content=["\']([0-9a-f]{64})["\']',
+        r'<meta\s+name="guidance-source-digest"\s+content="([0-9a-f]{64})"',
         content,
-        flags=re.IGNORECASE,
+        re.IGNORECASE,
     )
     date_match = re.search(
-        r'<meta\s+name=["\']guidance-updated["\']\s+content=["\'](\d{4}-\d{2}-\d{2})["\']',
+        r'<meta\s+name="guidance-updated"\s+content="(\d{4}-\d{2}-\d{2})"',
         content,
-        flags=re.IGNORECASE,
+        re.IGNORECASE,
     )
 
-    return (
-        digest_match.group(1) if digest_match else None,
-        date_match.group(1) if date_match else None,
-    )
+    digest = digest_match.group(1) if digest_match else None
+    updated = date_match.group(1) if date_match else None
+    return digest, updated
 
 
-def choose_update_date(existing_output: Path, new_digest: str) -> str:
-    previous_digest, previous_date = current_page_metadata(existing_output)
+def choose_update_date(existing_page: Path, new_digest: str) -> str:
+    previous_digest, previous_date = current_page_metadata(existing_page)
     if previous_digest == new_digest and previous_date:
         try:
             date.fromisoformat(previous_date)
@@ -592,6 +685,16 @@ def convert_tex_to_html(pandoc: str, source_path: Path, source_root: Path, desti
             note.slug,
         ) from exc
 
+    try:
+        tex_source = source_path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        raise GuidanceUpdateError(
+            "IMAGE_SCALE",
+            f"Could not read the TeX source while applying image widths: {exc}.",
+            note.slug,
+        ) from exc
+
+    fragment = apply_tex_image_widths(fragment, tex_source, note)
     validate_converted_fragment(fragment, note)
     return fragment.strip()
 
@@ -694,8 +797,8 @@ def collect_image_references(fragment: str, note: Note) -> set[str]:
         parser.feed(fragment)
     except Exception as exc:
         raise GuidanceUpdateError(
-            "IMAGE_PARSE",
-            f"Could not inspect converted image references: {exc}.",
+            "HTML_PARSE",
+            f"Could not parse converted image references: {exc}.",
             note.slug,
         ) from exc
 
@@ -707,22 +810,22 @@ def collect_image_references(fragment: str, note: Note) -> set[str]:
     return references
 
 
-def ensure_reference_case(reference: str, staging_root: Path) -> bool:
-    exact = staging_root.joinpath(*PurePosixPath(reference).parts)
-    if exact.is_file():
-        return True
+def create_case_alias(reference: str, staging_root: Path) -> str | None:
+    expected = staging_root.joinpath(*PurePosixPath(reference).parts)
+    if expected.is_file():
+        return reference
 
-    found = case_insensitive_file(staging_root, reference)
-    if not found:
-        return False
+    source = case_insensitive_file(staging_root, reference)
+    if not source:
+        return None
 
-    exact.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(found, exact)
+    expected.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, expected)
     log(
         "IMAGE_CASE",
-        f"Created case-correct copy {reference!r} from {found.relative_to(staging_root).as_posix()!r}.",
+        f"Created case-compatible image path {reference!r} from {source.relative_to(staging_root).as_posix()!r}.",
     )
-    return True
+    return reference
 
 
 def validate_referenced_images(
@@ -730,35 +833,182 @@ def validate_referenced_images(
     copied_images: set[str],
     staging_root: Path,
 ) -> None:
-    all_references = {reference for references in references_by_note.values() for reference in references}
+    copied_casefold = {path.casefold(): path for path in copied_images}
 
     for note_slug, references in references_by_note.items():
-        missing = [reference for reference in sorted(references) if not ensure_reference_case(reference, staging_root)]
+        missing: list[str] = []
+        for reference in sorted(references):
+            exact = staging_root.joinpath(*PurePosixPath(reference).parts)
+            if exact.is_file():
+                continue
+
+            case_match = copied_casefold.get(reference.casefold())
+            if case_match:
+                source = staging_root.joinpath(*PurePosixPath(case_match).parts)
+                exact.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, exact)
+                log(
+                    "IMAGE_CASE",
+                    f"Created {reference!r} from case-variant {case_match!r}.",
+                    note_slug,
+                )
+                continue
+
+            if create_case_alias(reference, staging_root):
+                continue
+            missing.append(reference)
+
         if missing:
             raise GuidanceUpdateError(
                 "IMAGE_REFERENCE",
-                "Converted content references missing or unsupported image(s): " + ", ".join(missing),
+                "Converted content references missing or unsupported image(s): "
+                + ", ".join(missing),
                 note_slug,
             )
 
-    if copied_images and not all_references:
-        log("IMAGES", "Images were copied, but none of the converted notes reference a local image.")
 
-
-def guidance_css(template_css: str) -> str:
-    shared_prefix_match = re.search(
-        r"^(.*?)(?=\n\s*\.supervision-body\s*\{)",
-        template_css,
-        flags=re.DOTALL,
-    )
-    if not shared_prefix_match:
+def read_template(path: Path) -> str:
+    log("TEMPLATE", f"Reading shared layout from {path}.")
+    if not path.is_file():
         raise GuidanceUpdateError(
             "TEMPLATE",
-            "Could not isolate the shared layout styles before .supervision-body.",
+            f"Shared template does not exist: {path}.",
         )
 
-    shared = shared_prefix_match.group(1).rstrip()
-    return shared + r'''
+    try:
+        return path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        raise GuidanceUpdateError(
+            "TEMPLATE",
+            f"Could not read shared template: {exc}.",
+        ) from exc
+
+
+def extract_style_block(template: str) -> str:
+    match = re.search(r"<style>(.*?)</style>", template, re.IGNORECASE | re.DOTALL)
+    if not match:
+        raise GuidanceUpdateError(
+            "TEMPLATE",
+            "Shared template does not contain an inline <style> block.",
+        )
+    return match.group(1).strip()
+
+
+def guidance_css(_template_css: str) -> str:
+    return '''    :root {
+      --paper: #f4f5f7;
+      --paper-soft: #fafbfc;
+      --sheet: #ffffff;
+      --panel-deep: #e2e5e9;
+      --line: rgba(28, 28, 30, 0.08);
+      --line-strong: rgba(28, 28, 30, 0.15);
+      --ink: #1c1c1e;
+      --ink-soft: #3a3a3c;
+      --muted: #71717a;
+      --accent: #3b5a75;
+      --accent-strong: #25394b;
+      --accent-soft: #edf2f6;
+      --display: 'Bitter', Georgia, serif;
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { background: var(--paper); }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+    }
+
+    .card {
+      width: min(100%, 1100px);
+      overflow: hidden;
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
+    }
+
+    .card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-left: 1px solid var(--line);
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+
+    .index-card:first-child { border-left: none; }
+
+    .index-nav .idx-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .index-nav .idx-label i {
+      width: 1.1rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .index-card.is-current {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
+
+    .index-card:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .index-card:hover .idx-label,
+    .index-card:hover .idx-label i { color: #fff; }
 
     .guidance-body { padding: 3rem 2.5rem; }
 
@@ -805,7 +1055,6 @@ def guidance_css(template_css: str) -> str:
     }
 
     .download-link:hover { color: var(--accent-strong); }
-
     .download-link i { margin-right: 0.3rem; }
 
     .guidance-title {
@@ -1019,13 +1268,6 @@ def guidance_css(template_css: str) -> str:
       line-height: 1.35;
     }
 
-    .back-to-top-wrap {
-      display: flex;
-      justify-content: center;
-      padding: 0 1.5rem 1.25rem;
-      background: var(--sheet);
-    }
-
     .back-to-top {
       width: 2.55rem;
       height: 2.55rem;
@@ -1060,16 +1302,19 @@ def guidance_css(template_css: str) -> str:
     html { scroll-behavior: smooth; }
 
     .foot {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
       align-items: center;
-      justify-content: space-between;
       gap: 1rem;
       padding: 0.9rem 1.5rem;
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
 
+    .foot .back-to-top { justify-self: center; }
+
     .foot-loc {
+      justify-self: end;
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -1080,6 +1325,7 @@ def guidance_css(template_css: str) -> str:
     .socials {
       display: flex;
       align-items: center;
+      justify-self: start;
       gap: 0.4rem;
     }
 
@@ -1131,7 +1377,13 @@ def guidance_css(template_css: str) -> str:
       .download-link { align-self: center; justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
-      .foot { flex-direction: column; text-align: center; }
+      .foot {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+      .foot-loc { justify-self: auto; }
+      .socials { justify-self: auto; }
     }
 '''.rstrip()
 
@@ -1178,6 +1430,7 @@ def footer_html() -> str:
             <i class="fab fa-linkedin" aria-hidden="true"></i>
           </a>
         </div>
+{back_to_top_html()}
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>'''
 
@@ -1217,11 +1470,9 @@ def pagination_html(note: Note) -> str:
 
 
 def back_to_top_html() -> str:
-    return '''      <div class="back-to-top-wrap">
-        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+    return '''        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
           <i class="fas fa-arrow-up" aria-hidden="true"></i>
-        </a>
-      </div>'''
+        </a>'''
 
 
 def format_display_date(iso_date: str) -> str:
@@ -1292,8 +1543,6 @@ def build_page(note: Note, fragment: str, digest: str, updated: str, template_cs
 {pagination_html(note)}
       </section>
 
-{back_to_top_html()}
-
 {footer_html()}
     </article>
   </main>
@@ -1343,7 +1592,7 @@ def validate_full_page(page: str, note: Note, digest: str, updated: str) -> None
 def write_text(path: Path, content: str, stage: str, note: str | None = None) -> None:
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8", newline="\n")
+        path.write_text(content, encoding="utf-8")
     except OSError as exc:
         raise GuidanceUpdateError(stage, f"Could not write {path}: {exc}.", note) from exc
 
@@ -1440,128 +1689,109 @@ def validate_staged_bundle(staging_root: Path) -> None:
     log("BUNDLE_VALIDATE", "All four staged pages and their local image references are valid.")
 
 
-def same_file(left: Path, right: Path) -> bool:
-    return left.is_file() and right.is_file() and sha256_file(left) == sha256_file(right)
+def file_bytes(path: Path) -> bytes | None:
+    try:
+        return path.read_bytes() if path.is_file() else None
+    except OSError:
+        return None
 
 
-def directories_equal(left: Path, right: Path) -> bool:
-    def manifest(root: Path) -> dict[str, str]:
-        if not root.is_dir():
-            return {}
-        return {
-            path.relative_to(root).as_posix(): sha256_file(path)
-            for path in sorted(candidate for candidate in root.rglob("*") if candidate.is_file())
-        }
+def directory_manifest(directory: Path) -> dict[str, str]:
+    if not directory.is_dir():
+        return {}
 
-    return manifest(left) == manifest(right)
+    manifest: dict[str, str] = {}
+    for path in sorted(directory.rglob("*")):
+        if path.is_file():
+            manifest[path.relative_to(directory).as_posix()] = sha256_file(path)
+    return manifest
 
 
 def bundle_changed(staging_root: Path, guidance_dir: Path) -> bool:
     for note in NOTES:
-        if not same_file(staging_root / note.output, guidance_dir / note.output):
+        if file_bytes(staging_root / note.output) != file_bytes(guidance_dir / note.output):
             return True
-    return not directories_equal(staging_root / "images", guidance_dir / "images")
+
+    return directory_manifest(staging_root / "images") != directory_manifest(guidance_dir / "images")
 
 
-def unique_sibling(path: Path, label: str) -> Path:
-    return path.with_name(f".{path.name}.{label}.{uuid.uuid4().hex}")
+def remove_path(path: Path) -> None:
+    if not path.exists() and not path.is_symlink():
+        return
+    if path.is_dir() and not path.is_symlink():
+        shutil.rmtree(path)
+    else:
+        path.unlink()
 
 
 def publish_bundle(staging_root: Path, guidance_dir: Path) -> None:
+    log("PUBLISH", "Publishing the complete guidance bundle transactionally.")
+    guidance_dir.mkdir(parents=True, exist_ok=True)
+
     targets = [guidance_dir / note.output for note in NOTES]
     targets.append(guidance_dir / "images")
 
-    prepared: dict[Path, Path] = {}
-    previous: dict[Path, Path] = {}
-    installed: list[Path] = []
+    incoming: dict[Path, Path] = {}
+    backups: dict[Path, Path] = {}
+    token = uuid.uuid4().hex
 
     try:
         for target in targets:
             source = staging_root / target.name
-            prepared_path = unique_sibling(target, "next")
+            temporary = guidance_dir / f".{target.name}.next.{token}"
+            remove_path(temporary)
 
             if source.is_dir():
-                shutil.copytree(source, prepared_path)
+                shutil.copytree(source, temporary)
             elif source.is_file():
-                shutil.copy2(source, prepared_path)
-            elif target.name == "images":
-                prepared_path.mkdir(parents=True)
+                shutil.copy2(source, temporary)
             else:
                 raise GuidanceUpdateError(
                     "PUBLISH_PREPARE",
-                    f"The staged source is missing: {source}.",
+                    f"Staged bundle is missing required target: {source}.",
                 )
-
-            prepared[target] = prepared_path
+            incoming[target] = temporary
 
         for target in targets:
             if target.exists() or target.is_symlink():
-                previous_path = unique_sibling(target, "previous")
-                os.replace(target, previous_path)
-                previous[target] = previous_path
+                backup = guidance_dir / f".{target.name}.previous.{token}"
+                remove_path(backup)
+                os.replace(target, backup)
+                backups[target] = backup
 
-        try:
-            for target in targets:
-                os.replace(prepared[target], target)
-                installed.append(target)
-        except OSError as exc:
-            raise GuidanceUpdateError(
-                "PUBLISH_INSTALL",
-                f"Could not install the staged guidance bundle: {exc}.",
-            ) from exc
+        for target in targets:
+            os.replace(incoming[target], target)
 
-        for backup in previous.values():
-            if backup.is_dir():
-                shutil.rmtree(backup)
-            elif backup.exists():
-                backup.unlink()
+    except Exception as exc:
+        log("ROLLBACK", f"Publication failed; restoring previous guidance bundle: {exc}.")
 
-    except Exception:
-        for target in reversed(installed):
-            if target.is_dir():
-                shutil.rmtree(target, ignore_errors=True)
-            elif target.exists() or target.is_symlink():
-                target.unlink(missing_ok=True)
+        for target in reversed(targets):
+            if target in backups:
+                remove_path(target)
+                backup = backups[target]
+                if backup.exists() or backup.is_symlink():
+                    os.replace(backup, target)
+            else:
+                remove_path(target)
 
-        for target, backup in previous.items():
-            if backup.exists() or backup.is_symlink():
-                os.replace(backup, target)
+        for temporary in incoming.values():
+            remove_path(temporary)
+        for backup in backups.values():
+            remove_path(backup)
 
-        for temporary in prepared.values():
-            if temporary.is_dir():
-                shutil.rmtree(temporary, ignore_errors=True)
-            elif temporary.exists():
-                temporary.unlink(missing_ok=True)
-        raise
-
-    finally:
-        for temporary in [*prepared.values(), *previous.values()]:
-            if temporary.is_dir():
-                shutil.rmtree(temporary, ignore_errors=True)
-            elif temporary.exists():
-                temporary.unlink(missing_ok=True)
-
-
-def read_template(path: Path) -> str:
-    log("TEMPLATE", f"Reading shared layout from {path}.")
-    if not path.is_file():
+        if isinstance(exc, GuidanceUpdateError):
+            raise
         raise GuidanceUpdateError(
-            "TEMPLATE",
-            f"The supervision template does not exist: {path}.",
-        )
-    try:
-        content = path.read_text(encoding="utf-8")
-    except (OSError, UnicodeError) as exc:
-        raise GuidanceUpdateError("TEMPLATE", f"Could not read {path}: {exc}.") from exc
+            "PUBLISH",
+            f"Could not publish the staged guidance bundle: {exc}.",
+        ) from exc
 
-    required_fragments = ('class="index-nav"', 'class="foot"', ".supervision-body")
-    for fragment in required_fragments:
-        if fragment not in content:
-            raise GuidanceUpdateError(
-                "TEMPLATE",
-                f"The supervision template is missing required fragment: {fragment!r}.",
-            )
-    return content
+    for backup in backups.values():
+        remove_path(backup)
+    for temporary in incoming.values():
+        remove_path(temporary)
+
+    log("PUBLISH", "Published all four pages and the image directory successfully.")
 
 
 def main() -> int:
@@ -1572,8 +1802,8 @@ def main() -> int:
         template = read_template(supervision_template)
         template_css = extract_style_block(template)
 
-        with tempfile.TemporaryDirectory(prefix="guidance-update-") as temporary:
-            workspace = Path(temporary)
+        with tempfile.TemporaryDirectory(prefix="guidance-update-") as temporary_directory:
+            workspace = Path(temporary_directory)
             archive = workspace / "dropbox-guidance.zip"
             extracted = workspace / "extracted"
             staged = workspace / "staged"
@@ -1587,14 +1817,12 @@ def main() -> int:
             validate_staged_bundle(staged)
 
             if not bundle_changed(staged, guidance_dir):
-                log("NO_CHANGE", "The generated guidance bundle is identical to the published bundle.")
+                log("NO_CHANGE", "The generated guidance bundle matches the published bundle.")
                 return 0
 
-            log("PUBLISH", "Installing all four validated pages and their image bundle transactionally.")
             publish_bundle(staged, guidance_dir)
 
-        log("COMPLETE", f"Published dissertation guidance successfully in {guidance_dir}.")
-        log("COMPLETE", f"Repository root resolved as {repo_root}.")
+        log("COMPLETE", f"Guidance update completed successfully in {repo_root}.")
         return 0
 
     except GuidanceUpdateError as exc:
