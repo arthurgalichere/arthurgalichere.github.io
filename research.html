@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arthur Galichère — Research</title>
+  <title>AG: Research</title>
   <meta name="description" content="Research by Arthur Galichère on macroeconomics, finance, asset price bubbles, financial stability, and monetary policy." />
 
   <link rel="icon" type="image/png" href="website/images/favicon_transparant.png" />
@@ -41,7 +41,10 @@
       box-sizing: border-box;
     }
 
-    html { background: var(--paper); }
+    html {
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
 
     body {
       min-height: 100vh;
@@ -271,17 +274,51 @@
       line-height: 1.5;
     }
 
-    .foot {
-      display: flex;
+    .back-to-top {
+      width: 2.55rem;
+      height: 2.55rem;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(28, 28, 30, 0.05);
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease,
+                  box-shadow 0.16s ease;
+    }
+
+    .back-to-top:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(28, 28, 30, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .back-to-top:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .foot {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
       gap: 1rem;
       padding: 0.9rem 1.5rem;
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
 
+    .foot .back-to-top { justify-self: center; }
+
     .foot-loc {
+      justify-self: end;
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -292,6 +329,7 @@
     .socials {
       display: flex;
       align-items: center;
+      justify-self: start;
       gap: 0.4rem;
     }
 
@@ -317,6 +355,17 @@
       transform: translateY(-1px);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      .index-card,
+      .paper-title a,
+      .back-to-top,
+      .socials a {
+        transition: none;
+      }
+    }
+
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .research-body { padding: 2rem 1.5rem; }
@@ -331,13 +380,18 @@
       .index-card:first-child { border-top: none; }
       .page-title { font-size: 2.15rem; }
       .foot {
+        display: flex;
         flex-direction: column;
         text-align: center;
       }
+
+      .foot .back-to-top { order: -1; }
+      .foot-loc { justify-self: auto; }
+      .socials { justify-self: auto; }
     }
   </style>
 </head>
-<body>
+<body id="top">
   <main class="page">
     <article class="card">
       <nav class="index-nav" aria-label="Academic Directory">
@@ -390,6 +444,9 @@
             <i class="fab fa-linkedin" aria-hidden="true"></i>
           </a>
         </div>
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
     </article>
