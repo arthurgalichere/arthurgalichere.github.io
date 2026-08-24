@@ -1,1 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AG — Dissertation Supervision and Guidance</title>
+  <meta name="description" content="Dissertation supervision information and guidance notes for economics students supervised by Arthur Galichère." />
+
+  <link rel="icon" type="image/png" href="../website/images/favicon_transparant.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --paper: #f4f5f7;
+      --paper-soft: #fafbfc;
+      --sheet: #ffffff;
+      --panel-deep: #e2e5e9;
+      --line: rgba(28, 28, 30, 0.08);
+      --line-strong: rgba(28, 28, 30, 0.15);
+      --ink: #1c1c1e;
+      --ink-soft: #3a3a3c;
+      --muted: #71717a;
+      --accent: #3b5a75;
+      --accent-strong: #25394b;
+      --accent-soft: #edf2f6;
+      --display: 'Bitter', Georgia, serif;
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { background: var(--paper); }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 0;
+      left: -9999px;
+      z-index: 100;
+      padding: 0.65rem 0.9rem;
+      color: #fff;
+      background: var(--ink);
+      font-size: 0.8rem;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+    }
+
+    .card {
+      width: min(100%, 1100px);
+      overflow: hidden;
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
+    }
+
+    .card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-left: 1px solid var(--line);
+      transition: color 0.16s ease, background-color 0.16s ease;
+    }
+
+    .index-card:first-child { border-left: none; }
+
+    .index-nav .idx-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .index-nav .idx-label i {
+      width: 1.1rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .index-card.is-current {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
+
+    .index-card:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .index-card:hover .idx-label,
+    .index-card:hover .idx-label i { color: #fff; }
+
+    .dissertation-body { padding: 3rem 2.5rem; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 2rem;
+      padding: 0.7rem 0.95rem;
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.25);
+      border-radius: 4px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .back-link:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .page-title {
+      margin-bottom: 1.25rem;
+      font-family: var(--display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .lead {
+      max-width: 850px;
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 1.75;
+      text-align: justify;
+    }
+
+    .content-section { margin-top: 3.5rem; }
+
+    .section-title {
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .supervision-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      color: var(--ink);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.28);
+      border-radius: 5px;
+      text-decoration: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    .supervision-card:hover {
+      border-color: rgba(59, 90, 117, 0.55);
+      box-shadow: 0 8px 20px rgba(28, 28, 30, 0.07);
+      transform: translateY(-1px);
+    }
+
+    .supervision-icon {
+      width: 2.8rem;
+      height: 2.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--accent);
+      border-radius: 50%;
+      font-size: 1rem;
+    }
+
+    .resource-title {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.12rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .resource-description {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 0.91rem;
+      line-height: 1.6;
+    }
+
+    .resource-arrow {
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    .guidance-introduction {
+      margin-bottom: 1.5rem;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    .guidance-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      counter-reset: guidance-note;
+    }
+
+    .guidance-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 1rem;
+      min-width: 0;
+      padding: 1.35rem;
+      color: var(--ink);
+      background: var(--paper-soft);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      text-decoration: none;
+      counter-increment: guidance-note;
+      transition: background-color 0.16s ease, border-color 0.16s ease,
+                  box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    .guidance-card:hover {
+      background: var(--accent-soft);
+      border-color: rgba(59, 90, 117, 0.4);
+      box-shadow: 0 7px 18px rgba(28, 28, 30, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .guidance-number {
+      width: 2.15rem;
+      height: 2.15rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-strong);
+      background: var(--sheet);
+      border: 1px solid rgba(59, 90, 117, 0.25);
+      border-radius: 50%;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .guidance-number::before {
+      content: counter(guidance-note, decimal-leading-zero);
+    }
+
+    .guidance-card .resource-arrow { margin-top: 0.65rem; }
+
+    .guidance-note {
+      margin-top: 1.25rem;
+      padding: 1rem 1.15rem;
+      color: var(--muted);
+      background: var(--paper-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 3px;
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--panel-deep);
+      border-top: 1px solid var(--line);
+    }
+
+    .foot-loc {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .socials a {
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .socials a:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .back-link,
+      .supervision-card,
+      .guidance-card,
+      .socials a { transition: none; }
+    }
+
+    @media (max-width: 768px) {
+      .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .dissertation-body { padding: 2rem 1.5rem; }
+      .guidance-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .index-nav { grid-template-columns: 1fr; }
+      .index-card {
+        border-top: 1px solid var(--line);
+        border-left: none;
+      }
+      .index-card:first-child { border-top: none; }
+      .page-title { font-size: 2.15rem; }
+      .supervision-card { grid-template-columns: auto minmax(0, 1fr); }
+      .supervision-card .resource-arrow { display: none; }
+      .guidance-card { grid-template-columns: auto minmax(0, 1fr); }
+      .guidance-card .resource-arrow { display: none; }
+      .foot {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <main id="main-content" class="page">
+    <article class="card">
+      <nav class="index-nav" aria-label="Academic Directory">
+        <a href="../index.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
+        </a>
+        <a href="../cv.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-file" aria-hidden="true"></i> CV</span>
+        </a>
+        <a href="../research.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-line" aria-hidden="true"></i> Research</span>
+        </a>
+        <a href="../teaching.html" class="index-card is-current" aria-current="page">
+          <span class="idx-label"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Teaching</span>
+        </a>
+        <a href="../economics.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
+        </a>
+      </nav>
+
+      <section class="dissertation-body">
+        <a href="../teaching.html" class="back-link">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i>
+          Back to Teaching
+        </a>
+
+        <h1 class="page-title">Dissertation Supervision and Guidance</h1>
+        <p class="lead">
+          This page brings together information about my approach to dissertation supervision and a sequence of guidance notes designed to support students through the main stages of an economics dissertation. The notes complement, rather than replace, the requirements and marking guidance provided by your degree programme.
+        </p>
+
+        <section class="content-section" aria-labelledby="supervision-heading">
+          <h2 id="supervision-heading" class="section-title">Dissertation Supervision</h2>
+
+          <a href="supervision.html" class="supervision-card">
+            <span class="supervision-icon" aria-hidden="true">
+              <i class="fas fa-user-graduate"></i>
+            </span>
+            <span>
+              <span class="resource-title">My Supervision Statement</span>
+              <span class="resource-description">
+                Read about my research interests, the types of empirical and theoretical projects I can supervise, what I expect from students, potential research topics, and examples of dissertations I have supervised.
+              </span>
+            </span>
+            <i class="fas fa-chevron-right resource-arrow" aria-hidden="true"></i>
+          </a>
+        </section>
+
+        <section class="content-section" aria-labelledby="guidance-heading">
+          <h2 id="guidance-heading" class="section-title">Dissertation Guidance Notes</h2>
+          <p class="guidance-introduction">
+            The four notes are arranged in a suggested reading order. You may work through them sequentially or return directly to the note most relevant to your current stage of the dissertation.
+          </p>
+
+          <div class="guidance-grid">
+            <a href="guidance/getting-started.html" class="guidance-card">
+              <span class="guidance-number" aria-hidden="true"></span>
+              <span>
+                <span class="resource-title">Getting Started with Your Dissertation</span>
+                <span class="resource-description">
+                  Guidance on moving from a broad area of interest towards a feasible research question and a workable dissertation plan.
+                </span>
+              </span>
+              <i class="fas fa-chevron-right resource-arrow" aria-hidden="true"></i>
+            </a>
+
+            <a href="guidance/writing-dissertation.html" class="guidance-card">
+              <span class="guidance-number" aria-hidden="true"></span>
+              <span>
+                <span class="resource-title">A Guide to Writing Your Dissertation</span>
+                <span class="resource-description">
+                  Practical advice on developing the argument, presenting economic analysis, drafting effectively, and producing a coherent final dissertation.
+                </span>
+              </span>
+              <i class="fas fa-chevron-right resource-arrow" aria-hidden="true"></i>
+            </a>
+
+            <a href="guidance/literature-review.html" class="guidance-card">
+              <span class="guidance-number" aria-hidden="true"></span>
+              <span>
+                <span class="resource-title">A Guide to Writing Your Literature Review</span>
+                <span class="resource-description">
+                  Guidance on identifying relevant research, organising the literature, evaluating contributions, and positioning your own project.
+                </span>
+              </span>
+              <i class="fas fa-chevron-right resource-arrow" aria-hidden="true"></i>
+            </a>
+
+            <a href="guidance/dissertation-structure.html" class="guidance-card">
+              <span class="guidance-number" aria-hidden="true"></span>
+              <span>
+                <span class="resource-title">Structure of the Dissertation</span>
+                <span class="resource-description">
+                  An overview of the main dissertation sections and how they can be organised into a clear and persuasive piece of economic research.
+                </span>
+              </span>
+              <i class="fas fa-chevron-right resource-arrow" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <p class="guidance-note">
+            Each guidance page includes an online version generated from the corresponding LaTeX note and a link to download its PDF version.
+          </p>
+        </section>
+      </section>
+
+      <footer class="foot">
+        <div class="socials">
+          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          </a>
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
+            <i class="fas fa-university" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+        <span class="foot-loc">University of Warwick · Coventry, UK</span>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
 
