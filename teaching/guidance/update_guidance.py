@@ -245,136 +245,211 @@ def safe_extract_zip(archive: Path, destination: Path) -> None:
                     )
 
                 unix_mode = member.external_attr >> 16
-                if stat.S_ISLNK(unix_mode):
+                if unix_mode and stat.S_ISLNK(unix_mode):
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
-                        f"Symbolic links are not permitted in the archive: {raw_name!r}.",
+                        f"Symbolic-link archive entry rejected: {raw_name!r}.",
                     )
 
-                target = (destination / Path(*path.parts)).resolve()
-                if os.path.commonpath((destination_resolved, target)) != str(destination_resolved):
+                target = destination.joinpath(*path.parts).resolve()
+                try:
+                    target.relative_to(destination_resolved)
+                except ValueError as exc:
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
-                        f"Archive member escapes the extraction directory: {raw_name!r}.",
-                    )
+                        f"Archive path escapes the extraction directory: {raw_name!r}.",
+                    ) from exc
 
                 validated_members.append(member)
 
-            if not validated_members:
-                raise GuidanceUpdateError(
-                    "ZIP_EXTRACT",
-                    "The ZIP archive contains no extractable files or directories.",
-                )
-
             for member in validated_members:
-                zipped.extract(member, destination)
+                normalized_name = member.filename.replace("\\", "/")
+                path = PurePosixPath(normalized_name)
+                target = destination.joinpath(*path.parts)
 
+                if member.is_dir():
+                    target.mkdir(parents=True, exist_ok=True)
+                    continue
+
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with zipped.open(member) as source, target.open("wb") as output:
+                    shutil.copyfileobj(source, output)
     except zipfile.BadZipFile as exc:
-        raise GuidanceUpdateError("ZIP_EXTRACT", f"The ZIP archive could not be read: {exc}.") from exc
+        raise GuidanceUpdateError("ZIP_EXTRACT", f"The ZIP archive is corrupt: {exc}.") from exc
     except OSError as exc:
-        raise GuidanceUpdateError("ZIP_EXTRACT", f"The ZIP archive could not be extracted: {exc}.") from exc
+        raise GuidanceUpdateError("ZIP_EXTRACT", f"Could not extract the ZIP archive: {exc}.") from exc
 
-    skipped_message = (
-        f" Skipped {skipped_root_entries} harmless Dropbox root entry."
-        if skipped_root_entries == 1
-        else (
-            f" Skipped {skipped_root_entries} harmless Dropbox root entries."
-            if skipped_root_entries
-            else ""
-        )
-    )
-    log(
-        "ZIP_EXTRACT",
-        f"Extracted {len(validated_members)} validated archive entries safely.{skipped_message}",
-    )
+    message = f"Extracted {len(validated_members)} validated archive entries safely."
+    if skipped_root_entries:
+        message += f" Skipped {skipped_root_entries} harmless Dropbox root entry."
+    log("ZIP_EXTRACT", message)
 
 
-def ignored_path(path: Path) -> bool:
-    return any(part.casefold() in IGNORED_DIRECTORY_NAMES for part in path.parts)
+def ignored_path(relative_path: Path) -> bool:
+    return any(part.casefold() in IGNORED_DIRECTORY_NAMES for part in relative_path.parts)
 
 
-def locate_source_root(extracted: Path) -> Path:
+def locate_source_root(extracted_root: Path) -> Path:
     log("SOURCE_DISCOVERY", "Locating the four allowlisted TeX source files.")
+    expected = {note.source for note in NOTES}
     candidates: list[Path] = []
 
-    for directory in [extracted, *(path for path in extracted.rglob("*") if path.is_dir())]:
+    for directory in [extracted_root, *sorted(path for path in extracted_root.rglob("*") if path.is_dir())]:
         try:
-            relative = directory.relative_to(extracted)
+            relative_directory = directory.relative_to(extracted_root)
         except ValueError:
             continue
 
-        if ignored_path(relative):
+        if ignored_path(relative_directory):
             continue
 
-        if all((directory / note.source).is_file() for note in NOTES):
+        available = {
+            path.name
+            for path in directory.iterdir()
+            if path.is_file() and path.suffix.casefold() == ".tex"
+        }
+        if expected.issubset(available):
             candidates.append(directory)
 
     if not candidates:
-        expected = ", ".join(note.source for note in NOTES)
+        discovered = sorted(
+            path.relative_to(extracted_root).as_posix()
+            for path in extracted_root.rglob("*.tex")
+            if not ignored_path(path.relative_to(extracted_root))
+        )
+        details = ", ".join(discovered) if discovered else "no TeX files were found"
         raise GuidanceUpdateError(
             "SOURCE_DISCOVERY",
-            "Could not find one directory containing all four allowlisted TeX files. "
-            f"Expected: {expected}.",
+            "Could not find a directory containing all four required TeX files. "
+            f"Discovered: {details}.",
         )
 
-    candidates.sort(key=lambda path: (len(path.relative_to(extracted).parts), str(path).casefold()))
+    if len(candidates) > 1:
+        choices = ", ".join(path.relative_to(extracted_root).as_posix() or "." for path in candidates)
+        raise GuidanceUpdateError(
+            "SOURCE_DISCOVERY",
+            f"More than one source directory contains all four required notes: {choices}.",
+        )
+
     source_root = candidates[0]
     log("SOURCE_DISCOVERY", f"Using source directory: {source_root}.")
     return source_root
 
 
-def ensure_pandoc() -> str:
+def require_pandoc() -> str:
     executable = shutil.which("pandoc")
     if not executable:
         raise GuidanceUpdateError(
             "DEPENDENCY",
-            "Pandoc is not installed or is not available on PATH. Install Pandoc before running this updater.",
+            "Pandoc is not installed or is not available on PATH.",
         )
 
     try:
         result = subprocess.run(
             [executable, "--version"],
-            check=True,
+            check=False,
             capture_output=True,
             text=True,
-            timeout=20,
+            timeout=15,
         )
-    except (subprocess.SubprocessError, OSError) as exc:
+    except (OSError, subprocess.TimeoutExpired) as exc:
         raise GuidanceUpdateError("DEPENDENCY", f"Pandoc could not be executed: {exc}.") from exc
 
-    version_line = result.stdout.splitlines()[0] if result.stdout else "pandoc"
-    log("DEPENDENCY", f"Using {version_line}.")
+    if result.returncode != 0:
+        raise GuidanceUpdateError(
+            "DEPENDENCY",
+            f"Pandoc version check failed: {result.stderr.strip() or 'unknown error'}.",
+        )
+
+    version = result.stdout.splitlines()[0] if result.stdout else "pandoc"
+    log("DEPENDENCY", f"Using {version}.")
     return executable
 
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
-    try:
-        with path.open("rb") as source:
-            for chunk in iter(lambda: source.read(1024 * 1024), b""):
-                digest.update(chunk)
-    except OSError as exc:
-        raise GuidanceUpdateError("HASH", f"Could not hash {path}: {exc}.") from exc
+    with path.open("rb") as file:
+        for block in iter(lambda: file.read(1024 * 1024), b""):
+            digest.update(block)
     return digest.hexdigest()
 
 
-def source_digest(note_path: Path, source_root: Path) -> str:
-    digest = hashlib.sha256()
-    digest.update(f"template-version:{TEMPLATE_VERSION}\n".encode())
-    digest.update(note_path.name.encode("utf-8"))
-    digest.update(b"\0")
-    digest.update(note_path.read_bytes())
+def referenced_local_images(tex_source: str) -> set[str]:
+    references: set[str] = set()
+    pattern = re.compile(
+        r"\\includegraphics(?:\s*\[[^]]*\])?\s*\{([^}]+)\}",
+        flags=re.IGNORECASE,
+    )
 
-    image_directory = source_root / "images"
-    if image_directory.is_dir():
-        for image in sorted(
-            (path for path in image_directory.rglob("*") if path.is_file()),
-            key=lambda path: path.relative_to(image_directory).as_posix().casefold(),
-        ):
-            relative = image.relative_to(source_root).as_posix()
-            digest.update(relative.encode("utf-8"))
-            digest.update(b"\0")
-            digest.update(image.read_bytes())
+    for match in pattern.finditer(tex_source):
+        value = match.group(1).strip().replace("\\", "/")
+        if not value:
+            continue
+        parsed = urllib.parse.urlsplit(value)
+        if parsed.scheme or parsed.netloc:
+            continue
+        while value.startswith("./"):
+            value = value[2:]
+        path = PurePosixPath(value)
+        if path.is_absolute() or ".." in path.parts:
+            raise GuidanceUpdateError(
+                "IMAGE_SECURITY",
+                f"Unsafe image path appears in TeX source: {value!r}.",
+            )
+        if path.parts and path.parts[0].casefold() == "images":
+            references.add(path.as_posix())
+    return references
+
+
+def resolve_image_for_digest(reference: str, source_root: Path) -> Path | None:
+    reference_path = PurePosixPath(reference)
+    exact = source_root.joinpath(*reference_path.parts)
+    if exact.is_file():
+        return exact
+
+    parent = exact.parent
+    stem = exact.stem
+    suffix = exact.suffix
+    if suffix:
+        if not parent.is_dir():
+            return None
+        matches = [path for path in parent.iterdir() if path.is_file() and path.name.casefold() == exact.name.casefold()]
+        return matches[0] if len(matches) == 1 else None
+
+    if not parent.is_dir():
+        return None
+    matches = [
+        path
+        for path in parent.iterdir()
+        if path.is_file()
+        and path.stem.casefold() == stem.casefold()
+        and path.suffix.casefold() in WEB_IMAGE_EXTENSIONS
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def source_digest(source_path: Path, source_root: Path) -> str:
+    digest = hashlib.sha256()
+    source_bytes = source_path.read_bytes()
+    digest.update(f"template-version:{TEMPLATE_VERSION}\n".encode("utf-8"))
+    digest.update(source_bytes)
+
+    try:
+        tex_source = source_bytes.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise GuidanceUpdateError(
+            "SOURCE_ENCODING",
+            f"The TeX source is not valid UTF-8: {exc}.",
+            source_path.name,
+        ) from exc
+
+    for reference in sorted(referenced_local_images(tex_source)):
+        image_path = resolve_image_for_digest(reference, source_root)
+        digest.update(f"\nimage:{reference}\n".encode("utf-8"))
+        if image_path and image_path.is_file():
+            digest.update(image_path.read_bytes())
+        else:
+            digest.update(b"<missing>")
 
     return digest.hexdigest()
 
@@ -389,15 +464,16 @@ def current_page_metadata(path: Path) -> tuple[str | None, str | None]:
         return None, None
 
     digest_match = re.search(
-        r'<meta\s+name="guidance-source-digest"\s+content="([0-9a-f]{64})"\s*/?>',
+        r'<meta\s+name=["\']guidance-source-digest["\']\s+content=["\']([0-9a-f]{64})["\']',
         content,
-        re.IGNORECASE,
+        flags=re.IGNORECASE,
     )
     date_match = re.search(
-        r'<meta\s+name="guidance-updated"\s+content="(\d{4}-\d{2}-\d{2})"\s*/?>',
+        r'<meta\s+name=["\']guidance-updated["\']\s+content=["\'](\d{4}-\d{2}-\d{2})["\']',
         content,
-        re.IGNORECASE,
+        flags=re.IGNORECASE,
     )
+
     return (
         digest_match.group(1) if digest_match else None,
         date_match.group(1) if date_match else None,
@@ -591,9 +667,71 @@ def copy_web_images(source_root: Path, staging_root: Path) -> set[str]:
 def validate_referenced_images(
     references_by_note: dict[str, set[str]],
     copied_images: set[str],
+    staging_root: Path,
 ) -> None:
+    """Validate image references and repair harmless filename-case mismatches.
+
+    Dropbox, Windows, and macOS commonly treat filenames case-insensitively,
+    while GitHub Pages serves files from a case-sensitive filesystem. Pandoc
+    preserves the spelling used in the TeX source, so a reference ending in
+    ``.PNG`` can otherwise fail when the actual file is named ``.png``.
+    """
+    casefolded_images: dict[str, str] = {}
+    ambiguous_images: set[str] = set()
+
+    for copied in copied_images:
+        key = copied.casefold()
+        previous = casefolded_images.get(key)
+        if previous is not None and previous != copied:
+            ambiguous_images.add(key)
+        else:
+            casefolded_images[key] = copied
+
+    if ambiguous_images:
+        collisions = []
+        for key in sorted(ambiguous_images):
+            variants = sorted(path for path in copied_images if path.casefold() == key)
+            collisions.append(" / ".join(variants))
+        raise GuidanceUpdateError(
+            "IMAGE_CASE_COLLISION",
+            "The images folder contains filenames that differ only by letter case: "
+            + "; ".join(collisions)
+            + ". Rename the files so each case-insensitive path is unique.",
+        )
+
     for note_slug, references in references_by_note.items():
-        missing = sorted(reference for reference in references if reference not in copied_images)
+        missing: list[str] = []
+
+        for reference in sorted(references):
+            if reference in copied_images:
+                continue
+
+            actual = casefolded_images.get(reference.casefold())
+            if actual is None:
+                missing.append(reference)
+                continue
+
+            source_path = staging_root / Path(*PurePosixPath(actual).parts)
+            alias_path = staging_root / Path(*PurePosixPath(reference).parts)
+            alias_path.parent.mkdir(parents=True, exist_ok=True)
+
+            try:
+                shutil.copy2(source_path, alias_path)
+            except OSError as exc:
+                raise GuidanceUpdateError(
+                    "IMAGE_CASE_ALIAS",
+                    f"Could not create the case-matching image path {reference!r} "
+                    f"from {actual!r}: {exc}.",
+                    note_slug,
+                ) from exc
+
+            copied_images.add(reference)
+            log(
+                "IMAGE_REFERENCE",
+                f"Resolved filename-case mismatch: {reference} -> {actual}.",
+                note_slug,
+            )
+
         if missing:
             raise GuidanceUpdateError(
                 "IMAGE_REFERENCE",
@@ -618,7 +756,7 @@ def guidance_css(template_css: str) -> str:
     if not shared_prefix_match:
         raise GuidanceUpdateError(
             "TEMPLATE",
-            "Could not locate '.supervision-body' in the supervision template CSS.",
+            "Could not isolate the shared layout styles before .supervision-body.",
         )
 
     shared = shared_prefix_match.group(1).rstrip()
@@ -740,6 +878,7 @@ def guidance_css(template_css: str) -> str:
     }
 
     .guidance-content img {
+      display: block;
       max-width: 100%;
       height: auto;
       margin: 1.5rem auto;
@@ -805,12 +944,6 @@ def guidance_css(template_css: str) -> str:
       border-radius: 4px;
     }
 
-    .guidance-content pre code {
-      padding: 0;
-      background: transparent;
-      border: 0;
-    }
-
     .guidance-update {
       margin-top: 3rem;
       color: var(--muted);
@@ -818,6 +951,116 @@ def guidance_css(template_css: str) -> str:
       font-size: 0.78rem;
       letter-spacing: 0.03em;
       text-align: center;
+    }
+
+    .guidance-pagination {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .guidance-pagination.is-single { grid-template-columns: minmax(0, 1fr); }
+
+    .guidance-page-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-width: 0;
+      padding: 1rem 1.1rem;
+      color: var(--accent-strong);
+      background: var(--paper-soft);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .guidance-page-link.is-next { justify-content: flex-end; text-align: right; }
+
+    .guidance-page-link:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .guidance-page-link i { flex: 0 0 auto; }
+
+    .guidance-page-copy { min-width: 0; }
+
+    .guidance-page-direction {
+      display: block;
+      margin-bottom: 0.15rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .guidance-page-title {
+      display: block;
+      font-family: var(--display);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--panel-deep);
+      border-top: 1px solid var(--line);
+    }
+
+    .foot-loc {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .socials a {
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .socials a:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .index-card,
+      .back-link,
+      .download-link,
+      .guidance-page-link,
+      .socials a { transition: none; }
     }
 
     @media (max-width: 768px) {
@@ -830,17 +1073,16 @@ def guidance_css(template_css: str) -> str:
       .index-card { border-top: 1px solid var(--line); border-left: none; }
       .index-card:first-child { border-top: none; }
       .guidance-toolbar { align-items: stretch; flex-direction: column; }
-      .back-link,
-      .download-link { justify-content: center; }
+      .back-link, .download-link { justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
+      .guidance-pagination { grid-template-columns: 1fr; }
       .foot { flex-direction: column; text-align: center; }
     }
-'''
+'''.rstrip()
 
 
 def navigation_html() -> str:
-    return '''
-      <nav class="index-nav" aria-label="Academic Directory">
+    return '''      <nav class="index-nav" aria-label="Academic Directory">
         <a href="../../index.html" class="index-card">
           <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
         </a>
@@ -860,13 +1102,18 @@ def navigation_html() -> str:
 
 
 def footer_html() -> str:
-    return '''
-      <footer class="foot">
+    cv_url = html.escape(
+        "https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/"
+        "CV_Arthur_Galichere.pdf"
+        "?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&st=hik4skpl&dl=1",
+        quote=True,
+    )
+    return f'''      <footer class="foot">
         <div class="socials">
           <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
             <i class="fas fa-envelope" aria-hidden="true"></i>
           </a>
-          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV">
+          <a href="{cv_url}" aria-label="Download Arthur Galichère's CV">
             <i class="fas fa-file-pdf" aria-hidden="true"></i>
           </a>
           <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
@@ -880,15 +1127,62 @@ def footer_html() -> str:
       </footer>'''
 
 
-def build_page(note: Note, body_fragment: str, digest: str, updated: str, css: str) -> str:
-    display_date = date.fromisoformat(updated).strftime("%d/%m/%Y")
+def pagination_html(note: Note) -> str:
+    notes = list(NOTES)
+    index = notes.index(note)
+    previous_note = notes[index - 1] if index > 0 else None
+    next_note = notes[index + 1] if index < len(notes) - 1 else None
+
+    links: list[str] = []
+    if previous_note:
+        links.append(
+            f'''        <a class="guidance-page-link is-previous" href="{html.escape(previous_note.output, quote=True)}">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i>
+          <span class="guidance-page-copy">
+            <span class="guidance-page-direction">Previous note</span>
+            <span class="guidance-page-title">{html.escape(previous_note.title)}</span>
+          </span>
+        </a>'''
+        )
+    if next_note:
+        links.append(
+            f'''        <a class="guidance-page-link is-next" href="{html.escape(next_note.output, quote=True)}">
+          <span class="guidance-page-copy">
+            <span class="guidance-page-direction">Next note</span>
+            <span class="guidance-page-title">{html.escape(next_note.title)}</span>
+          </span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>'''
+        )
+
+    modifier = " is-single" if len(links) == 1 else ""
+    return f'''      <nav class="guidance-pagination{modifier}" aria-label="Guidance note navigation">
+{os.linesep.join(links)}
+      </nav>'''
+
+
+def format_display_date(iso_date: str) -> str:
+    try:
+        parsed = date.fromisoformat(iso_date)
+    except ValueError as exc:
+        raise GuidanceUpdateError("DATE", f"Invalid ISO update date: {iso_date!r}.") from exc
+    return parsed.strftime("%d/%m/%Y")
+
+
+def build_page(note: Note, fragment: str, digest: str, updated: str, template_css: str) -> str:
+    escaped_title = html.escape(note.title)
+    escaped_description = html.escape(note.description, quote=True)
+    escaped_pdf_url = html.escape(note.pdf_url, quote=True)
+    display_date = format_display_date(updated)
+    css = guidance_css(template_css)
+
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arthur Galichère — {html.escape(note.title)}</title>
-  <meta name="description" content="{html.escape(note.description, quote=True)}" />
+  <title>Arthur Galichère — {escaped_title}</title>
+  <meta name="description" content="{escaped_description}" />
   <meta name="guidance-source-digest" content="{digest}" />
   <meta name="guidance-updated" content="{updated}" />
 
@@ -897,11 +1191,18 @@ def build_page(note: Note, body_fragment: str, digest: str, updated: str, css: s
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
 {css}
   </style>
+
+  <script>
+    window.MathJax = {{
+      tex: {{ inlineMath: [['\\\\(', '\\\\)']], displayMath: [['\\\\[', '\\\\]']] }},
+      options: {{ skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }}
+    }};
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <main class="page">
@@ -912,17 +1213,20 @@ def build_page(note: Note, body_fragment: str, digest: str, updated: str, css: s
         <div class="guidance-toolbar">
           <a href="../dissertation.html" class="back-link">
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            Back to Dissertation Supervision and Guidance
+            Dissertation Supervision and Guidance
           </a>
-          <a href="{html.escape(note.pdf_url, quote=True)}" class="download-link">
+          <a href="{escaped_pdf_url}" class="download-link">
             <i class="fas fa-download" aria-hidden="true"></i>
             Download PDF
           </a>
         </div>
 
-        <h1 class="guidance-title">{html.escape(note.title)}</h1>
-        <div class="guidance-content">{body_fragment}</div>
+        <h1 class="guidance-title">{escaped_title}</h1>
+
+        <div class="guidance-content">{fragment}</div>
         <p class="guidance-update">Information updated on {display_date}</p>
+
+{pagination_html(note)}
       </section>
 
 {footer_html()}
@@ -933,26 +1237,24 @@ def build_page(note: Note, body_fragment: str, digest: str, updated: str, css: s
 '''
 
 
-def validate_full_page(page: str, note: Note, expected_digest: str, expected_date: str) -> None:
-    required_fragments = (
+def validate_full_page(page: str, note: Note, digest: str, updated: str) -> None:
+    required = (
         "<!DOCTYPE html>",
-        html.escape(note.title),
+        note.title,
         'class="index-nav"',
-        'href="../../teaching.html"',
         'href="../dissertation.html"',
-        'class="download-link"',
-        html.escape(note.pdf_url, quote=True),
         'class="guidance-content"',
-        'class="guidance-update"',
+        note.pdf_url.replace("&", "&amp;"),
+        f'content="{digest}"',
+        f'content="{updated}"',
+        f"Information updated on {format_display_date(updated)}",
         'class="foot"',
-        f'content="{expected_digest}"',
-        f'content="{expected_date}"',
     )
-    for fragment in required_fragments:
+    for fragment in required:
         if fragment not in page:
             raise GuidanceUpdateError(
                 "PAGE_VALIDATE",
-                f"Generated page is missing required fragment {fragment!r}.",
+                f"Generated page is missing required fragment: {fragment!r}.",
                 note.slug,
             )
 
@@ -1017,7 +1319,7 @@ def stage_bundle(
         write_text(staging_root / note.output, page, "STAGE_WRITE", note.slug)
         log("STAGE", f"Prepared {note.output}.", note.slug)
 
-    validate_referenced_images(references_by_note, copied_images)
+    validate_referenced_images(references_by_note, copied_images, staging_root)
 
 
 def validate_staged_bundle(staging_root: Path) -> None:
@@ -1080,44 +1382,35 @@ def directories_equal(left: Path, right: Path) -> bool:
             return {}
         return {
             path.relative_to(root).as_posix(): sha256_file(path)
-            for path in sorted(root.rglob("*"))
-            if path.is_file()
+            for path in sorted(candidate for candidate in root.rglob("*") if candidate.is_file())
         }
 
     return manifest(left) == manifest(right)
 
 
-def bundle_has_changes(staging_root: Path, guidance_dir: Path) -> bool:
+def bundle_changed(staging_root: Path, guidance_dir: Path) -> bool:
     for note in NOTES:
         if not same_file(staging_root / note.output, guidance_dir / note.output):
             return True
     return not directories_equal(staging_root / "images", guidance_dir / "images")
 
 
-def unique_temporary_path(parent: Path, filename: str, label: str) -> Path:
-    return parent / f".{filename}.{label}.{uuid.uuid4().hex}"
+def unique_sibling(path: Path, label: str) -> Path:
+    return path.with_name(f".{path.name}.{label}.{uuid.uuid4().hex}")
 
 
-def publish_bundle_transactionally(staging_root: Path, guidance_dir: Path) -> bool:
-    if not bundle_has_changes(staging_root, guidance_dir):
-        log("PUBLISH", "The generated guidance bundle matches the published bundle; no files were replaced.")
-        return False
-
-    log("PUBLISH", "Publishing all guidance pages and images transactionally.")
-    guidance_dir.mkdir(parents=True, exist_ok=True)
-
+def publish_bundle(staging_root: Path, guidance_dir: Path) -> None:
     targets = [guidance_dir / note.output for note in NOTES]
-    if (staging_root / "images").is_dir() or (guidance_dir / "images").exists():
-        targets.append(guidance_dir / "images")
+    targets.append(guidance_dir / "images")
 
     prepared: dict[Path, Path] = {}
-    backups: dict[Path, Path] = {}
-    published_targets: list[Path] = []
+    previous: dict[Path, Path] = {}
+    installed: list[Path] = []
 
     try:
         for target in targets:
             source = staging_root / target.name
-            prepared_path = unique_temporary_path(guidance_dir, target.name, "next")
+            prepared_path = unique_sibling(target, "next")
 
             if source.is_dir():
                 shutil.copytree(source, prepared_path)
@@ -1128,115 +1421,112 @@ def publish_bundle_transactionally(staging_root: Path, guidance_dir: Path) -> bo
             else:
                 raise GuidanceUpdateError(
                     "PUBLISH_PREPARE",
-                    f"Staged publication source is missing: {source}.",
+                    f"The staged source is missing: {source}.",
                 )
+
             prepared[target] = prepared_path
 
         for target in targets:
-            if not target.exists():
-                continue
-            backup_path = unique_temporary_path(guidance_dir, target.name, "previous")
-            os.replace(target, backup_path)
-            backups[target] = backup_path
+            if target.exists() or target.is_symlink():
+                previous_path = unique_sibling(target, "previous")
+                os.replace(target, previous_path)
+                previous[target] = previous_path
 
-        for target in targets:
-            os.replace(prepared[target], target)
-            published_targets.append(target)
+        try:
+            for target in targets:
+                os.replace(prepared[target], target)
+                installed.append(target)
+        except OSError as exc:
+            raise GuidanceUpdateError(
+                "PUBLISH_INSTALL",
+                f"Could not install the staged guidance bundle: {exc}.",
+            ) from exc
 
-    except (OSError, shutil.Error, GuidanceUpdateError) as exc:
-        rollback_errors: list[str] = []
+        for backup in previous.values():
+            if backup.is_dir():
+                shutil.rmtree(backup)
+            elif backup.exists():
+                backup.unlink()
 
-        for target in reversed(published_targets):
-            try:
-                if target.is_dir():
-                    shutil.rmtree(target)
-                elif target.exists():
-                    target.unlink()
-            except OSError as rollback_exc:
-                rollback_errors.append(f"could not remove new {target.name}: {rollback_exc}")
+    except Exception:
+        for target in reversed(installed):
+            if target.is_dir():
+                shutil.rmtree(target, ignore_errors=True)
+            elif target.exists() or target.is_symlink():
+                target.unlink(missing_ok=True)
 
-        for target, backup in backups.items():
-            try:
-                if target.exists():
-                    if target.is_dir():
-                        shutil.rmtree(target)
-                    else:
-                        target.unlink()
-                if backup.exists():
-                    os.replace(backup, target)
-            except OSError as rollback_exc:
-                rollback_errors.append(f"could not restore {target.name}: {rollback_exc}")
+        for target, backup in previous.items():
+            if backup.exists() or backup.is_symlink():
+                os.replace(backup, target)
 
-        detail = f"Publication failed: {exc}."
-        if rollback_errors:
-            detail += " Rollback problems: " + "; ".join(rollback_errors)
-        raise GuidanceUpdateError("PUBLISH_ROLLBACK", detail) from exc
+        for temporary in prepared.values():
+            if temporary.is_dir():
+                shutil.rmtree(temporary, ignore_errors=True)
+            elif temporary.exists():
+                temporary.unlink(missing_ok=True)
+        raise
 
     finally:
-        for path in list(prepared.values()) + list(backups.values()):
-            try:
-                if path.is_dir():
-                    shutil.rmtree(path)
-                elif path.exists():
-                    path.unlink()
-            except OSError:
-                pass
-
-    log("PUBLISH", "Published all four guidance pages and the image bundle successfully.")
-    return True
+        for temporary in [*prepared.values(), *previous.values()]:
+            if temporary.is_dir():
+                shutil.rmtree(temporary, ignore_errors=True)
+            elif temporary.exists():
+                temporary.unlink(missing_ok=True)
 
 
-def read_template(supervision_template: Path) -> str:
-    log("TEMPLATE", f"Reading shared layout from {supervision_template}.")
-    if not supervision_template.is_file():
+def read_template(path: Path) -> str:
+    log("TEMPLATE", f"Reading shared layout from {path}.")
+    if not path.is_file():
         raise GuidanceUpdateError(
             "TEMPLATE",
-            f"Shared supervision template does not exist: {supervision_template}.",
+            f"The supervision template does not exist: {path}.",
         )
-
     try:
-        template = supervision_template.read_text(encoding="utf-8")
+        content = path.read_text(encoding="utf-8")
     except (OSError, UnicodeError) as exc:
-        raise GuidanceUpdateError("TEMPLATE", f"Could not read the supervision template: {exc}.") from exc
+        raise GuidanceUpdateError("TEMPLATE", f"Could not read {path}: {exc}.") from exc
 
-    required = ('class="index-nav"', 'class="foot"', ".supervision-body")
-    missing = [fragment for fragment in required if fragment not in template]
-    if missing:
-        raise GuidanceUpdateError(
-            "TEMPLATE",
-            "The supervision template is missing required structure: " + ", ".join(missing),
-        )
-    return template
+    required_fragments = ('class="index-nav"', 'class="foot"', ".supervision-body")
+    for fragment in required_fragments:
+        if fragment not in content:
+            raise GuidanceUpdateError(
+                "TEMPLATE",
+                f"The supervision template is missing required fragment: {fragment!r}.",
+            )
+    return content
 
 
 def main() -> int:
     repo_root, guidance_dir, supervision_template = repo_paths()
-    os.chdir(repo_root)
 
     try:
-        pandoc = ensure_pandoc()
+        pandoc = require_pandoc()
         template = read_template(supervision_template)
-        css = guidance_css(extract_style_block(template))
+        template_css = extract_style_block(template)
 
-        with tempfile.TemporaryDirectory(prefix="guidance-update-") as temporary_directory:
-            temporary_root = Path(temporary_directory)
-            archive = temporary_root / "dropbox-guidance.zip"
-            extracted = temporary_root / "extracted"
-            staged = temporary_root / "staged"
+        with tempfile.TemporaryDirectory(prefix="guidance-update-") as temporary:
+            workspace = Path(temporary)
+            archive = workspace / "dropbox-guidance.zip"
+            extracted = workspace / "extracted"
+            staged = workspace / "staged"
             extracted.mkdir()
             staged.mkdir()
 
             download_dropbox_zip(archive)
             safe_extract_zip(archive, extracted)
             source_root = locate_source_root(extracted)
-            stage_bundle(pandoc, source_root, guidance_dir, staged, css)
+            stage_bundle(pandoc, source_root, guidance_dir, staged, template_css)
             validate_staged_bundle(staged)
-            changed = publish_bundle_transactionally(staged, guidance_dir)
 
-        if changed:
-            log("COMPLETE", "Guidance pages were updated successfully.")
-        else:
-            log("COMPLETE", "Guidance pages were already current.")
+            if not bundle_changed(staged, guidance_dir):
+                log("NO_CHANGE", "The generated guidance bundle is identical to the published bundle.")
+                return 0
+
+            log("PUBLISH", "Installing all four validated pages and their image bundle transactionally.")
+            publish_bundle(staged, guidance_dir)
+
+        log("COMPLETE", f"Published dissertation guidance successfully in {guidance_dir}.")
+        log("COMPLETE", f"Repository root resolved as {repo_root}.")
         return 0
 
     except GuidanceUpdateError as exc:
