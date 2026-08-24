@@ -1,1 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AG — Structure of the Dissertation</title>
+  <meta name="description" content="Guidance by Arthur Galichère on structuring an economics dissertation." />
+  <meta name="guidance-source-digest" content="0000000000000000000000000000000000000000000000000000000000000000" />
+  <meta name="guidance-updated" content="2026-08-24" />
+
+  <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --paper: #f4f5f7;
+      --paper-soft: #fafbfc;
+      --sheet: #ffffff;
+      --panel-deep: #e2e5e9;
+      --line: rgba(28, 28, 30, 0.08);
+      --line-strong: rgba(28, 28, 30, 0.15);
+      --ink: #1c1c1e;
+      --ink-soft: #3a3a3c;
+      --muted: #71717a;
+      --accent: #3b5a75;
+      --accent-strong: #25394b;
+      --accent-soft: #edf2f6;
+      --display: 'Bitter', Georgia, serif;
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { background: var(--paper); }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+    }
+
+    .card {
+      width: min(100%, 1100px);
+      overflow: hidden;
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
+    }
+
+    .card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-left: 1px solid var(--line);
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+
+    .index-card:first-child { border-left: none; }
+
+    .index-nav .idx-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .index-nav .idx-label i {
+      width: 1.1rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .index-card.is-current {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
+
+    .index-card:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .index-card:hover .idx-label,
+    .index-card:hover .idx-label i { color: #fff; }
+
+    .guidance-body { padding: 3rem 2.5rem; }
+
+    .guidance-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .back-link,
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.7rem 0.95rem;
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.25);
+      border-radius: 4px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .back-link:hover,
+    .download-link:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .guidance-title {
+      margin-bottom: 2rem;
+      font-family: var(--display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .guidance-content {
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+      line-height: 1.72;
+    }
+
+    .guidance-content > * + * { margin-top: 1rem; }
+
+    .guidance-content h1,
+    .guidance-content h2,
+    .guidance-content h3,
+    .guidance-content h4 {
+      color: var(--accent-strong);
+      font-family: var(--display);
+      line-height: 1.3;
+    }
+
+    .guidance-content h1,
+    .guidance-content h2 {
+      padding-bottom: 0.4rem;
+      margin-top: 2.6rem;
+      margin-bottom: 1rem;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .guidance-content h3 {
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.18rem;
+    }
+
+    .guidance-content h4 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+    }
+
+    .guidance-content p { text-align: justify; }
+
+    .guidance-content ul,
+    .guidance-content ol {
+      display: grid;
+      gap: 0.45rem;
+      padding-left: 1.5rem;
+    }
+
+    .guidance-content li::marker { color: var(--accent); }
+
+    .guidance-content a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration-line: underline;
+      text-decoration-color: rgba(59, 90, 117, 0.35);
+      text-underline-offset: 0.16em;
+    }
+
+    .guidance-content a:hover {
+      color: var(--accent-strong);
+      text-decoration-color: var(--accent-strong);
+    }
+
+    .guidance-content blockquote {
+      padding: 1rem 1.2rem;
+      color: var(--ink-soft);
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 3px;
+    }
+
+    .guidance-content img {
+      max-width: 100%;
+      height: auto;
+      margin: 1.5rem auto;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+    }
+
+    .guidance-content figure { margin: 1.5rem 0; }
+    .guidance-content figure img { margin: 0 auto; }
+
+    .guidance-content figcaption {
+      margin-top: 0.55rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .guidance-content table {
+      width: 100%;
+      margin: 1.4rem 0;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .guidance-content th,
+    .guidance-content td {
+      padding: 0.7rem 0.8rem;
+      text-align: left;
+      vertical-align: top;
+      border: 1px solid var(--line-strong);
+    }
+
+    .guidance-content th {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      font-weight: 700;
+    }
+
+    .guidance-content .math.display {
+      max-width: 100%;
+      margin: 1.4rem 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      text-align: center;
+    }
+
+    .guidance-content code {
+      padding: 0.12rem 0.3rem;
+      background: var(--paper-soft);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 0.88em;
+    }
+
+    .guidance-content pre {
+      max-width: 100%;
+      padding: 1rem;
+      overflow-x: auto;
+      background: var(--paper-soft);
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+    }
+
+    .guidance-placeholder {
+      padding: 1.1rem 1.2rem;
+      color: var(--muted);
+      background: var(--paper-soft);
+      border: 1px dashed var(--line-strong);
+      border-radius: 4px;
+      text-align: left !important;
+    }
+
+    .guidance-pagination {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .guidance-pagination-single {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .guidance-pagination-single .guidance-page-link {
+      width: min(100%, 32rem);
+    }
+
+    .guidance-page-link {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 0.85rem;
+      min-height: 5.2rem;
+      padding: 1rem 1.1rem;
+      color: var(--accent-strong);
+      background: var(--paper-soft);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .guidance-page-link:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .guidance-next {
+      grid-template-columns: minmax(0, 1fr) auto;
+      text-align: right;
+    }
+
+    .guidance-page-copy {
+      display: grid;
+      gap: 0.25rem;
+      min-width: 0;
+    }
+
+    .guidance-page-label {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .guidance-page-title {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .guidance-page-link:hover .guidance-page-label { color: rgba(255, 255, 255, 0.76); }
+
+    .guidance-update {
+      margin-top: 2rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-align: center;
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--panel-deep);
+      border-top: 1px solid var(--line);
+    }
+
+    .foot-loc {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .socials a {
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .socials a:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .index-card,
+      .back-link,
+      .download-link,
+      .guidance-page-link,
+      .socials a {
+        transition: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .guidance-body { padding: 2rem 1.5rem; }
+      .guidance-title { font-size: 2.15rem; }
+      .guidance-pagination { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .index-nav { grid-template-columns: 1fr; }
+      .index-card {
+        border-top: 1px solid var(--line);
+        border-left: none;
+      }
+      .index-card:first-child { border-top: none; }
+
+      .guidance-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .back-link,
+      .download-link { justify-content: center; }
+
+      .foot {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <article class="card">
+      <nav class="index-nav" aria-label="Academic Directory">
+        <a href="../../index.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
+        </a>
+        <a href="../../cv.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-file" aria-hidden="true"></i> CV</span>
+        </a>
+        <a href="../../research.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-line" aria-hidden="true"></i> Research</span>
+        </a>
+        <a href="../../teaching.html" class="index-card is-current" aria-current="page">
+          <span class="idx-label"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Teaching</span>
+        </a>
+        <a href="../../economics.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
+        </a>
+      </nav>
+
+      <section class="guidance-body">
+        <div class="guidance-toolbar">
+          <a href="../dissertation.html" class="back-link">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Back to Dissertation Supervision and Guidance
+          </a>
+          <a href="https://www.dropbox.com/scl/fi/70uu4hmon81ekrnwunlsq/Structure-of-the-dissertation.pdf?rlkey=s1on52nrda7vc3ffhn5x5q7qf&amp;st=tn1rx8v4&amp;dl=1" class="download-link">
+            <i class="fas fa-download" aria-hidden="true"></i>
+            Download PDF
+          </a>
+        </div>
+
+        <h1 class="guidance-title">Structure of the Dissertation</h1>
+        <div class="guidance-content">
+          <p class="guidance-placeholder">
+            This guidance page is populated automatically from the Dropbox source
+            <em>Structure of the dissertation.tex</em>. Run the dissertation
+            guidance workflow to replace this message with the latest published note.
+          </p>
+        </div>
+
+        <nav class="guidance-pagination guidance-pagination-single" aria-label="Dissertation guidance navigation">
+          <a href="literature-review.html" class="guidance-page-link guidance-previous">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            <span class="guidance-page-copy">
+              <span class="guidance-page-label">Previous guidance note</span>
+              <span class="guidance-page-title">A Guide to Writing Your Literature Review</span>
+            </span>
+          </a>
+        </nav>
+
+        <p class="guidance-update">Information updated on 24/08/2026</p>
+      </section>
+
+      <footer class="foot">
+        <div class="socials">
+          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          </a>
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
+            <i class="fas fa-university" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+        <span class="foot-loc">University of Warwick · Coventry, UK</span>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
 
