@@ -32,7 +32,7 @@ DROPBOX_FOLDER_URL = (
 IGNORED_DIRECTORY_NAMES = {"guidance notes online"}
 WEB_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}
 MINIMUM_CONVERTED_TEXT_LENGTH = 120
-TEMPLATE_VERSION = "1"
+TEMPLATE_VERSION = "2"
 
 
 @dataclass(frozen=True)
@@ -231,29 +231,29 @@ def safe_extract_zip(archive: Path, destination: Path) -> None:
                         f"Unsafe root-level file entry rejected: {raw_name!r}.",
                     )
 
-                path = PurePosixPath(normalized_name)
-                raw_parts = [part for part in normalized_name.split("/") if part]
-
-                if (
-                    path.is_absolute()
-                    or ".." in raw_parts
-                    or re.match(r"^[A-Za-z]:", normalized_name)
-                ):
+                pure_path = PurePosixPath(normalized_name)
+                if pure_path.is_absolute() or ".." in pure_path.parts:
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
                         f"Unsafe archive path rejected: {raw_name!r}.",
                     )
 
-                unix_mode = member.external_attr >> 16
-                if unix_mode and stat.S_ISLNK(unix_mode):
+                if re.match(r"^[A-Za-z]:", normalized_name):
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
-                        f"Symbolic-link archive entry rejected: {raw_name!r}.",
+                        f"Windows drive path rejected: {raw_name!r}.",
                     )
 
-                target = destination.joinpath(*path.parts).resolve()
+                mode = member.external_attr >> 16
+                if stat.S_ISLNK(mode):
+                    raise GuidanceUpdateError(
+                        "ZIP_SECURITY",
+                        f"Symbolic link rejected: {raw_name!r}.",
+                    )
+
+                output_path = destination.joinpath(*pure_path.parts)
                 try:
-                    target.relative_to(destination_resolved)
+                    output_path.resolve().relative_to(destination_resolved)
                 except ValueError as exc:
                     raise GuidanceUpdateError(
                         "ZIP_SECURITY",
@@ -264,20 +264,21 @@ def safe_extract_zip(archive: Path, destination: Path) -> None:
 
             for member in validated_members:
                 normalized_name = member.filename.replace("\\", "/")
-                path = PurePosixPath(normalized_name)
-                target = destination.joinpath(*path.parts)
+                relative_path = PurePosixPath(normalized_name)
+                output_path = destination.joinpath(*relative_path.parts)
 
                 if member.is_dir():
-                    target.mkdir(parents=True, exist_ok=True)
+                    output_path.mkdir(parents=True, exist_ok=True)
                     continue
 
-                target.parent.mkdir(parents=True, exist_ok=True)
-                with zipped.open(member) as source, target.open("wb") as output:
-                    shutil.copyfileobj(source, output)
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                with zipped.open(member) as source, output_path.open("wb") as target:
+                    shutil.copyfileobj(source, target)
+
     except zipfile.BadZipFile as exc:
         raise GuidanceUpdateError("ZIP_EXTRACT", f"The ZIP archive is corrupt: {exc}.") from exc
     except OSError as exc:
-        raise GuidanceUpdateError("ZIP_EXTRACT", f"Could not extract the ZIP archive: {exc}.") from exc
+        raise GuidanceUpdateError("ZIP_EXTRACT", f"Could not extract the archive: {exc}.") from exc
 
     message = f"Extracted {len(validated_members)} validated archive entries safely."
     if skipped_root_entries:
@@ -285,53 +286,54 @@ def safe_extract_zip(archive: Path, destination: Path) -> None:
     log("ZIP_EXTRACT", message)
 
 
-def ignored_path(relative_path: Path) -> bool:
-    return any(part.casefold() in IGNORED_DIRECTORY_NAMES for part in relative_path.parts)
+def should_ignore_path(path: Path) -> bool:
+    return any(part.casefold() in IGNORED_DIRECTORY_NAMES for part in path.parts)
 
 
-def locate_source_root(extracted_root: Path) -> Path:
+def locate_source_root(extracted: Path) -> Path:
     log("SOURCE_DISCOVERY", "Locating the four allowlisted TeX source files.")
-    expected = {note.source for note in NOTES}
-    candidates: list[Path] = []
+    required = {note.source.casefold(): note.source for note in NOTES}
+    matches: dict[str, list[Path]] = {key: [] for key in required}
 
-    for directory in [extracted_root, *sorted(path for path in extracted_root.rglob("*") if path.is_dir())]:
-        try:
-            relative_directory = directory.relative_to(extracted_root)
-        except ValueError:
+    for candidate in extracted.rglob("*.tex"):
+        relative = candidate.relative_to(extracted)
+        if should_ignore_path(relative):
             continue
+        key = candidate.name.casefold()
+        if key in matches:
+            matches[key].append(candidate)
 
-        if ignored_path(relative_directory):
-            continue
-
-        available = {
-            path.name
-            for path in directory.iterdir()
-            if path.is_file() and path.suffix.casefold() == ".tex"
-        }
-        if expected.issubset(available):
-            candidates.append(directory)
-
-    if not candidates:
-        discovered = sorted(
-            path.relative_to(extracted_root).as_posix()
-            for path in extracted_root.rglob("*.tex")
-            if not ignored_path(path.relative_to(extracted_root))
-        )
-        details = ", ".join(discovered) if discovered else "no TeX files were found"
+    missing = [required[key] for key, candidates in matches.items() if not candidates]
+    if missing:
         raise GuidanceUpdateError(
             "SOURCE_DISCOVERY",
-            "Could not find a directory containing all four required TeX files. "
-            f"Discovered: {details}.",
+            "Required TeX source file(s) not found outside ignored directories: " + ", ".join(missing) + ".",
         )
 
-    if len(candidates) > 1:
-        choices = ", ".join(path.relative_to(extracted_root).as_posix() or "." for path in candidates)
+    duplicates = {
+        required[key]: candidates
+        for key, candidates in matches.items()
+        if len(candidates) > 1
+    }
+    if duplicates:
+        detail = "; ".join(
+            f"{name}: {', '.join(str(path.relative_to(extracted)) for path in paths)}"
+            for name, paths in duplicates.items()
+        )
         raise GuidanceUpdateError(
             "SOURCE_DISCOVERY",
-            f"More than one source directory contains all four required notes: {choices}.",
+            "Multiple copies of an allowlisted source file were found: " + detail + ".",
         )
 
-    source_root = candidates[0]
+    parents = {candidates[0].parent for candidates in matches.values()}
+    if len(parents) != 1:
+        locations = ", ".join(str(path.relative_to(extracted)) for path in sorted(parents))
+        raise GuidanceUpdateError(
+            "SOURCE_DISCOVERY",
+            f"The four TeX source files are not in the same directory. Located directories: {locations}.",
+        )
+
+    source_root = parents.pop()
     log("SOURCE_DISCOVERY", f"Using source directory: {source_root}.")
     return source_root
 
@@ -345,87 +347,126 @@ def require_pandoc() -> str:
         )
 
     try:
-        result = subprocess.run(
+        completed = subprocess.run(
             [executable, "--version"],
-            check=False,
+            check=True,
             capture_output=True,
             text=True,
-            timeout=15,
+            timeout=20,
         )
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        raise GuidanceUpdateError("DEPENDENCY", f"Pandoc could not be executed: {exc}.") from exc
-
-    if result.returncode != 0:
+    except (subprocess.SubprocessError, OSError) as exc:
         raise GuidanceUpdateError(
             "DEPENDENCY",
-            f"Pandoc version check failed: {result.stderr.strip() or 'unknown error'}.",
-        )
+            f"Pandoc was found but could not be executed: {exc}.",
+        ) from exc
 
-    version = result.stdout.splitlines()[0] if result.stdout else "pandoc"
-    log("DEPENDENCY", f"Using {version}.")
+    version_line = completed.stdout.splitlines()[0] if completed.stdout else "pandoc"
+    log("DEPENDENCY", f"Using {version_line}.")
     return executable
 
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
-    with path.open("rb") as file:
-        for block in iter(lambda: file.read(1024 * 1024), b""):
+    with path.open("rb") as source:
+        for block in iter(lambda: source.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
 
 
-def referenced_local_images(tex_source: str) -> set[str]:
-    references: set[str] = set()
-    pattern = re.compile(
-        r"\\includegraphics(?:\s*\[[^]]*\])?\s*\{([^}]+)\}",
-        flags=re.IGNORECASE,
-    )
+def extract_style_block(template: str) -> str:
+    match = re.search(r"<style>(.*?)</style>", template, flags=re.IGNORECASE | re.DOTALL)
+    if not match:
+        raise GuidanceUpdateError(
+            "TEMPLATE",
+            "Could not find a <style> block in teaching/supervision.html.",
+        )
+    return match.group(1).strip("\n")
 
-    for match in pattern.finditer(tex_source):
-        value = match.group(1).strip().replace("\\", "/")
-        if not value:
-            continue
-        parsed = urllib.parse.urlsplit(value)
-        if parsed.scheme or parsed.netloc:
-            continue
-        while value.startswith("./"):
-            value = value[2:]
-        path = PurePosixPath(value)
-        if path.is_absolute() or ".." in path.parts:
-            raise GuidanceUpdateError(
-                "IMAGE_SECURITY",
-                f"Unsafe image path appears in TeX source: {value!r}.",
-            )
-        if path.parts and path.parts[0].casefold() == "images":
-            references.add(path.as_posix())
+
+def strip_tex_comments(source: str) -> str:
+    lines: list[str] = []
+    for line in source.splitlines():
+        output: list[str] = []
+        index = 0
+        while index < len(line):
+            if line[index] == "%":
+                slash_count = 0
+                back = index - 1
+                while back >= 0 and line[back] == "\\":
+                    slash_count += 1
+                    back -= 1
+                if slash_count % 2 == 0:
+                    break
+            output.append(line[index])
+            index += 1
+        lines.append("".join(output))
+    return "\n".join(lines)
+
+
+def normalize_tex_image_reference(reference: str) -> str | None:
+    cleaned = reference.strip().replace("\\", "/")
+    parsed = urllib.parse.urlsplit(cleaned)
+    if parsed.scheme or parsed.netloc or cleaned.startswith("data:"):
+        return None
+
+    cleaned = urllib.parse.unquote(parsed.path).lstrip("./")
+    if not cleaned:
+        return None
+
+    pure_path = PurePosixPath(cleaned)
+    if pure_path.is_absolute() or ".." in pure_path.parts:
+        return None
+
+    if not pure_path.suffix:
+        for extension in sorted(WEB_IMAGE_EXTENSIONS):
+            candidate = pure_path.with_suffix(extension)
+            return candidate.as_posix()
+
+    return pure_path.as_posix()
+
+
+def referenced_local_images(tex_source: str) -> set[str]:
+    without_comments = strip_tex_comments(tex_source)
+    references: set[str] = set()
+    pattern = re.compile(r"\\includegraphics(?:\s*\[[^\]]*\])?\s*\{([^}]+)\}")
+    for match in pattern.finditer(without_comments):
+        normalized = normalize_tex_image_reference(match.group(1))
+        if normalized:
+            references.add(normalized)
     return references
 
 
+def case_insensitive_file(root: Path, reference: str) -> Path | None:
+    target = PurePosixPath(reference)
+    current = root
+
+    for part in target.parts:
+        if not current.is_dir():
+            return None
+        exact = current / part
+        if exact.exists():
+            current = exact
+            continue
+        matches = [entry for entry in current.iterdir() if entry.name.casefold() == part.casefold()]
+        if len(matches) != 1:
+            return None
+        current = matches[0]
+
+    return current if current.is_file() else None
+
+
 def resolve_image_for_digest(reference: str, source_root: Path) -> Path | None:
-    reference_path = PurePosixPath(reference)
-    exact = source_root.joinpath(*reference_path.parts)
+    exact = source_root.joinpath(*PurePosixPath(reference).parts)
     if exact.is_file():
         return exact
 
-    parent = exact.parent
-    stem = exact.stem
-    suffix = exact.suffix
-    if suffix:
-        if not parent.is_dir():
-            return None
-        matches = [path for path in parent.iterdir() if path.is_file() and path.name.casefold() == exact.name.casefold()]
-        return matches[0] if len(matches) == 1 else None
+    if not PurePosixPath(reference).suffix:
+        for extension in WEB_IMAGE_EXTENSIONS:
+            candidate = exact.with_suffix(extension)
+            if candidate.is_file():
+                return candidate
 
-    if not parent.is_dir():
-        return None
-    matches = [
-        path
-        for path in parent.iterdir()
-        if path.is_file()
-        and path.stem.casefold() == stem.casefold()
-        and path.suffix.casefold() in WEB_IMAGE_EXTENSIONS
-    ]
-    return matches[0] if len(matches) == 1 else None
+    return case_insensitive_file(source_root, reference)
 
 
 def source_digest(source_path: Path, source_root: Path) -> str:
@@ -493,7 +534,6 @@ def choose_update_date(existing_output: Path, new_digest: str) -> str:
 
 def convert_tex_to_html(pandoc: str, source_path: Path, source_root: Path, destination: Path, note: Note) -> str:
     log("CONVERT", f"Converting {source_path.name} with Pandoc.", note.slug)
-
     command = [
         pandoc,
         str(source_path),
@@ -507,18 +547,18 @@ def convert_tex_to_html(pandoc: str, source_path: Path, source_root: Path, desti
     ]
 
     try:
-        result = subprocess.run(
+        completed = subprocess.run(
             command,
             cwd=source_root,
             check=False,
             capture_output=True,
             text=True,
-            timeout=120,
+            timeout=180,
         )
     except subprocess.TimeoutExpired as exc:
         raise GuidanceUpdateError(
             "CONVERT",
-            "Pandoc exceeded the 120-second conversion timeout.",
+            "Pandoc timed out after 180 seconds.",
             note.slug,
         ) from exc
     except OSError as exc:
@@ -528,80 +568,124 @@ def convert_tex_to_html(pandoc: str, source_path: Path, source_root: Path, desti
             note.slug,
         ) from exc
 
-    if result.returncode != 0:
-        stderr = result.stderr.strip() or "No error details were returned."
+    if completed.returncode != 0:
+        stderr = completed.stderr.strip() or "No diagnostic output was produced."
         raise GuidanceUpdateError(
             "CONVERT",
-            f"Pandoc exited with status {result.returncode}: {stderr}",
+            f"Pandoc exited with status {completed.returncode}: {stderr}",
+            note.slug,
+        )
+
+    if not destination.is_file():
+        raise GuidanceUpdateError(
+            "CONVERT",
+            "Pandoc reported success but did not create the expected HTML fragment.",
             note.slug,
         )
 
     try:
-        converted = destination.read_text(encoding="utf-8")
+        fragment = destination.read_text(encoding="utf-8")
     except (OSError, UnicodeError) as exc:
         raise GuidanceUpdateError(
-            "CONVERT_OUTPUT",
-            f"Pandoc output could not be read as UTF-8: {exc}.",
+            "CONVERT_READ",
+            f"Could not read the converted HTML fragment: {exc}.",
             note.slug,
         ) from exc
 
-    validate_converted_fragment(converted, note)
-    return converted
+    validate_converted_fragment(fragment, note)
+    return fragment.strip()
 
 
 def visible_text_length(fragment: str) -> int:
-    without_scripts = re.sub(r"<(script|style)\b.*?</\1>", " ", fragment, flags=re.IGNORECASE | re.DOTALL)
+    without_scripts = re.sub(
+        r"<(script|style)\b[^>]*>.*?</\1>",
+        " ",
+        fragment,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
     without_tags = re.sub(r"<[^>]+>", " ", without_scripts)
-    text = html.unescape(without_tags)
-    return len(re.sub(r"\s+", " ", text).strip())
+    decoded = html.unescape(without_tags)
+    return len(re.sub(r"\s+", " ", decoded).strip())
 
 
 def validate_converted_fragment(fragment: str, note: Note) -> None:
     if not fragment.strip():
-        raise GuidanceUpdateError("CONTENT_VALIDATE", "Pandoc produced an empty HTML fragment.", note.slug)
+        raise GuidanceUpdateError("CONTENT_VALIDATE", "Converted HTML is empty.", note.slug)
 
-    text_length = visible_text_length(fragment)
-    if text_length < MINIMUM_CONVERTED_TEXT_LENGTH:
+    length = visible_text_length(fragment)
+    if length < MINIMUM_CONVERTED_TEXT_LENGTH:
         raise GuidanceUpdateError(
             "CONTENT_VALIDATE",
-            f"Converted content is unexpectedly short ({text_length} visible characters).",
+            f"Converted content has only {length} visible characters; expected at least {MINIMUM_CONVERTED_TEXT_LENGTH}.",
             note.slug,
         )
 
-    suspicious_patterns = (
-        r"\\begin\{document\}",
-        r"\\end\{document\}",
-        r"\\documentclass(?:\[[^]]*\])?\{",
+    lowered = fragment.casefold()
+    failure_markers = (
+        "pandoc: error",
+        "conversion failed",
+        "traceback (most recent call last)",
     )
-    for pattern in suspicious_patterns:
-        if re.search(pattern, fragment):
+    for marker in failure_markers:
+        if marker in lowered:
             raise GuidanceUpdateError(
                 "CONTENT_VALIDATE",
-                f"Converted HTML still contains unresolved LaTeX matching {pattern!r}.",
+                f"Converted HTML contains an error marker: {marker!r}.",
                 note.slug,
             )
 
 
+def copy_web_images(source_root: Path, staging_root: Path) -> set[str]:
+    source_images = source_root / "images"
+    destination_images = staging_root / "images"
+    copied: set[str] = set()
+
+    if not source_images.exists():
+        log("IMAGES", "No top-level images directory was found; continuing without copied images.")
+        destination_images.mkdir(parents=True, exist_ok=True)
+        return copied
+
+    if not source_images.is_dir():
+        raise GuidanceUpdateError(
+            "IMAGES",
+            f"Expected {source_images} to be a directory.",
+        )
+
+    log("IMAGES", f"Copying web-compatible images from {source_images}.")
+    destination_images.mkdir(parents=True, exist_ok=True)
+
+    for source in source_images.rglob("*"):
+        if not source.is_file():
+            continue
+        relative = source.relative_to(source_root)
+        if should_ignore_path(relative):
+            continue
+        if source.suffix.casefold() not in WEB_IMAGE_EXTENSIONS:
+            continue
+
+        destination = staging_root / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
+        copied.add(relative.as_posix())
+
+    log("IMAGES", f"Copied {len(copied)} web-compatible image file(s).")
+    return copied
+
+
 def normalize_image_reference(source: str) -> str | None:
-    parsed = urllib.parse.urlsplit(source)
+    parsed = urllib.parse.urlsplit(source.strip())
     if parsed.scheme or parsed.netloc or source.startswith("data:"):
         return None
 
-    path = urllib.parse.unquote(parsed.path).replace("\\", "/")
-    while path.startswith("./"):
-        path = path[2:]
-
+    path = urllib.parse.unquote(parsed.path).replace("\\", "/").lstrip("./")
     if not path:
         return None
 
-    pure = PurePosixPath(path)
-    if pure.is_absolute() or ".." in pure.parts:
-        raise GuidanceUpdateError("IMAGE_SECURITY", f"Unsafe image reference found in converted HTML: {source!r}.")
+    pure_path = PurePosixPath(path)
+    if pure_path.is_absolute() or ".." in pure_path.parts:
+        return None
 
-    if pure.parts and pure.parts[0].casefold() == "images":
-        return PurePosixPath("images", *pure.parts[1:]).as_posix()
-
-    return None
+    return pure_path.as_posix()
 
 
 def collect_image_references(fragment: str, note: Note) -> set[str]:
@@ -611,57 +695,34 @@ def collect_image_references(fragment: str, note: Note) -> set[str]:
     except Exception as exc:
         raise GuidanceUpdateError(
             "IMAGE_PARSE",
-            f"Could not inspect generated image references: {exc}.",
+            f"Could not inspect converted image references: {exc}.",
             note.slug,
         ) from exc
 
     references: set[str] = set()
     for source in parser.sources:
-        try:
-            normalized = normalize_image_reference(source)
-        except GuidanceUpdateError as exc:
-            raise GuidanceUpdateError(exc.stage, str(exc).split("] ", 1)[-1], note.slug) from exc
+        normalized = normalize_image_reference(source)
         if normalized:
             references.add(normalized)
     return references
 
 
-def copy_web_images(source_root: Path, staging_root: Path) -> set[str]:
-    source_images = source_root / "images"
-    destination_images = staging_root / "images"
-    copied: set[str] = set()
+def ensure_reference_case(reference: str, staging_root: Path) -> bool:
+    exact = staging_root.joinpath(*PurePosixPath(reference).parts)
+    if exact.is_file():
+        return True
 
-    if not source_images.is_dir():
-        log("IMAGES", "No top-level images directory was found; continuing without local images.")
-        return copied
+    found = case_insensitive_file(staging_root, reference)
+    if not found:
+        return False
 
-    log("IMAGES", f"Copying web-compatible images from {source_images}.")
-
-    for source in sorted(path for path in source_images.rglob("*") if path.is_file()):
-        relative_inside_images = source.relative_to(source_images)
-        relative_source = source.relative_to(source_root)
-
-        if ignored_path(relative_source):
-            continue
-
-        if source.suffix.casefold() not in WEB_IMAGE_EXTENSIONS:
-            log("IMAGES", f"Ignoring unsupported image file: {relative_source.as_posix()}.")
-            continue
-
-        destination = destination_images / relative_inside_images
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            shutil.copy2(source, destination)
-        except OSError as exc:
-            raise GuidanceUpdateError(
-                "IMAGE_COPY",
-                f"Could not copy {relative_source.as_posix()}: {exc}.",
-            ) from exc
-
-        copied.add(PurePosixPath("images", *relative_inside_images.parts).as_posix())
-
-    log("IMAGES", f"Copied {len(copied)} web-compatible image file(s).")
-    return copied
+    exact.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(found, exact)
+    log(
+        "IMAGE_CASE",
+        f"Created case-correct copy {reference!r} from {found.relative_to(staging_root).as_posix()!r}.",
+    )
+    return True
 
 
 def validate_referenced_images(
@@ -669,69 +730,10 @@ def validate_referenced_images(
     copied_images: set[str],
     staging_root: Path,
 ) -> None:
-    """Validate image references and repair harmless filename-case mismatches.
-
-    Dropbox, Windows, and macOS commonly treat filenames case-insensitively,
-    while GitHub Pages serves files from a case-sensitive filesystem. Pandoc
-    preserves the spelling used in the TeX source, so a reference ending in
-    ``.PNG`` can otherwise fail when the actual file is named ``.png``.
-    """
-    casefolded_images: dict[str, str] = {}
-    ambiguous_images: set[str] = set()
-
-    for copied in copied_images:
-        key = copied.casefold()
-        previous = casefolded_images.get(key)
-        if previous is not None and previous != copied:
-            ambiguous_images.add(key)
-        else:
-            casefolded_images[key] = copied
-
-    if ambiguous_images:
-        collisions = []
-        for key in sorted(ambiguous_images):
-            variants = sorted(path for path in copied_images if path.casefold() == key)
-            collisions.append(" / ".join(variants))
-        raise GuidanceUpdateError(
-            "IMAGE_CASE_COLLISION",
-            "The images folder contains filenames that differ only by letter case: "
-            + "; ".join(collisions)
-            + ". Rename the files so each case-insensitive path is unique.",
-        )
+    all_references = {reference for references in references_by_note.values() for reference in references}
 
     for note_slug, references in references_by_note.items():
-        missing: list[str] = []
-
-        for reference in sorted(references):
-            if reference in copied_images:
-                continue
-
-            actual = casefolded_images.get(reference.casefold())
-            if actual is None:
-                missing.append(reference)
-                continue
-
-            source_path = staging_root / Path(*PurePosixPath(actual).parts)
-            alias_path = staging_root / Path(*PurePosixPath(reference).parts)
-            alias_path.parent.mkdir(parents=True, exist_ok=True)
-
-            try:
-                shutil.copy2(source_path, alias_path)
-            except OSError as exc:
-                raise GuidanceUpdateError(
-                    "IMAGE_CASE_ALIAS",
-                    f"Could not create the case-matching image path {reference!r} "
-                    f"from {actual!r}: {exc}.",
-                    note_slug,
-                ) from exc
-
-            copied_images.add(reference)
-            log(
-                "IMAGE_REFERENCE",
-                f"Resolved filename-case mismatch: {reference} -> {actual}.",
-                note_slug,
-            )
-
+        missing = [reference for reference in sorted(references) if not ensure_reference_case(reference, staging_root)]
         if missing:
             raise GuidanceUpdateError(
                 "IMAGE_REFERENCE",
@@ -739,12 +741,8 @@ def validate_referenced_images(
                 note_slug,
             )
 
-
-def extract_style_block(template: str) -> str:
-    match = re.search(r"<style>(.*?)</style>", template, flags=re.IGNORECASE | re.DOTALL)
-    if not match:
-        raise GuidanceUpdateError("TEMPLATE", "The supervision template contains no <style> block.")
-    return match.group(1).strip()
+    if copied_images and not all_references:
+        log("IMAGES", "Images were copied, but none of the converted notes reference a local image.")
 
 
 def guidance_css(template_css: str) -> str:
@@ -772,8 +770,7 @@ def guidance_css(template_css: str) -> str:
       margin-bottom: 2rem;
     }
 
-    .back-link,
-    .download-link {
+    .back-link {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
@@ -789,13 +786,27 @@ def guidance_css(template_css: str) -> str:
                   border-color 0.16s ease, transform 0.16s ease;
     }
 
-    .back-link:hover,
-    .download-link:hover {
+    .back-link:hover {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
       transform: translateY(-1px);
     }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.16s ease;
+    }
+
+    .download-link:hover { color: var(--accent-strong); }
+
+    .download-link i { margin-right: 0.3rem; }
 
     .guidance-title {
       margin-bottom: 2rem;
@@ -1008,6 +1019,46 @@ def guidance_css(template_css: str) -> str:
       line-height: 1.35;
     }
 
+    .back-to-top-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 0 1.5rem 1.25rem;
+      background: var(--sheet);
+    }
+
+    .back-to-top {
+      width: 2.55rem;
+      height: 2.55rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.25);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(28, 28, 30, 0.05);
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease,
+                  box-shadow 0.16s ease;
+    }
+
+    .back-to-top:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(28, 28, 30, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .back-to-top:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    html { scroll-behavior: smooth; }
+
     .foot {
       display: flex;
       align-items: center;
@@ -1056,10 +1107,13 @@ def guidance_css(template_css: str) -> str:
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
       .index-card,
       .back-link,
       .download-link,
       .guidance-page-link,
+      .back-to-top,
       .socials a { transition: none; }
     }
 
@@ -1073,7 +1127,8 @@ def guidance_css(template_css: str) -> str:
       .index-card { border-top: 1px solid var(--line); border-left: none; }
       .index-card:first-child { border-top: none; }
       .guidance-toolbar { align-items: stretch; flex-direction: column; }
-      .back-link, .download-link { justify-content: center; }
+      .back-link { justify-content: center; }
+      .download-link { align-self: center; justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
       .foot { flex-direction: column; text-align: center; }
@@ -1161,6 +1216,14 @@ def pagination_html(note: Note) -> str:
       </nav>'''
 
 
+def back_to_top_html() -> str:
+    return '''      <div class="back-to-top-wrap">
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
+      </div>'''
+
+
 def format_display_date(iso_date: str) -> str:
     try:
         parsed = date.fromisoformat(iso_date)
@@ -1204,7 +1267,7 @@ def build_page(note: Note, fragment: str, digest: str, updated: str, template_cs
   </script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-<body>
+<body id="top">
   <main class="page">
     <article class="card">
 {navigation_html()}
@@ -1229,6 +1292,8 @@ def build_page(note: Note, fragment: str, digest: str, updated: str, template_cs
 {pagination_html(note)}
       </section>
 
+{back_to_top_html()}
+
 {footer_html()}
     </article>
   </main>
@@ -1240,6 +1305,7 @@ def build_page(note: Note, fragment: str, digest: str, updated: str, template_cs
 def validate_full_page(page: str, note: Note, digest: str, updated: str) -> None:
     required = (
         "<!DOCTYPE html>",
+        '<body id="top">',
         note.title,
         'class="index-nav"',
         'href="../dissertation.html"',
@@ -1248,6 +1314,8 @@ def validate_full_page(page: str, note: Note, digest: str, updated: str) -> None
         f'content="{digest}"',
         f'content="{updated}"',
         f"Information updated on {format_display_date(updated)}",
+        'class="back-to-top"',
+        'href="#top"',
         'class="foot"',
     )
     for fragment in required:
