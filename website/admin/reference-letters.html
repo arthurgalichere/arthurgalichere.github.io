@@ -1,1 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AG: Reference Letters</title>
+  <meta name="description" content="Information for undergraduate and postgraduate students requesting a reference letter from Arthur Galichère." />
 
+  <link rel="icon" type="image/png" href="../images/favicon_transparant.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --paper: #f4f5f7;
+      --paper-soft: #fafbfc;
+      --sheet: #ffffff;
+      --panel-deep: #e2e5e9;
+      --line: rgba(28, 28, 30, 0.08);
+      --line-strong: rgba(28, 28, 30, 0.15);
+      --ink: #1c1c1e;
+      --ink-soft: #3a3a3c;
+      --muted: #71717a;
+      --accent: #3b5a75;
+      --accent-strong: #25394b;
+      --accent-soft: #edf2f6;
+      --warning: #8a5a12;
+      --warning-soft: #fff8e8;
+      --display: 'Bitter', Georgia, serif;
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 0;
+      left: -9999px;
+      z-index: 100;
+      padding: 0.65rem 0.9rem;
+      color: #fff;
+      background: var(--ink);
+      font-size: 0.8rem;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+    }
+
+    .card {
+      width: min(100%, 1100px);
+      overflow: hidden;
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
+    }
+
+    .card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-left: 1px solid var(--line);
+      transition: color 0.16s ease, background-color 0.16s ease;
+    }
+
+    .index-card:first-child { border-left: none; }
+
+    .index-nav .idx-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .index-nav .idx-label i {
+      width: 1.1rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .index-card.is-current {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
+
+    .index-card:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .index-card:hover .idx-label,
+    .index-card:hover .idx-label i { color: #fff; }
+
+    .reference-body { padding: 3rem 2.5rem; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 2rem;
+      padding: 0.7rem 0.95rem;
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.25);
+      border-radius: 4px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .back-link:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .page-title {
+      margin-bottom: 1.25rem;
+      font-family: var(--display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .lead {
+      max-width: 870px;
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 1.75;
+      text-align: justify;
+    }
+
+    .content-section { margin-top: 3.5rem; }
+
+    .section-title {
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .request-panel {
+      padding: 1.5rem;
+      color: var(--ink-soft);
+      background: var(--paper-soft);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .request-panel p + p { margin-top: 1rem; }
+
+    .conditions-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      list-style: none;
+    }
+
+    .condition-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: start;
+      gap: 1rem;
+      padding: 1.2rem 1.25rem;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      line-height: 1.65;
+    }
+
+    .condition-icon {
+      width: 2.35rem;
+      height: 2.35rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--accent);
+      border-radius: 50%;
+      font-size: 0.85rem;
+    }
+
+    .condition-title {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .unavailable-note {
+      margin-top: 1.25rem;
+      padding: 1.1rem 1.2rem;
+      color: var(--warning);
+      background: var(--warning-soft);
+      border-left: 4px solid var(--warning);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .email-action {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding: 1.2rem 1.25rem;
+      color: var(--ink);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.28);
+      border-radius: 5px;
+      text-decoration: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease,
+                  transform 0.16s ease;
+    }
+
+    .email-action:hover {
+      border-color: rgba(59, 90, 117, 0.55);
+      box-shadow: 0 8px 20px rgba(28, 28, 30, 0.07);
+      transform: translateY(-1px);
+    }
+
+    .email-icon {
+      width: 2.7rem;
+      height: 2.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--accent);
+      border-radius: 50%;
+      font-size: 0.95rem;
+    }
+
+    .email-title {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .email-description {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .email-action .fa-chevron-right {
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .foot {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--panel-deep);
+      border-top: 1px solid var(--line);
+    }
+
+    .foot-loc {
+      justify-self: end;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      justify-self: start;
+      gap: 0.4rem;
+    }
+
+    .socials a,
+    .back-to-top {
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .socials a { border-radius: 4px; }
+
+    .back-to-top {
+      justify-self: center;
+      border-radius: 50%;
+    }
+
+    .socials a:hover,
+    .back-to-top:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      .back-link,
+      .email-action,
+      .socials a,
+      .back-to-top { transition: none; }
+    }
+
+    @media (max-width: 768px) {
+      .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .reference-body { padding: 2rem 1.5rem; }
+    }
+
+    @media (max-width: 680px) {
+      .index-nav { grid-template-columns: 1fr; }
+      .index-card {
+        border-top: 1px solid var(--line);
+        border-left: none;
+      }
+      .index-card:first-child { border-top: none; }
+      .page-title { font-size: 2.15rem; }
+      .lead { text-align: left; }
+      .email-action {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+      .email-action .fa-chevron-right { display: none; }
+      .foot {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+      .back-to-top { grid-row: 1; }
+      .socials {
+        grid-row: 2;
+        justify-self: center;
+      }
+      .foot-loc {
+        grid-row: 3;
+        justify-self: center;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <main id="main-content" class="page">
+    <article class="card">
+      <nav class="index-nav" aria-label="Academic Directory">
+        <a href="../../index.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
+        </a>
+        <a href="../../cv.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-file" aria-hidden="true"></i> CV</span>
+        </a>
+        <a href="../../research.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-line" aria-hidden="true"></i> Research</span>
+        </a>
+        <a href="../../teaching.html" class="index-card is-current" aria-current="page">
+          <span class="idx-label"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Teaching</span>
+        </a>
+        <a href="../../economics.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
+        </a>
+      </nav>
+
+      <section class="reference-body">
+        <a href="../../teaching.html" class="back-link">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i>
+          Back to Teaching
+        </a>
+
+        <h1 class="page-title">Reference Letters</h1>
+        <p class="lead">
+          I am happy to support undergraduate and postgraduate students by providing academic reference letters where I am able to do so. Please read the conditions below before emailing your request, as they help me manage applications fairly and prepare references to an appropriate standard.
+        </p>
+
+        <section class="content-section" aria-labelledby="request-title">
+          <h2 id="request-title" class="section-title">Before Making a Request</h2>
+
+          <div class="request-panel">
+            <p>I aim to accommodate reference requests from students whenever my availability and the application timetable allow.</p>
+
+            <ul class="conditions-list">
+              <li class="condition-card">
+                <span class="condition-icon" aria-hidden="true">
+                  <i class="fas fa-calendar-xmark"></i>
+                </span>
+                <span>
+                  <span class="condition-title">January to April</span>
+                  I cannot accept reference requests between January and April. Outside this period, you are welcome to contact me by email.
+                </span>
+              </li>
+
+              <li class="condition-card">
+                <span class="condition-icon" aria-hidden="true">
+                  <i class="fas fa-hourglass-half"></i>
+                </span>
+                <span>
+                  <span class="condition-title">Minimum notice</span>
+                  Due to the number of requests I receive, I can consider only applications whose submission deadline is at least three weeks away when you contact me. This is necessary, as  I cannot guarantee that a reference will be completed in time when less than three weeks notice is provided.
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <a href="mailto:arthur.galichere@warwick.ac.uk?subject=Reference%20letter%20request" class="email-action">
+            <span class="email-icon" aria-hidden="true">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span>
+              <span class="email-title">Request a Reference Letter</span>
+              <span class="email-description">Email your request outside the January–April restricted period and at least three weeks before the deadline.</span>
+            </span>
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </a>
+        </section>
+      </section>
+
+      <footer class="foot">
+        <div class="socials">
+          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          </a>
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
+            <i class="fas fa-university" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
+
+        <span class="foot-loc">University of Warwick · Coventry, UK</span>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
