@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arthur Galichère — Structure of the Dissertation</title>
   <meta name="description" content="Guidance by Arthur Galichère on structuring an economics dissertation." />
-  <meta name="guidance-source-digest" content="b2e16d3935aa84b9ca7ab2e29c445a20d3229440c03c2f4ae2a329f6062cc376" />
+  <meta name="guidance-source-digest" content="a7607e494c8d0c903079c2dfe15e49cd908a9f6d894af9212420f65766d1ab31" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -13,8 +13,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
+
     :root {
       --paper: #f4f5f7;
       --paper-soft: #fafbfc;
@@ -259,11 +261,16 @@
 
     .guidance-content img {
       display: block;
+      width: auto;
       max-width: 100%;
       height: auto;
       margin: 1.5rem auto;
       border: 1px solid var(--line-strong);
       border-radius: 4px;
+    }
+
+    .guidance-content img[style*="--tex-image-width"] {
+      width: var(--tex-image-width);
     }
 
     .guidance-content figure { margin: 1.5rem 0; }
@@ -324,55 +331,58 @@
       border-radius: 4px;
     }
 
-    .guidance-update {
-      margin-top: 3rem;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      text-align: center;
+    .guidance-content pre code {
+      padding: 0;
+      background: transparent;
+      border: none;
     }
 
     .guidance-pagination {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
     }
 
     .guidance-pagination.is-single { grid-template-columns: minmax(0, 1fr); }
 
     .guidance-page-link {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.85rem;
       min-width: 0;
       padding: 1rem 1.1rem;
-      color: var(--accent-strong);
+      color: var(--ink);
       background: var(--paper-soft);
       border: 1px solid var(--line-strong);
       border-radius: 5px;
       text-decoration: none;
       transition: color 0.16s ease, background-color 0.16s ease,
-                  border-color 0.16s ease, transform 0.16s ease;
+                  border-color 0.16s ease, box-shadow 0.16s ease,
+                  transform 0.16s ease;
     }
 
-    .guidance-page-link.is-next { justify-content: flex-end; text-align: right; }
-
     .guidance-page-link:hover {
-      color: #fff;
-      background: var(--accent);
-      border-color: var(--accent);
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      border-color: rgba(59, 90, 117, 0.4);
+      box-shadow: 0 7px 18px rgba(28, 28, 30, 0.06);
       transform: translateY(-1px);
     }
 
-    .guidance-page-link i { flex: 0 0 auto; }
+    .guidance-page-link.next { text-align: right; }
 
-    .guidance-page-copy { min-width: 0; }
+    .guidance-page-link .direction-icon,
+    .guidance-page-link .page-arrow {
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
 
-    .guidance-page-direction {
+    .guidance-page-label {
       display: block;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.2rem;
+      color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.08em;
@@ -388,15 +398,24 @@
       line-height: 1.35;
     }
 
+    .guidance-update {
+      margin-top: 2.25rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-align: center;
+    }
+
     .back-to-top {
       width: 2.55rem;
       height: 2.55rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border: 1px solid rgba(59, 90, 117, 0.25);
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
       border-radius: 50%;
       font-size: 0.85rem;
       text-decoration: none;
@@ -486,6 +505,10 @@
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .guidance-body { padding: 2rem 1.5rem; }
+
+      .guidance-content img[style*="--tex-image-width"] {
+        width: min(100%, calc(var(--tex-image-width) + 30%));
+      }
     }
 
     @media (max-width: 680px) {
@@ -502,18 +525,11 @@
         flex-direction: column;
         text-align: center;
       }
+      .foot .back-to-top { order: -1; }
       .foot-loc { justify-self: auto; }
       .socials { justify-self: auto; }
     }
   </style>
-
-  <script>
-    window.MathJax = {
-      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
-      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
-    };
-  </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body id="top">
   <main class="page">
@@ -550,7 +566,8 @@
 
         <h1 class="guidance-title">Structure of the Dissertation</h1>
 
-        <div class="guidance-content"><h1 class="unnumbered" id="abstract">Abstract</h1>
+        <div class="guidance-content">
+<h1 class="unnumbered" id="abstract">Abstract</h1>
 <ol>
 <li><p>“This dissertation studies ..."</p></li>
 <li><p>Very brief overview of the methodology (1-3 sentences)</p></li>
@@ -596,18 +613,21 @@
 <ol>
 <li><p>First paragraph: briefly remind the reader about the research question, the methodology and answer the research question</p></li>
 <li><p>Present a summarised version of main results: one paragraph per result</p></li>
-</ol></div>
-        <p class="guidance-update">Information updated on 24/08/2026</p>
+</ol>
+        </div>
 
       <nav class="guidance-pagination is-single" aria-label="Guidance note navigation">
-        <a class="guidance-page-link is-previous" href="literature-review.html">
-          <i class="fas fa-arrow-left" aria-hidden="true"></i>
-          <span class="guidance-page-copy">
-            <span class="guidance-page-direction">Previous note</span>
+        <a href="literature-review.html" class="guidance-page-link previous">
+          <i class="fas fa-arrow-left direction-icon" aria-hidden="true"></i>
+          <span>
+            <span class="guidance-page-label">Previous guidance note</span>
             <span class="guidance-page-title">A Guide to Writing Your Literature Review</span>
           </span>
+          <i class="fas fa-chevron-left page-arrow" aria-hidden="true"></i>
         </a>
       </nav>
+
+        <p class="guidance-update">Information updated on 24/08/2026</p>
       </section>
 
       <footer class="foot">

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arthur Galichère — A Guide to Writing Your Literature Review</title>
   <meta name="description" content="Guidance by Arthur Galichère on writing a literature review for an economics dissertation." />
-  <meta name="guidance-source-digest" content="76d445090e9f5c40c13f5fc1ac0e6af498be44bba8712dacc9eba71e30aeb98c" />
+  <meta name="guidance-source-digest" content="22060766c94cd3d4f4e49c19ad7772542d9cb70bcd17ccf14e5d94781b852fce" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -13,8 +13,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
+
     :root {
       --paper: #f4f5f7;
       --paper-soft: #fafbfc;
@@ -259,11 +261,16 @@
 
     .guidance-content img {
       display: block;
+      width: auto;
       max-width: 100%;
       height: auto;
       margin: 1.5rem auto;
       border: 1px solid var(--line-strong);
       border-radius: 4px;
+    }
+
+    .guidance-content img[style*="--tex-image-width"] {
+      width: var(--tex-image-width);
     }
 
     .guidance-content figure { margin: 1.5rem 0; }
@@ -324,55 +331,58 @@
       border-radius: 4px;
     }
 
-    .guidance-update {
-      margin-top: 3rem;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      text-align: center;
+    .guidance-content pre code {
+      padding: 0;
+      background: transparent;
+      border: none;
     }
 
     .guidance-pagination {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
     }
 
     .guidance-pagination.is-single { grid-template-columns: minmax(0, 1fr); }
 
     .guidance-page-link {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.85rem;
       min-width: 0;
       padding: 1rem 1.1rem;
-      color: var(--accent-strong);
+      color: var(--ink);
       background: var(--paper-soft);
       border: 1px solid var(--line-strong);
       border-radius: 5px;
       text-decoration: none;
       transition: color 0.16s ease, background-color 0.16s ease,
-                  border-color 0.16s ease, transform 0.16s ease;
+                  border-color 0.16s ease, box-shadow 0.16s ease,
+                  transform 0.16s ease;
     }
 
-    .guidance-page-link.is-next { justify-content: flex-end; text-align: right; }
-
     .guidance-page-link:hover {
-      color: #fff;
-      background: var(--accent);
-      border-color: var(--accent);
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      border-color: rgba(59, 90, 117, 0.4);
+      box-shadow: 0 7px 18px rgba(28, 28, 30, 0.06);
       transform: translateY(-1px);
     }
 
-    .guidance-page-link i { flex: 0 0 auto; }
+    .guidance-page-link.next { text-align: right; }
 
-    .guidance-page-copy { min-width: 0; }
+    .guidance-page-link .direction-icon,
+    .guidance-page-link .page-arrow {
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
 
-    .guidance-page-direction {
+    .guidance-page-label {
       display: block;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.2rem;
+      color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.08em;
@@ -388,15 +398,24 @@
       line-height: 1.35;
     }
 
+    .guidance-update {
+      margin-top: 2.25rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-align: center;
+    }
+
     .back-to-top {
       width: 2.55rem;
       height: 2.55rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border: 1px solid rgba(59, 90, 117, 0.25);
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
       border-radius: 50%;
       font-size: 0.85rem;
       text-decoration: none;
@@ -486,6 +505,10 @@
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .guidance-body { padding: 2rem 1.5rem; }
+
+      .guidance-content img[style*="--tex-image-width"] {
+        width: min(100%, calc(var(--tex-image-width) + 30%));
+      }
     }
 
     @media (max-width: 680px) {
@@ -502,18 +525,11 @@
         flex-direction: column;
         text-align: center;
       }
+      .foot .back-to-top { order: -1; }
       .foot-loc { justify-self: auto; }
       .socials { justify-self: auto; }
     }
   </style>
-
-  <script>
-    window.MathJax = {
-      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
-      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
-    };
-  </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body id="top">
   <main class="page">
@@ -550,7 +566,8 @@
 
         <h1 class="guidance-title">A Guide to Writing Your Literature Review</h1>
 
-        <div class="guidance-content"><p>The literature review is one of the most important sections of your dissertation as it places your project in the literature and highlights the novelty of your research. Despite being an important element of the dissertation, many students overlook this section. This note will provide you with a simple and efficient method on how to elaborate your literature review.</p>
+        <div class="guidance-content">
+<p>The literature review is one of the most important sections of your dissertation as it places your project in the literature and highlights the novelty of your research. Despite being an important element of the dissertation, many students overlook this section. This note will provide you with a simple and efficient method on how to elaborate your literature review.</p>
 <p>Once you have a <em>vague</em> research topic in mind, the constitution of your literature review starts right away. In other words, you are going to gather information, and thus start your literature review, while you are narrowing down your research question.</p>
 <p>When you have a settled on research topic, you are going to narrow your research question by examining what other researchers have done. That is to say, you are going to read papers. This is the crucial moment when you should not waste time and take some notes on the work of others. By collecting the essential information for every paper you are reading related to your research topic, you are constituting your own literature review.</p>
 <p>What is the essential information you should collect? You need to write down the author(s), the year of publication (or the year of the current version of the working paper), the research question, the answer to this research question and their methodology. Additionally, and crucially if you are doing an empirical project, you should note what data was used and where it was collected. This will be tremendously helpful for your project since you will not waste time searching for what data you should use and where to get it. Finally, you can include a final column called <em>comments</em> where you write about the paper’s specific details, such as particular variables, important theoretical mechanisms, or just some observations.</p>
@@ -627,25 +644,29 @@
 <li><p>Highlighting areas that demand further exploration and identify inconsistencies or puzzles in the current literature</p></li>
 <li><p>Examining the predominant methodologies and research techniques employed in the field, briefly outlining their respective strengths and weaknesses. For theoretical papers, this means retrieving and explaining the key mechanisms that generate the study’s results</p></li>
 </ul>
-<p>The last question is how to organise your literature review: Chronologically? Or by topics? Maybe an alternative way? There is no right answer to this question as different projects will be more adequate to one style or another. Then I will leave this answer to your own judgment.</p></div>
-        <p class="guidance-update">Information updated on 24/08/2026</p>
+<p>The last question is how to organise your literature review: Chronologically? Or by topics? Maybe an alternative way? There is no right answer to this question as different projects will be more adequate to one style or another. Then I will leave this answer to your own judgment.</p>
+        </div>
 
       <nav class="guidance-pagination" aria-label="Guidance note navigation">
-        <a class="guidance-page-link is-previous" href="writing-dissertation.html">
-          <i class="fas fa-arrow-left" aria-hidden="true"></i>
-          <span class="guidance-page-copy">
-            <span class="guidance-page-direction">Previous note</span>
+        <a href="writing-dissertation.html" class="guidance-page-link previous">
+          <i class="fas fa-arrow-left direction-icon" aria-hidden="true"></i>
+          <span>
+            <span class="guidance-page-label">Previous guidance note</span>
             <span class="guidance-page-title">A Guide to Writing Your Dissertation</span>
           </span>
+          <i class="fas fa-chevron-left page-arrow" aria-hidden="true"></i>
         </a>
-        <a class="guidance-page-link is-next" href="dissertation-structure.html">
-          <span class="guidance-page-copy">
-            <span class="guidance-page-direction">Next note</span>
+        <a href="dissertation-structure.html" class="guidance-page-link next">
+          <i class="fas fa-chevron-right page-arrow" aria-hidden="true"></i>
+          <span>
+            <span class="guidance-page-label">Next guidance note</span>
             <span class="guidance-page-title">Structure of the Dissertation</span>
           </span>
-          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          <i class="fas fa-arrow-right direction-icon" aria-hidden="true"></i>
         </a>
       </nav>
+
+        <p class="guidance-update">Information updated on 24/08/2026</p>
       </section>
 
       <footer class="foot">
