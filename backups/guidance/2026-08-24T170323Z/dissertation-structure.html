@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arthur Galichère — A Guide to Writing Your Dissertation</title>
-  <meta name="description" content="Guidance by Arthur Galichère on writing an economics dissertation." />
-  <meta name="guidance-source-digest" content="90d01faa57d966be0813a9ba70caf2d3d6632e16062c14dd09dd0d6b62657d4f" />
+  <title>Arthur Galichère — Structure of the Dissertation</title>
+  <meta name="description" content="Guidance by Arthur Galichère on structuring an economics dissertation." />
+  <meta name="guidance-source-digest" content="1d7b00dbe05097c4f79424e6aefd870060a0e8475da1196b52e4814234f3b4a9" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -49,7 +49,8 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a:focus-visible {
+    a:focus-visible,
+    summary:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 2px;
@@ -175,6 +176,7 @@
     }
 
     .download-link:hover { color: var(--accent-strong); }
+
     .download-link i { margin-right: 0.3rem; }
 
     .guidance-title {
@@ -388,6 +390,13 @@
       line-height: 1.35;
     }
 
+    .back-to-top-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 0 1.5rem 1.25rem;
+      background: var(--sheet);
+    }
+
     .back-to-top {
       width: 2.55rem;
       height: 2.55rem;
@@ -422,19 +431,16 @@
     html { scroll-behavior: smooth; }
 
     .foot {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 1rem;
       padding: 0.9rem 1.5rem;
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
 
-    .foot .back-to-top { justify-self: center; }
-
     .foot-loc {
-      justify-self: end;
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -445,7 +451,6 @@
     .socials {
       display: flex;
       align-items: center;
-      justify-self: start;
       gap: 0.4rem;
     }
 
@@ -497,13 +502,7 @@
       .download-link { align-self: center; justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
-      .foot {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-      }
-      .foot-loc { justify-self: auto; }
-      .socials { justify-self: auto; }
+      .foot { flex-direction: column; text-align: center; }
     }
   </style>
 
@@ -542,76 +541,79 @@
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
             Dissertation Supervision and Guidance
           </a>
-          <a href="https://www.dropbox.com/scl/fi/1unhpr8pmujck02cnqy2z/A-Guide-to-writing-your-Dissertation.pdf?rlkey=b6rj35sb9hql0hsfc5a2hf8lz&amp;st=jnxjdp8q&amp;dl=1" class="download-link">
+          <a href="https://www.dropbox.com/scl/fi/70uu4hmon81ekrnwunlsq/Structure-of-the-dissertation.pdf?rlkey=s1on52nrda7vc3ffhn5x5q7qf&amp;st=tn1rx8v4&amp;dl=1" class="download-link">
             <i class="fas fa-download" aria-hidden="true"></i>
             Download PDF
           </a>
         </div>
 
-        <h1 class="guidance-title">A Guide to Writing Your Dissertation</h1>
+        <h1 class="guidance-title">Structure of the Dissertation</h1>
 
-        <div class="guidance-content"><h1 class="unnumbered" id="motivations">Motivations</h1>
-<p>The motivations of your project are one of the most crucial sections of your dissertation. Here, you will engage the readers and spark their curiosity about your project. Therefore, you need to clearly demonstrate the purpose of your project. In other words, you must attempt to answer the following questions:</p>
-<ul>
-<li><p>What is the problem you are tackling?</p></li>
-<li><p>Why this problem should be studied?</p></li>
-<li><p>Why is your project worth reading?</p></li>
-<li><p>What will the readers learn from your project?</p></li>
-</ul>
-<p>If you manage to answer these questions, then the readers will be interested to discover your project.</p>
-<h1 class="unnumbered" id="content">Content</h1>
-<p>While the motivations of your paper are crucial, the entire paper should convey some interest. What is the story of your project? What do you want to tell the others? And never forget, What is the big picture? Details matter, but so does how you connect them. You need to keep in mind what is the big picture of your project, but you also need to explain it to the readers!</p>
-<p>How to write a good project? In addition to being interesting and motivated, it should be <strong>accessible</strong>! Your story should be <strong>clear</strong> and <strong>logical</strong>. The readers should understand your thought process! Organise your ideas and structure your text. <strong>Define terms, abbreviations and important concepts</strong> that the readers are unlikely to know. You want the reading of your project to be as smooth as possible. Imagine that your target audience is an undergraduate student in economics, but who might not have studied the same courses as you. Therefore, think how you would explain your story to this student to be sure that it is understandable.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>You need to keep in mind that the rigour of your dissertation is at least as important as its scope. Having a good story is great, but you need to back it up with a strong argumentation (i.e. with an adequate methodology). Otherwise, your dissertation will not demonstrate anything, which is the height of a dissertation.</p>
-<p>However, developing a strong argumentation does not mean that you should not talk about the ‘weaknesses’ of your project. On the contrary, you want <strong>transparency</strong>! Your project will be taken more seriously if you address the potential weaknesses of your analysis. This shows that you understood the limitations of the available data, certain techniques or your analysis, and that you can discuss the real impact of your results having these issues in mind and not deceive the readers. Therefore do not hesitate to discuss potential issues that you face or the limits of your analysis. It can be done in the appendix if there is no adequate place in the main text.</p>
-<p>Finally, remember that you are writing an academic paper. Your dissertation should be scientific, meaning that you should make abstraction of your personal opinion/experience. This does not mean that your beliefs or personal experience cannot drive your project, but you must remain <em>neutral</em> in your academic process.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> This is what we call <strong>research integrity</strong>; conducting research in such a way that allows others to have confidence and trust in the methods and the findings of the research. You should realise that this part on <em>integrity</em> closely relates to the part on <em>transparency</em>.</p>
-<h1 class="unnumbered" id="methodology">Methodology</h1>
-<p>The research methodology is used to justify to the readers your research process. You need to keep in mind that your justification should be derived from an analysis of the relevant literature, if existing.</p>
-<p>First, begin with this section by stating, again or in a different manner, the research objectives of your project. This will enable the readers to assess the validity of your chosen research methodology. Second, state your methodological process and describe it. Finally, explain and clarify your choice within the context of the existing literature and discuss potential issues</p>
-<h1 class="unnumbered" id="data">Data</h1>
-<p>This section is used to present the data you are going to use in your analysis. Explain what type of data you are going to use, where it is located (name of the database), the unit (level, growth rate, ...), how many observations there are, which periods are covered by your data and what is the frequency? Ideally, create a table summarising everything above with an extra column explaining the rationale of this data/variable. You can include a simplified table in this section and a more detailed table in the appendix if needed.</p>
-<h1 class="unnumbered" id="results">Results</h1>
-<p>Remember, <em>the econometrics is only a tool, the focus is on the economics</em>. While the research methodology is the backbone of your dissertation, the story is the heart, and this story needs to be grounded in theory. Thus, you need to think about how to present your results and more importantly, how to interpret them. That is where economics enters: use economic theory to interpret and explain your results. Modern economic theory is mostly based on the utilitarian approach (micro, macro, game theory, etc), therefore, you should analyse your results through the lens of this framework (if possible, some projects or research questions might not be suited for that).</p>
-<h1 class="unnumbered" id="form">Form</h1>
-<ul>
-<li><p>Justify your text: distribute evenly your text between the two margins</p></li>
-<li><p>Use simple sentences: you are writing an academic paper, not poetry! The readers have to process a lot of information while reading your text. Therefore you should make it easy for the readers to read your paper and not lose them with complicated sentences</p></li>
-<li><p>Use paragraph: try to express one idea per paragraph such that the readers can see the logical organisation of your thoughts</p></li>
-<li><p>Let your text breathe: do not write one block of text with a small font. The readers should not lose their eyesight while deciphering your text! Use sections (and maybe subsections), writes paragraphs, let a bit of space between the lines, etc.</p></li>
-</ul>
-<h1 class="unnumbered" id="writing-advice">Writing advice</h1>
-<p>No one is born Shakespeare, so it is fine to not write good sentences right away. The following advice might help you to write your dissertation: Write sentences as they sound in your head, even if they do not sound good. Write everything that seems important, even if it is not well formulated. Once you have everything on paper, you are going to reorganise your text. Try to find how to tell your ‘story’, rewrite some (many) parts and remove things that you do not like. This process should help you to see the entire structure of your dissertation and how to improve it without missing important parts.</p>
-<h1 class="unnumbered" id="so-how-should-you-write-your-dissertation">So how should you write your dissertation?</h1>
-<p>To summarise, think about how your project (and text) will be perceived by the readers. You want to write a clear, logical and accessible story that is well-motivated and well-advocated.</p>
-<p><span class="math display">\[\begin{aligned}
-Success &amp;=&amp; f(work)+chance
-\end{aligned}\]</span></p>
-<aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr />
+        <div class="guidance-content"><h1 class="unnumbered" id="abstract">Abstract</h1>
 <ol>
-<li id="fn1"><p>You can use <em>footnotes</em> to give extra details that do not find a logical place in the main text.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Convictions and personal experience are sometimes a source of motivation for researchers. This means that these researchers already have an expectation about future findings in mind at the very beginning of their project. However, whatever the final results of their research, their research method must be free of any form of bias.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li><p>“This dissertation studies ..."</p></li>
+<li><p>Very brief overview of the methodology (1-3 sentences)</p></li>
+<li><p>Contribution and brief overview of the results</p></li>
 </ol>
-</aside></div>
+<h1 id="introduction">Introduction</h1>
+<ol>
+<li><p>Context and Motivation</p></li>
+<li><p>Presentation of important concepts</p></li>
+<li><p>Research question(s)</p></li>
+<li><p>Optional: what is your hypothesis?</p></li>
+<li><p>State the analytical method (what type of data/model) to answer your research question</p></li>
+<li><p>Contribution and extensive overview of the results</p></li>
+</ol>
+<h1 id="literature-review">Literature Review</h1>
+<ol>
+<li><p>Chronological and/or by topics presentation of the literature</p></li>
+<li><p>Research gaps and contribution</p></li>
+</ol>
+<h1 id="methodology">Methodology</h1>
+<p>The guidance in this section is tailored to the specific type of your project. If you are undertaking an empirical study, refer to subsection <a href="#meth_empi" data-reference-type="ref" data-reference="meth_empi">[meth_empi]</a> for detailed instructions. Conversely, if you are engaged in a theoretical project, consult subsection <a href="#meth_theor" data-reference-type="ref" data-reference="meth_theor">[meth_theor]</a> for comprehensive guidance.</p>
+<h2 id="empirical-analysis">Empirical Analysis<span id="meth_empi" label="meth_empi"></span></h2>
+<p>Before presenting the data, model and diagnostic tests, write an <u>introductory short summary</u> <u>paragraph</u> presenting what model will be used, what are the data / important variables and the sample characteristics (starting-ending dates, frequency, time series / panel data / cross-sectional data, ...).</p>
+<ol>
+<li><p>Data subsection: presentation of data and transformation, plots of the data and descriptive statistics</p></li>
+<li><p>Model subsection: presentation of the model and variables and reasons/arguments of the choice of the model (Why this model? What are the advantages or disadvantages? ...)</p></li>
+<li><p>Diagnostic tests: What, why and interpretations of the results of the tests</p></li>
+</ol>
+<h2 id="theoretical-analysis">Theoretical Analysis<span id="meth_theor" label="meth_theor"></span></h2>
+<p>Before presenting the model, write one or two <u>introductory short summary paragraphs</u> explaining your model: On which model is based yours? What type of model is it (Growth, RBC, RANK, HANK, ...)? How many agents populate the economy and what are their economic roles? How many assets/means of saving are available to the agents? How many firms and type of firms? What are the main frictions in the environment (if any)?</p>
+<ol>
+<li><p>Agents problems subsection: presentation of maximisation problems of the agents and their optimal behaviours</p></li>
+<li><p>Aggregation and equilibrium subsection: presentation of the system and its variables</p></li>
+<li><p>Calibration: present the parameters and their values, as well as the source of the calibration (optional: present the data moments that the model’s calibration tries to replicate)</p></li>
+</ol>
+<h1 id="results">Results</h1>
+<p>Before presenting the results in details, write an <u>introductory short summary paragraph</u> presenting an overview of the main results.</p>
+<ol>
+<li><p>Present the results of the analysis and explain/interpret them using economic theory</p></li>
+<li><p>Tables and graphs should include a table/figure number, title, legend and a explanatory note below (the table/figure should be understandable without reading the main text)</p></li>
+</ol>
+<h1 id="conclusion">Conclusion</h1>
+<ol>
+<li><p>First paragraph: briefly remind the reader about the research question, the methodology and answer the research question</p></li>
+<li><p>Present a summarised version of main results: one paragraph per result</p></li>
+</ol></div>
         <p class="guidance-update">Information updated on 24/08/2026</p>
 
-      <nav class="guidance-pagination" aria-label="Guidance note navigation">
-        <a class="guidance-page-link is-previous" href="getting-started.html">
+      <nav class="guidance-pagination is-single" aria-label="Guidance note navigation">
+        <a class="guidance-page-link is-previous" href="literature-review.html">
           <i class="fas fa-arrow-left" aria-hidden="true"></i>
           <span class="guidance-page-copy">
             <span class="guidance-page-direction">Previous note</span>
-            <span class="guidance-page-title">Getting Started with Your Dissertation</span>
-          </span>
-        </a>
-        <a class="guidance-page-link is-next" href="literature-review.html">
-          <span class="guidance-page-copy">
-            <span class="guidance-page-direction">Next note</span>
             <span class="guidance-page-title">A Guide to Writing Your Literature Review</span>
           </span>
-          <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
       </nav>
       </section>
+
+      <div class="back-to-top-wrap">
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
+      </div>
 
       <footer class="foot">
         <div class="socials">
@@ -628,9 +630,6 @@ Success &amp;=&amp; f(work)+chance
             <i class="fab fa-linkedin" aria-hidden="true"></i>
           </a>
         </div>
-        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
-          <i class="fas fa-arrow-up" aria-hidden="true"></i>
-        </a>
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
     </article>

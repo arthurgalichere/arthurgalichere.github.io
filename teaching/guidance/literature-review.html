@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arthur Galichère — A Guide to Writing Your Literature Review</title>
   <meta name="description" content="Guidance by Arthur Galichère on writing a literature review for an economics dissertation." />
-  <meta name="guidance-source-digest" content="61f86f5a579a850e47471790e3b48c0be133bfabcd07fff0b6369246faa43c6d" />
+  <meta name="guidance-source-digest" content="76d445090e9f5c40c13f5fc1ac0e6af498be44bba8712dacc9eba71e30aeb98c" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -49,8 +49,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a:focus-visible,
-    summary:focus-visible {
+    a:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 2px;
@@ -176,7 +175,6 @@
     }
 
     .download-link:hover { color: var(--accent-strong); }
-
     .download-link i { margin-right: 0.3rem; }
 
     .guidance-title {
@@ -390,13 +388,6 @@
       line-height: 1.35;
     }
 
-    .back-to-top-wrap {
-      display: flex;
-      justify-content: center;
-      padding: 0 1.5rem 1.25rem;
-      background: var(--sheet);
-    }
-
     .back-to-top {
       width: 2.55rem;
       height: 2.55rem;
@@ -431,16 +422,19 @@
     html { scroll-behavior: smooth; }
 
     .foot {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
       align-items: center;
-      justify-content: space-between;
       gap: 1rem;
       padding: 0.9rem 1.5rem;
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
 
+    .foot .back-to-top { justify-self: center; }
+
     .foot-loc {
+      justify-self: end;
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -451,6 +445,7 @@
     .socials {
       display: flex;
       align-items: center;
+      justify-self: start;
       gap: 0.4rem;
     }
 
@@ -502,7 +497,13 @@
       .download-link { align-self: center; justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
-      .foot { flex-direction: column; text-align: center; }
+      .foot {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+      .foot-loc { justify-self: auto; }
+      .socials { justify-self: auto; }
     }
   </style>
 
@@ -647,12 +648,6 @@
       </nav>
       </section>
 
-      <div class="back-to-top-wrap">
-        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
-          <i class="fas fa-arrow-up" aria-hidden="true"></i>
-        </a>
-      </div>
-
       <footer class="foot">
         <div class="socials">
           <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
@@ -668,6 +663,9 @@
             <i class="fab fa-linkedin" aria-hidden="true"></i>
           </a>
         </div>
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
     </article>
