@@ -45,15 +45,22 @@
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { width: 100%; overflow-x: hidden; background: var(--paper); }
+
+    html {
+      width: 100%;
+      overflow-x: hidden;
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
+
     body {
       min-width: 0;
       min-height: 100vh;
-      font-family: var(--sans);
+      color: var(--ink);
       background:
         radial-gradient(circle 840px at 50% -16%, #ffffff 0%, transparent 52%),
         linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
-      color: var(--ink);
+      font-family: var(--sans);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -61,22 +68,35 @@
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
     .skip {
       position: absolute;
       left: -9999px;
       top: 0;
-      background: var(--ink);
-      color: #fff;
+      z-index: 200;
       padding: 0.55rem 0.9rem;
+      color: #fff;
+      background: var(--ink);
+      border-radius: 3px;
       font-family: var(--mono);
       font-size: 0.78rem;
       font-weight: 500;
-      z-index: 200;
-      border-radius: 3px;
     }
+
     .skip:focus { left: 1rem; top: 1rem; }
-    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
 
     .page {
       width: 100%;
@@ -85,38 +105,47 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
       gap: 0.55rem;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
     }
 
     .card {
       position: relative;
       width: min(100%, 1100px);
       min-width: 0;
+      overflow: hidden;
       background: var(--sheet);
       border: 1px solid var(--line-strong);
       border-radius: 6px;
       box-shadow: 0 1px 2px rgba(28, 28, 30, 0.03), 0 20px 48px rgba(28, 28, 30, 0.08);
-      overflow: hidden;
     }
-    .card::before { content: ''; display: block; height: 4px; background: var(--accent); }
+
+    .card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: var(--accent);
+    }
 
     .index-nav {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
       border-bottom: 1px solid var(--line-strong);
     }
+
     .index-card {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 1rem;
       padding: 1.1rem 1.4rem;
-      border-left: 1px solid var(--line);
       color: var(--ink);
+      border-left: 1px solid var(--line);
       transition: background-color 0.16s ease, color 0.16s ease;
     }
+
     .index-card:first-child { border-left: none; }
+
     .index-nav .idx-label {
       display: inline-flex;
       align-items: center;
@@ -125,28 +154,41 @@
       font-size: 1.15rem;
       font-weight: 600;
     }
+
     .index-nav .idx-label i {
       width: 1.1rem;
       color: var(--accent);
       font-size: 0.85rem;
       text-align: center;
     }
-    .index-card.is-current { background: var(--accent-soft); color: var(--accent-strong); }
+
+    .index-card.is-current {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
     .index-card.is-current .idx-label i { color: var(--accent-strong); }
-    .index-card:hover { background: var(--accent); color: #fff; }
+
+    .index-card:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
     .index-card:hover .idx-label,
     .index-card:hover .idx-label i { color: #fff; }
 
     .hero-section {
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(320px, 1fr);
+      align-items: start;
       column-gap: 3rem;
       row-gap: 1.5rem;
       padding: 3rem 2.5rem 2.5rem;
-      align-items: start;
     }
+
     .hero-header { grid-column: 1 / -1; }
     .in-a-few-words-wrapper { grid-column: 1; }
+
     .hero-right {
       grid-column: 2;
       min-width: 0;
@@ -168,20 +210,21 @@
 
     .name {
       margin-top: 0.2rem;
+      color: var(--ink);
       font-family: var(--display);
       font-size: 3.2rem;
       font-weight: 700;
       line-height: 1.1;
-      color: var(--ink);
     }
+
     .subtitle {
       margin-top: 0.4rem;
       margin-bottom: 1.5rem;
+      color: var(--accent);
       font-family: var(--sans);
       font-size: 1.2rem;
       font-weight: 500;
       line-height: 1.4;
-      color: var(--accent);
     }
 
     .inline-link {
@@ -189,41 +232,49 @@
       text-decoration: none;
       transition: color 0.16s ease;
     }
-    .inline-link:hover { color: var(--accent-strong); text-decoration: none; }
+
+    .inline-link:hover {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
 
     .section-label {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       margin-bottom: 1rem;
+      color: var(--ink);
       font-family: var(--display);
       font-size: 1.4rem;
       font-weight: 700;
-      color: var(--ink);
     }
+
     .in-a-few-words-content {
+      color: var(--ink-soft);
       font-family: var(--sans);
       font-size: 0.98rem;
       line-height: 1.6;
-      color: var(--ink-soft);
       text-align: justify;
     }
+
     .paragraph-spaced { margin-top: 0.6rem; }
 
     .interest-list {
-      list-style: none;
-      margin-top: 0.8rem;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 0.5rem 1.5rem;
+      margin-top: 0.8rem;
+      list-style: none;
     }
+
     .interest-list li {
       position: relative;
       padding-left: 1rem;
-      font-size: 0.92rem;
       color: var(--ink-soft);
+      font-size: 0.92rem;
       font-weight: 500;
     }
+
     .interest-list li::before {
       content: '';
       position: absolute;
@@ -231,24 +282,27 @@
       top: 0.55em;
       width: 0.35rem;
       height: 0.35rem;
-      border-radius: 50%;
       background: var(--accent);
+      border-radius: 50%;
     }
 
     .about-container { padding: 0 2.5rem 3rem; }
+
     .about-wrapper {
-      border-top: 1px solid var(--line-strong);
       padding-top: 2.5rem;
+      border-top: 1px solid var(--line-strong);
     }
+
     .about-text {
       display: grid;
       gap: 1.2rem;
+      color: var(--ink-soft);
       font-family: var(--sans);
       font-size: 0.95rem;
       line-height: 1.65;
-      color: var(--ink-soft);
       text-align: justify;
     }
+
     .about-wrapper a:not(.inline-link) {
       color: var(--accent);
       text-decoration-line: underline;
@@ -257,6 +311,7 @@
       text-underline-offset: 0.16em;
       transition: color 0.16s ease, text-decoration-color 0.16s ease;
     }
+
     .about-wrapper a:not(.inline-link):hover {
       color: var(--accent-strong);
       text-decoration-color: var(--accent-strong);
@@ -264,36 +319,56 @@
     }
 
     .foot {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
       align-items: center;
-      justify-content: space-between;
       gap: 1rem;
       padding: 0.9rem 1.5rem;
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
+
     .foot-loc {
+      justify-self: end;
+      color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
     }
-    .socials { display: flex; align-items: center; gap: 0.4rem; }
-    .socials a {
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      justify-self: start;
+    }
+
+    .socials a,
+    .back-to-top {
       width: 2rem;
       height: 2rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--line-strong);
-      border-radius: 4px;
-      background: var(--sheet);
       color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
       font-size: 0.85rem;
-      transition: all 0.16s ease;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
     }
-    .socials a:hover {
+
+    .socials a { border-radius: 4px; }
+
+    .back-to-top {
+      justify-self: center;
+      border-radius: 50%;
+    }
+
+    .socials a:hover,
+    .back-to-top:hover {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
@@ -304,10 +379,12 @@
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     .reveal {
       animation: rise 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both;
       animation-delay: var(--reveal-delay, 0ms);
     }
+
     .delay-40 { --reveal-delay: 40ms; }
     .delay-80 { --reveal-delay: 80ms; }
     .delay-140 { --reveal-delay: 140ms; }
@@ -315,16 +392,31 @@
     .delay-220 { --reveal-delay: 220ms; }
     .delay-340 { --reveal-delay: 340ms; }
 
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      .reveal { animation: none; }
+
+      .index-card,
+      .inline-link,
+      .about-wrapper a,
+      .socials a,
+      .back-to-top {
+        transition: none;
+      }
+    }
+
     @media (max-width: 960px) {
       .hero-section {
         grid-template-columns: 1fr;
-        padding: 2.5rem 1.5rem 2rem;
         row-gap: 2rem;
+        padding: 2.5rem 1.5rem 2rem;
       }
+
       .hero-header { grid-column: auto; order: 1; }
       .hero-right { grid-column: auto; order: 2; align-items: flex-start; }
       .in-a-few-words-wrapper { grid-column: auto; order: 3; }
-      .portrait-landscape { aspect-ratio: 16 / 9; max-width: 550px; }
+      .portrait-landscape { max-width: 550px; aspect-ratio: 16 / 9; }
       .about-container { padding: 0 1.5rem 2.5rem; }
     }
 
@@ -335,14 +427,35 @@
     @media (max-width: 680px) {
       .name { font-size: 2.5rem; }
       .index-nav { grid-template-columns: 1fr; }
-      .index-card { border-left: none; border-top: 1px solid var(--line); }
+      .index-card { border-top: 1px solid var(--line); border-left: none; }
       .index-card:first-child { border-top: none; }
       .interest-list { grid-template-columns: 1fr; }
-      .foot { flex-direction: column; align-items: center; text-align: center; gap: 0.8rem; }
+
+      .foot {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 0.8rem;
+        text-align: center;
+      }
+
+      .back-to-top {
+        grid-row: 1;
+        justify-self: center;
+      }
+
+      .socials {
+        grid-row: 2;
+        justify-self: center;
+      }
+
+      .foot-loc {
+        grid-row: 3;
+        justify-self: center;
+      }
     }
   </style>
 </head>
-<body>
+<body id="top">
   <a href="#main" class="skip">Skip to main content</a>
 
   <main id="main" class="page">
@@ -397,7 +510,7 @@
         </div>
 
         <div class="hero-right reveal delay-140">
-          <img src="website/images/arthur_galichere.png" alt="Portrait of Arthur Galichere" class="portrait-landscape" />
+          <img src="website/images/arthur_galichere.png" alt="Portrait of Arthur Galichère" class="portrait-landscape" />
         </div>
       </section>
 
@@ -438,11 +551,24 @@
 
       <footer class="foot reveal delay-340">
         <div class="socials">
-          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur"><i class="fas fa-envelope" aria-hidden="true"></i></a>
-          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&st=hik4skpl&dl=1" aria-label="Download Arthur Galichere's CV"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>
-          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University Profile"><i class="fas fa-university" aria-hidden="true"></i></a>
-          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          </a>
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
+            <i class="fas fa-university" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+          </a>
         </div>
+
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
+
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
     </article>
