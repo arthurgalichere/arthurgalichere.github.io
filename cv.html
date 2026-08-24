@@ -223,6 +223,10 @@
       line-height: 1.4;
     }
 
+    .cv-section.role-light .cv-item-role {
+      font-weight: 450;
+    }
+
     .cv-item-institution {
       margin-top: 0.1rem;
       color: var(--accent);
@@ -566,9 +570,14 @@
       const subsections = Array.isArray(section.subsections) ? section.subsections : [];
       const isTeaching = titleLower === 'teaching experience';
       const isResearchPresentations = titleLower === 'research presentations';
+      const useLighterRoles = isTeaching || isResearchPresentations;
+
+      const sectionClasses = ['cv-section'];
+      if (isTeaching) sectionClasses.push('teaching-tight');
+      if (useLighterRoles) sectionClasses.push('role-light');
 
       let sectionHTML = `
-        <div class="cv-section ${isTeaching ? 'teaching-tight' : ''}">
+        <div class="${sectionClasses.join(' ')}">
           <h2 class="cv-section-title">${escapeHTML(title)}</h2>
       `;
 
