@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arthur Galichère — Structure of the Dissertation</title>
-  <meta name="description" content="Guidance by Arthur Galichère on structuring an economics dissertation." />
-  <meta name="guidance-source-digest" content="4fa942aeb82b939ece7b74549e02641e2b6961f92bedba88305585726f1b49db" />
+  <title>AG — A Guide to Writing Your Dissertation</title>
+  <meta name="description" content="Guidance by Arthur Galichère on writing an economics dissertation." />
+  <meta name="guidance-source-digest" content="0000000000000000000000000000000000000000000000000000000000000000" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
-:root {
+    :root {
       --paper: #f4f5f7;
       --paper-soft: #fafbfc;
       --sheet: #ffffff;
@@ -49,8 +49,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a:focus-visible,
-    summary:focus-visible {
+    a:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 2px;
@@ -247,7 +246,6 @@
     }
 
     .guidance-content img {
-      display: block;
       max-width: 100%;
       height: auto;
       margin: 1.5rem auto;
@@ -313,40 +311,40 @@
       border-radius: 4px;
     }
 
-    .guidance-update {
-      margin-top: 3rem;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      text-align: center;
+    .guidance-content pre code {
+      padding: 0;
+      background: transparent;
+      border: 0;
     }
 
     .guidance-pagination {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
-      margin-top: 2.5rem;
+      margin-top: 2.75rem;
     }
 
-    .guidance-pagination.is-single { grid-template-columns: minmax(0, 1fr); }
-
     .guidance-page-link {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
       min-width: 0;
-      padding: 1rem 1.1rem;
+      display: grid;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.2rem;
       color: var(--accent-strong);
-      background: var(--paper-soft);
-      border: 1px solid var(--line-strong);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.28);
       border-radius: 5px;
       text-decoration: none;
       transition: color 0.16s ease, background-color 0.16s ease,
                   border-color 0.16s ease, transform 0.16s ease;
     }
 
-    .guidance-page-link.is-next { justify-content: flex-end; text-align: right; }
+    .guidance-previous { grid-template-columns: auto minmax(0, 1fr); }
+
+    .guidance-next {
+      grid-template-columns: minmax(0, 1fr) auto;
+      text-align: right;
+    }
 
     .guidance-page-link:hover {
       color: #fff;
@@ -355,26 +353,53 @@
       transform: translateY(-1px);
     }
 
-    .guidance-page-link i { flex: 0 0 auto; }
-
-    .guidance-page-copy { min-width: 0; }
-
-    .guidance-page-direction {
-      display: block;
-      margin-bottom: 0.15rem;
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.72;
+    .guidance-page-copy {
+      min-width: 0;
+      display: grid;
+      gap: 0.25rem;
     }
 
+    .guidance-page-label {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .guidance-page-link:hover .guidance-page-label { color: rgba(255, 255, 255, 0.78); }
+
     .guidance-page-title {
-      display: block;
       font-family: var(--display);
-      font-size: 0.96rem;
+      font-size: 1rem;
       font-weight: 700;
-      line-height: 1.35;
+      line-height: 1.4;
+    }
+
+    .guidance-page-link > i {
+      font-size: 0.82rem;
+      transition: transform 0.16s ease;
+    }
+
+    .guidance-previous:hover > i { transform: translateX(-3px); }
+    .guidance-next:hover > i { transform: translateX(3px); }
+
+    .guidance-placeholder {
+      padding: 1.2rem 1.3rem;
+      color: var(--muted);
+      background: var(--paper-soft);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+    }
+
+    .guidance-update {
+      margin-top: 3rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-align: center;
     }
 
     .foot {
@@ -424,14 +449,6 @@
       transform: translateY(-1px);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .index-card,
-      .back-link,
-      .download-link,
-      .guidance-page-link,
-      .socials a { transition: none; }
-    }
-
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .guidance-body { padding: 2rem 1.5rem; }
@@ -439,23 +456,41 @@
 
     @media (max-width: 680px) {
       .index-nav { grid-template-columns: 1fr; }
-      .index-card { border-top: 1px solid var(--line); border-left: none; }
+      .index-card {
+        border-top: 1px solid var(--line);
+        border-left: none;
+      }
       .index-card:first-child { border-top: none; }
-      .guidance-toolbar { align-items: stretch; flex-direction: column; }
-      .back-link, .download-link { justify-content: center; }
+
+      .guidance-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .back-link,
+      .download-link { justify-content: center; }
+
       .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
-      .foot { flex-direction: column; text-align: center; }
+      .guidance-next { text-align: left; }
+
+      .foot {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .index-card,
+      .back-link,
+      .download-link,
+      .guidance-page-link,
+      .guidance-page-link > i,
+      .socials a {
+        transition: none;
+      }
     }
   </style>
-
-  <script>
-    window.MathJax = {
-      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
-      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
-    };
-  </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <main class="page">
@@ -482,75 +517,42 @@
         <div class="guidance-toolbar">
           <a href="../dissertation.html" class="back-link">
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            Dissertation Supervision and Guidance
+            Back to Dissertation Supervision and Guidance
           </a>
-          <a href="https://www.dropbox.com/scl/fi/70uu4hmon81ekrnwunlsq/Structure-of-the-dissertation.pdf?rlkey=s1on52nrda7vc3ffhn5x5q7qf&amp;st=tn1rx8v4&amp;dl=1" class="download-link">
+          <a href="https://www.dropbox.com/scl/fi/1unhpr8pmujck02cnqy2z/A-Guide-to-writing-your-Dissertation.pdf?rlkey=b6rj35sb9hql0hsfc5a2hf8lz&amp;st=jnxjdp8q&amp;dl=1" class="download-link">
             <i class="fas fa-download" aria-hidden="true"></i>
             Download PDF
           </a>
         </div>
 
-        <h1 class="guidance-title">Structure of the Dissertation</h1>
+        <h1 class="guidance-title">A Guide to Writing Your Dissertation</h1>
+        <div class="guidance-content">
+          <p class="guidance-placeholder">
+            This guidance page is populated automatically from the Dropbox source
+            <em>A Guide to writing your Dissertation.tex</em>. Run the dissertation
+            guidance workflow to replace this message with the latest published note.
+          </p>
+        </div>
 
-        <div class="guidance-content"><h1 class="unnumbered" id="abstract">Abstract</h1>
-<ol>
-<li><p>“This dissertation studies ..."</p></li>
-<li><p>Very brief overview of the methodology (1-3 sentences)</p></li>
-<li><p>Contribution and brief overview of the results</p></li>
-</ol>
-<h1 id="introduction">Introduction</h1>
-<ol>
-<li><p>Context and Motivation</p></li>
-<li><p>Presentation of important concepts</p></li>
-<li><p>Research question(s)</p></li>
-<li><p>Optional: what is your hypothesis?</p></li>
-<li><p>State the analytical method (what type of data/model) to answer your research question</p></li>
-<li><p>Contribution and extensive overview of the results</p></li>
-</ol>
-<h1 id="literature-review">Literature Review</h1>
-<ol>
-<li><p>Chronological and/or by topics presentation of the literature</p></li>
-<li><p>Research gaps and contribution</p></li>
-</ol>
-<h1 id="methodology">Methodology</h1>
-<p>The guidance in this section is tailored to the specific type of your project. If you are undertaking an empirical study, refer to subsection <a href="#meth_empi" data-reference-type="ref" data-reference="meth_empi">[meth_empi]</a> for detailed instructions. Conversely, if you are engaged in a theoretical project, consult subsection <a href="#meth_theor" data-reference-type="ref" data-reference="meth_theor">[meth_theor]</a> for comprehensive guidance.</p>
-<h2 id="empirical-analysis">Empirical Analysis<span id="meth_empi" label="meth_empi"></span></h2>
-<p>Before presenting the data, model and diagnostic tests, write an <u>introductory short summary</u> <u>paragraph</u> presenting what model will be used, what are the data / important variables and the sample characteristics (starting-ending dates, frequency, time series / panel data / cross-sectional data, ...).</p>
-<ol>
-<li><p>Data subsection: presentation of data and transformation, plots of the data and descriptive statistics</p></li>
-<li><p>Model subsection: presentation of the model and variables and reasons/arguments of the choice of the model (Why this model? What are the advantages or disadvantages? ...)</p></li>
-<li><p>Diagnostic tests: What, why and interpretations of the results of the tests</p></li>
-</ol>
-<h2 id="theoretical-analysis">Theoretical Analysis<span id="meth_theor" label="meth_theor"></span></h2>
-<p>Before presenting the model, write one or two <u>introductory short summary paragraphs</u> explaining your model: On which model is based yours? What type of model is it (Growth, RBC, RANK, HANK, ...)? How many agents populate the economy and what are their economic roles? How many assets/means of saving are available to the agents? How many firms and type of firms? What are the main frictions in the environment (if any)?</p>
-<ol>
-<li><p>Agents problems subsection: presentation of maximisation problems of the agents and their optimal behaviours</p></li>
-<li><p>Aggregation and equilibrium subsection: presentation of the system and its variables</p></li>
-<li><p>Calibration: present the parameters and their values, as well as the source of the calibration (optional: present the data moments that the model’s calibration tries to replicate)</p></li>
-</ol>
-<h1 id="results">Results</h1>
-<p>Before presenting the results in details, write an <u>introductory short summary paragraph</u> presenting an overview of the main results.</p>
-<ol>
-<li><p>Present the results of the analysis and explain/interpret them using economic theory</p></li>
-<li><p>Tables and graphs should include a table/figure number, title, legend and a explanatory note below (the table/figure should be understandable without reading the main text)</p></li>
-</ol>
-<h1 id="conclusion">Conclusion</h1>
-<ol>
-<li><p>First paragraph: briefly remind the reader about the research question, the methodology and answer the research question</p></li>
-<li><p>Present a summarised version of main results: one paragraph per result</p></li>
-</ol>
-</div>
+        <nav class="guidance-pagination" aria-label="Dissertation guidance navigation">
+          <a href="getting-started.html" class="guidance-page-link guidance-previous">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            <span class="guidance-page-copy">
+              <span class="guidance-page-label">Previous guidance note</span>
+              <span class="guidance-page-title">Getting Started with Your Dissertation</span>
+            </span>
+          </a>
+
+          <a href="literature-review.html" class="guidance-page-link guidance-next">
+            <span class="guidance-page-copy">
+              <span class="guidance-page-label">Next guidance note</span>
+              <span class="guidance-page-title">A Guide to Writing Your Literature Review</span>
+            </span>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </nav>
+
         <p class="guidance-update">Information updated on 24/08/2026</p>
-
-      <nav class="guidance-pagination is-single" aria-label="Guidance note navigation">
-        <a class="guidance-page-link is-previous" href="literature-review.html">
-          <i class="fas fa-arrow-left" aria-hidden="true"></i>
-          <span class="guidance-page-copy">
-            <span class="guidance-page-direction">Previous note</span>
-            <span class="guidance-page-title">A Guide to Writing Your Literature Review</span>
-          </span>
-        </a>
-      </nav>
       </section>
 
       <footer class="foot">

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AG — A Guide to Writing Your Literature Review</title>
+  <title>Arthur Galichère — A Guide to Writing Your Literature Review</title>
   <meta name="description" content="Guidance by Arthur Galichère on writing a literature review for an economics dissertation." />
-  <meta name="guidance-source-digest" content="0000000000000000000000000000000000000000000000000000000000000000" />
+  <meta name="guidance-source-digest" content="8d2c3f87454deaefedcdf7853167b30eb876fcf8b4003eb5433c7abcd7e773f8" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
-    :root {
+:root {
       --paper: #f4f5f7;
       --paper-soft: #fafbfc;
       --sheet: #ffffff;
@@ -49,7 +49,8 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a:focus-visible {
+    a:focus-visible,
+    summary:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 2px;
@@ -246,6 +247,7 @@
     }
 
     .guidance-content img {
+      display: block;
       max-width: 100%;
       height: auto;
       margin: 1.5rem auto;
@@ -311,30 +313,29 @@
       border-radius: 4px;
     }
 
-    .guidance-placeholder {
-      padding: 1.1rem 1.2rem;
+    .guidance-update {
+      margin-top: 3rem;
       color: var(--muted);
-      background: var(--paper-soft);
-      border: 1px dashed var(--line-strong);
-      border-radius: 4px;
-      text-align: left !important;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-align: center;
     }
 
     .guidance-pagination {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--line-strong);
+      margin-top: 2.5rem;
     }
 
+    .guidance-pagination.is-single { grid-template-columns: minmax(0, 1fr); }
+
     .guidance-page-link {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
+      display: flex;
       align-items: center;
-      gap: 0.85rem;
-      min-height: 5.2rem;
+      gap: 0.8rem;
+      min-width: 0;
       padding: 1rem 1.1rem;
       color: var(--accent-strong);
       background: var(--paper-soft);
@@ -345,6 +346,8 @@
                   border-color 0.16s ease, transform 0.16s ease;
     }
 
+    .guidance-page-link.is-next { justify-content: flex-end; text-align: right; }
+
     .guidance-page-link:hover {
       color: #fff;
       background: var(--accent);
@@ -352,41 +355,26 @@
       transform: translateY(-1px);
     }
 
-    .guidance-next {
-      grid-template-columns: minmax(0, 1fr) auto;
-      text-align: right;
-    }
+    .guidance-page-link i { flex: 0 0 auto; }
 
-    .guidance-page-copy {
-      display: grid;
-      gap: 0.25rem;
-      min-width: 0;
-    }
+    .guidance-page-copy { min-width: 0; }
 
-    .guidance-page-label {
-      color: var(--muted);
+    .guidance-page-direction {
+      display: block;
+      margin-bottom: 0.15rem;
       font-family: var(--mono);
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      opacity: 0.72;
     }
 
     .guidance-page-title {
+      display: block;
       font-family: var(--display);
-      font-size: 1rem;
+      font-size: 0.96rem;
       font-weight: 700;
       line-height: 1.35;
-    }
-
-    .guidance-page-link:hover .guidance-page-label { color: rgba(255, 255, 255, 0.76); }
-
-    .guidance-update {
-      margin-top: 2rem;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.03em;
-      text-align: center;
     }
 
     .foot {
@@ -436,10 +424,17 @@
       transform: translateY(-1px);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .index-card,
+      .back-link,
+      .download-link,
+      .guidance-page-link,
+      .socials a { transition: none; }
+    }
+
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .guidance-body { padding: 2rem 1.5rem; }
-      .guidance-title { font-size: 2.15rem; }
     }
 
     @media (max-width: 680px) {
@@ -448,6 +443,7 @@
       .index-card:first-child { border-top: none; }
       .guidance-toolbar { align-items: stretch; flex-direction: column; }
       .back-link, .download-link { justify-content: center; }
+      .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
       .foot { flex-direction: column; text-align: center; }
     }
@@ -455,16 +451,11 @@
 
   <script>
     window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']]
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
     };
   </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <main class="page">
@@ -491,7 +482,7 @@
         <div class="guidance-toolbar">
           <a href="../dissertation.html" class="back-link">
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            Back to Dissertation Supervision and Guidance
+            Dissertation Supervision and Guidance
           </a>
           <a href="https://www.dropbox.com/scl/fi/es6yhoobdindeqhrip37y/A-Guide-to-writing-your-Literature-Review.pdf?rlkey=hh09xo8pqs4dna7hxb0qisqt7&amp;st=sxqdxiy4&amp;dl=1" class="download-link">
             <i class="fas fa-download" aria-hidden="true"></i>
@@ -500,33 +491,104 @@
         </div>
 
         <h1 class="guidance-title">A Guide to Writing Your Literature Review</h1>
-        <div class="guidance-content">
-          <p class="guidance-placeholder">
-            This guidance page is populated automatically from the Dropbox source
-            <em>A Guide to writing your Literature Review.tex</em>. Run the dissertation
-            guidance workflow to replace this message with the latest published note.
-          </p>
-        </div>
 
-        <nav class="guidance-pagination" aria-label="Dissertation guidance navigation">
-          <a href="writing-dissertation.html" class="guidance-page-link guidance-previous">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            <span class="guidance-page-copy">
-              <span class="guidance-page-label">Previous guidance note</span>
-              <span class="guidance-page-title">A Guide to Writing Your Dissertation</span>
-            </span>
-          </a>
-
-          <a href="dissertation-structure.html" class="guidance-page-link guidance-next">
-            <span class="guidance-page-copy">
-              <span class="guidance-page-label">Next guidance note</span>
-              <span class="guidance-page-title">Structure of the Dissertation</span>
-            </span>
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
-        </nav>
-
+        <div class="guidance-content"><p>The literature review is one of the most important sections of your dissertation as it places your project in the literature and highlights the novelty of your research. Despite being an important element of the dissertation, many students overlook this section. This note will provide you with a simple and efficient method on how to elaborate your literature review.</p>
+<p>Once you have a <em>vague</em> research topic in mind, the constitution of your literature review starts right away. In other words, you are going to gather information, and thus start your literature review, while you are narrowing down your research question.</p>
+<p>When you have a settled on research topic, you are going to narrow your research question by examining what other researchers have done. That is to say, you are going to read papers. This is the crucial moment when you should not waste time and take some notes on the work of others. By collecting the essential information for every paper you are reading related to your research topic, you are constituting your own literature review.</p>
+<p>What is the essential information you should collect? You need to write down the author(s), the year of publication (or the year of the current version of the working paper), the research question, the answer to this research question and their methodology. Additionally, and crucially if you are doing an empirical project, you should note what data was used and where it was collected. This will be tremendously helpful for your project since you will not waste time searching for what data you should use and where to get it. Finally, you can include a final column called <em>comments</em> where you write about the paper’s specific details, such as particular variables, important theoretical mechanisms, or just some observations.</p>
+<p>Here is an example of how to organise your literature review:</p>
+<div class="center">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Author</th>
+<th style="text-align: center;">Year</th>
+<th style="text-align: center;">Research Question</th>
+<th style="text-align: center;">Answer</th>
+<th style="text-align: center;">Methodology</th>
+<th style="text-align: center;">Data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Galichère,</td>
+<td style="text-align: center;">2021</td>
+<td style="text-align: center;">Can monetary</td>
+<td style="text-align: center;">Yes, but strong reaction</td>
+<td style="text-align: center;">New-Keynesian model</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Arthur</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">policy deflate bubble?</td>
+<td style="text-align: center;">of MP can create a recession</td>
+<td style="text-align: center;">with heterogeneous agents</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Once you have read enough papers related to your research question, you have should enough information to directly write down your literature review! And if you missed an important point, you know where to look for it!</p>
+<p>When writing your literature review, you must demonstrate how the reviewed works directly connect to your research topic. Put differently, you should present the existing literature with a clear connection to your well-defined research topic. Instead of merely listing viewpoints or findings, a critical analysis of each perspective is necessary. This involves:</p>
+<ul>
+<li><p>Differentiating between existing studies and gaps that require attention. Explore the underlying reasons behind each viewpoint</p></li>
+<li><p>Comparing arguments across different papers, assessing how one paper’s argument compares to another’s</p></li>
+<li><p>Highlighting areas that demand further exploration and identify inconsistencies or puzzles in the current literature</p></li>
+<li><p>Examining the predominant methodologies and research techniques employed in the field, briefly outlining their respective strengths and weaknesses. For theoretical papers, this means retrieving and explaining the key mechanisms that generate the study’s results</p></li>
+</ul>
+<p>The last question is how to organise your literature review: Chronologically? Or by topics? Maybe an alternative way? There is no right answer to this question as different projects will be more adequate to one style or another. Then I will leave this answer to your own judgment.</p>
+</div>
         <p class="guidance-update">Information updated on 24/08/2026</p>
+
+      <nav class="guidance-pagination" aria-label="Guidance note navigation">
+        <a class="guidance-page-link is-previous" href="writing-dissertation.html">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i>
+          <span class="guidance-page-copy">
+            <span class="guidance-page-direction">Previous note</span>
+            <span class="guidance-page-title">A Guide to Writing Your Dissertation</span>
+          </span>
+        </a>
+        <a class="guidance-page-link is-next" href="dissertation-structure.html">
+          <span class="guidance-page-copy">
+            <span class="guidance-page-direction">Next note</span>
+            <span class="guidance-page-title">Structure of the Dissertation</span>
+          </span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </nav>
       </section>
 
       <footer class="foot">
@@ -550,4 +612,3 @@
   </main>
 </body>
 </html>
-

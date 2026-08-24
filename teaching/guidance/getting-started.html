@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AG — Getting Started with Your Dissertation</title>
+  <title>Arthur Galichère — Getting Started with Your Dissertation</title>
   <meta name="description" content="Guidance by Arthur Galichère on getting started with an economics dissertation." />
-  <meta name="guidance-source-digest" content="43c372af281aa2655feb1153ef95fd06aa18b4264fe8ba147bfb13d8746e7daf" />
+  <meta name="guidance-source-digest" content="6770865ee71925addf2fbf0c1ef42808ad8a9e700171bebe6ef296ff76cb9971" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
-    :root {
+:root {
       --paper: #f4f5f7;
       --paper-soft: #fafbfc;
       --sheet: #ffffff;
@@ -49,7 +49,8 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a:focus-visible {
+    a:focus-visible,
+    summary:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 2px;
@@ -246,6 +247,7 @@
     }
 
     .guidance-content img {
+      display: block;
       max-width: 100%;
       height: auto;
       margin: 1.5rem auto;
@@ -254,7 +256,6 @@
     }
 
     .guidance-content figure { margin: 1.5rem 0; }
-
     .guidance-content figure img { margin: 0 auto; }
 
     .guidance-content figcaption {
@@ -312,82 +313,6 @@
       border-radius: 4px;
     }
 
-    .guidance-content pre code {
-      padding: 0;
-      background: transparent;
-      border: none;
-    }
-
-    .guidance-pagination {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 2.75rem;
-    }
-
-    .guidance-next {
-      width: min(100%, 430px);
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.1rem 1.2rem;
-      color: var(--accent-strong);
-      background: var(--accent-soft);
-      border: 1px solid rgba(59, 90, 117, 0.28);
-      border-radius: 5px;
-      text-decoration: none;
-      transition: color 0.16s ease, background-color 0.16s ease,
-                  border-color 0.16s ease, transform 0.16s ease;
-    }
-
-    .guidance-next:hover {
-      color: #fff;
-      background: var(--accent);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .guidance-next-copy {
-      min-width: 0;
-      display: grid;
-      gap: 0.25rem;
-    }
-
-    .guidance-next-label {
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .guidance-next:hover .guidance-next-label {
-      color: rgba(255, 255, 255, 0.78);
-    }
-
-    .guidance-next-title {
-      font-family: var(--display);
-      font-size: 1rem;
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    .guidance-next i {
-      font-size: 0.82rem;
-      transition: transform 0.16s ease;
-    }
-
-    .guidance-next:hover i { transform: translateX(3px); }
-
-    .guidance-placeholder {
-      padding: 1.2rem 1.3rem;
-      color: var(--muted);
-      background: var(--paper-soft);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-    }
-
     .guidance-update {
       margin-top: 3rem;
       color: var(--muted);
@@ -395,6 +320,61 @@
       font-size: 0.78rem;
       letter-spacing: 0.03em;
       text-align: center;
+    }
+
+    .guidance-pagination {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .guidance-pagination.is-single { grid-template-columns: minmax(0, 1fr); }
+
+    .guidance-page-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-width: 0;
+      padding: 1rem 1.1rem;
+      color: var(--accent-strong);
+      background: var(--paper-soft);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .guidance-page-link.is-next { justify-content: flex-end; text-align: right; }
+
+    .guidance-page-link:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .guidance-page-link i { flex: 0 0 auto; }
+
+    .guidance-page-copy { min-width: 0; }
+
+    .guidance-page-direction {
+      display: block;
+      margin-bottom: 0.15rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .guidance-page-title {
+      display: block;
+      font-family: var(--display);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.35;
     }
 
     .foot {
@@ -444,6 +424,14 @@
       transform: translateY(-1px);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .index-card,
+      .back-link,
+      .download-link,
+      .guidance-page-link,
+      .socials a { transition: none; }
+    }
+
     @media (max-width: 768px) {
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .guidance-body { padding: 2rem 1.5rem; }
@@ -451,41 +439,23 @@
 
     @media (max-width: 680px) {
       .index-nav { grid-template-columns: 1fr; }
-      .index-card {
-        border-top: 1px solid var(--line);
-        border-left: none;
-      }
+      .index-card { border-top: 1px solid var(--line); border-left: none; }
       .index-card:first-child { border-top: none; }
-
-      .guidance-toolbar {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .back-link,
-      .download-link { justify-content: center; }
-
+      .guidance-toolbar { align-items: stretch; flex-direction: column; }
+      .back-link, .download-link { justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
-      .guidance-pagination { justify-content: stretch; }
-      .guidance-next { width: 100%; }
-
-      .foot {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .index-card,
-      .back-link,
-      .download-link,
-      .guidance-next,
-      .guidance-next i,
-      .socials a {
-        transition: none;
-      }
+      .guidance-pagination { grid-template-columns: 1fr; }
+      .foot { flex-direction: column; text-align: center; }
     }
   </style>
+
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <main class="page">
@@ -512,7 +482,7 @@
         <div class="guidance-toolbar">
           <a href="../dissertation.html" class="back-link">
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            Back to Dissertation Supervision and Guidance
+            Dissertation Supervision and Guidance
           </a>
           <a href="https://www.dropbox.com/scl/fi/39dgnnt0nqzxzjnbkxoe7/Getting-Started-with-your-Dissertation.pdf?rlkey=h3ch13gj4z0f6jds83ey456s9&amp;st=6dlbom4l&amp;dl=1" class="download-link">
             <i class="fas fa-download" aria-hidden="true"></i>
@@ -521,25 +491,114 @@
         </div>
 
         <h1 class="guidance-title">Getting Started with Your Dissertation</h1>
-        <div class="guidance-content">
-          <p class="guidance-placeholder">
-            This guidance page is populated automatically from the Dropbox source
-            <em>Getting Started with your Dissertation.tex</em>. Run the dissertation
-            guidance workflow to replace this message with the latest published note.
-          </p>
-        </div>
 
-        <nav class="guidance-pagination" aria-label="Dissertation guidance navigation">
-          <a href="writing-dissertation.html" class="guidance-next">
-            <span class="guidance-next-copy">
-              <span class="guidance-next-label">Next guidance note</span>
-              <span class="guidance-next-title">A Guide to Writing Your Dissertation</span>
-            </span>
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </a>
-        </nav>
-
+        <div class="guidance-content"><h1 class="unnumbered" id="introduction">Introduction</h1>
+<p>Writing a dissertation is an opportunity to study a specific topic in depth, develop independent research skills, and build expertise in a particular subject area. It also strengthens critical thinking: you need to evaluate information, formulate arguments, choose appropriate evidence, and draw logical conclusions. Beyond academic skills, the dissertation develops perseverance, time management, and confidence in completing a substantial independent project. A well-written dissertation can also demonstrate your expertise and may become a useful asset when applying for jobs or graduate programmes.</p>
+<h1 class="unnumbered" id="how-to-begin">How to Begin</h1>
+<p>A good dissertation project usually starts with five steps:</p>
+<ol>
+<li><p>Find a topic that you find interesting.</p></li>
+<li><p>Identify a feasible research project.</p></li>
+<li><p>Formulate a relatively narrow research question.</p></li>
+<li><p>Find suitable data, if the project is empirical.</p></li>
+<li><p>Think carefully about the methodology or model.</p></li>
+</ol>
+<p>The overall aim is to find a project that is both interesting and feasible: interesting enough to motivate sustained work, and feasible enough to complete within the dissertation period.</p>
+<h1 class="unnumbered" id="find-an-interesting-topic">1. Find an Interesting Topic</h1>
+<p>Choose a topic because it genuinely interests you, not simply because it looks easy. You will spend several months working on the dissertation, so it is important to choose something that motivates you and raises questions you would like to answer.</p>
+<p>A useful way to generate ideas is to read the titles and abstracts of recent articles in relevant journals, such as the <em>Journal of Monetary Economics</em>, or to look at recent working papers in your field. At this early stage, the goal is not necessarily to find a final research question, but to identify a broad area that you find intellectually engaging.</p>
+<h1 class="unnumbered" id="identify-a-feasible-research-project">2. Identify a Feasible Research Project</h1>
+<p>A dissertation topic must also be feasible. This means that there should be a realistic research design that allows you to answer the question, or at least to make meaningful progress on it.</p>
+<p>For an empirical project, feasibility usually depends on three things:</p>
+<ul>
+<li><p>whether suitable data are available;</p></li>
+<li><p>whether the data are appropriate for the question;</p></li>
+<li><p>whether you understand, or can learn, the econometric method required for the analysis.</p></li>
+</ul>
+<p>For a theoretical project, feasibility depends on whether the model is manageable, clearly motivated, and possible to solve, analyse, or simulate within the available time. A dissertation model does not need to be extremely complex. In many cases, a simple model that is well motivated, clearly solved, and carefully interpreted is better than an ambitious model that cannot be completed properly.</p>
+<p>The ideal project lies at the intersection of what is interesting and what is feasible.</p>
+<figure>
+<img src="images/Topics_feasible_interesting.PNG" />
+</figure>
+<h1 class="unnumbered" id="formulate-a-narrow-research-question">3. Formulate a Narrow Research Question</h1>
+<p>Avoid research questions that are too broad. A very broad question often leaves you without a clear strategy for how to answer it, and it can make the dissertation difficult to structure. A narrower research question helps you stay focused and makes it easier to decide which literature, data, model, and methodology are relevant.</p>
+<p>For example, instead of asking a very general question about monetary policy and financial markets, you might ask: “Can monetary policy reduce the size of asset price bubbles?” This is still a substantial question, but it is more focused. It suggests possible answers such as yes, no, or only under certain conditions. The dissertation then becomes an argument about which answer is most convincing, based on theory, evidence, and analysis.</p>
+<p>A good research question should be specific enough to guide the project, but not so narrow that there is nothing meaningful to discuss.</p>
+<h1 class="unnumbered" id="find-the-data">4. Find the Data</h1>
+<p>For empirical projects, data are essential. If the necessary data cannot be obtained, then the empirical project is unlikely to be feasible. Once you have a possible topic, you should therefore start looking for relevant data as soon as possible.</p>
+<p>A useful strategy is to look at papers similar to your proposed project and read their data or methodology sections. Authors usually report where they obtained their data, how the variables were constructed, and what sample period they used. This can help you identify possible data sources and understand whether your own project is realistic.</p>
+<p>Possible data sources include Bloomberg, FRED, DataStream, BEA, the Wind Economic Database, IMF, ONS, INSEE, Eurostat, the ECB Statistical Data Warehouse, OECD, BoardEx, CSMAR, and WRDS. Access may vary depending on institutional subscriptions, so you should check early whether you can actually obtain the data you need.</p>
+<p>Some useful online data sources include:</p>
+<ul>
+<li><p>FRED: <a href="https://fred.stlouisfed.org/" class="uri">https://fred.stlouisfed.org/</a></p></li>
+<li><p>The Shift Project Data Portal: <a href="https://theshiftdataportal.org/" class="uri">https://theshiftdataportal.org/</a></p></li>
+<li><p>IMF Climate Change Indicators Dashboard: <a href="https://climatedata.imf.org/" class="uri">https://climatedata.imf.org/</a></p></li>
+<li><p>Our World in Data: <a href="https://ourworldindata.org/" class="uri">https://ourworldindata.org/</a></p></li>
+</ul>
+<h1 class="unnumbered" id="think-about-the-methodology-or-model">5. Think About the Methodology or Model</h1>
+<p>You need to decide what framework you want to use and why. The method should be appropriate for the research question, the data, and the type of argument you want to make.</p>
+<p>For empirical projects, possible methods include AR, VAR, SVAR, GARCH, ARIMA, difference-in-differences, and GSADF approaches. These methods are not interchangeable: each is designed for particular types of questions and data. For example, a VAR may be useful for studying dynamic relationships among time-series variables, while a difference-in-differences design is typically used to study the effect of a policy or treatment when a suitable comparison group is available.</p>
+<p>For theoretical projects, possible frameworks include RBC models, New Keynesian models, and closed- or open-economy models. The key issue is not only the type of model, but also whether the assumptions are clearly stated and whether the model helps answer the research question.</p>
+<p>You should also think carefully about the form of the model: which variables will be included, how they are related, and what the rationale is for your choices. A strong dissertation requires a clear and extensive argument explaining why the chosen framework and model are appropriate. The goal is not only to apply a method, but to show that you understand what you are doing.</p>
+<p>Useful resources for econometric methods include books and papers such as Favero’s <em>Applied Macroeconometrics</em>, Fabozzi et al.’s <em>The Basics of Financial Econometrics</em>, Wang’s <em>Financial Econometrics</em>, Andersen et al.’s work on financial risk measurement, Koop and Korobilis on Bayesian multivariate time-series methods, Blake and Mumtaz on Bayesian econometrics for central bankers, and Kim on Markov-switching models. Dimitris Korobilis and Gary Koop also provide econometric code and resources online.</p>
+<h1 class="unnumbered" id="data-treatment-and-transformations">Data Treatment and Transformations</h1>
+<p>Once you have the data, you need to understand how to treat them before estimation. This step is often as important as the estimation itself. Important questions include:</p>
+<ul>
+<li><p>Do the data need to be transformed, for example using logs, growth rates, differences, or ratios?</p></li>
+<li><p>Should you use real or nominal values?</p></li>
+<li><p>Are the variables stationary, or do they contain trends or unit roots?</p></li>
+<li><p>Is there evidence of structural breaks?</p></li>
+<li><p>Is endogeneity a concern?</p></li>
+<li><p>Are there missing values, outliers, or measurement issues?</p></li>
+<li><p>Which diagnostic tests or robustness checks should be applied before and after estimation?</p></li>
+</ul>
+<p>You should review your econometrics material, use good textbooks, and consult reliable online resources. Published papers do not always report every preliminary test or robustness check, but careful researchers usually examine their data before estimating their main model. In your dissertation, you should be able to explain how you treated the data and why those choices are appropriate.</p>
+<h1 class="unnumbered" id="replicating-or-extending-an-existing-paper">Replicating or Extending an Existing Paper</h1>
+<p>If you are uncertain about your project or struggling to find ideas, it is acceptable to start from a paper you like and replicate or extend it. This can be a very good way to learn how research is conducted.</p>
+<p>However, the project should normally contain some element of novelty or independent contribution. For example, you could use different data, a different sample period, a slightly different model, the same method applied to a different country or sector, or an additional robustness check. The novelty does not have to be large, but you should be able to explain clearly how your dissertation differs from the existing paper and what is learned from that difference.</p>
+<h1 class="unnumbered" id="empirical-dissertations">Empirical Dissertations</h1>
+<p>An empirical dissertation has the following structure:</p>
+<ol>
+<li><p>Introduction and motivation.</p></li>
+<li><p>Literature review.</p></li>
+<li><p>Data.</p></li>
+<li><p>Methodology or econometric framework.</p></li>
+<li><p>Empirical results.</p></li>
+<li><p>Robustness checks or additional analysis, where appropriate.</p></li>
+<li><p>Conclusion, including limitations and possible extensions.</p></li>
+</ol>
+<p>The introduction should explain the research question, why it matters, and what the dissertation aims to contribute. It should also give the reader a clear overview of the argument and, where possible, the main findings.</p>
+<p>The literature review should position the dissertation within the existing research. It should not simply summarise papers one by one. Instead, it should explain what is already known, where there are gaps or disagreements, and how your dissertation relates to those debates.</p>
+<p>The data section should describe the sources, variables, sample period, frequency, and any transformations applied to the data. It should be clear enough for the reader to understand exactly what has been used and why. If variables are constructed from raw data, the construction should be explained carefully.</p>
+<p>The methodology section should justify the econometric approach. You should explain why the chosen method is suitable for the research question and the data. It is also important to discuss the assumptions behind the method and any limitations that may affect the interpretation of the results.</p>
+<p>The results section should present the main empirical findings clearly. Tables and figures should be well labelled, and the discussion should focus on interpretation rather than simply reporting coefficients. The key question is what the results imply for the research question.</p>
+<p>Robustness checks or additional analysis can strengthen the dissertation by showing whether the main findings are sensitive to alternative specifications, sample periods, variable definitions, or estimation methods. Not every dissertation needs many robustness checks, but a strong empirical dissertation should show awareness of the reliability and limitations of its results.</p>
+<p>The conclusion should summarise the main argument and findings, discuss limitations, and suggest possible extensions. It should not introduce an entirely new argument, but it can explain what the dissertation contributes and what could be done next.</p>
+<h1 class="unnumbered" id="theoretical-dissertations">Theoretical Dissertations</h1>
+<p>A theoretical dissertation has a structure similar to an empirical dissertation. It typically includes:</p>
+<ol>
+<li><p>Introduction and motivation.</p></li>
+<li><p>Literature review.</p></li>
+<li><p>Model.</p></li>
+<li><p>Results, such as simulations, comparative statics, or proved propositions.</p></li>
+<li><p>Conclusion, including limitations and possible extensions.</p></li>
+</ol>
+<p>The dissertation should motivate and justify the research question. This may involve explaining why an existing approach is incomplete for a particular situation, identifying the contribution of the project, and assessing whether current theories can address the problem.</p>
+<p>The methodology section should present the model clearly. You may develop a new approach or adapt existing models. It is often useful to begin with a simple baseline model and then add complexity only when it helps answer the research question. Assumptions should be clearly stated and should serve a purpose: they should help generate clear results, novel insights, or a useful worked example. The model should then be solved, tested, simulated, or analysed in a way that supports the argument of the dissertation.</p>
+<h1 class="unnumbered" id="summary">Summary</h1>
+<p>In short: choose a topic that genuinely interests you, make sure the project is feasible, narrow the research question, secure the data where needed, and justify your methodology carefully. A strong dissertation is not necessarily the most complicated one; it is a project with a clear question, an appropriate method, careful execution, and a well-explained argument.</p>
+</div>
         <p class="guidance-update">Information updated on 24/08/2026</p>
+
+      <nav class="guidance-pagination is-single" aria-label="Guidance note navigation">
+        <a class="guidance-page-link is-next" href="writing-dissertation.html">
+          <span class="guidance-page-copy">
+            <span class="guidance-page-direction">Next note</span>
+            <span class="guidance-page-title">A Guide to Writing Your Dissertation</span>
+          </span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </nav>
       </section>
 
       <footer class="foot">
