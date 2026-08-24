@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arthur Galichère — A Guide to Writing Your Literature Review</title>
-  <meta name="description" content="Guidance by Arthur Galichère on writing a literature review for an economics dissertation." />
-  <meta name="guidance-source-digest" content="61f86f5a579a850e47471790e3b48c0be133bfabcd07fff0b6369246faa43c6d" />
+  <title>Arthur Galichère — Structure of the Dissertation</title>
+  <meta name="description" content="Guidance by Arthur Galichère on structuring an economics dissertation." />
+  <meta name="guidance-source-digest" content="4fa942aeb82b939ece7b74549e02641e2b6961f92bedba88305585726f1b49db" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
-    :root {
+:root {
       --paper: #f4f5f7;
       --paper-soft: #fafbfc;
       --sheet: #ffffff;
@@ -141,7 +141,8 @@
       margin-bottom: 2rem;
     }
 
-    .back-link {
+    .back-link,
+    .download-link {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
@@ -157,27 +158,13 @@
                   border-color 0.16s ease, transform 0.16s ease;
     }
 
-    .back-link:hover {
+    .back-link:hover,
+    .download-link:hover {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
       transform: translateY(-1px);
     }
-
-    .download-link {
-      display: inline-flex;
-      align-items: center;
-      flex: 0 0 auto;
-      color: var(--accent);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.16s ease;
-    }
-
-    .download-link:hover { color: var(--accent-strong); }
-
-    .download-link i { margin-right: 0.3rem; }
 
     .guidance-title {
       margin-bottom: 2rem;
@@ -390,46 +377,6 @@
       line-height: 1.35;
     }
 
-    .back-to-top-wrap {
-      display: flex;
-      justify-content: center;
-      padding: 0 1.5rem 1.25rem;
-      background: var(--sheet);
-    }
-
-    .back-to-top {
-      width: 2.55rem;
-      height: 2.55rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border: 1px solid rgba(59, 90, 117, 0.25);
-      border-radius: 50%;
-      font-size: 0.85rem;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(28, 28, 30, 0.05);
-      transition: color 0.16s ease, background-color 0.16s ease,
-                  border-color 0.16s ease, transform 0.16s ease,
-                  box-shadow 0.16s ease;
-    }
-
-    .back-to-top:hover {
-      color: #fff;
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 6px 16px rgba(28, 28, 30, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .back-to-top:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    html { scroll-behavior: smooth; }
-
     .foot {
       display: flex;
       align-items: center;
@@ -478,13 +425,10 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-
       .index-card,
       .back-link,
       .download-link,
       .guidance-page-link,
-      .back-to-top,
       .socials a { transition: none; }
     }
 
@@ -498,8 +442,7 @@
       .index-card { border-top: 1px solid var(--line); border-left: none; }
       .index-card:first-child { border-top: none; }
       .guidance-toolbar { align-items: stretch; flex-direction: column; }
-      .back-link { justify-content: center; }
-      .download-link { align-self: center; justify-content: center; }
+      .back-link, .download-link { justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
       .foot { flex-direction: column; text-align: center; }
@@ -514,7 +457,7 @@
   </script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-<body id="top">
+<body>
   <main class="page">
     <article class="card">
       <nav class="index-nav" aria-label="Academic Directory">
@@ -541,117 +484,74 @@
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
             Dissertation Supervision and Guidance
           </a>
-          <a href="https://www.dropbox.com/scl/fi/es6yhoobdindeqhrip37y/A-Guide-to-writing-your-Literature-Review.pdf?rlkey=hh09xo8pqs4dna7hxb0qisqt7&amp;st=sxqdxiy4&amp;dl=1" class="download-link">
+          <a href="https://www.dropbox.com/scl/fi/70uu4hmon81ekrnwunlsq/Structure-of-the-dissertation.pdf?rlkey=s1on52nrda7vc3ffhn5x5q7qf&amp;st=tn1rx8v4&amp;dl=1" class="download-link">
             <i class="fas fa-download" aria-hidden="true"></i>
             Download PDF
           </a>
         </div>
 
-        <h1 class="guidance-title">A Guide to Writing Your Literature Review</h1>
+        <h1 class="guidance-title">Structure of the Dissertation</h1>
 
-        <div class="guidance-content"><p>The literature review is one of the most important sections of your dissertation as it places your project in the literature and highlights the novelty of your research. Despite being an important element of the dissertation, many students overlook this section. This note will provide you with a simple and efficient method on how to elaborate your literature review.</p>
-<p>Once you have a <em>vague</em> research topic in mind, the constitution of your literature review starts right away. In other words, you are going to gather information, and thus start your literature review, while you are narrowing down your research question.</p>
-<p>When you have a settled on research topic, you are going to narrow your research question by examining what other researchers have done. That is to say, you are going to read papers. This is the crucial moment when you should not waste time and take some notes on the work of others. By collecting the essential information for every paper you are reading related to your research topic, you are constituting your own literature review.</p>
-<p>What is the essential information you should collect? You need to write down the author(s), the year of publication (or the year of the current version of the working paper), the research question, the answer to this research question and their methodology. Additionally, and crucially if you are doing an empirical project, you should note what data was used and where it was collected. This will be tremendously helpful for your project since you will not waste time searching for what data you should use and where to get it. Finally, you can include a final column called <em>comments</em> where you write about the paper’s specific details, such as particular variables, important theoretical mechanisms, or just some observations.</p>
-<p>Here is an example of how to organise your literature review:</p>
-<div class="center">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Author</th>
-<th style="text-align: center;">Year</th>
-<th style="text-align: center;">Research Question</th>
-<th style="text-align: center;">Answer</th>
-<th style="text-align: center;">Methodology</th>
-<th style="text-align: center;">Data</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Galichère,</td>
-<td style="text-align: center;">2021</td>
-<td style="text-align: center;">Can monetary</td>
-<td style="text-align: center;">Yes, but strong reaction</td>
-<td style="text-align: center;">New-Keynesian model</td>
-<td style="text-align: center;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Arthur</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">policy deflate bubble?</td>
-<td style="text-align: center;">of MP can create a recession</td>
-<td style="text-align: center;">with heterogeneous agents</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-<td style="text-align: center;">.</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
+        <div class="guidance-content"><h1 class="unnumbered" id="abstract">Abstract</h1>
+<ol>
+<li><p>“This dissertation studies ..."</p></li>
+<li><p>Very brief overview of the methodology (1-3 sentences)</p></li>
+<li><p>Contribution and brief overview of the results</p></li>
+</ol>
+<h1 id="introduction">Introduction</h1>
+<ol>
+<li><p>Context and Motivation</p></li>
+<li><p>Presentation of important concepts</p></li>
+<li><p>Research question(s)</p></li>
+<li><p>Optional: what is your hypothesis?</p></li>
+<li><p>State the analytical method (what type of data/model) to answer your research question</p></li>
+<li><p>Contribution and extensive overview of the results</p></li>
+</ol>
+<h1 id="literature-review">Literature Review</h1>
+<ol>
+<li><p>Chronological and/or by topics presentation of the literature</p></li>
+<li><p>Research gaps and contribution</p></li>
+</ol>
+<h1 id="methodology">Methodology</h1>
+<p>The guidance in this section is tailored to the specific type of your project. If you are undertaking an empirical study, refer to subsection <a href="#meth_empi" data-reference-type="ref" data-reference="meth_empi">[meth_empi]</a> for detailed instructions. Conversely, if you are engaged in a theoretical project, consult subsection <a href="#meth_theor" data-reference-type="ref" data-reference="meth_theor">[meth_theor]</a> for comprehensive guidance.</p>
+<h2 id="empirical-analysis">Empirical Analysis<span id="meth_empi" label="meth_empi"></span></h2>
+<p>Before presenting the data, model and diagnostic tests, write an <u>introductory short summary</u> <u>paragraph</u> presenting what model will be used, what are the data / important variables and the sample characteristics (starting-ending dates, frequency, time series / panel data / cross-sectional data, ...).</p>
+<ol>
+<li><p>Data subsection: presentation of data and transformation, plots of the data and descriptive statistics</p></li>
+<li><p>Model subsection: presentation of the model and variables and reasons/arguments of the choice of the model (Why this model? What are the advantages or disadvantages? ...)</p></li>
+<li><p>Diagnostic tests: What, why and interpretations of the results of the tests</p></li>
+</ol>
+<h2 id="theoretical-analysis">Theoretical Analysis<span id="meth_theor" label="meth_theor"></span></h2>
+<p>Before presenting the model, write one or two <u>introductory short summary paragraphs</u> explaining your model: On which model is based yours? What type of model is it (Growth, RBC, RANK, HANK, ...)? How many agents populate the economy and what are their economic roles? How many assets/means of saving are available to the agents? How many firms and type of firms? What are the main frictions in the environment (if any)?</p>
+<ol>
+<li><p>Agents problems subsection: presentation of maximisation problems of the agents and their optimal behaviours</p></li>
+<li><p>Aggregation and equilibrium subsection: presentation of the system and its variables</p></li>
+<li><p>Calibration: present the parameters and their values, as well as the source of the calibration (optional: present the data moments that the model’s calibration tries to replicate)</p></li>
+</ol>
+<h1 id="results">Results</h1>
+<p>Before presenting the results in details, write an <u>introductory short summary paragraph</u> presenting an overview of the main results.</p>
+<ol>
+<li><p>Present the results of the analysis and explain/interpret them using economic theory</p></li>
+<li><p>Tables and graphs should include a table/figure number, title, legend and a explanatory note below (the table/figure should be understandable without reading the main text)</p></li>
+</ol>
+<h1 id="conclusion">Conclusion</h1>
+<ol>
+<li><p>First paragraph: briefly remind the reader about the research question, the methodology and answer the research question</p></li>
+<li><p>Present a summarised version of main results: one paragraph per result</p></li>
+</ol>
 </div>
-<p>Once you have read enough papers related to your research question, you have should enough information to directly write down your literature review! And if you missed an important point, you know where to look for it!</p>
-<p>When writing your literature review, you must demonstrate how the reviewed works directly connect to your research topic. Put differently, you should present the existing literature with a clear connection to your well-defined research topic. Instead of merely listing viewpoints or findings, a critical analysis of each perspective is necessary. This involves:</p>
-<ul>
-<li><p>Differentiating between existing studies and gaps that require attention. Explore the underlying reasons behind each viewpoint</p></li>
-<li><p>Comparing arguments across different papers, assessing how one paper’s argument compares to another’s</p></li>
-<li><p>Highlighting areas that demand further exploration and identify inconsistencies or puzzles in the current literature</p></li>
-<li><p>Examining the predominant methodologies and research techniques employed in the field, briefly outlining their respective strengths and weaknesses. For theoretical papers, this means retrieving and explaining the key mechanisms that generate the study’s results</p></li>
-</ul>
-<p>The last question is how to organise your literature review: Chronologically? Or by topics? Maybe an alternative way? There is no right answer to this question as different projects will be more adequate to one style or another. Then I will leave this answer to your own judgment.</p></div>
         <p class="guidance-update">Information updated on 24/08/2026</p>
 
-      <nav class="guidance-pagination" aria-label="Guidance note navigation">
-        <a class="guidance-page-link is-previous" href="writing-dissertation.html">
+      <nav class="guidance-pagination is-single" aria-label="Guidance note navigation">
+        <a class="guidance-page-link is-previous" href="literature-review.html">
           <i class="fas fa-arrow-left" aria-hidden="true"></i>
           <span class="guidance-page-copy">
             <span class="guidance-page-direction">Previous note</span>
-            <span class="guidance-page-title">A Guide to Writing Your Dissertation</span>
+            <span class="guidance-page-title">A Guide to Writing Your Literature Review</span>
           </span>
-        </a>
-        <a class="guidance-page-link is-next" href="dissertation-structure.html">
-          <span class="guidance-page-copy">
-            <span class="guidance-page-direction">Next note</span>
-            <span class="guidance-page-title">Structure of the Dissertation</span>
-          </span>
-          <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
       </nav>
       </section>
-
-      <div class="back-to-top-wrap">
-        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
-          <i class="fas fa-arrow-up" aria-hidden="true"></i>
-        </a>
-      </div>
 
       <footer class="foot">
         <div class="socials">

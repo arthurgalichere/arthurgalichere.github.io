@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arthur Galichère — A Guide to Writing Your Literature Review</title>
   <meta name="description" content="Guidance by Arthur Galichère on writing a literature review for an economics dissertation." />
-  <meta name="guidance-source-digest" content="61f86f5a579a850e47471790e3b48c0be133bfabcd07fff0b6369246faa43c6d" />
+  <meta name="guidance-source-digest" content="8d2c3f87454deaefedcdf7853167b30eb876fcf8b4003eb5433c7abcd7e773f8" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
-    :root {
+:root {
       --paper: #f4f5f7;
       --paper-soft: #fafbfc;
       --sheet: #ffffff;
@@ -141,7 +141,8 @@
       margin-bottom: 2rem;
     }
 
-    .back-link {
+    .back-link,
+    .download-link {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
@@ -157,27 +158,13 @@
                   border-color 0.16s ease, transform 0.16s ease;
     }
 
-    .back-link:hover {
+    .back-link:hover,
+    .download-link:hover {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
       transform: translateY(-1px);
     }
-
-    .download-link {
-      display: inline-flex;
-      align-items: center;
-      flex: 0 0 auto;
-      color: var(--accent);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.16s ease;
-    }
-
-    .download-link:hover { color: var(--accent-strong); }
-
-    .download-link i { margin-right: 0.3rem; }
 
     .guidance-title {
       margin-bottom: 2rem;
@@ -390,46 +377,6 @@
       line-height: 1.35;
     }
 
-    .back-to-top-wrap {
-      display: flex;
-      justify-content: center;
-      padding: 0 1.5rem 1.25rem;
-      background: var(--sheet);
-    }
-
-    .back-to-top {
-      width: 2.55rem;
-      height: 2.55rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border: 1px solid rgba(59, 90, 117, 0.25);
-      border-radius: 50%;
-      font-size: 0.85rem;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(28, 28, 30, 0.05);
-      transition: color 0.16s ease, background-color 0.16s ease,
-                  border-color 0.16s ease, transform 0.16s ease,
-                  box-shadow 0.16s ease;
-    }
-
-    .back-to-top:hover {
-      color: #fff;
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 6px 16px rgba(28, 28, 30, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .back-to-top:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    html { scroll-behavior: smooth; }
-
     .foot {
       display: flex;
       align-items: center;
@@ -478,13 +425,10 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-
       .index-card,
       .back-link,
       .download-link,
       .guidance-page-link,
-      .back-to-top,
       .socials a { transition: none; }
     }
 
@@ -498,8 +442,7 @@
       .index-card { border-top: 1px solid var(--line); border-left: none; }
       .index-card:first-child { border-top: none; }
       .guidance-toolbar { align-items: stretch; flex-direction: column; }
-      .back-link { justify-content: center; }
-      .download-link { align-self: center; justify-content: center; }
+      .back-link, .download-link { justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
       .foot { flex-direction: column; text-align: center; }
@@ -514,7 +457,7 @@
   </script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-<body id="top">
+<body>
   <main class="page">
     <article class="card">
       <nav class="index-nav" aria-label="Academic Directory">
@@ -626,7 +569,8 @@
 <li><p>Highlighting areas that demand further exploration and identify inconsistencies or puzzles in the current literature</p></li>
 <li><p>Examining the predominant methodologies and research techniques employed in the field, briefly outlining their respective strengths and weaknesses. For theoretical papers, this means retrieving and explaining the key mechanisms that generate the study’s results</p></li>
 </ul>
-<p>The last question is how to organise your literature review: Chronologically? Or by topics? Maybe an alternative way? There is no right answer to this question as different projects will be more adequate to one style or another. Then I will leave this answer to your own judgment.</p></div>
+<p>The last question is how to organise your literature review: Chronologically? Or by topics? Maybe an alternative way? There is no right answer to this question as different projects will be more adequate to one style or another. Then I will leave this answer to your own judgment.</p>
+</div>
         <p class="guidance-update">Information updated on 24/08/2026</p>
 
       <nav class="guidance-pagination" aria-label="Guidance note navigation">
@@ -646,12 +590,6 @@
         </a>
       </nav>
       </section>
-
-      <div class="back-to-top-wrap">
-        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
-          <i class="fas fa-arrow-up" aria-hidden="true"></i>
-        </a>
-      </div>
 
       <footer class="foot">
         <div class="socials">

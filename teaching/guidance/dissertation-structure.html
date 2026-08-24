@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arthur Galichère — Structure of the Dissertation</title>
   <meta name="description" content="Guidance by Arthur Galichère on structuring an economics dissertation." />
-  <meta name="guidance-source-digest" content="4fa942aeb82b939ece7b74549e02641e2b6961f92bedba88305585726f1b49db" />
+  <meta name="guidance-source-digest" content="1d7b00dbe05097c4f79424e6aefd870060a0e8475da1196b52e4814234f3b4a9" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
-:root {
+    :root {
       --paper: #f4f5f7;
       --paper-soft: #fafbfc;
       --sheet: #ffffff;
@@ -141,8 +141,7 @@
       margin-bottom: 2rem;
     }
 
-    .back-link,
-    .download-link {
+    .back-link {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
@@ -158,13 +157,27 @@
                   border-color 0.16s ease, transform 0.16s ease;
     }
 
-    .back-link:hover,
-    .download-link:hover {
+    .back-link:hover {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
       transform: translateY(-1px);
     }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.16s ease;
+    }
+
+    .download-link:hover { color: var(--accent-strong); }
+
+    .download-link i { margin-right: 0.3rem; }
 
     .guidance-title {
       margin-bottom: 2rem;
@@ -377,6 +390,46 @@
       line-height: 1.35;
     }
 
+    .back-to-top-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 0 1.5rem 1.25rem;
+      background: var(--sheet);
+    }
+
+    .back-to-top {
+      width: 2.55rem;
+      height: 2.55rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.25);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(28, 28, 30, 0.05);
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease,
+                  box-shadow 0.16s ease;
+    }
+
+    .back-to-top:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(28, 28, 30, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .back-to-top:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    html { scroll-behavior: smooth; }
+
     .foot {
       display: flex;
       align-items: center;
@@ -425,10 +478,13 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
       .index-card,
       .back-link,
       .download-link,
       .guidance-page-link,
+      .back-to-top,
       .socials a { transition: none; }
     }
 
@@ -442,7 +498,8 @@
       .index-card { border-top: 1px solid var(--line); border-left: none; }
       .index-card:first-child { border-top: none; }
       .guidance-toolbar { align-items: stretch; flex-direction: column; }
-      .back-link, .download-link { justify-content: center; }
+      .back-link { justify-content: center; }
+      .download-link { align-self: center; justify-content: center; }
       .guidance-title { font-size: 2.15rem; }
       .guidance-pagination { grid-template-columns: 1fr; }
       .foot { flex-direction: column; text-align: center; }
@@ -457,7 +514,7 @@
   </script>
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-<body>
+<body id="top">
   <main class="page">
     <article class="card">
       <nav class="index-nav" aria-label="Academic Directory">
@@ -538,8 +595,7 @@
 <ol>
 <li><p>First paragraph: briefly remind the reader about the research question, the methodology and answer the research question</p></li>
 <li><p>Present a summarised version of main results: one paragraph per result</p></li>
-</ol>
-</div>
+</ol></div>
         <p class="guidance-update">Information updated on 24/08/2026</p>
 
       <nav class="guidance-pagination is-single" aria-label="Guidance note navigation">
@@ -552,6 +608,12 @@
         </a>
       </nav>
       </section>
+
+      <div class="back-to-top-wrap">
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
+      </div>
 
       <footer class="foot">
         <div class="socials">
