@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arthur Galichère — Dissertation Supervision</title>
+  <title>AG: Dissertation Supervision</title>
   <meta name="description" content="Dissertation supervision guidance, research interests, expectations, potential topics, and examples of projects supervised by Arthur Galichère." />
 
   <link rel="icon" type="image/png" href="../website/images/favicon_transparant.png" />
@@ -37,7 +37,10 @@
       box-sizing: border-box;
     }
 
-    html { background: var(--paper); }
+    html {
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
 
     body {
       min-height: 100vh;
@@ -201,7 +204,6 @@
     }
 
     .supervision-paths li { padding-left: 0.25rem; }
-
     .supervision-paths li::marker { color: var(--accent); }
 
     .supervision-paths strong {
@@ -322,7 +324,6 @@
     }
 
     .examples-section .section-title { margin-bottom: 2.1rem; }
-
     .example-group + .example-group { margin-top: 2.8rem; }
 
     .example-group-title {
@@ -371,7 +372,6 @@
     }
 
     .project-ribbon summary::-webkit-details-marker { display: none; }
-
     .project-ribbon summary:hover { background: var(--accent-soft); }
 
     .project-ribbon[open] summary {
@@ -441,17 +441,51 @@
       border-color: var(--accent);
     }
 
-    .foot {
-      display: flex;
+    .back-to-top {
+      width: 2.55rem;
+      height: 2.55rem;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(28, 28, 30, 0.05);
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease,
+                  box-shadow 0.16s ease;
+    }
+
+    .back-to-top:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(28, 28, 30, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .back-to-top:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .foot {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
       gap: 1rem;
       padding: 0.9rem 1.5rem;
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
 
+    .foot .back-to-top { justify-self: center; }
+
     .foot-loc {
+      justify-self: end;
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -462,6 +496,7 @@
     .socials {
       display: flex;
       align-items: center;
+      justify-self: start;
       gap: 0.4rem;
     }
 
@@ -488,11 +523,14 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
       .back-link,
       .project-ribbon,
       .project-ribbon summary,
       .project-chevron,
       .project-link,
+      .back-to-top,
       .socials a {
         transition: none;
       }
@@ -515,13 +553,17 @@
       .project-ribbon summary { padding: 1rem; }
       .project-content { padding: 1rem; }
       .foot {
+        display: flex;
         flex-direction: column;
         text-align: center;
       }
+      .foot .back-to-top { order: -1; }
+      .foot-loc { justify-self: auto; }
+      .socials { justify-self: auto; }
     }
   </style>
 </head>
-<body>
+<body id="top">
   <main class="page">
     <article class="card">
       <nav class="index-nav" aria-label="Academic Directory">
@@ -618,111 +660,53 @@
             <p class="example-group-intro">These projects develop, extend, calibrate, or estimate economic models to examine a clearly defined research question. Applied theoretical work combines formal modelling with data, counterfactual exercises, or quantitative policy analysis.</p>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">How NOT to Conduct Monetary Policy: The Case of Turkiye</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
+              <summary><span class="project-title">How NOT to Conduct Monetary Policy: The Case of Turkiye</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
               <div class="project-content">
                 <p class="project-meta">Applied theoretical analysis · Published student paper</p>
                 <p>This work quantifies the welfare cost of an unorthodox monetary policy conducted in Turkiye during 2021–2023 through a counterfactual experiment based on an estimated Markov-switching DSGE model. This episode marks a sharp departure from conventional, inflation-stabilising policy and provides an ideal setting for evaluating welfare losses caused by politically driven departures from orthodoxy.</p>
                 <p>The analysis uses quarterly data from 2006Q1 to 2025Q1 and specifies four candidate models, three of which allow for regime switching in Taylor-rule parameters and shock volatilities. Estimation results indicate that the best-fitting model includes switching in the inflation-response and interest-rate-smoothing parameters, alongside volatility switching in cost-push shocks. Using this model, the counterfactual experiment estimates welfare gains of 155–177% had the central bank refrained from unorthodox policy during this episode.</p>
-                <div class="project-links">
-                  <a href="https://www.dropbox.com/scl/fi/2qm6wrdmvmmni9d5rkt0i/2025-Taher-Fahmi-WM-ESP-2026.pdf?rlkey=y3ookdyex1ptrwc4sfcj89c3r&st=nyie799q&dl=1" target="_blank" rel="noreferrer" class="project-link">
-                    <i class="fas fa-file-lines" aria-hidden="true"></i>
-                    Warwick–Monash Economics Student Papers, March 2026
-                  </a>
-                </div>
+                <div class="project-links"><a href="https://drive.google.com/file/d/1ZW48HOuyqLdIhlkEbinimD_7khTCy0AT/view?usp=drive_link" target="_blank" rel="noreferrer" class="project-link"><i class="fas fa-file-lines" aria-hidden="true"></i>Warwick–Monash Economics Student Papers, March 2026</a></div>
               </div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Is Net-zero a Feasible Approach? A Theoretical Model of Sustainable Growth and Natural Capital</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
+              <summary><span class="project-title">Is Net-zero a Feasible Approach? A Theoretical Model of Sustainable Growth and Natural Capital</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
               <div class="project-content">
                 <p class="project-meta">Theoretical analysis · Selected conference presentation</p>
                 <p>This paper asks whether net zero is feasible and whether it creates a growth trade-off. It uses an endogenous growth model to examine whether an economy can achieve sustainable green growth by reallocating resources between carbon-intensive artificial capital and biofuel-intensive natural capital.</p>
                 <p>Production uses two reproducible inputs, natural and artificial capital. The accumulation of artificial capital reduces the natural-capital stock through the negative externality of carbon emissions, which private agents do not internalise. A carbon tax-and-subsidy scheme encourages firms to substitute towards natural capital. Pollution damage can be mitigated or partially reversed, supporting the net-zero objective, but at the cost of lower long-run growth. Improvements in abatement technology may help overcome this trade-off.</p>
-                <div class="project-links">
-                  <a href="https://www.dropbox.com/scl/fi/rqvtiyznqe7nexkima257/2023-RAE-Jay-Kavaiya-Carroll-Round-Poster.pdf?rlkey=d2epi5l37t92v0i25dzl4evmf&amp;st=w8qda63a&amp;dl=1" target="_blank" rel="noreferrer" class="project-link">
-                    <i class="fas fa-file-pdf" aria-hidden="true"></i>
-                    2023 Carroll Round poster
-                  </a>
-                </div>
+                <div class="project-links"><a href="https://www.dropbox.com/scl/fi/rqvtiyznqe7nexkima257/2023-RAE-Jay-Kavaiya-Carroll-Round-Poster.pdf?rlkey=d2epi5l37t92v0i25dzl4evmf&amp;st=w8qda63a&amp;dl=1" target="_blank" rel="noreferrer" class="project-link"><i class="fas fa-file-pdf" aria-hidden="true"></i>2023 Carroll Round poster</a></div>
               </div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Technologies and Labour: A Theoretical Model of Task-based Production in a Labour Market with Search Frictions</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Theoretical analysis</p>
-                <p>This paper examines the relationship between automation, task creation, and labour-market outcomes by incorporating the task-based approach of Acemoglu and Restrepo into a search-and-matching model. The methodology combines theoretical modelling with empirical analysis.</p>
-                <p>The results indicate that automation has a complex and dual effect on the labour market, depending on the balance between displacement and productivity effects. Task creation is uniformly beneficial, mitigating the adverse effects of automation and supporting labour-market performance. The findings suggest that policies promoting innovation and task creation can help economies benefit from technological change.</p>
-              </div>
+              <summary><span class="project-title">Technologies and Labour: A Theoretical Model of Task-based Production in a Labour Market with Search Frictions</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Theoretical analysis</p><p>This paper examines the relationship between automation, task creation, and labour-market outcomes by incorporating the task-based approach of Acemoglu and Restrepo into a search-and-matching model. The methodology combines theoretical modelling with empirical analysis.</p><p>The results indicate that automation has a complex and dual effect on the labour market, depending on the balance between displacement and productivity effects. Task creation is uniformly beneficial, mitigating the adverse effects of automation and supporting labour-market performance. The findings suggest that policies promoting innovation and task creation can help economies benefit from technological change.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Examining the Interactions of Retail and Institutional Investors in a Theoretical Steady-State Model</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Theoretical analysis</p>
-                <p>With the rise of zero-commission trading, retail investors now account for a much larger share of stock-market activity. Their demographic profile has also changed, with younger investors holding smaller portfolios and often displaying a greater willingness to take risks.</p>
-                <p>This paper develops a theoretical model to investigate the interactions and optimal investment decisions of retail and institutional investors. It finds that retail investors tend to adopt riskier investment strategies, while institutional investors prefer diversified portfolios. The results are consistent with the broader literature on retail-investor preferences and trading behaviour.</p>
-              </div>
+              <summary><span class="project-title">Examining the Interactions of Retail and Institutional Investors in a Theoretical Steady-State Model</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Theoretical analysis</p><p>With the rise of zero-commission trading, retail investors now account for a much larger share of stock-market activity. Their demographic profile has also changed, with younger investors holding smaller portfolios and often displaying a greater willingness to take risks.</p><p>This paper develops a theoretical model to investigate the interactions and optimal investment decisions of retail and institutional investors. It finds that retail investors tend to adopt riskier investment strategies, while institutional investors prefer diversified portfolios. The results are consistent with the broader literature on retail-investor preferences and trading behaviour.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Financial Crisis, Quantitative Easing and Income Inequality: A Theoretical Analysis</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Theoretical analysis</p>
-                <p>This paper develops a two-agent New Keynesian model with financial intermediaries to study the distributional effects of financial crises and quantitative easing. The model includes unrestricted households with full access to financial markets and ownership of financial intermediaries and firms, alongside restricted households that cannot borrow or lend and behave in a hand-to-mouth manner.</p>
-                <p>An asset-value shock is used to examine the effects of large-scale government intermediation during a recession. Access to finance determines how households are affected: richer households become richer while poorer households become poorer. Although both groups benefit from intervention, quantitative easing disproportionately favours wealthier households and widens income inequality.</p>
-              </div>
+              <summary><span class="project-title">Financial Crisis, Quantitative Easing and Income Inequality: A Theoretical Analysis</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Theoretical analysis</p><p>This paper develops a two-agent New Keynesian model with financial intermediaries to study the distributional effects of financial crises and quantitative easing. The model includes unrestricted households with full access to financial markets and ownership of financial intermediaries and firms, alongside restricted households that cannot borrow or lend and behave in a hand-to-mouth manner.</p><p>An asset-value shock is used to examine the effects of large-scale government intermediation during a recession. Access to finance determines how households are affected: richer households become richer while poorer households become poorer. Although both groups benefit from intervention, quantitative easing disproportionately favours wealthier households and widens income inequality.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Climate Change and Monetary Policy: Assessing the Effect of a Climate Lending Facility</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Theoretical analysis</p>
-                <p>Central banks have become increasingly important contributors to climate policy because of their responsibility for macroeconomic and financial stability. However, relatively little theoretical work studies the economic effects of specific climate-oriented central-bank instruments.</p>
-                <p>This project develops a New Keynesian model to assess a climate lending facility: the provision of low-cost central-bank funding to financial institutions that extend climate-related loans at lower interest rates. It provides a theoretical foundation for evaluating how such a facility influences the dynamic response of the economy.</p>
-              </div>
+              <summary><span class="project-title">Climate Change and Monetary Policy: Assessing the Effect of a Climate Lending Facility</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Theoretical analysis</p><p>Central banks have become increasingly important contributors to climate policy because of their responsibility for macroeconomic and financial stability. However, relatively little theoretical work studies the economic effects of specific climate-oriented central-bank instruments.</p><p>This project develops a New Keynesian model to assess a climate lending facility: the provision of low-cost central-bank funding to financial institutions that extend climate-related loans at lower interest rates. It provides a theoretical foundation for evaluating how such a facility influences the dynamic response of the economy.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Financial Shocks with Bank Intermediation</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Theoretical analysis</p>
-                <p>This project extends the RBC model of debt and equity financing developed by Jermann and Quadrini by introducing banks and retirement shocks that affect the probability of bank failure. It studies how bank intermediation changes the propagation of financial shocks using impulse-response functions.</p>
-                <p>The additional frictions created by banks amplify both the expansionary effects of positive financial shocks and the contractionary effects of negative shocks. Financial and retirement shocks both affect firms' borrowing capacity, but through different channels. The model provides a framework for understanding how financial crises can develop into broader economic crises.</p>
-              </div>
+              <summary><span class="project-title">Financial Shocks with Bank Intermediation</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Theoretical analysis</p><p>This project extends the RBC model of debt and equity financing developed by Jermann and Quadrini by introducing banks and retirement shocks that affect the probability of bank failure. It studies how bank intermediation changes the propagation of financial shocks using impulse-response functions.</p><p>The additional frictions created by banks amplify both the expansionary effects of positive financial shocks and the contractionary effects of negative shocks. Financial and retirement shocks both affect firms' borrowing capacity, but through different channels. The model provides a framework for understanding how financial crises can develop into broader economic crises.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">“Killing Two Birds with One Stone”: An Optimal Carbon Tax on Income for the UK</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Theoretical analysis</p>
-                <p>This dissertation examines how an optimal income-based carbon tax affects income inequality and consumption-based carbon emissions in the United Kingdom. It constructs an environmental DSGE model with heterogeneous households and uses a broad social-welfare-maximisation problem to identify the optimal tax rate.</p>
-                <p>The findings indicate a positive relationship between the optimal tax and society's perceived harm from carbon pollution. Introducing the tax reduces consumption emissions, income inequality, and carbon-related production damage.</p>
-              </div>
+              <summary><span class="project-title">“Killing Two Birds with One Stone”: An Optimal Carbon Tax on Income for the UK</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Theoretical analysis</p><p>This dissertation examines how an optimal income-based carbon tax affects income inequality and consumption-based carbon emissions in the United Kingdom. It constructs an environmental DSGE model with heterogeneous households and uses a broad social-welfare-maximisation problem to identify the optimal tax rate.</p><p>The findings indicate a positive relationship between the optimal tax and society's perceived harm from carbon pollution. Introducing the tax reduces consumption emissions, income inequality, and carbon-related production damage.</p></div>
             </details>
           </div>
 
@@ -731,75 +715,33 @@
             <p class="example-group-intro">These projects use economic and financial data to test hypotheses, identify relationships, or detect changes in market behaviour. They illustrate the use of econometric methods to address substantive questions in macroeconomics and finance.</p>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Quantitative Easing and the Possibility of Stock Market and House Price Bubbles: Evidence from the UK</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Empirical analysis</p>
-                <p>This paper investigates whether quantitative easing contributes to bubble formation in UK stock and housing markets. The Generalised Supremum Augmented Dickey-Fuller test is used to identify bubbles, after which limited dependent-variable models control for the underlying dynamics during identified periods of exuberance.</p>
-                <p>Both stock and housing markets exhibit signs of bubbles, but only the housing market shows significant evidence of recent exuberance. The results also support a relationship between quantitative easing and bubble formation.</p>
-              </div>
+              <summary><span class="project-title">Quantitative Easing and the Possibility of Stock Market and House Price Bubbles: Evidence from the UK</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Empirical analysis</p><p>This paper investigates whether quantitative easing contributes to bubble formation in UK stock and housing markets. The Generalised Supremum Augmented Dickey-Fuller test is used to identify bubbles, after which limited dependent-variable models control for the underlying dynamics during identified periods of exuberance.</p><p>Both stock and housing markets exhibit signs of bubbles, but only the housing market shows significant evidence of recent exuberance. The results also support a relationship between quantitative easing and bubble formation.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">The Heterogeneous Impact of Financial Literacy and Income on Household Investment Behaviour under Monetary Policy</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Empirical analysis</p>
-                <p>This paper uses Survey of Consumer Finances data to study how financial literacy and income shape household investment responses to monetary policy. It analyses both participation in risky-asset markets and the share of portfolios allocated to risky assets across years.</p>
-                <p>Individuals with the lowest financial literacy and income are the least responsive to monetary-policy changes. Within this group, households with a high share of wealth in risky assets may be particularly vulnerable during market downturns. The paper highlights the potential for monetary policy to worsen wealth inequality and emphasises the importance of improving financial literacy alongside monetary interventions.</p>
-              </div>
+              <summary><span class="project-title">The Heterogeneous Impact of Financial Literacy and Income on Household Investment Behaviour under Monetary Policy</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Empirical analysis</p><p>This paper uses Survey of Consumer Finances data to study how financial literacy and income shape household investment responses to monetary policy. It analyses both participation in risky-asset markets and the share of portfolios allocated to risky assets across years.</p><p>Individuals with the lowest financial literacy and income are the least responsive to monetary-policy changes. Within this group, households with a high share of wealth in risky assets may be particularly vulnerable during market downturns. The paper highlights the potential for monetary policy to worsen wealth inequality and emphasises the importance of improving financial literacy alongside monetary interventions.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Liquidity Risk and Its Macro-financial Vulnerabilities in the UK Banking Sector</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Empirical analysis</p>
-                <p>This research examines the macro-financial vulnerabilities associated with liquidity risk in the UK banking sector from 2007 to 2021. It analyses HSBC, Lloyds, Barclays, and NatWest, linking liquidity conditions to bank behaviour and economic performance.</p>
-                <p>The findings indicate that the banks collectively improved performance at the cost of greater liquidity vulnerability, although their individual relationships with liquidity and economic conditions differ. The project helps explain why liquidity ratios vary across banks despite the introduction of active prudential regulation.</p>
-              </div>
+              <summary><span class="project-title">Liquidity Risk and Its Macro-financial Vulnerabilities in the UK Banking Sector</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Empirical analysis</p><p>This research examines the macro-financial vulnerabilities associated with liquidity risk in the UK banking sector from 2007 to 2021. It analyses HSBC, Lloyds, Barclays, and NatWest, linking liquidity conditions to bank behaviour and economic performance.</p><p>The findings indicate that the banks collectively improved performance at the cost of greater liquidity vulnerability, although their individual relationships with liquidity and economic conditions differ. The project helps explain why liquidity ratios vary across banks despite the introduction of active prudential regulation.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">An Analysis of Bitcoin's Explosive Price Behaviour as an Asset Price Bubble in 2020–21</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Empirical analysis</p>
-                <p>This paper investigates whether Bitcoin experienced an asset-price bubble during 2020 and 2021. It applies the Generalised Supremum Augmented Dickey-Fuller procedure proposed by Phillips, Shi, and Yu to date-stamp periods of explosive price behaviour.</p>
-                <p>The identified exuberant periods are then linked to events that may have contributed to bubble formation. The paper finds evidence that Bitcoin entered several bubble episodes over the two-year period.</p>
-              </div>
+              <summary><span class="project-title">An Analysis of Bitcoin's Explosive Price Behaviour as an Asset Price Bubble in 2020–21</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Empirical analysis</p><p>This paper investigates whether Bitcoin experienced an asset-price bubble during 2020 and 2021. It applies the Generalised Supremum Augmented Dickey-Fuller procedure proposed by Phillips, Shi, and Yu to date-stamp periods of explosive price behaviour.</p><p>The identified exuberant periods are then linked to events that may have contributed to bubble formation. The paper finds evidence that Bitcoin entered several bubble episodes over the two-year period.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Bubble, Bubble, Where Are You? An Empirical Investigation of House Price Bubbles in Regional Norway</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Empirical analysis</p>
-                <p>This paper investigates whether regional Norwegian housing markets experienced bubble regimes over the previous two decades. The Generalised Supremum Augmented Dickey-Fuller test identifies explosive behaviour, and the BSADF date-stamping strategy proposed by Phillips and co-authors identifies the corresponding periods.</p>
-                <p>The paper establishes the presence of several periods of explosivity in selected cities. Oslo, in particular, exhibits multiple boom-and-bust episodes over the sample period.</p>
-              </div>
+              <summary><span class="project-title">Bubble, Bubble, Where Are You? An Empirical Investigation of House Price Bubbles in Regional Norway</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Empirical analysis</p><p>This paper investigates whether regional Norwegian housing markets experienced bubble regimes over the previous two decades. The Generalised Supremum Augmented Dickey-Fuller test identifies explosive behaviour, and the BSADF date-stamping strategy proposed by Phillips and co-authors identifies the corresponding periods.</p><p>The paper establishes the presence of several periods of explosivity in selected cities. Oslo, in particular, exhibits multiple boom-and-bust episodes over the sample period.</p></div>
             </details>
 
             <details class="project-ribbon">
-              <summary>
-                <span class="project-title">Detection of Structural Regimes and Analysis of the Impact of Crude Oil on Airline Stock Performance: A Markov Regime-switching Approach</span>
-                <i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i>
-              </summary>
-              <div class="project-content">
-                <p class="project-meta">Empirical analysis</p>
-                <p>This paper identifies structural regimes in crude-oil prices and estimates their regime-dependent effects on airline stock indices. It applies a Markov-switching vector autoregressive model to weekly oil-price data and a custom index of IATA-associated airline stocks from 1993 to 2023.</p>
-                <p>The results identify high- and low-volatility oil-price regimes. Oil prices have a positive effect on airline stock performance in the high-volatility regime and a negative effect in the low-volatility regime. The high-volatility regime is also more persistent.</p>
-              </div>
+              <summary><span class="project-title">Detection of Structural Regimes and Analysis of the Impact of Crude Oil on Airline Stock Performance: A Markov Regime-switching Approach</span><i class="fas fa-chevron-down project-chevron" aria-hidden="true"></i></summary>
+              <div class="project-content"><p class="project-meta">Empirical analysis</p><p>This paper identifies structural regimes in crude-oil prices and estimates their regime-dependent effects on airline stock indices. It applies a Markov-switching vector autoregressive model to weekly oil-price data and a custom index of IATA-associated airline stocks from 1993 to 2023.</p><p>The results identify high- and low-volatility oil-price regimes. Oil prices have a positive effect on airline stock performance in the high-volatility regime and a negative effect in the low-volatility regime. The high-volatility regime is also more persistent.</p></div>
             </details>
           </div>
         </section>
@@ -807,23 +749,17 @@
 
       <footer class="foot">
         <div class="socials">
-          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-          </a>
-          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i>
-          </a>
-          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
-            <i class="fas fa-university" aria-hidden="true"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
-            <i class="fab fa-linkedin" aria-hidden="true"></i>
-          </a>
+          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile"><i class="fas fa-university" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
         </div>
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
     </article>
   </main>
 </body>
 </html>
-
