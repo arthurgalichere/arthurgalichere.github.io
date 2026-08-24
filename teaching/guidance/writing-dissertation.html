@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arthur Galichère — Getting Started with Your Dissertation</title>
-  <meta name="description" content="Guidance by Arthur Galichère on getting started with an economics dissertation." />
-  <meta name="guidance-source-digest" content="43c372af281aa2655feb1153ef95fd06aa18b4264fe8ba147bfb13d8746e7daf" />
+  <title>AG — A Guide to Writing Your Dissertation</title>
+  <meta name="description" content="Guidance by Arthur Galichère on writing an economics dissertation." />
+  <meta name="guidance-source-digest" content="0000000000000000000000000000000000000000000000000000000000000000" />
   <meta name="guidance-updated" content="2026-08-24" />
 
   <link rel="icon" type="image/png" href="../../website/images/favicon_transparant.png" />
@@ -255,7 +254,6 @@
     }
 
     .guidance-content figure { margin: 1.5rem 0; }
-
     .guidance-content figure img { margin: 0 auto; }
 
     .guidance-content figcaption {
@@ -316,19 +314,19 @@
     .guidance-content pre code {
       padding: 0;
       background: transparent;
-      border: none;
+      border: 0;
     }
 
     .guidance-pagination {
-      display: flex;
-      justify-content: flex-end;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
       margin-top: 2.75rem;
     }
 
-    .guidance-next {
-      width: min(100%, 430px);
+    .guidance-page-link {
+      min-width: 0;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
       gap: 1rem;
       padding: 1.1rem 1.2rem;
@@ -341,20 +339,27 @@
                   border-color 0.16s ease, transform 0.16s ease;
     }
 
-    .guidance-next:hover {
+    .guidance-previous { grid-template-columns: auto minmax(0, 1fr); }
+
+    .guidance-next {
+      grid-template-columns: minmax(0, 1fr) auto;
+      text-align: right;
+    }
+
+    .guidance-page-link:hover {
       color: #fff;
       background: var(--accent);
       border-color: var(--accent);
       transform: translateY(-1px);
     }
 
-    .guidance-next-copy {
+    .guidance-page-copy {
       min-width: 0;
       display: grid;
       gap: 0.25rem;
     }
 
-    .guidance-next-label {
+    .guidance-page-label {
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -363,23 +368,22 @@
       text-transform: uppercase;
     }
 
-    .guidance-next:hover .guidance-next-label {
-      color: rgba(255, 255, 255, 0.78);
-    }
+    .guidance-page-link:hover .guidance-page-label { color: rgba(255, 255, 255, 0.78); }
 
-    .guidance-next-title {
+    .guidance-page-title {
       font-family: var(--display);
       font-size: 1rem;
       font-weight: 700;
       line-height: 1.4;
     }
 
-    .guidance-next i {
+    .guidance-page-link > i {
       font-size: 0.82rem;
       transition: transform 0.16s ease;
     }
 
-    .guidance-next:hover i { transform: translateX(3px); }
+    .guidance-previous:hover > i { transform: translateX(-3px); }
+    .guidance-next:hover > i { transform: translateX(3px); }
 
     .guidance-placeholder {
       padding: 1.2rem 1.3rem;
@@ -467,8 +471,8 @@
       .download-link { justify-content: center; }
 
       .guidance-title { font-size: 2.15rem; }
-      .guidance-pagination { justify-content: stretch; }
-      .guidance-next { width: 100%; }
+      .guidance-pagination { grid-template-columns: 1fr; }
+      .guidance-next { text-align: left; }
 
       .foot {
         flex-direction: column;
@@ -480,8 +484,8 @@
       .index-card,
       .back-link,
       .download-link,
-      .guidance-next,
-      .guidance-next i,
+      .guidance-page-link,
+      .guidance-page-link > i,
       .socials a {
         transition: none;
       }
@@ -515,26 +519,34 @@
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
             Back to Dissertation Supervision and Guidance
           </a>
-          <a href="https://www.dropbox.com/scl/fi/39dgnnt0nqzxzjnbkxoe7/Getting-Started-with-your-Dissertation.pdf?rlkey=h3ch13gj4z0f6jds83ey456s9&amp;st=6dlbom4l&amp;dl=1" class="download-link">
+          <a href="https://www.dropbox.com/scl/fi/1unhpr8pmujck02cnqy2z/A-Guide-to-writing-your-Dissertation.pdf?rlkey=b6rj35sb9hql0hsfc5a2hf8lz&amp;st=jnxjdp8q&amp;dl=1" class="download-link">
             <i class="fas fa-download" aria-hidden="true"></i>
             Download PDF
           </a>
         </div>
 
-        <h1 class="guidance-title">Getting Started with Your Dissertation</h1>
+        <h1 class="guidance-title">A Guide to Writing Your Dissertation</h1>
         <div class="guidance-content">
           <p class="guidance-placeholder">
             This guidance page is populated automatically from the Dropbox source
-            <em>Getting Started with your Dissertation.tex</em>. Run the dissertation
+            <em>A Guide to writing your Dissertation.tex</em>. Run the dissertation
             guidance workflow to replace this message with the latest published note.
           </p>
         </div>
 
         <nav class="guidance-pagination" aria-label="Dissertation guidance navigation">
-          <a href="writing-dissertation.html" class="guidance-next">
-            <span class="guidance-next-copy">
-              <span class="guidance-next-label">Next guidance note</span>
-              <span class="guidance-next-title">A Guide to Writing Your Dissertation</span>
+          <a href="getting-started.html" class="guidance-page-link guidance-previous">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            <span class="guidance-page-copy">
+              <span class="guidance-page-label">Previous guidance note</span>
+              <span class="guidance-page-title">Getting Started with Your Dissertation</span>
+            </span>
+          </a>
+
+          <a href="literature-review.html" class="guidance-page-link guidance-next">
+            <span class="guidance-page-copy">
+              <span class="guidance-page-label">Next guidance note</span>
+              <span class="guidance-page-title">A Guide to Writing Your Literature Review</span>
             </span>
             <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
