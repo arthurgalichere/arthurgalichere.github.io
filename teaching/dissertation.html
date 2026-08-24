@@ -37,7 +37,10 @@
       box-sizing: border-box;
     }
 
-    html { background: var(--paper); }
+    html {
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
 
     body {
       min-height: 100vh;
@@ -327,17 +330,51 @@
       line-height: 1.6;
     }
 
-    .foot {
-      display: flex;
+    .back-to-top {
+      width: 2.55rem;
+      height: 2.55rem;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(28, 28, 30, 0.05);
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease,
+                  box-shadow 0.16s ease;
+    }
+
+    .back-to-top:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(28, 28, 30, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .back-to-top:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .foot {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
       gap: 1rem;
       padding: 0.9rem 1.5rem;
       background: var(--panel-deep);
       border-top: 1px solid var(--line);
     }
 
+    .foot .back-to-top { justify-self: center; }
+
     .foot-loc {
+      justify-self: end;
       color: var(--muted);
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -348,6 +385,7 @@
     .socials {
       display: flex;
       align-items: center;
+      justify-self: start;
       gap: 0.4rem;
     }
 
@@ -375,9 +413,12 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
       .back-link,
       .supervision-card,
       .guidance-card,
+      .back-to-top,
       .socials a { transition: none; }
     }
 
@@ -400,13 +441,17 @@
       .guidance-card { grid-template-columns: auto minmax(0, 1fr); }
       .guidance-card .resource-arrow { display: none; }
       .foot {
+        display: flex;
         flex-direction: column;
         text-align: center;
       }
+      .foot .back-to-top { order: -1; }
+      .foot-loc { justify-self: auto; }
+      .socials { justify-self: auto; }
     }
   </style>
 </head>
-<body>
+<body id="top">
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <main id="main-content" class="page">
@@ -530,10 +575,12 @@
             <i class="fab fa-linkedin" aria-hidden="true"></i>
           </a>
         </div>
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
         <span class="foot-loc">University of Warwick · Coventry, UK</span>
       </footer>
     </article>
   </main>
 </body>
 </html>
-
