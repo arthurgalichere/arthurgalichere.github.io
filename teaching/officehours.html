@@ -1,1 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AG: Advice and Feedback Hours</title>
+  <meta name="description" content="Advice and feedback hours, booking guidance, and current meeting times for students of Arthur Galichère at the University of Warwick." />
 
+  <link rel="icon" type="image/png" href="../website/images/favicon_transparant.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --paper: #f4f5f7;
+      --paper-soft: #fafbfc;
+      --sheet: #ffffff;
+      --panel-deep: #e2e5e9;
+      --line: rgba(28, 28, 30, 0.08);
+      --line-strong: rgba(28, 28, 30, 0.15);
+      --ink: #1c1c1e;
+      --ink-soft: #3a3a3c;
+      --muted: #71717a;
+      --accent: #3b5a75;
+      --accent-strong: #25394b;
+      --accent-soft: #edf2f6;
+      --success: #386641;
+      --warning: #8a5a12;
+      --error: #9f2d25;
+      --error-background: #fdf2f2;
+      --error-border: #f5c6cb;
+      --display: 'Bitter', Georgia, serif;
+      --sans: 'Montserrat', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 0;
+      left: -9999px;
+      z-index: 100;
+      padding: 0.65rem 0.9rem;
+      color: #fff;
+      background: var(--ink);
+      font-size: 0.8rem;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(0.7rem, 4vh, 2.5rem) 1rem 1rem;
+    }
+
+    .card {
+      width: min(100%, 1100px);
+      overflow: hidden;
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: 0 20px 48px rgba(28, 28, 30, 0.08);
+    }
+
+    .card::before {
+      content: '';
+      display: block;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    .index-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .index-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-left: 1px solid var(--line);
+      transition: background-color 0.16s ease, color 0.16s ease;
+    }
+
+    .index-card:first-child { border-left: none; }
+
+    .index-nav .idx-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .index-nav .idx-label i {
+      width: 1.1rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .index-card.is-current {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
+    .index-card.is-current .idx-label i { color: var(--accent-strong); }
+
+    .index-card:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .index-card:hover .idx-label,
+    .index-card:hover .idx-label i { color: #fff; }
+
+    .office-hours-body { padding: 3rem 2.5rem; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 2rem;
+      padding: 0.7rem 0.95rem;
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.25);
+      border-radius: 4px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease;
+    }
+
+    .back-link:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .page-title {
+      margin-bottom: 1rem;
+      font-family: var(--display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .lead {
+      max-width: 880px;
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .content-section { margin-top: 3.5rem; }
+
+    .section-title {
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .booking-panel {
+      padding: 1.5rem;
+      background: var(--paper-soft);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+    }
+
+    .booking-panel p {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.72;
+      text-align: justify;
+    }
+
+    .booking-panel p + p { margin-top: 1rem; }
+
+    .booking-action {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.3rem 0;
+      padding: 1.15rem 1.25rem;
+      color: var(--ink);
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 90, 117, 0.28);
+      border-radius: 5px;
+      text-decoration: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    .booking-action:hover {
+      border-color: rgba(59, 90, 117, 0.55);
+      box-shadow: 0 8px 20px rgba(28, 28, 30, 0.07);
+      transform: translateY(-1px);
+    }
+
+    .booking-icon {
+      width: 2.7rem;
+      height: 2.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--accent);
+      border-radius: 50%;
+      font-size: 0.95rem;
+    }
+
+    .booking-title {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--accent-strong);
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .booking-description {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .booking-action .fa-chevron-right {
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .troubleshooting {
+      margin-top: 1.25rem;
+      padding: 1.15rem 1.25rem;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border-left: 4px solid var(--accent);
+      border-radius: 4px;
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+
+    .troubleshooting-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .troubleshooting ol {
+      display: grid;
+      gap: 0.45rem;
+      padding-left: 1.35rem;
+    }
+
+    .troubleshooting li { padding-left: 0.15rem; }
+    .troubleshooting li::marker { color: var(--accent); font-weight: 600; }
+
+    .advance-note {
+      margin-top: 1.15rem;
+      color: var(--warning);
+      font-size: 0.86rem;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .signature {
+      margin-top: 1.25rem;
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .schedule-introduction {
+      margin-bottom: 1.25rem;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .schedule-source {
+      min-height: 5rem;
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .schedule-source > * + * { margin-top: 1rem; }
+
+    .schedule-source h1,
+    .schedule-source h2,
+    .schedule-source h3,
+    .schedule-source h4 {
+      color: var(--accent-strong);
+      font-family: var(--display);
+      line-height: 1.35;
+    }
+
+    .schedule-source h1,
+    .schedule-source h2 { font-size: 1.15rem; }
+    .schedule-source h3,
+    .schedule-source h4 { font-size: 1rem; }
+
+    .schedule-source ul,
+    .schedule-source ol {
+      display: grid;
+      gap: 0.4rem;
+      padding-left: 1.4rem;
+    }
+
+    .schedule-source li::marker { color: var(--accent); }
+
+    .schedule-source a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration-line: underline;
+      text-decoration-color: rgba(59, 90, 117, 0.35);
+      text-underline-offset: 0.16em;
+    }
+
+    .schedule-source a:hover {
+      color: var(--accent-strong);
+      text-decoration-color: var(--accent-strong);
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .schedule-table {
+      width: 100%;
+      min-width: 650px;
+      border-collapse: collapse;
+      background: var(--sheet);
+      font-size: 0.9rem;
+    }
+
+    .schedule-table th,
+    .schedule-table td {
+      padding: 0.8rem 0.9rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .schedule-table th {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      font-family: var(--display);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table tbody tr:nth-child(even) { background: var(--paper-soft); }
+
+    .loading-message,
+    .empty-message {
+      padding: 1rem 1.1rem;
+      color: var(--muted);
+      background: var(--paper-soft);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-style: italic;
+    }
+
+    .render-error {
+      padding: 1.2rem;
+      color: var(--error);
+      background: var(--error-background);
+      border: 1px solid var(--error-border);
+      border-radius: 4px;
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .render-error strong { display: block; margin-bottom: 0.35rem; }
+
+    .foot {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--panel-deep);
+      border-top: 1px solid var(--line);
+    }
+
+    .foot-loc {
+      justify-self: end;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      justify-self: start;
+      gap: 0.4rem;
+    }
+
+    .socials a,
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      background: var(--sheet);
+      border: 1px solid var(--line-strong);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.16s ease, background-color 0.16s ease,
+                  border-color 0.16s ease, transform 0.16s ease,
+                  box-shadow 0.16s ease;
+    }
+
+    .socials a {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 4px;
+    }
+
+    .back-to-top {
+      width: 2.55rem;
+      height: 2.55rem;
+      justify-self: center;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(28, 28, 30, 0.05);
+    }
+
+    .socials a:hover,
+    .back-to-top:hover {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .back-to-top:hover {
+      box-shadow: 0 6px 16px rgba(28, 28, 30, 0.1);
+      transform: translateY(-2px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      .index-card,
+      .back-link,
+      .booking-action,
+      .socials a,
+      .back-to-top { transition: none; }
+    }
+
+    @media (max-width: 768px) {
+      .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .office-hours-body { padding: 2rem 1.5rem; }
+    }
+
+    @media (max-width: 680px) {
+      .index-nav { grid-template-columns: 1fr; }
+      .index-card {
+        border-top: 1px solid var(--line);
+        border-left: none;
+      }
+      .index-card:first-child { border-top: none; }
+      .page-title { font-size: 2.15rem; }
+
+      .booking-action {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+      .booking-action .fa-chevron-right { display: none; }
+
+      .foot {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .back-to-top { grid-row: 1; }
+      .socials { grid-row: 2; justify-self: center; }
+      .foot-loc { grid-row: 3; justify-self: center; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <main id="main-content" class="page">
+    <article class="card">
+      <nav class="index-nav" aria-label="Academic Directory">
+        <a href="../index.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-user" aria-hidden="true"></i> Profile</span>
+        </a>
+        <a href="../cv.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-file" aria-hidden="true"></i> CV</span>
+        </a>
+        <a href="../research.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-line" aria-hidden="true"></i> Research</span>
+        </a>
+        <a href="../teaching.html" class="index-card is-current" aria-current="page">
+          <span class="idx-label"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Teaching</span>
+        </a>
+        <a href="../economics.html" class="index-card">
+          <span class="idx-label"><i class="fas fa-chart-pie" aria-hidden="true"></i> Economics</span>
+        </a>
+      </nav>
+
+      <section class="office-hours-body">
+        <a href="../teaching.html" class="back-link">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i>
+          Back to Teaching
+        </a>
+
+        <h1 class="page-title">Advice and Feedback Hours</h1>
+        <p class="lead">
+          Information about Advice and Feedback (A&amp;F) hours, including open sessions, individual appointment booking, and the current schedule of module-specific support.
+        </p>
+
+        <section class="content-section" aria-labelledby="booking-title">
+          <h2 id="booking-title" class="section-title">Booking an Individual Appointment</h2>
+
+          <div class="booking-panel">
+            <p>Dear Student,</p>
+            <p>I hope you are doing well.</p>
+            <p>To discuss module content, feedback, assessment preparation, or dissertation work, you can arrange an individual Advice and Feedback (A&amp;F) appointment through my personal Microsoft booking page.</p>
+
+            <a
+              href="https://outlook.office.com/bookwithme/user/4f6c30c3d38b4bcea13d858fee35f847@warwick.ac.uk?anonymous&amp;ismsaljsauthenabled&amp;ep=plink"
+              class="booking-action"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="booking-icon" aria-hidden="true">
+                <i class="fas fa-calendar-check"></i>
+              </span>
+              <span>
+                <span class="booking-title">Book a Time with Arthur Galichère</span>
+                <span class="booking-description">View available appointments and reserve a suitable meeting time.</span>
+              </span>
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </a>
+
+            <p>The booking system usually works smoothly and has been used successfully by many students. Occasionally, however, a booking cannot be confirmed. This may happen if another student selects the same appointment at the same time, or if stored browser cookies interfere with the booking process.</p>
+
+            <div class="troubleshooting">
+              <p class="troubleshooting-title">
+                <i class="fas fa-screwdriver-wrench" aria-hidden="true"></i>
+                If you experience a booking problem, try:
+              </p>
+              <ol>
+                <li>Open the booking page in a private or Incognito browsing window.</li>
+                <li>Choose the option to book as a guest instead of signing in with your Microsoft account.</li>
+                <li>If the problem continues, try completing the booking from your phone.</li>
+              </ol>
+            </div>
+
+            <p class="advance-note">
+              <i class="fas fa-circle-info" aria-hidden="true"></i>
+              Appointments can usually be booked only up to one week in advance. My booking page is set to UK time. Please ensure that the time zone in your Microsoft 365 or Outlook account is also set to UK time; otherwise, check the displayed time conversion carefully and plan accordingly.
+            </p>
+
+            <div class="signature">
+              <p>I hope this information is helpful.</p>
+              <p>Best,<br />Arthur</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-section" aria-labelledby="schedule-title">
+          <h2 id="schedule-title" class="section-title">Current Advice and Feedback Hours</h2>
+          <p class="schedule-introduction">
+            The schedule below lists my current module-specific A&amp;F hours by term. <strong>Drop-in sessions</strong> do not require advance booking, while sessions marked <strong>Appointments</strong> should be reserved through the booking page above. Please check your module communications for any temporary changes to these arrangements.
+          </p>
+
+          <div id="office-hours-content" class="schedule-source" aria-live="polite" aria-busy="true">
+            <p class="loading-message"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading the current timetable…</p>
+          </div>
+        </section>
+      </section>
+
+      <footer class="foot">
+        <div class="socials">
+          <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.dropbox.com/scl/fi/6gfp5hvfgt76ic6liye70/CV_Arthur_Galichere.pdf?rlkey=g47ostrw9cvmxjdm8t6j2sgbq&amp;st=hik4skpl&amp;dl=1" aria-label="Download Arthur Galichère's CV">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          </a>
+          <a href="https://warwick.ac.uk/fac/soc/economics/staff/agalichere/" target="_blank" rel="noreferrer" aria-label="University profile">
+            <i class="fas fa-university" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/arthurgalichere/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <a href="#top" class="back-to-top" aria-label="Back to the top of the page" title="Back to top">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        </a>
+
+        <span class="foot-loc">University of Warwick · Coventry, UK</span>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    function escapeHTML(value) {
+      return String(value == null ? '' : value).replace(/[&<>'"]/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      })[character]);
+    }
+
+    function renderInlineMarkdown(value) {
+      let text = escapeHTML(value);
+
+      text = text.replace(
+        /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noreferrer">$1</a>'
+      );
+      text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+      text = text.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
+      text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+      return text;
+    }
+
+    function splitTableRow(line) {
+      return line
+        .trim()
+        .replace(/^\|/, '')
+        .replace(/\|$/, '')
+        .split('|')
+        .map(cell => cell.trim());
+    }
+
+    function isTableSeparator(line) {
+      const cells = splitTableRow(line);
+      return cells.length > 0 && cells.every(cell => /^:?-{3,}:?$/.test(cell));
+    }
+
+    function renderTable(lines, startIndex) {
+      const headers = splitTableRow(lines[startIndex]);
+      const rows = [];
+      let index = startIndex + 2;
+
+      while (index < lines.length && lines[index].includes('|') && lines[index].trim()) {
+        rows.push(splitTableRow(lines[index]));
+        index += 1;
+      }
+
+      const headerHTML = headers
+        .map(header => `<th scope="col">${renderInlineMarkdown(header)}</th>`)
+        .join('');
+
+      const rowsHTML = rows.map(row => {
+        const cells = headers.map((_, cellIndex) => row[cellIndex] || '');
+        return `<tr>${cells.map(cell => `<td>${renderInlineMarkdown(cell)}</td>`).join('')}</tr>`;
+      }).join('');
+
+      return {
+        html: `
+          <div class="table-wrap">
+            <table class="schedule-table">
+              <thead><tr>${headerHTML}</tr></thead>
+              <tbody>${rowsHTML}</tbody>
+            </table>
+          </div>
+        `,
+        nextIndex: index
+      };
+    }
+
+    function markdownToHTML(markdown) {
+      const lines = String(markdown || '').replace(/\r\n?/g, '\n').split('\n');
+      const output = [];
+      let paragraph = [];
+      let listType = null;
+      let listItems = [];
+
+      function flushParagraph() {
+        if (!paragraph.length) return;
+        output.push(`<p>${renderInlineMarkdown(paragraph.join(' '))}</p>`);
+        paragraph = [];
+      }
+
+      function flushList() {
+        if (!listType || !listItems.length) return;
+        output.push(`<${listType}>${listItems.map(item => `<li>${renderInlineMarkdown(item)}</li>`).join('')}</${listType}>`);
+        listType = null;
+        listItems = [];
+      }
+
+      let index = 0;
+      while (index < lines.length) {
+        const line = lines[index];
+        const trimmed = line.trim();
+
+        if (
+          index + 1 < lines.length &&
+          trimmed.includes('|') &&
+          isTableSeparator(lines[index + 1])
+        ) {
+          flushParagraph();
+          flushList();
+          const table = renderTable(lines, index);
+          output.push(table.html);
+          index = table.nextIndex;
+          continue;
+        }
+
+        if (!trimmed) {
+          flushParagraph();
+          flushList();
+          index += 1;
+          continue;
+        }
+
+        const heading = trimmed.match(/^(#{1,4})\s+(.+)$/);
+        if (heading) {
+          flushParagraph();
+          flushList();
+          const level = Math.min(heading[1].length + 1, 4);
+          output.push(`<h${level}>${renderInlineMarkdown(heading[2])}</h${level}>`);
+          index += 1;
+          continue;
+        }
+
+        const unordered = trimmed.match(/^[-*+]\s+(.+)$/);
+        if (unordered) {
+          flushParagraph();
+          if (listType && listType !== 'ul') flushList();
+          listType = 'ul';
+          listItems.push(unordered[1]);
+          index += 1;
+          continue;
+        }
+
+        const ordered = trimmed.match(/^\d+[.)]\s+(.+)$/);
+        if (ordered) {
+          flushParagraph();
+          if (listType && listType !== 'ol') flushList();
+          listType = 'ol';
+          listItems.push(ordered[1]);
+          index += 1;
+          continue;
+        }
+
+        flushList();
+        paragraph.push(trimmed);
+        index += 1;
+      }
+
+      flushParagraph();
+      flushList();
+      return output.join('');
+    }
+
+    async function loadOfficeHours() {
+      const target = document.getElementById('office-hours-content');
+
+      try {
+        const response = await fetch(`officehours.md?v=${Date.now()}`);
+        if (!response.ok) {
+          throw new Error(`The server returned status ${response.status}.`);
+        }
+
+        const markdown = await response.text();
+        if (!markdown.trim()) {
+          target.innerHTML = '<p class="empty-message">No current advice and feedback hours have been published.</p>';
+          return;
+        }
+
+        const rendered = markdownToHTML(markdown);
+        target.innerHTML = rendered || '<p class="empty-message">No current advice and feedback hours have been published.</p>';
+      } catch (error) {
+        console.error('Office-hours timetable could not be loaded:', error);
+        target.innerHTML = `
+          <div class="render-error" role="alert">
+            <strong><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Current timetable unavailable</strong>
+            The information in <code>teaching/officehours.md</code> could not be loaded. Please use the booking link above or contact me by email. ${escapeHTML(error.message)}
+          </div>
+        `;
+      } finally {
+        target.setAttribute('aria-busy', 'false');
+      }
+    }
+
+    loadOfficeHours();
+  </script>
+</body>
+</html>
