@@ -153,7 +153,7 @@
     .economics-body { padding: 3rem 2.5rem; }
 
     .page-title {
-      margin-bottom: 1.25rem;
+      margin-bottom: 2rem;
       font-family: var(--display);
       font-size: 2.5rem;
       font-weight: 700;
@@ -161,7 +161,7 @@
     }
 
     .lead {
-      max-width: 900px;
+      width: 100%;
       color: var(--ink-soft);
       font-size: 1rem;
       line-height: 1.75;
@@ -231,6 +231,8 @@
       border-color: rgba(59, 90, 117, 0.3);
     }
 
+    .portal-card.is-wide { grid-column: 1 / -1; }
+
     .portal-icon {
       width: 2.65rem;
       height: 2.65rem;
@@ -296,6 +298,21 @@
       text-align: center;
     }
 
+    .copyright-note {
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 0.78rem;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    .copyright-note strong {
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
     .foot {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -332,12 +349,13 @@
       color: var(--ink-soft);
       background: var(--sheet);
       border: 1px solid var(--line-strong);
-      border-radius: 4px;
       font-size: 0.85rem;
       text-decoration: none;
       transition: color 0.16s ease, background-color 0.16s ease,
                   border-color 0.16s ease, transform 0.16s ease;
     }
+
+    .socials a { border-radius: 4px; }
 
     .back-to-top {
       justify-self: center;
@@ -352,8 +370,28 @@
       transform: translateY(-1px);
     }
 
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      animation: rise 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+      animation-delay: var(--reveal-delay, 0ms);
+    }
+
+    .delay-40 { --reveal-delay: 40ms; }
+    .delay-80 { --reveal-delay: 80ms; }
+    .delay-140 { --reveal-delay: 140ms; }
+    .delay-180 { --reveal-delay: 180ms; }
+    .delay-260 { --reveal-delay: 260ms; }
+    .delay-300 { --reveal-delay: 300ms; }
+    .delay-340 { --reveal-delay: 340ms; }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+
+      .reveal { animation: none; }
 
       .index-card,
       .socials a,
@@ -364,16 +402,24 @@
       .index-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .economics-body { padding: 2rem 1.5rem; }
       .portal-grid { grid-template-columns: 1fr; }
+      .portal-card.is-wide { grid-column: auto; }
     }
 
     @media (max-width: 680px) {
       .index-nav { grid-template-columns: 1fr; }
+
       .index-card {
         border-top: 1px solid var(--line);
         border-left: none;
       }
+
       .index-card:first-child { border-top: none; }
       .page-title { font-size: 2.15rem; }
+
+      .portal-heading {
+        flex-direction: column;
+        gap: 0.45rem;
+      }
 
       .foot {
         grid-template-columns: 1fr;
@@ -411,17 +457,17 @@
       </nav>
 
       <section class="economics-body">
-        <h1 class="page-title">Economics</h1>
-        <p class="lead">
-          This section is being developed as a portal for economic data, interactive indicators, forecasting tools, business-cycle analysis, and macroeconomic model simulations. The objective is to bring together accessible empirical resources and model-based applications for students, researchers, and anyone interested in understanding macroeconomic dynamics.
+        <h1 class="page-title reveal delay-40">Economics</h1>
+        <p class="lead reveal delay-80">
+          This section is being developed as a portal for economic data, visual analysis, forecasting tools, and interactive macroeconomic simulations. It will bring together empirical indicators and model-based resources designed for students, researchers, and anyone interested in understanding macroeconomic dynamics.
         </p>
 
-        <div class="development-note" role="status">
+        <div class="development-note reveal delay-140" role="status">
           <i class="fas fa-person-digging" aria-hidden="true"></i>
-          <p><strong>Work in progress.</strong> The individual resources are not yet available. Main Economic Indicators and the Real Business Cycle simulation are planned as the first releases, with development expected to begin over the next one to two months. The remaining sections will be introduced gradually as the underlying data and modelling tools are completed.</p>
+          <p><strong>Work in progress.</strong> The individual resources are not yet available. Main Economic Indicators and the RBC Model Simulation and Forecasting page are planned as the first releases, with development expected to begin over the next one to two months. The remaining sections will be introduced gradually as the underlying data and modelling tools are completed.</p>
         </div>
 
-        <section class="content-section" aria-labelledby="data-heading">
+        <section class="content-section reveal delay-180" aria-labelledby="data-heading">
           <h2 id="data-heading" class="section-title">Data and Economic Analysis</h2>
           <p class="section-introduction">Dashboards and analytical resources for monitoring economic activity, financial markets, and the business cycle.</p>
 
@@ -444,7 +490,7 @@
                   <h3 class="portal-title">Real Business Cycles</h3>
                   <span class="status-badge">Planned</span>
                 </div>
-                <p class="portal-description">Resources for identifying, measuring, and comparing expansions, recessions, cyclical comovement, volatility, and the behaviour of macroeconomic variables over real business cycles.</p>
+                <p class="portal-description">Resources for identifying, measuring, and comparing expansions, recessions, cyclical comovement, volatility, and the behaviour of macroeconomic variables over the business cycle.</p>
               </div>
             </article>
 
@@ -472,24 +518,24 @@
           </div>
         </section>
 
-        <section class="content-section" aria-labelledby="models-heading">
+        <section class="content-section reveal delay-260" aria-labelledby="models-heading">
           <h2 id="models-heading" class="section-title">Macroeconomic Models and Simulations</h2>
           <p class="section-introduction">Interactive resources for exploring the mechanisms, simulations, and forecasting implications of modern macroeconomic models.</p>
 
           <div class="portal-grid">
             <article class="portal-card is-next">
-              <span class="portal-icon" aria-hidden="true"><i class="fas fa-gears"></i></span>
+              <span class="portal-icon" aria-hidden="true"><i class="fas fa-industry"></i></span>
               <div class="portal-content">
                 <div class="portal-heading">
                   <h3 class="portal-title">RBC Model Simulation and Forecasting</h3>
                   <span class="status-badge">Next</span>
                 </div>
-                <p class="portal-description">An interactive Real Business Cycle model environment for studying equilibrium dynamics, impulse responses, simulated time series, calibration, and model-based forecasts.</p>
+                <p class="portal-description">An interactive Real Business Cycle environment for studying equilibrium dynamics, impulse responses, simulated time series, calibration, and model-based forecasts.</p>
               </div>
             </article>
 
             <article class="portal-card">
-              <span class="portal-icon" aria-hidden="true"><i class="fas fa-sliders"></i></span>
+              <span class="portal-icon" aria-hidden="true"><i class="fas fa-building-columns"></i></span>
               <div class="portal-content">
                 <div class="portal-heading">
                   <h3 class="portal-title">New Keynesian Model Simulation and Forecasting</h3>
@@ -499,23 +545,27 @@
               </div>
             </article>
 
-            <article class="portal-card">
-              <span class="portal-icon" aria-hidden="true"><i class="fas fa-diagram-project"></i></span>
+            <article class="portal-card is-wide">
+              <span class="portal-icon" aria-hidden="true"><i class="fas fa-gears"></i></span>
               <div class="portal-content">
                 <div class="portal-heading">
                   <h3 class="portal-title">DSGE Modelling</h3>
                   <span class="status-badge">Planned</span>
                 </div>
-                <p class="portal-description">A library of DSGE models ranging from valuation and market models to macro-finance models, with dedicated subpages presenting each model’s structure, economic mechanisms, solution, calibration or estimation, simulations, and applications.</p>
+                <p class="portal-description">A collection of dynamic stochastic general equilibrium models, ranging from foundational value and market models to richer macro-finance frameworks. This section will present model structures, solution methods, simulations, quantitative implementation, and applications across multiple dedicated subpages.</p>
               </div>
             </article>
           </div>
 
           <p class="portal-note">Cards will become active links as each resource is completed and published.</p>
         </section>
+
+        <p class="copyright-note reveal delay-300">
+          <strong>© Arthur Galichère.</strong> All original content developed for this page and its subpages—including analysis, graphs, visualisations, and model simulations—is created by the author unless otherwise stated. Any reuse should acknowledge Arthur Galichère and cite this website. Third-party data remain subject to the attribution and usage requirements of their original providers.
+        </p>
       </section>
 
-      <footer class="foot">
+      <footer class="foot reveal delay-340">
         <div class="socials">
           <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
             <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -541,4 +591,3 @@
   </main>
 </body>
 </html>
-
