@@ -180,7 +180,7 @@
     }
 
     .page-title {
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       font-family: var(--display);
       font-size: 2.5rem;
       font-weight: 700;
@@ -188,10 +188,11 @@
     }
 
     .lead {
-      max-width: 880px;
+      width: 100%;
       color: var(--ink-soft);
       font-size: 1rem;
       line-height: 1.75;
+      text-align: justify;
     }
 
     .content-section { margin-top: 3.5rem; }
@@ -228,7 +229,7 @@
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      gap: 1rem;
+      gap: 1.25rem;
       margin: 1.3rem 0;
       padding: 1.15rem 1.25rem;
       color: var(--ink);
@@ -259,7 +260,7 @@
 
     .booking-title {
       display: block;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.55rem;
       color: var(--accent-strong);
       font-family: var(--display);
       font-size: 1.05rem;
@@ -267,11 +268,16 @@
     }
 
     .booking-description {
-      display: block;
+      display: grid;
+      gap: 0.1rem;
+      padding-left: 1.15rem;
       color: var(--muted);
       font-size: 0.82rem;
       line-height: 1.5;
     }
+
+    .booking-description li { padding-left: 0.1rem; }
+    .booking-description li::marker { color: var(--accent); }
 
     .booking-action .fa-chevron-right {
       color: var(--accent);
@@ -280,11 +286,7 @@
 
     .troubleshooting {
       margin-top: 1.25rem;
-      padding: 1.15rem 1.25rem;
       color: var(--ink-soft);
-      background: var(--sheet);
-      border-left: 4px solid var(--accent);
-      border-radius: 4px;
       font-size: 0.93rem;
       line-height: 1.65;
     }
@@ -292,16 +294,22 @@
     .troubleshooting-title {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.55rem;
       margin-bottom: 0.65rem;
-      color: var(--accent-strong);
+      color: var(--accent-strong) !important;
       font-weight: 700;
+      text-align: left !important;
+    }
+
+    .troubleshooting-title i {
+      flex: 0 0 auto;
+      color: var(--accent);
     }
 
     .troubleshooting ol {
       display: grid;
       gap: 0.45rem;
-      padding-left: 1.35rem;
+      padding-left: 1.55rem;
     }
 
     .troubleshooting li { padding-left: 0.15rem; }
@@ -328,6 +336,23 @@
       font-size: 0.95rem;
       line-height: 1.7;
     }
+
+    .schedule-introduction ul {
+      display: grid;
+      gap: 0.12rem;
+      margin-top: 0.65rem;
+      padding-left: 1.45rem;
+    }
+
+    .schedule-introduction li {
+      padding-left: 0.15rem;
+      line-height: 1.55;
+    }
+
+    .schedule-introduction li::marker { color: var(--accent); }
+
+    .schedule-introduction ul + p { margin-top: 1.15rem; }
+    .schedule-introduction p + p { margin-top: 0.65rem; }
 
     .schedule-source {
       min-height: 5rem;
@@ -499,8 +524,34 @@
       transform: translateY(-2px);
     }
 
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      animation: rise 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+      animation-delay: var(--reveal-delay, 0ms);
+    }
+
+    .delay-40  { --reveal-delay: 40ms; }
+    .delay-80  { --reveal-delay: 80ms; }
+    .delay-120 { --reveal-delay: 120ms; }
+    .delay-160 { --reveal-delay: 160ms; }
+    .delay-220 { --reveal-delay: 220ms; }
+    .delay-340 { --reveal-delay: 340ms; }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+
+      .reveal { animation: none; }
 
       .index-card,
       .back-link,
@@ -564,17 +615,17 @@
       </nav>
 
       <section class="office-hours-body">
-        <a href="../teaching.html" class="back-link">
+        <a href="../teaching.html" class="back-link reveal delay-40">
           <i class="fas fa-arrow-left" aria-hidden="true"></i>
           Back to Teaching
         </a>
 
-        <h1 class="page-title">Advice and Feedback Hours</h1>
-        <p class="lead">
+        <h1 class="page-title reveal delay-80">Advice and Feedback Hours</h1>
+        <p class="lead reveal delay-120">
           Information about Advice and Feedback (A&amp;F) hours, including open sessions, individual appointment booking, and the current schedule of module-specific support.
         </p>
 
-        <section class="content-section" aria-labelledby="booking-title">
+        <section class="content-section reveal delay-160" aria-labelledby="booking-title">
           <h2 id="booking-title" class="section-title">Booking an Individual Appointment</h2>
 
           <div class="booking-panel">
@@ -597,7 +648,7 @@
                   <li>View available appointments and reserve a suitable meeting time.</li>
                   <li>Appointments can usually be booked only up to one week in advance.</li>
                 </ul>
-                </span>
+              </span>
               <i class="fas fa-chevron-right" aria-hidden="true"></i>
             </a>
 
@@ -620,8 +671,6 @@
               </ol>
             </div>
 
-
-
             <div class="signature">
               <p>I hope this information is helpful.</p>
               <p>Best,<br />Arthur</p>
@@ -629,11 +678,16 @@
           </div>
         </section>
 
-        <section class="content-section" aria-labelledby="schedule-title">
+        <section class="content-section reveal delay-220" aria-labelledby="schedule-title">
           <h2 id="schedule-title" class="section-title">Advice and Feedback Hours</h2>
-          <p class="schedule-introduction">
-            The schedule below lists my current module-specific A&amp;F hours by term. <strong>Drop-in sessions</strong> do not require advance booking, while sessions marked <strong>Appointments</strong> should be reserved through the booking page above. Please check your module communications for any temporary changes to these arrangements.
-          </p>
+          <div class="schedule-introduction">
+            <p>The schedule below lists my current module-specific A&amp;F hours by term.</p>
+            <ul>
+              <li><strong>Drop-in sessions:</strong> no advance booking is required.</li>
+              <li><strong>Appointments:</strong> reserve a suitable time through the booking page above.</li>
+            </ul>
+            <p>Please check your module communications for any temporary changes to these arrangements.</p>
+          </div>
 
           <div id="office-hours-content" class="schedule-source" aria-live="polite" aria-busy="true">
             <p class="loading-message"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading the current timetable…</p>
@@ -641,7 +695,7 @@
         </section>
       </section>
 
-      <footer class="foot">
+      <footer class="foot reveal delay-340">
         <div class="socials">
           <a href="mailto:arthur.galichere@warwick.ac.uk" aria-label="Email Arthur">
             <i class="fas fa-envelope" aria-hidden="true"></i>
