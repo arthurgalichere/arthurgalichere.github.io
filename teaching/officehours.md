@@ -13,4 +13,4 @@
 
 * **EC201 Lectures/Seminars:** **Appointments** on TBC
   
-[comment]: <> (* **MSc Dissertation Supervision Meeting:** **Appointments** on **Fridays**, TBC)
+[//]: # (* **MSc Dissertation Supervision Meeting:** **Appointments** on **Fridays**, TBC)
