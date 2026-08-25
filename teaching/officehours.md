@@ -11,5 +11,6 @@
 
 # Term 3
 
-* **EC201 Lectures/Seminars:** **Appointments** on Tuesdays, **16:00–18:00**, Room **S1.137** 
+* **EC201 Lectures/Seminars:** **Appointments** on Tuesdays, **16:00–18:00**, Room **S1.137**
+  
 [comment]: <> (* **MSc Dissertation Supervision Meeting:** **Appointments** on **Fridays**, TBC)
