@@ -12,5 +12,4 @@
 # Term 3
 
 * **EC201 Lectures/Seminars:** **Appointments** on TBC
-  
-[//]: # (* **MSc Dissertation Supervision Meeting:** **Appointments** on **Fridays**, TBC)
+* **MSc Dissertation Supervision Meeting:** **Appointments** on TBC
