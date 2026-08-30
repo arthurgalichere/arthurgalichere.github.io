@@ -28,7 +28,7 @@ for obs in raw_data['observations']:
 df = pd.DataFrame({"value": values}, index=pd.to_datetime(dates))
 
 # Macroeconomic convention: Take the natural log of GDP before filtering
-df["log_gdp"] = (np.log(df["value"]))*100
+df["log_gdp"] = np.log(df["value"]) 
 
 # 5. Apply Hodrick-Prescott (HP) Filter (lambda = 1600 for quarterly data)
 hp_cycle, hp_trend = sm.tsa.filters.hpfilter(df["log_gdp"], lamb=1600)
