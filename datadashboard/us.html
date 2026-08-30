@@ -1,30 +1,36 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div style="width: 100%; max-width: 800px; margin: auto;">
+<div style="width: 100%; max-width: 800px; margin: auto; margin-bottom: 40px;">
   <canvas id="myFredChart"></canvas>
 </div>
 
+<div style="width: 100%; max-width: 800px; margin: auto;">
+  <canvas id="myCyclesChart"></canvas>
+</div>
+
 <script>
-fetch('../data/fred_data.json')
+fetch('../data/gdp_filtered_data.json')
   .then(response => response.json())
   .then(data => {
-    // Extract dates for the X-axis and numbers for the Y-axis
+    // Extract dates and datasets from the updated JSON structure
     const dates = data.map(item => item.date);
-    const values = data.map(item => item.value);
+    const gdpValues = data.map(item => item.gdp_value);
+    const hpCycles = data.map(item => item.hp_cycle);
+    const hamiltonCycles = data.map(item => item.hamilton_cycle);
 
-    // Create the chart (Conceptually similar to Matlab's plot(x, y) command)
-    const ctx = document.getElementById('myFredChart').getContext('2d');
-    new Chart(ctx, {
+    // Chart 1: Raw US GDP
+    const ctx1 = document.getElementById('myFredChart').getContext('2d');
+    new Chart(ctx1, {
       type: 'line',
       data: {
         labels: dates,
         datasets: [{
           label: 'US Gross Domestic Product (GDP)',
-          data: values,
+          data: gdpValues,
           borderColor: '#2b6cb0',
           borderWidth: 2,
           fill: false,
-          pointRadius: 0 // Keeps the line clean; points show up on hover
+          pointRadius: 0
         }]
       },
       options: {
@@ -32,6 +38,40 @@ fetch('../data/fred_data.json')
         scales: {
           x: { title: { display: true, text: 'Date' } },
           y: { title: { display: true, text: 'Billions of Dollars' } }
+        }
+      }
+    });
+
+    // Chart 2: HP Cycle vs. Hamilton Cycle Comparison
+    const ctx2 = document.getElementById('myCyclesChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [
+          {
+            label: 'HP Filter Cycle',
+            data: hpCycles,
+            borderColor: '#e53e3e',
+            borderWidth: 1.5,
+            fill: false,
+            pointRadius: 0
+          },
+          {
+            label: 'Hamilton Filter Cycle',
+            data: hamiltonCycles,
+            borderColor: '#319795',
+            borderWidth: 1.5,
+            fill: false,
+            pointRadius: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: { title: { display: true, text: 'Date' } },
+          y: { title: { display: true, text: 'Cyclical Deviation' } }
         }
       }
     });
