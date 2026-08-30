@@ -28,14 +28,14 @@ for obs in raw_data['observations']:
 df = pd.DataFrame({"value": values}, index=pd.to_datetime(dates))
 
 # Macroeconomic convention: Take the natural log of GDP before filtering
-df["log_gdp"] = np.log(df["value"]) 
+df["log_gdp"] = (np.log(df["value"]) * 100)
 
 # 5. Apply Hodrick-Prescott (HP) Filter (lambda = 1600 for quarterly data)
 hp_cycle, hp_trend = sm.tsa.filters.hpfilter(df["log_gdp"], lamb=1600)
 
 # 6. Apply Hamilton Regression Filter (h=8, p=4 standard for quarterly data)
 # Note: Hamilton filter yields NaNs for the first p + h - 1 entries
-ham_result = sm.tsa.filters.hamilton_filter(df["log_gdp"], h=8, p=4)
+ham_result = sm.tsa.filters.hamilton_filter(df["log_gdp"], h=4, p=4) # h=8 is standard for quarterly data for 2 years *4 quarterly, but cycles too big, so reduce to 4 for 1 year lookahead 
 ham_cycle = ham_result.cycle
 ham_trend = ham_result.trend
 
