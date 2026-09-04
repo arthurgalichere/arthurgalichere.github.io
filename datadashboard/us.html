@@ -12,16 +12,58 @@
 fetch('../data/gdp_filtered_data.json')
   .then(response => response.json())
   .then(data => {
-    // Extract dates and datasets from the updated JSON structure
+    // Extract dates and datasets from the JSON structure
     const dates = data.map(item => item.date);
     const gdpValues = data.map(item => item.gdp_value);
     const hpCycles = data.map(item => item.hp_cycle);
     const hamiltonCycles = data.map(item => item.hamilton_cycle);
+    const recessions = data.map(item => item.recession); // Extracts the 1s and 0s
+
+    // 1. Custom Plugin to draw the grey recession bands in the background
+    const recessionPlugin = {
+      id: 'recessionPlugin',
+      beforeDraw: (chart) => {
+        const recData = chart.config.options.recessionData;
+        if (!recData) return;
+        
+        const meta = chart.getDatasetMeta(0);
+        if (!meta || !meta.data.length) return;
+        
+        const ctx = chart.ctx;
+        const top = chart.chartArea.top;
+        const bottom = chart.chartArea.bottom;
+
+        ctx.save();
+        ctx.fillStyle = 'rgba(200, 200, 200, 0.3)'; // Light grey color for recession
+
+        let inRecession = false;
+        let startX = 0;
+
+        for (let i = 0; i < recData.length; i++) {
+          if (recData[i] === 1 && !inRecession) {
+            inRecession = true;
+            startX = meta.data[i].x; // Find exact pixel location of the date
+          } else if (recData[i] === 0 && inRecession) {
+            inRecession = false;
+            let endX = meta.data[i].x;
+            ctx.fillRect(startX, top, endX - startX, bottom - top);
+          }
+        }
+        
+        // If data ends while still in a recession
+        if (inRecession) {
+           let endX = meta.data[recData.length - 1].x;
+           ctx.fillRect(startX, top, endX - startX, bottom - top);
+        }
+        ctx.restore();
+      }
+    };
 
     // Chart 1: Raw US GDP
     const ctx1 = document.getElementById('myFredChart').getContext('2d');
     new Chart(ctx1, {
       type: 'line',
+      plugins: [recessionPlugin], // Inject custom plugin
       data: {
         labels: dates,
         datasets: [{
@@ -35,6 +77,16 @@ fetch('../data/gdp_filtered_data.json')
       },
       options: {
         responsive: true,
+        recessionData: recessions, // Pass data to plugin
+        plugins: {
+          legend: {
+            labels: {
+              // 3. Change legend symbols to lines
+              usePointStyle: true,
+              pointStyle: 'line' 
+            }
+          }
+        },
         scales: {
           x: { title: { display: true, text: 'Date' } },
           y: { title: { display: true, text: 'Billions of Dollars' } }
@@ -46,6 +98,7 @@ fetch('../data/gdp_filtered_data.json')
     const ctx2 = document.getElementById('myCyclesChart').getContext('2d');
     new Chart(ctx2, {
       type: 'line',
+      plugins: [recessionPlugin], // Inject custom plugin
       data: {
         labels: dates,
         datasets: [
@@ -64,11 +117,34 @@ fetch('../data/gdp_filtered_data.json')
             borderWidth: 1.5,
             fill: false,
             pointRadius: 0
+          },
+          // 2. Bold dashed zero line mapping
+          {
+            label: 'Zero Line',
+            data: dates.map(() => 0), // Array of zeros covering every date
+            borderColor: '#1a202c', // Dark grey/black
+            borderWidth: 2,
+            borderDash: [5, 5],
+            fill: false,
+            pointRadius: 0
           }
         ]
       },
       options: {
         responsive: true,
+        recessionData: recessions, // Pass data to plugin
+        plugins: {
+          legend: {
+            labels: {
+              usePointStyle: true,
+              pointStyle: 'line',
+              // Hide the 'Zero Line' dataset from the legend box
+              filter: function(item, chart) {
+                return item.text !== 'Zero Line';
+              }
+            }
+          }
+        },
         scales: {
           x: { title: { display: true, text: 'Date' } },
           y: { title: { display: true, text: 'Cyclical Deviation' } }
