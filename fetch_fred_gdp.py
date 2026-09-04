@@ -8,24 +8,29 @@ import statsmodels.api as sm
 # 1. Grab your hidden API key from the system environment
 api_key = os.environ.get("FRED_API_KEY")
 
-# 2. Define the economic variable you want (e.g., GDP)
-series_id = "GDP" 
-url = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
+# Helper function to fetch a series from FRED and return a Pandas DataFrame
+def fetch_fred_data(series_id, api_key):
+    url = f"https://api.stlouisfed.org/fred/series/observations?series_id={series_id}&api_key={api_key}&file_type=json"
+    response = urllib.request.urlopen(url)
+    raw_data = json.loads(response.read().decode())
+    
+    dates, values = [], []
+    for obs in raw_data['observations']:
+        if obs["value"] != ".":
+            dates.append(obs["date"])
+            values.append(float(obs["value"]))
+            
+    return pd.DataFrame({series_id: values}, index=pd.to_datetime(dates))
 
-# 3. Request the data from FRED
-response = urllib.request.urlopen(url)
-raw_data = json.loads(response.read().decode())
+# 2 & 3. Request GDP and Recession data from FRED
+# Note: Using USRECQ (Quarterly) so it perfectly aligns with Quarterly GDP
+df_gdp = fetch_fred_data("GDP", api_key)
+df_rec = fetch_fred_data("USRECQ", api_key)
 
-# 4. Extract dates and values, filtering out missing values ('.')
-dates = []
-values = []
-for obs in raw_data['observations']:
-    if obs["value"] != ".":
-        dates.append(obs["date"])
-        values.append(float(obs["value"]))
-
-# Load into a pandas DataFrame with a datetime index
-df = pd.DataFrame({"value": values}, index=pd.to_datetime(dates))
+# 4. Merge the data into a single DataFrame
+df = df_gdp.join(df_rec, how="left")
+df.rename(columns={"GDP": "value", "USRECQ": "recession"}, inplace=True)
+df["recession"] = df["recession"].fillna(0) # Fill any unmatched dates with 0 (no recession)
 
 # Macroeconomic convention: Take the natural log of GDP before filtering
 df["log_gdp"] = (np.log(df["value"]) * 100)
@@ -35,13 +40,15 @@ hp_cycle, hp_trend = sm.tsa.filters.hpfilter(df["log_gdp"], lamb=1600)
 
 # 6. Apply Hamilton Regression Filter (h=8, p=4 standard for quarterly data)
 # Note: Hamilton filter yields NaNs for the first p + h - 1 entries
-ham_result = sm.tsa.filters.hamilton_filter(df["log_gdp"], h=4, p=4) # h=8 is standard for quarterly data for 2 years *4 quarterly, but cycles too big, so reduce to 4 for 1 year lookahead 
+# h=8 is standard for quarterly data for 2 years * 4 quarterly, but cycles too big, so reduce to 4 for 1 year lookahead 
+ham_result = sm.tsa.filters.hamilton_filter(df["log_gdp"], h=4, p=4) 
 ham_cycle = ham_result.cycle
 ham_trend = ham_result.trend
 
 # 7. Combine raw data and filter outputs into a structured list, converting NaNs to None for JSON
 filtered_output = []
-for i, date_str in enumerate(dates):
+for i in range(len(df)):
+    date_str = df.index[i].strftime("%Y-%m-%d")
     filtered_output.append({
         "date": date_str,
         "gdp_value": df["value"].iloc[i],
@@ -50,6 +57,7 @@ for i, date_str in enumerate(dates):
         "hp_cycle": float(hp_cycle.iloc[i]) if not np.isnan(hp_cycle.iloc[i]) else None,
         "hamilton_trend": float(ham_trend.iloc[i]) if not np.isnan(ham_trend.iloc[i]) else None,
         "hamilton_cycle": float(ham_cycle.iloc[i]) if not np.isnan(ham_cycle.iloc[i]) else None,
+        "recession": int(df["recession"].iloc[i]) # 1 for recession, 0 for expansion
     })
 
 # 8. Create data folder if it doesn't exist, then save results to JSON
