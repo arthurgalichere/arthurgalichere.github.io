@@ -12,14 +12,13 @@
 fetch('../data/gdp_filtered_data.json')
   .then(response => response.json())
   .then(data => {
-    // Extract dates and datasets from the JSON structure
     const dates = data.map(item => item.date);
     const gdpValues = data.map(item => item.gdp_value);
     const hpCycles = data.map(item => item.hp_cycle);
     const hamiltonCycles = data.map(item => item.hamilton_cycle);
-    const recessions = data.map(item => item.recession); // Extracts the 1s and 0s
+    const recessions = data.map(item => item.recession);
 
-    // 1. Custom Plugin to draw the grey recession bands in the background
+    // Custom Plugin to draw the grey recession bands in the background
     const recessionPlugin = {
       id: 'recessionPlugin',
       beforeDraw: (chart) => {
@@ -34,7 +33,8 @@ fetch('../data/gdp_filtered_data.json')
         const bottom = chart.chartArea.bottom;
 
         ctx.save();
-        ctx.fillStyle = 'rgba(200, 200, 200, 0.3)'; // Light grey color for recession
+        // 2. Make recession bars slightly darker (lower RGB values, slightly higher opacity)
+        ctx.fillStyle = 'rgba(150, 150, 150, 0.4)'; 
 
         let inRecession = false;
         let startX = 0;
@@ -42,7 +42,7 @@ fetch('../data/gdp_filtered_data.json')
         for (let i = 0; i < recData.length; i++) {
           if (recData[i] === 1 && !inRecession) {
             inRecession = true;
-            startX = meta.data[i].x; // Find exact pixel location of the date
+            startX = meta.data[i].x; 
           } else if (recData[i] === 0 && inRecession) {
             inRecession = false;
             let endX = meta.data[i].x;
@@ -50,7 +50,6 @@ fetch('../data/gdp_filtered_data.json')
           }
         }
         
-        // If data ends while still in a recession
         if (inRecession) {
            let endX = meta.data[recData.length - 1].x;
            ctx.fillRect(startX, top, endX - startX, bottom - top);
@@ -59,15 +58,41 @@ fetch('../data/gdp_filtered_data.json')
       }
     };
 
+    // Shared X-Axis Configuration for both charts
+    const sharedXAxisConfig = {
+      grid: {
+        display: false // 1. Remove vertical grid lines
+      },
+      title: { display: true, text: 'Date' },
+      ticks: {
+        autoSkip: false, // Prevents Chart.js from overriding our custom tick logic
+        maxRotation: 0,
+        // 3. Display only the year, every 5 years, starting from 1950
+        callback: function(value) {
+          const dateStr = this.getLabelForValue(value);
+          if (!dateStr) return null;
+          
+          const year = parseInt(dateStr.substring(0, 4), 10);
+          const month = dateStr.substring(5, 7);
+          
+          // Check if year >= 1950, is a multiple of 5, and it's the first quarter ('01')
+          if (year >= 1950 && year % 5 === 0 && month === '01') {
+            return year;
+          }
+          return null; // Hides ticks for all other dates
+        }
+      }
+    };
+
     // Chart 1: Raw US GDP
     const ctx1 = document.getElementById('myFredChart').getContext('2d');
     new Chart(ctx1, {
       type: 'line',
-      plugins: [recessionPlugin], // Inject custom plugin
+      plugins: [recessionPlugin],
       data: {
         labels: dates,
         datasets: [{
-          label: 'US Gross Domestic Product (GDP)',
+          label: 'US Gross Domestic Product',
           data: gdpValues,
           borderColor: '#2b6cb0',
           borderWidth: 2,
@@ -77,18 +102,25 @@ fetch('../data/gdp_filtered_data.json')
       },
       options: {
         responsive: true,
-        recessionData: recessions, // Pass data to plugin
+        recessionData: recessions,
         plugins: {
+          // 4. Chart title and legend placement
+          title: {
+            display: true,
+            text: 'US Gross Domestic Product (GDP)',
+            font: { size: 16 }
+          },
           legend: {
+            position: 'top',
+            align: 'end', // Aligns legend to the top right
             labels: {
-              // 3. Change legend symbols to lines
               usePointStyle: true,
-              pointStyle: 'line' 
+              pointStyle: 'line'
             }
           }
         },
         scales: {
-          x: { title: { display: true, text: 'Date' } },
+          x: sharedXAxisConfig,
           y: { title: { display: true, text: 'Billions of Dollars' } }
         }
       }
@@ -98,7 +130,7 @@ fetch('../data/gdp_filtered_data.json')
     const ctx2 = document.getElementById('myCyclesChart').getContext('2d');
     new Chart(ctx2, {
       type: 'line',
-      plugins: [recessionPlugin], // Inject custom plugin
+      plugins: [recessionPlugin],
       data: {
         labels: dates,
         datasets: [
@@ -118,11 +150,10 @@ fetch('../data/gdp_filtered_data.json')
             fill: false,
             pointRadius: 0
           },
-          // 2. Bold dashed zero line mapping
           {
             label: 'Zero Line',
-            data: dates.map(() => 0), // Array of zeros covering every date
-            borderColor: '#1a202c', // Dark grey/black
+            data: dates.map(() => 0),
+            borderColor: '#1a202c',
             borderWidth: 2,
             borderDash: [5, 5],
             fill: false,
@@ -132,13 +163,20 @@ fetch('../data/gdp_filtered_data.json')
       },
       options: {
         responsive: true,
-        recessionData: recessions, // Pass data to plugin
+        recessionData: recessions,
         plugins: {
+          // 4. Chart title and legend placement
+          title: {
+            display: true,
+            text: 'GDP Cyclical Components (HP vs. Hamilton)',
+            font: { size: 16 }
+          },
           legend: {
+            position: 'top',
+            align: 'end', // Aligns legend to the top right
             labels: {
               usePointStyle: true,
               pointStyle: 'line',
-              // Hide the 'Zero Line' dataset from the legend box
               filter: function(item, chart) {
                 return item.text !== 'Zero Line';
               }
@@ -146,8 +184,8 @@ fetch('../data/gdp_filtered_data.json')
           }
         },
         scales: {
-          x: { title: { display: true, text: 'Date' } },
-          y: { title: { display: true, text: 'Cyclical Deviation' } }
+          x: sharedXAxisConfig,
+          y: { title: { display: true, text: 'Cyclical Deviation (%)' } }
         }
       }
     });
