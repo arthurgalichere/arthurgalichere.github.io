@@ -6,7 +6,8 @@
         "hp_trend": 549.0427235587866,
         "hp_cycle": 0.33088772313794834,
         "hamilton_trend": null,
-        "hamilton_cycle": null
+        "hamilton_cycle": null,
+        "recession": 0
     },
     {
         "date": "1947-04-01",
@@ -15,7 +16,8 @@
         "hp_trend": 550.8006296024366,
         "hp_cycle": -0.2804849854122722,
         "hamilton_trend": null,
-        "hamilton_cycle": null
+        "hamilton_cycle": null,
+        "recession": 0
     },
     {
         "date": "1947-07-01",
@@ -24,7 +26,8 @@
         "hp_trend": 552.5587424509133,
         "hp_cycle": -0.578788597355242,
         "hamilton_trend": null,
-        "hamilton_cycle": null
+        "hamilton_cycle": null,
+        "recession": 0
     },
     {
         "date": "1947-10-01",
@@ -33,7 +36,8 @@
         "hp_trend": 554.3170936059279,
         "hp_cycle": 1.6529444456635929,
         "hamilton_trend": null,
-        "hamilton_cycle": null
+        "hamilton_cycle": null,
+        "recession": 0
     },
     {
         "date": "1948-01-01",
@@ -42,7 +46,8 @@
         "hp_trend": 556.0753528263183,
         "hp_cycle": 2.1772385025039966,
         "hamilton_trend": null,
-        "hamilton_cycle": null
+        "hamilton_cycle": null,
+        "recession": 0
     },
     {
         "date": "1948-04-01",
@@ -51,7 +56,8 @@
         "hp_trend": 557.8342229612007,
         "hp_cycle": 2.9542225829466133,
         "hamilton_trend": null,
-        "hamilton_cycle": null
+        "hamilton_cycle": null,
+        "recession": 0
     },
     {
         "date": "1948-07-01",
@@ -60,7 +66,8 @@
         "hp_trend": 559.5957676337547,
         "hp_cycle": 3.5956367800479256,
         "hamilton_trend": null,
-        "hamilton_cycle": null
+        "hamilton_cycle": null,
+        "recession": 0
     },
     {
         "date": "1948-10-01",
@@ -69,7 +76,8 @@
         "hp_trend": 561.3638968562744,
         "hp_cycle": 2.245692389616579,
         "hamilton_trend": 564.7979139250938,
-        "hamilton_cycle": -1.1883246792027649
+        "hamilton_cycle": -1.1883246792027649,
+        "recession": 0
     },
     {
         "date": "1949-01-01",
@@ -78,7 +86,8 @@
         "hp_trend": 563.1447679140417,
         "hp_cycle": -1.4552952752554802,
         "hamilton_trend": 566.5194609750457,
-        "hamilton_cycle": -4.8299883362594755
+        "hamilton_cycle": -4.8299883362594755,
+        "recession": 1
     },
     {
         "date": "1949-04-01",
@@ -87,7 +96,8 @@
         "hp_trend": 564.9459416500821,
         "hp_cycle": -4.6046230720880885,
         "hamilton_trend": 568.4619969365401,
-        "hamilton_cycle": -8.120678358546115
+        "hamilton_cycle": -8.120678358546115,
+        "recession": 1
     },
     {
         "date": "1949-07-01",
@@ -96,7 +106,8 @@
         "hp_trend": 566.7740693478737,
         "hp_cycle": -5.867557438188328,
         "hamilton_trend": 571.1082269379713,
-        "hamilton_cycle": -10.20171502828589
+        "hamilton_cycle": -10.20171502828589,
+        "recession": 1
     },
     {
         "date": "1949-10-01",
@@ -105,7 +116,8 @@
         "hp_trend": 568.6329244014747,
         "hp_cycle": -8.558775498506975,
         "hamilton_trend": 570.365619236751,
-        "hamilton_cycle": -10.291470333783195
+        "hamilton_cycle": -10.291470333783195,
+        "recession": 1
     },
     {
         "date": "1950-01-01",
@@ -114,7 +126,8 @@
         "hp_trend": 570.5226129815447,
         "hp_cycle": -6.748374753529674,
         "hamilton_trend": 566.8416528568861,
-        "hamilton_cycle": -3.0674146288710062
+        "hamilton_cycle": -3.0674146288710062,
+        "recession": 0
     },
     {
         "date": "1950-04-01",
@@ -123,7 +136,8 @@
         "hp_trend": 572.4378920240572,
         "hp_cycle": -5.317817894836367,
         "hamilton_trend": 565.7361049899101,
-        "hamilton_cycle": 1.3839691393106932
+        "hamilton_cycle": 1.3839691393106932,
+        "recession": 0
     },
     {
         "date": "1950-07-01",
@@ -132,7 +146,8 @@
         "hp_trend": 574.3693007307645,
         "hp_cycle": -1.3096594428366188,
         "hamilton_trend": 567.8416913330765,
-        "hamilton_cycle": 5.217949954851406
+        "hamilton_cycle": 5.217949954851406,
+        "recession": 0
     },
     {
         "date": "1950-10-01",
@@ -141,7 +156,8 @@
         "hp_trend": 576.3040546672346,
         "hp_cycle": 0.5108559349225743,
         "hamilton_trend": 566.4835930264767,
-        "hamilton_cycle": 10.331317575680487
+        "hamilton_cycle": 10.331317575680487,
+        "recession": 0
     },
     {
         "date": "1951-01-01",
@@ -150,7 +166,8 @@
         "hp_trend": 578.2285508618831,
         "hp_cycle": 3.482565134437209,
         "hamilton_trend": 572.0985517614131,
-        "hamilton_cycle": 9.612564234907268
+        "hamilton_cycle": 9.612564234907268,
+        "recession": 0
     },
     {
         "date": "1951-04-01",
@@ -159,7 +176,8 @@
         "hp_trend": 580.129505628085,
         "hp_cycle": 3.9608194780912527,
         "hamilton_trend": 576.2588279230596,
-        "hamilton_cycle": 7.831497183116653
+        "hamilton_cycle": 7.831497183116653,
+        "recession": 0
     },
     {
         "date": "1951-07-01",
@@ -168,7 +186,8 @@
         "hp_trend": 581.995811882424,
         "hp_cycle": 4.192436962039778,
         "hamilton_trend": 582.7809816833951,
-        "hamilton_cycle": 3.4072671610687166
+        "hamilton_cycle": 3.4072671610687166,
+        "recession": 0
     },
     {
         "date": "1951-10-01",
@@ -177,7 +196,8 @@
         "hp_trend": 583.8188380536578,
         "hp_cycle": 3.7242225357102825,
         "hamilton_trend": 585.8274447494973,
-        "hamilton_cycle": 1.715615839870793
+        "hamilton_cycle": 1.715615839870793,
+        "recession": 0
     },
     {
         "date": "1952-01-01",
@@ -186,7 +206,8 @@
         "hp_trend": 585.5925728436449,
         "hp_cycle": 2.9678177972024287,
         "hamilton_trend": 590.5133706251786,
-        "hamilton_cycle": -1.9529799843312503
+        "hamilton_cycle": -1.9529799843312503,
+        "recession": 0
     },
     {
         "date": "1952-04-01",
@@ -195,7 +216,8 @@
         "hp_trend": 587.3133325933287,
         "hp_cycle": 1.5827731439848094,
         "hamilton_trend": 592.0575379153809,
-        "hamilton_cycle": -3.1614321780673436
+        "hamilton_cycle": -3.1614321780673436,
+        "recession": 0
     },
     {
         "date": "1952-07-01",
@@ -204,7 +226,8 @@
         "hp_trend": 588.9792885297753,
         "hp_cycle": 1.747722261415106,
         "hamilton_trend": 593.3593234299123,
-        "hamilton_cycle": -2.632312638721828
+        "hamilton_cycle": -2.632312638721828,
+        "recession": 0
     },
     {
         "date": "1952-10-01",
@@ -213,7 +236,8 @@
         "hp_trend": 590.589601113266,
         "hp_cycle": 3.6409803893080834,
         "hamilton_trend": 594.6676259798007,
-        "hamilton_cycle": -0.43704447722666373
+        "hamilton_cycle": -0.43704447722666373,
+        "recession": 0
     },
     {
         "date": "1953-01-01",
@@ -222,7 +246,8 @@
         "hp_trend": 592.1445231304955,
         "hp_cycle": 3.9508560598005715,
         "hamilton_trend": 595.4106286563608,
-        "hamilton_cycle": 0.6847505339352438
+        "hamilton_cycle": 0.6847505339352438,
+        "recession": 0
     },
     {
         "date": "1953-04-01",
@@ -231,7 +256,8 @@
         "hp_trend": 593.646582980902,
         "hp_cycle": 3.41554987754796,
         "hamilton_trend": 595.4337717285312,
-        "hamilton_cycle": 1.6283611299188578
+        "hamilton_cycle": 1.6283611299188578,
+        "recession": 0
     },
     {
         "date": "1953-07-01",
@@ -240,7 +266,8 @@
         "hp_trend": 595.1007783489613,
         "hp_cycle": 1.8137021043874029,
         "hamilton_trend": 598.015876454185,
-        "hamilton_cycle": -1.1013960008363028
+        "hamilton_cycle": -1.1013960008363028,
+        "recession": 1
     },
     {
         "date": "1953-10-01",
@@ -249,7 +276,8 @@
         "hp_trend": 596.514241637822,
         "hp_cycle": -0.9382770141014589,
         "hamilton_trend": 602.7985130796055,
-        "hamilton_cycle": -7.222548455884976
+        "hamilton_cycle": -7.222548455884976,
+        "recession": 1
     },
     {
         "date": "1954-01-01",
@@ -258,7 +286,8 @@
         "hp_trend": 597.8952388144484,
         "hp_cycle": -2.481335122199539,
         "hamilton_trend": 603.7953873742586,
-        "hamilton_cycle": -8.38148368200973
+        "hamilton_cycle": -8.38148368200973,
+        "recession": 1
     },
     {
         "date": "1954-04-01",
@@ -267,7 +296,8 @@
         "hp_trend": 599.2514494226706,
         "hp_cycle": -3.636370238121117,
         "hamilton_trend": 603.6972634894444,
-        "hamilton_cycle": -8.082184304894895
+        "hamilton_cycle": -8.082184304894895,
+        "recession": 1
     },
     {
         "date": "1954-07-01",
@@ -276,7 +306,8 @@
         "hp_trend": 600.5890021718674,
         "hp_cycle": -3.7192691964664846,
         "hamilton_trend": 603.0519523282924,
-        "hamilton_cycle": -6.1822193528914795
+        "hamilton_cycle": -6.1822193528914795,
+        "recession": 0
     },
     {
         "date": "1954-10-01",
@@ -285,7 +316,8 @@
         "hp_trend": 601.9117530400188,
         "hp_cycle": -2.8318204502780873,
         "hamilton_trend": 601.0184729782973,
-        "hamilton_cycle": -1.9385403885565893
+        "hamilton_cycle": -1.9385403885565893,
+        "recession": 0
     },
     {
         "date": "1955-01-01",
@@ -294,7 +326,8 @@
         "hp_trend": 603.2212334618572,
         "hp_cycle": -0.8588001829001541,
         "hamilton_trend": 601.4821478514766,
-        "hamilton_cycle": 0.8802854274804304
+        "hamilton_cycle": 0.8802854274804304,
+        "recession": 0
     },
     {
         "date": "1955-04-01",
@@ -303,7 +336,8 @@
         "hp_trend": 604.5172049843336,
         "hp_cycle": -0.12763559474467456,
         "hamilton_trend": 602.2866100438323,
-        "hamilton_cycle": 2.1029593457566307
+        "hamilton_cycle": 2.1029593457566307,
+        "recession": 0
     },
     {
         "date": "1955-07-01",
@@ -312,7 +346,8 @@
         "hp_trend": 605.798892404285,
         "hp_cycle": 0.6310106104272108,
         "hamilton_trend": 603.9830866083068,
-        "hamilton_cycle": 2.4468164064053326
+        "hamilton_cycle": 2.4468164064053326,
+        "recession": 0
     },
     {
         "date": "1955-10-01",
@@ -321,7 +356,8 @@
         "hp_trend": 607.0654407463005,
         "hp_cycle": 0.9489291790819152,
         "hamilton_trend": 606.832590021801,
-        "hamilton_cycle": 1.1817799035814005
+        "hamilton_cycle": 1.1817799035814005,
+        "recession": 0
     },
     {
         "date": "1956-01-01",
@@ -330,7 +366,8 @@
         "hp_trend": 608.3163894166014,
         "hp_cycle": 0.3033393332967762,
         "hamilton_trend": 610.6813089192354,
-        "hamilton_cycle": -2.061580169337276
+        "hamilton_cycle": -2.061580169337276,
+        "recession": 0
     },
     {
         "date": "1956-04-01",
@@ -339,7 +376,8 @@
         "hp_trend": 609.5518709021462,
         "hp_cycle": 0.48226642719066604,
         "hamilton_trend": 612.0355631221238,
-        "hamilton_cycle": -2.001425792786904
+        "hamilton_cycle": -2.001425792786904,
+        "recession": 0
     },
     {
         "date": "1956-07-01",
@@ -348,7 +386,8 @@
         "hp_trend": 610.772207276977,
         "hp_cycle": 0.4168680406628482,
         "hamilton_trend": 613.6746297666792,
-        "hamilton_cycle": -2.4855544490393413
+        "hamilton_cycle": -2.4855544490393413,
+        "recession": 0
     },
     {
         "date": "1956-10-01",
@@ -357,7 +396,8 @@
         "hp_trend": 611.9780220316532,
         "hp_cycle": 1.245228470237521,
         "hamilton_trend": 615.2112730990947,
-        "hamilton_cycle": -1.988022597204008
+        "hamilton_cycle": -1.988022597204008,
+        "recession": 0
     },
     {
         "date": "1957-01-01",
@@ -366,7 +406,8 @@
         "hp_trend": 613.1701991992591,
         "hp_cycle": 2.056037936086682,
         "hamilton_trend": 615.1922438557239,
-        "hamilton_cycle": 0.03399327962188181
+        "hamilton_cycle": 0.03399327962188181,
+        "recession": 0
     },
     {
         "date": "1957-04-01",
@@ -375,7 +416,8 @@
         "hp_trend": 614.3504010806736,
         "hp_cycle": 1.35279394778604,
         "hamilton_trend": 616.9495973751623,
-        "hamilton_cycle": -1.2464023467026664
+        "hamilton_cycle": -1.2464023467026664,
+        "recession": 0
     },
     {
         "date": "1957-07-01",
@@ -384,7 +426,8 @@
         "hp_trend": 615.5215750004852,
         "hp_cycle": 1.7507289043819583,
         "hamilton_trend": 618.2604508237495,
-        "hamilton_cycle": -0.9881469188823075
+        "hamilton_cycle": -0.9881469188823075,
+        "recession": 0
     },
     {
         "date": "1957-10-01",
@@ -393,7 +436,8 @@
         "hp_trend": 616.6875137794998,
         "hp_cycle": -0.38466905460222733,
         "hamilton_trend": 620.5886499639669,
-        "hamilton_cycle": -4.285805239069305
+        "hamilton_cycle": -4.285805239069305,
+        "recession": 1
     },
     {
         "date": "1958-01-01",
@@ -402,7 +446,8 @@
         "hp_trend": 617.8531044440887,
         "hp_cycle": -3.1046137874994884,
         "hamilton_trend": 622.7615742092704,
-        "hamilton_cycle": -8.013083552681223
+        "hamilton_cycle": -8.013083552681223,
+        "recession": 1
     },
     {
         "date": "1958-04-01",
@@ -411,7 +456,8 @@
         "hp_trend": 619.0229936024638,
         "hp_cycle": -3.3297561694861315,
         "hamilton_trend": 622.2437791058271,
-        "hamilton_cycle": -6.5505416728494765
+        "hamilton_cycle": -6.5505416728494765,
+        "recession": 1
     },
     {
         "date": "1958-07-01",
@@ -420,7 +466,8 @@
         "hp_trend": 620.1998874792196,
         "hp_cycle": -1.6117464914199218,
         "hamilton_trend": 624.1445398773672,
-        "hamilton_cycle": -5.556398889567504
+        "hamilton_cycle": -5.556398889567504,
+        "recession": 0
     },
     {
         "date": "1958-10-01",
@@ -429,7 +476,8 @@
         "hp_trend": 621.3844112013451,
         "hp_cycle": -0.012640987640565982,
         "hamilton_trend": 622.2268592053774,
-        "hamilton_cycle": -0.8550889916729147
+        "hamilton_cycle": -0.8550889916729147,
+        "recession": 0
     },
     {
         "date": "1959-01-01",
@@ -438,7 +486,8 @@
         "hp_trend": 622.5761825542721,
         "hp_cycle": 0.9295749746879665,
         "hamilton_trend": 619.731788347504,
-        "hamilton_cycle": 3.7739691814560956
+        "hamilton_cycle": 3.7739691814560956,
+        "recession": 0
     },
     {
         "date": "1959-04-01",
@@ -447,7 +496,8 @@
         "hp_trend": 623.7748114228151,
         "hp_cycle": 2.116964971304469,
         "hamilton_trend": 622.3683995119385,
-        "hamilton_cycle": 3.5233768821810827
+        "hamilton_cycle": 3.5233768821810827,
+        "recession": 0
     },
     {
         "date": "1959-07-01",
@@ -456,7 +506,8 @@
         "hp_trend": 624.9804886761477,
         "hp_cycle": 1.3658135637947453,
         "hamilton_trend": 626.857991428705,
-        "hamilton_cycle": -0.5116891887624888
+        "hamilton_cycle": -0.5116891887624888,
+        "recession": 0
     },
     {
         "date": "1959-10-01",
@@ -465,7 +516,8 @@
         "hp_trend": 626.194728286551,
         "hp_cycle": 0.8284719304677992,
         "hamilton_trend": 629.4920052716892,
-        "hamilton_cycle": -2.4688050546703835
+        "hamilton_cycle": -2.4688050546703835,
+        "recession": 0
     },
     {
         "date": "1960-01-01",
@@ -474,7 +526,8 @@
         "hp_trend": 627.4198978597833,
         "hp_cycle": 2.2261880670519076,
         "hamilton_trend": 630.9134209855931,
-        "hamilton_cycle": -1.267335058757908
+        "hamilton_cycle": -1.267335058757908,
+        "recession": 0
     },
     {
         "date": "1960-04-01",
@@ -483,7 +536,8 @@
         "hp_trend": 628.6588827965595,
         "hp_cycle": 0.697831425539789,
         "hamilton_trend": 633.3310446988604,
-        "hamilton_cycle": -3.9743304767611107
+        "hamilton_cycle": -3.9743304767611107,
+        "recession": 0
     },
     {
         "date": "1960-07-01",
@@ -492,7 +546,8 @@
         "hp_trend": 629.9159598651361,
         "hp_cycle": 0.27338392293165725,
         "hamilton_trend": 632.8716230817406,
-        "hamilton_cycle": -2.6822792936728774
+        "hamilton_cycle": -2.6822792936728774,
+        "recession": 1
     },
     {
         "date": "1960-10-01",
@@ -501,7 +556,8 @@
         "hp_trend": 631.1958419784102,
         "hp_cycle": -2.002453193971178,
         "hamilton_trend": 633.2874074362068,
-        "hamilton_cycle": -4.094018651767783
+        "hamilton_cycle": -4.094018651767783,
+        "recession": 1
     },
     {
         "date": "1961-01-01",
@@ -510,7 +566,8 @@
         "hp_trend": 632.5034129142309,
         "hp_cycle": -2.421530750152556,
         "hamilton_trend": 637.3294211089448,
-        "hamilton_cycle": -7.247538944866392
+        "hamilton_cycle": -7.247538944866392,
+        "recession": 1
     },
     {
         "date": "1961-04-01",
@@ -519,7 +576,8 @@
         "hp_trend": 633.8423049172011,
         "hp_cycle": -1.8473435272495635,
         "hamilton_trend": 635.7411470161663,
-        "hamilton_cycle": -3.7461856262148103
+        "hamilton_cycle": -3.7461856262148103,
+        "recession": 0
     },
     {
         "date": "1961-07-01",
@@ -528,7 +586,8 @@
         "hp_trend": 635.2146367752051,
         "hp_cycle": -1.061667336099049,
         "hamilton_trend": 636.3537546627031,
-        "hamilton_cycle": -2.200785223596995
+        "hamilton_cycle": -2.200785223596995,
+        "recession": 0
     },
     {
         "date": "1961-10-01",
@@ -537,7 +596,8 @@
         "hp_trend": 636.621372686423,
         "hp_cycle": -0.21310072130870594,
         "hamilton_trend": 635.0367103290107,
-        "hamilton_cycle": 1.3715616361035927
+        "hamilton_cycle": 1.3715616361035927,
+        "recession": 0
     },
     {
         "date": "1962-01-01",
@@ -546,7 +606,8 @@
         "hp_trend": 638.0628133069498,
         "hp_cycle": 0.6273071575548101,
         "hamilton_trend": 636.4517893359636,
-        "hamilton_cycle": 2.2383311285410628
+        "hamilton_cycle": 2.2383311285410628,
+        "recession": 0
     },
     {
         "date": "1962-04-01",
@@ -555,7 +616,8 @@
         "hp_trend": 639.5391261049299,
         "hp_cycle": 0.21482081924727936,
         "hamilton_trend": 639.5539789613877,
-        "hamilton_cycle": 0.19996796278951479
+        "hamilton_cycle": 0.19996796278951479,
+        "recession": 0
     },
     {
         "date": "1962-07-01",
@@ -564,7 +626,8 @@
         "hp_trend": 641.0508706154806,
         "hp_cycle": 0.13538955476951742,
         "hamilton_trend": 641.7019084208476,
-        "hamilton_cycle": -0.5156482505975646
+        "hamilton_cycle": -0.5156482505975646,
+        "recession": 0
     },
     {
         "date": "1962-10-01",
@@ -573,7 +636,8 @@
         "hp_trend": 642.5987406367315,
         "hp_cycle": -0.879771214380753,
         "hamilton_trend": 643.8718777046076,
-        "hamilton_cycle": -2.1529082822569308
+        "hamilton_cycle": -2.1529082822569308,
+        "recession": 0
     },
     {
         "date": "1963-01-01",
@@ -582,7 +646,8 @@
         "hp_trend": 644.183514585284,
         "hp_cycle": -0.9422523391361892,
         "hamilton_trend": 646.1331832255511,
-        "hamilton_cycle": -2.8919209794032668
+        "hamilton_cycle": -2.8919209794032668,
+        "recession": 0
     },
     {
         "date": "1963-04-01",
@@ -591,7 +656,8 @@
         "hp_trend": 645.8054210207305,
         "hp_cycle": -1.2728119116189873,
         "hamilton_trend": 646.5092123295065,
-        "hamilton_cycle": -1.9766032203949635
+        "hamilton_cycle": -1.9766032203949635,
+        "recession": 0
     },
     {
         "date": "1963-07-01",
@@ -600,7 +666,8 @@
         "hp_trend": 647.4640995949512,
         "hp_cycle": -0.6253066406630978,
         "hamilton_trend": 647.9195832385194,
-        "hamilton_cycle": -1.0807902842312842
+        "hamilton_cycle": -1.0807902842312842,
+        "recession": 0
     },
     {
         "date": "1963-10-01",
@@ -609,7 +676,8 @@
         "hp_trend": 649.158394452382,
         "hp_cycle": -0.8571398783783479,
         "hamilton_trend": 648.2213289845674,
-        "hamilton_cycle": 0.07992558943624317
+        "hamilton_cycle": 0.07992558943624317,
+        "recession": 0
     },
     {
         "date": "1964-01-01",
@@ -618,7 +686,8 @@
         "hp_trend": 650.8867589208086,
         "hp_cycle": -0.18555837618271198,
         "hamilton_trend": 650.0622049736492,
-        "hamilton_cycle": 0.6389955709767037
+        "hamilton_cycle": 0.6389955709767037,
+        "recession": 0
     },
     {
         "date": "1964-04-01",
@@ -627,7 +696,8 @@
         "hp_trend": 652.6471106155929,
         "hp_cycle": -0.6330211711020866,
         "hamilton_trend": 651.5428815196734,
-        "hamilton_cycle": 0.4712079248173495
+        "hamilton_cycle": 0.4712079248173495,
+        "recession": 0
     },
     {
         "date": "1964-07-01",
@@ -636,7 +706,8 @@
         "hp_trend": 654.4372511781118,
         "hp_cycle": -0.47417594789737905,
         "hamilton_trend": 654.1913686472142,
-        "hamilton_cycle": -0.22829341699980432
+        "hamilton_cycle": -0.22829341699980432,
+        "recession": 0
     },
     {
         "date": "1964-10-01",
@@ -645,7 +716,8 @@
         "hp_trend": 656.2545866115106,
         "hp_cycle": -1.5302884302956272,
         "hamilton_trend": 655.3979139309187,
-        "hamilton_cycle": -0.6736157497036857
+        "hamilton_cycle": -0.6736157497036857,
+        "recession": 0
     },
     {
         "date": "1965-01-01",
@@ -654,7 +726,8 @@
         "hp_trend": 658.0962265589671,
         "hp_cycle": -0.47852184304394996,
         "hamilton_trend": 657.985566112662,
-        "hamilton_cycle": -0.36786139673881735
+        "hamilton_cycle": -0.36786139673881735,
+        "recession": 0
     },
     {
         "date": "1965-04-01",
@@ -663,7 +736,8 @@
         "hp_trend": 659.9583242333897,
         "hp_cycle": -0.6277098578622144,
         "hamilton_trend": 658.9976835438765,
-        "hamilton_cycle": 0.3329308316509696
+        "hamilton_cycle": 0.3329308316509696,
+        "recession": 0
     },
     {
         "date": "1965-07-01",
@@ -672,7 +746,8 @@
         "hp_trend": 661.8367337715349,
         "hp_cycle": 0.0802794499452375,
         "hamilton_trend": 660.9408821567199,
-        "hamilton_cycle": 0.9761310647602386
+        "hamilton_cycle": 0.9761310647602386,
+        "recession": 0
     },
     {
         "date": "1965-10-01",
@@ -681,7 +756,8 @@
         "hp_trend": 663.7269169914981,
         "hp_cycle": 1.1530129791392483,
         "hamilton_trend": 661.3363418325379,
-        "hamilton_cycle": 3.5435881380994942
+        "hamilton_cycle": 3.5435881380994942,
+        "recession": 0
     },
     {
         "date": "1966-01-01",
@@ -690,7 +766,8 @@
         "hp_trend": 665.6243858860305,
         "hp_cycle": 2.302110028228526,
         "hamilton_trend": 665.0758293588127,
-        "hamilton_cycle": 2.8506665554463098
+        "hamilton_cycle": 2.8506665554463098,
+        "recession": 0
     },
     {
         "date": "1966-04-01",
@@ -699,7 +776,8 @@
         "hp_trend": 667.5253730809952,
         "hp_cycle": 1.5564943845596417,
         "hamilton_trend": 666.7009759435972,
-        "hamilton_cycle": 2.3808915219576647
+        "hamilton_cycle": 2.3808915219576647,
+        "recession": 0
     },
     {
         "date": "1966-07-01",
@@ -708,7 +786,8 @@
         "hp_trend": 669.4275500210226,
         "hp_cycle": 1.4587279159776472,
         "hamilton_trend": 669.1939692454644,
-        "hamilton_cycle": 1.6923086915359136
+        "hamilton_cycle": 1.6923086915359136,
+        "recession": 0
     },
     {
         "date": "1966-10-01",
@@ -717,7 +796,8 @@
         "hp_trend": 671.3295609597337,
         "hp_cycle": 1.2100511883946865,
         "hamilton_trend": 672.6988538226227,
-        "hamilton_cycle": -0.1592416744942966
+        "hamilton_cycle": -0.1592416744942966,
+        "recession": 0
     },
     {
         "date": "1967-01-01",
@@ -726,7 +806,8 @@
         "hp_trend": 673.2309618556973,
         "hp_cycle": 0.6044277557284659,
         "hamilton_trend": 675.6967925495891,
-        "hamilton_cycle": -1.8614029381633372
+        "hamilton_cycle": -1.8614029381633372,
+        "recession": 0
     },
     {
         "date": "1967-04-01",
@@ -735,7 +816,8 @@
         "hp_trend": 675.1320649494752,
         "hp_cycle": -0.7281486941004687,
         "hamilton_trend": 675.7566388194489,
-        "hamilton_cycle": -1.3527225640741563
+        "hamilton_cycle": -1.3527225640741563,
+        "recession": 0
     },
     {
         "date": "1967-07-01",
@@ -744,7 +826,8 @@
         "hp_trend": 677.0335602489765,
         "hp_cycle": -0.7336767668049333,
         "hamilton_trend": 677.5643799810636,
-        "hamilton_cycle": -1.2644964988919583
+        "hamilton_cycle": -1.2644964988919583,
+        "recession": 0
     },
     {
         "date": "1967-10-01",
@@ -753,7 +836,8 @@
         "hp_trend": 678.9356826691762,
         "hp_cycle": -0.7801027475169349,
         "hamilton_trend": 679.5546013195452,
-        "hamilton_cycle": -1.3990213978859174
+        "hamilton_cycle": -1.3990213978859174,
+        "recession": 0
     },
     {
         "date": "1968-01-01",
@@ -762,7 +846,8 @@
         "hp_trend": 680.83820857707,
         "hp_cycle": 0.4388660378381246,
         "hamilton_trend": 680.5124582951881,
-        "hamilton_cycle": 0.7646163197199485
+        "hamilton_cycle": 0.7646163197199485,
+        "recession": 0
     },
     {
         "date": "1968-04-01",
@@ -771,7 +856,8 @@
         "hp_trend": 682.7404267754365,
         "hp_cycle": 1.2440411016783628,
         "hamilton_trend": 680.6400666601925,
-        "hamilton_cycle": 3.3444012169223925
+        "hamilton_cycle": 3.3444012169223925,
+        "recession": 0
     },
     {
         "date": "1968-07-01",
@@ -780,7 +866,8 @@
         "hp_trend": 684.6419003583284,
         "hp_cycle": 1.0911025204538873,
         "hamilton_trend": 683.1898549448185,
-        "hamilton_cycle": 2.5431479339637235
+        "hamilton_cycle": 2.5431479339637235,
+        "recession": 0
     },
     {
         "date": "1968-10-01",
@@ -789,7 +876,8 @@
         "hp_trend": 686.5429699454862,
         "hp_cycle": 0.9833379077017526,
         "hamilton_trend": 685.3675664367473,
-        "hamilton_cycle": 2.158741416440648
+        "hamilton_cycle": 2.158741416440648,
+        "recession": 0
     },
     {
         "date": "1969-01-01",
@@ -798,7 +886,8 @@
         "hp_trend": 688.4446580957263,
         "hp_cycle": 1.6623401142433067,
         "hamilton_trend": 688.9426794087096,
-        "hamilton_cycle": 1.164318801259924
+        "hamilton_cycle": 1.164318801259924,
+        "recession": 0
     },
     {
         "date": "1969-04-01",
@@ -807,7 +896,8 @@
         "hp_trend": 690.3486019540572,
         "hp_cycle": 1.3248822222141143,
         "hamilton_trend": 691.6367788854648,
-        "hamilton_cycle": 0.03670529080659435
+        "hamilton_cycle": 0.03670529080659435,
+        "recession": 0
     },
     {
         "date": "1969-07-01",
@@ -816,7 +906,8 @@
         "hp_trend": 692.2574776280591,
         "hp_cycle": 1.4696585584030117,
         "hamilton_trend": 692.5652057697368,
-        "hamilton_cycle": 1.1619304167252267
+        "hamilton_cycle": 1.1619304167252267,
+        "recession": 0
     },
     {
         "date": "1969-10-01",
@@ -825,7 +916,8 @@
         "hp_trend": 694.1747892767006,
         "hp_cycle": 0.344477942898493,
         "hamilton_trend": 694.2751653242294,
-        "hamilton_cycle": 0.2441018953696812
+        "hamilton_cycle": 0.2441018953696812,
+        "recession": 0
     },
     {
         "date": "1970-01-01",
@@ -834,7 +926,8 @@
         "hp_trend": 696.1049595955516,
         "hp_cycle": -0.33619482251697264,
         "hamilton_trend": 697.4440380749284,
-        "hamilton_cycle": -1.6752733018937533
+        "hamilton_cycle": -1.6752733018937533,
+        "recession": 1
     },
     {
         "date": "1970-04-01",
@@ -843,7 +936,8 @@
         "hp_trend": 698.052626578896,
         "hp_cycle": -0.7568623561189725,
         "hamilton_trend": 698.5744618200381,
-        "hamilton_cycle": -1.2786975972610435
+        "hamilton_cycle": -1.2786975972610435,
+        "recession": 1
     },
     {
         "date": "1970-07-01",
@@ -852,7 +946,8 @@
         "hp_trend": 700.0222180992535,
         "hp_cycle": -0.9911354165884632,
         "hamilton_trend": 700.57750455037,
-        "hamilton_cycle": -1.5464218677050212
+        "hamilton_cycle": -1.5464218677050212,
+        "recession": 1
     },
     {
         "date": "1970-10-01",
@@ -861,7 +956,8 @@
         "hp_trend": 702.0176889901707,
         "hp_cycle": -2.752179504012929,
         "hamilton_trend": 700.9248828689128,
-        "hamilton_cycle": -1.6593733827551205
+        "hamilton_cycle": -1.6593733827551205,
+        "recession": 1
     },
     {
         "date": "1971-01-01",
@@ -870,7 +966,8 @@
         "hp_trend": 704.0423746255591,
         "hp_cycle": -0.5898380850856029,
         "hamilton_trend": 702.1180388030284,
-        "hamilton_cycle": 1.3344977374450764
+        "hamilton_cycle": 1.3344977374450764,
+        "recession": 0
     },
     {
         "date": "1971-04-01",
@@ -879,7 +976,8 @@
         "hp_trend": 706.0978902671397,
         "hp_cycle": -0.8023451847529941,
         "hamilton_trend": 704.0802745915424,
-        "hamilton_cycle": 1.2152704908443184
+        "hamilton_cycle": 1.2152704908443184,
+        "recession": 0
     },
     {
         "date": "1971-07-01",
@@ -888,7 +986,8 @@
         "hp_trend": 708.1854825278307,
         "hp_cycle": -1.0557390473048827,
         "hamilton_trend": 705.894123040683,
-        "hamilton_cycle": 1.235620439842819
+        "hamilton_cycle": 1.235620439842819,
+        "recession": 0
     },
     {
         "date": "1971-10-01",
@@ -897,7 +996,8 @@
         "hp_trend": 710.3058965548097,
         "hp_cycle": -2.110083075045395,
         "hamilton_trend": 705.2909442417991,
-        "hamilton_cycle": 2.9048692379651584
+        "hamilton_cycle": 2.9048692379651584,
+        "recession": 0
     },
     {
         "date": "1972-01-01",
@@ -906,7 +1006,8 @@
         "hp_trend": 712.4592176583495,
         "hp_cycle": -0.932772879824256,
         "hamilton_trend": 711.3366505904493,
-        "hamilton_cycle": 0.18979418807600723
+        "hamilton_cycle": 0.18979418807600723,
+        "recession": 0
     },
     {
         "date": "1972-04-01",
@@ -915,7 +1016,8 @@
         "hp_trend": 714.6442123468008,
         "hp_cycle": -0.2533094038467425,
         "hamilton_trend": 712.8212665352314,
-        "hamilton_cycle": 1.569636407722669
+        "hamilton_cycle": 1.569636407722669,
+        "recession": 0
     },
     {
         "date": "1972-07-01",
@@ -924,7 +1026,8 @@
         "hp_trend": 716.8590641454641,
         "hp_cycle": -0.5754480635887376,
         "hamilton_trend": 713.5731183074221,
-        "hamilton_cycle": 2.7104977744533016
+        "hamilton_cycle": 2.7104977744533016,
+        "recession": 0
     },
     {
         "date": "1972-10-01",
@@ -933,7 +1036,8 @@
         "hp_trend": 719.1017982612624,
         "hp_cycle": 0.10918387285857989,
         "hamilton_trend": 714.5992798145019,
-        "hamilton_cycle": 4.6117023196190985
+        "hamilton_cycle": 4.6117023196190985,
+        "recession": 0
     },
     {
         "date": "1973-01-01",
@@ -942,7 +1046,8 @@
         "hp_trend": 721.3700802460788,
         "hp_cycle": 1.4317479011799605,
         "hamilton_trend": 719.0275318256079,
-        "hamilton_cycle": 3.7742963216509224
+        "hamilton_cycle": 3.7742963216509224,
+        "recession": 0
     },
     {
         "date": "1973-04-01",
@@ -951,7 +1056,8 @@
         "hp_trend": 723.6616438917175,
         "hp_cycle": 1.7481489211587586,
         "hamilton_trend": 722.1452692560115,
-        "hamilton_cycle": 3.2645235568647877
+        "hamilton_cycle": 3.2645235568647877,
+        "recession": 0
     },
     {
         "date": "1973-07-01",
@@ -960,7 +1066,8 @@
         "hp_trend": 725.9751178324207,
         "hp_cycle": 0.8358865742391117,
         "hamilton_trend": 723.0347212599296,
-        "hamilton_cycle": 3.7762831467301794
+        "hamilton_cycle": 3.7762831467301794,
+        "recession": 0
     },
     {
         "date": "1973-10-01",
@@ -969,7 +1076,8 @@
         "hp_trend": 728.3102232955063,
         "hp_cycle": 1.418455249713702,
         "hamilton_trend": 726.4247174530576,
-        "hamilton_cycle": 3.3039610921623535
+        "hamilton_cycle": 3.3039610921623535,
+        "recession": 0
     },
     {
         "date": "1974-01-01",
@@ -978,7 +1086,8 @@
         "hp_trend": 730.6672039374016,
         "hp_cycle": 0.06704399468230804,
         "hamilton_trend": 730.705933305068,
-        "hamilton_cycle": 0.02831462701590226
+        "hamilton_cycle": 0.02831462701590226,
+        "recession": 1
     },
     {
         "date": "1974-04-01",
@@ -987,7 +1096,8 @@
         "hp_trend": 733.0471899490645,
         "hp_cycle": 0.2587715533213668,
         "hamilton_trend": 732.7034320171545,
-        "hamilton_cycle": 0.6025294852314573
+        "hamilton_cycle": 0.6025294852314573,
+        "recession": 1
     },
     {
         "date": "1974-07-01",
@@ -996,7 +1106,8 @@
         "hp_trend": 735.4513534239496,
         "hp_cycle": -0.20557674681344906,
         "hamilton_trend": 733.1503556881922,
-        "hamilton_cycle": 2.0954209889439426
+        "hamilton_cycle": 2.0954209889439426,
+        "recession": 1
     },
     {
         "date": "1974-10-01",
@@ -1005,7 +1116,8 @@
         "hp_trend": 737.881028187732,
         "hp_cycle": -0.12520187773350244,
         "hamilton_trend": 736.8409346643763,
-        "hamilton_cycle": 0.9148916456222196
+        "hamilton_cycle": 0.9148916456222196,
+        "recession": 1
     },
     {
         "date": "1975-01-01",
@@ -1014,7 +1126,8 @@
         "hp_trend": 740.3374195806205,
         "hp_cycle": -1.5593177123163287,
         "hamilton_trend": 737.2546273197711,
-        "hamilton_cycle": 1.523474548533045
+        "hamilton_cycle": 1.523474548533045,
+        "recession": 1
     },
     {
         "date": "1975-04-01",
@@ -1023,7 +1136,8 @@
         "hp_trend": 742.8216546916497,
         "hp_cycle": -1.8563579845647382,
         "hamilton_trend": 740.0888817788161,
-        "hamilton_cycle": 0.8764149282687868
+        "hamilton_cycle": 0.8764149282687868,
+        "recession": 0
     },
     {
         "date": "1975-07-01",
@@ -1032,7 +1146,8 @@
         "hp_trend": 745.3338860362834,
         "hp_cycle": -0.9195479564577909,
         "hamilton_trend": 742.2633911424151,
-        "hamilton_cycle": 2.150946937410481
+        "hamilton_cycle": 2.150946937410481,
+        "recession": 0
     },
     {
         "date": "1975-10-01",
@@ -1041,7 +1156,8 @@
         "hp_trend": 747.8731059062458,
         "hp_cycle": -0.46221709007420486,
         "hamilton_trend": 744.7036531325094,
-        "hamilton_cycle": 2.707235683662134
+        "hamilton_cycle": 2.707235683662134,
+        "recession": 0
     },
     {
         "date": "1976-01-01",
@@ -1050,7 +1166,8 @@
         "hp_trend": 750.4377318757873,
         "hp_cycle": 0.24820079367600556,
         "hamilton_trend": 745.1063206905815,
-        "hamilton_cycle": 5.579611978881871
+        "hamilton_cycle": 5.579611978881871,
+        "recession": 0
     },
     {
         "date": "1976-04-01",
@@ -1059,7 +1176,8 @@
         "hp_trend": 753.025892633478,
         "hp_cycle": -0.6058261536076088,
         "hamilton_trend": 747.5687623010255,
-        "hamilton_cycle": 4.8513041788448845
+        "hamilton_cycle": 4.8513041788448845,
+        "recession": 0
     },
     {
         "date": "1976-07-01",
@@ -1068,7 +1186,8 @@
         "hp_trend": 755.6358719933836,
         "hp_cycle": -1.3849436236642987,
         "hamilton_trend": 752.1471714501804,
-        "hamilton_cycle": 2.1037569195389096
+        "hamilton_cycle": 2.1037569195389096,
+        "recession": 0
     },
     {
         "date": "1976-10-01",
@@ -1077,7 +1196,8 @@
         "hp_trend": 758.2655751282235,
         "hp_cycle": -1.5168927009576691,
         "hamilton_trend": 754.9065749839729,
-        "hamilton_cycle": 1.8421074432930027
+        "hamilton_cycle": 1.8421074432930027,
+        "recession": 0
     },
     {
         "date": "1977-01-01",
@@ -1086,7 +1206,8 @@
         "hp_trend": 760.9120416209524,
         "hp_cycle": -1.3910126370627722,
         "hamilton_trend": 758.0293560793466,
-        "hamilton_cycle": 1.4916729045430657
+        "hamilton_cycle": 1.4916729045430657,
+        "recession": 0
     },
     {
         "date": "1977-04-01",
@@ -1095,7 +1216,8 @@
         "hp_trend": 763.5713629965868,
         "hp_cycle": -0.7240265070735177,
         "hamilton_trend": 759.0300933220069,
-        "hamilton_cycle": 3.8172431675063763
+        "hamilton_cycle": 3.8172431675063763,
+        "recession": 0
     },
     {
         "date": "1977-07-01",
@@ -1104,7 +1226,8 @@
         "hp_trend": 766.2387613972453,
         "hp_cycle": -0.3936788853706048,
         "hamilton_trend": 760.5888456826002,
-        "hamilton_cycle": 5.256236829274485
+        "hamilton_cycle": 5.256236829274485,
+        "recession": 0
     },
     {
         "date": "1977-10-01",
@@ -1113,7 +1236,8 @@
         "hp_trend": 768.9090064484798,
         "hp_cycle": -0.9251663355026949,
         "hamilton_trend": 763.7147905483115,
-        "hamilton_cycle": 4.269049564665579
+        "hamilton_cycle": 4.269049564665579,
+        "recession": 0
     },
     {
         "date": "1978-01-01",
@@ -1122,7 +1246,8 @@
         "hp_trend": 771.5766217265389,
         "hp_cycle": -1.8299818749032966,
         "hamilton_trend": 766.7251825606556,
-        "hamilton_cycle": 3.0214572909799244
+        "hamilton_cycle": 3.0214572909799244,
+        "recession": 0
     },
     {
         "date": "1978-04-01",
@@ -1131,7 +1256,8 @@
         "hp_trend": 774.2355525787118,
         "hp_cycle": 1.196863365519448,
         "hamilton_trend": 770.2770514751672,
-        "hamilton_cycle": 5.155364469064011
+        "hamilton_cycle": 5.155364469064011,
+        "recession": 0
     },
     {
         "date": "1978-07-01",
@@ -1140,7 +1266,8 @@
         "hp_trend": 776.8786006136158,
         "hp_cycle": 1.2374632900330198,
         "hamilton_trend": 773.1301013507607,
-        "hamilton_cycle": 4.985962552888168
+        "hamilton_cycle": 4.985962552888168,
+        "recession": 0
     },
     {
         "date": "1978-10-01",
@@ -1149,7 +1276,8 @@
         "hp_trend": 779.4993154794714,
         "hp_cycle": 1.9789685059992053,
         "hamilton_trend": 774.6352480731616,
-        "hamilton_cycle": 6.843035912309006
+        "hamilton_cycle": 6.843035912309006,
+        "recession": 0
     },
     {
         "date": "1979-01-01",
@@ -1158,7 +1286,8 @@
         "hp_trend": 782.0920202390557,
         "hp_cycle": 1.3713559885618452,
         "hamilton_trend": 776.0863620431148,
-        "hamilton_cycle": 7.377014184502741
+        "hamilton_cycle": 7.377014184502741,
+        "recession": 0
     },
     {
         "date": "1979-04-01",
@@ -1167,7 +1296,8 @@
         "hp_trend": 784.6522748104619,
         "hp_cycle": 1.3371757902298214,
         "hamilton_trend": 783.9816135218349,
-        "hamilton_cycle": 2.0078370788568236
+        "hamilton_cycle": 2.0078370788568236,
+        "recession": 0
     },
     {
         "date": "1979-07-01",
@@ -1176,7 +1306,8 @@
         "hp_trend": 787.176496209276,
         "hp_cycle": 1.7156388171461003,
         "hamilton_trend": 785.7477509743095,
-        "hamilton_cycle": 3.1443840521126276
+        "hamilton_cycle": 3.1443840521126276,
+        "recession": 0
     },
     {
         "date": "1979-10-01",
@@ -1185,7 +1316,8 @@
         "hp_trend": 789.6619371859531,
         "hp_cycle": 1.3194342945578228,
         "hamilton_trend": 788.2882642131121,
-        "hamilton_cycle": 2.693107267398773
+        "hamilton_cycle": 2.693107267398773,
+        "recession": 0
     },
     {
         "date": "1980-01-01",
@@ -1194,7 +1326,8 @@
         "hp_trend": 792.1069227652084,
         "hp_cycle": 1.2671014735368544,
         "hamilton_trend": 790.1232889253604,
-        "hamilton_cycle": 3.2507353133848937
+        "hamilton_cycle": 3.2507353133848937,
+        "recession": 0
     },
     {
         "date": "1980-04-01",
@@ -1203,7 +1336,8 @@
         "hp_trend": 794.5106026181911,
         "hp_cycle": -0.8677491774226382,
         "hamilton_trend": 792.5805773192756,
-        "hamilton_cycle": 1.0622761214929142
+        "hamilton_cycle": 1.0622761214929142,
+        "recession": 1
     },
     {
         "date": "1980-07-01",
@@ -1212,7 +1346,8 @@
         "hp_trend": 796.8729183544722,
         "hp_cycle": -1.138275673696512,
         "hamilton_trend": 796.0000729612261,
-        "hamilton_cycle": -0.2654302804504596
+        "hamilton_cycle": -0.2654302804504596,
+        "recession": 1
     },
     {
         "date": "1980-10-01",
@@ -1221,7 +1356,8 @@
         "hp_trend": 799.1932692403867,
         "hp_cycle": 0.9608915680275913,
         "hamilton_trend": 797.6066893072108,
-        "hamilton_cycle": 2.5474715012035176
+        "hamilton_cycle": 2.5474715012035176,
+        "recession": 0
     },
     {
         "date": "1981-01-01",
@@ -1230,7 +1366,8 @@
         "hp_trend": 801.4703431199739,
         "hp_cycle": 3.223201868697174,
         "hamilton_trend": 799.9493374388762,
-        "hamilton_cycle": 4.744207549794851
+        "hamilton_cycle": 4.744207549794851,
+        "recession": 0
     },
     {
         "date": "1981-04-01",
@@ -1239,7 +1376,8 @@
         "hp_trend": 803.7034283945023,
         "hp_cycle": 2.20939676166347,
         "hamilton_trend": 799.2354689774303,
-        "hamilton_cycle": 6.677356178735522
+        "hamilton_cycle": 6.677356178735522,
+        "recession": 0
     },
     {
         "date": "1981-07-01",
@@ -1248,7 +1386,8 @@
         "hp_trend": 805.8938279664088,
         "hp_cycle": 3.0730987065835507,
         "hamilton_trend": 801.8984613265618,
-        "hamilton_cycle": 7.068465346430571
+        "hamilton_cycle": 7.068465346430571,
+        "recession": 0
     },
     {
         "date": "1981-10-01",
@@ -1257,7 +1396,8 @@
         "hp_trend": 808.0442256111063,
         "hp_cycle": 1.5405804418451226,
         "hamilton_trend": 808.2506905547784,
-        "hamilton_cycle": 1.3341154981729915
+        "hamilton_cycle": 1.3341154981729915,
+        "recession": 1
     },
     {
         "date": "1982-01-01",
@@ -1266,7 +1406,8 @@
         "hp_trend": 810.1592257906995,
         "hp_cycle": -0.7732262324011572,
         "hamilton_trend": 812.9376189487944,
-        "hamilton_cycle": -3.5516193904960573
+        "hamilton_cycle": -3.5516193904960573,
+        "recession": 1
     },
     {
         "date": "1982-04-01",
@@ -1275,7 +1416,8 @@
         "hp_trend": 812.244395830069,
         "hp_cycle": -1.1124358410610284,
         "hamilton_trend": 811.9555972460215,
-        "hamilton_cycle": -0.8236372570135018
+        "hamilton_cycle": -0.8236372570135018,
+        "recession": 1
     },
     {
         "date": "1982-07-01",
@@ -1284,7 +1426,8 @@
         "hp_trend": 814.3048197877005,
         "hp_cycle": -2.147216519419203,
         "hamilton_trend": 815.4036491521075,
-        "hamilton_cycle": -3.246045883826241
+        "hamilton_cycle": -3.246045883826241,
+        "recession": 1
     },
     {
         "date": "1982-10-01",
@@ -1293,7 +1436,8 @@
         "hp_trend": 816.3448864496786,
         "hp_cycle": -3.116520213774834,
         "hamilton_trend": 815.5503523699108,
-        "hamilton_cycle": -2.321986134007034
+        "hamilton_cycle": -2.321986134007034,
+        "recession": 1
     },
     {
         "date": "1983-01-01",
@@ -1302,7 +1446,8 @@
         "hp_trend": 818.3676425917627,
         "hp_cycle": -3.078346288115199,
         "hamilton_trend": 814.1706842139047,
-        "hamilton_cycle": 1.1186120897427827
+        "hamilton_cycle": 1.1186120897427827,
+        "recession": 0
     },
     {
         "date": "1983-04-01",
@@ -1311,7 +1456,8 @@
         "hp_trend": 820.3741871645783,
         "hp_cycle": -2.09456317453089,
         "hamilton_trend": 817.2415225891077,
-        "hamilton_cycle": 1.038101400939695
+        "hamilton_cycle": 1.038101400939695,
+        "recession": 0
     },
     {
         "date": "1983-07-01",
@@ -1320,7 +1466,8 @@
         "hp_trend": 822.3636951523212,
         "hp_cycle": -1.047773246886095,
         "hamilton_trend": 818.341752618907,
-        "hamilton_cycle": 2.974169286528081
+        "hamilton_cycle": 2.974169286528081,
+        "recession": 0
     },
     {
         "date": "1983-10-01",
@@ -1329,7 +1476,8 @@
         "hp_trend": 824.3340324372028,
         "hp_cycle": -0.19781078990126844,
         "hamilton_trend": 818.9822043025913,
-        "hamilton_cycle": 5.154017344710269
+        "hamilton_cycle": 5.154017344710269,
+        "recession": 0
     },
     {
         "date": "1984-01-01",
@@ -1338,7 +1486,8 @@
         "hp_trend": 826.2824100431561,
         "hp_cycle": 0.7970730445267691,
         "hamilton_trend": 821.7059848391548,
-        "hamilton_cycle": 5.373498248528108
+        "hamilton_cycle": 5.373498248528108,
+        "recession": 0
     },
     {
         "date": "1984-04-01",
@@ -1347,7 +1496,8 @@
         "hp_trend": 828.2059153623703,
         "hp_cycle": 1.4387860479452002,
         "hamilton_trend": 825.3591532647893,
-        "hamilton_cycle": 4.285548145526263
+        "hamilton_cycle": 4.285548145526263,
+        "recession": 0
     },
     {
         "date": "1984-07-01",
@@ -1356,7 +1506,8 @@
         "hp_trend": 830.102133957688,
         "hp_cycle": 1.3872052329738835,
         "hamilton_trend": 828.4035300870174,
-        "hamilton_cycle": 3.085809103644465
+        "hamilton_cycle": 3.085809103644465,
+        "recession": 0
     },
     {
         "date": "1984-10-01",
@@ -1365,7 +1516,8 @@
         "hp_trend": 831.969550633231,
         "hp_cycle": 1.0818889296560883,
         "hamilton_trend": 830.9440900962505,
-        "hamilton_cycle": 2.107349466636606
+        "hamilton_cycle": 2.107349466636606,
+        "recession": 0
     },
     {
         "date": "1985-01-01",
@@ -1374,7 +1526,8 @@
         "hp_trend": 833.8075171963922,
         "hp_cycle": 1.1921815599786214,
         "hamilton_trend": 833.8948427783145,
-        "hamilton_cycle": 1.104855978056321
+        "hamilton_cycle": 1.104855978056321,
+        "recession": 0
     },
     {
         "date": "1985-04-01",
@@ -1383,7 +1536,8 @@
         "hp_trend": 835.6160616351447,
         "hp_cycle": 0.9019908058406827,
         "hamilton_trend": 836.2964400300232,
-        "hamilton_cycle": 0.221612410962166
+        "hamilton_cycle": 0.221612410962166,
+        "recession": 0
     },
     {
         "date": "1985-07-01",
@@ -1392,7 +1546,8 @@
         "hp_trend": 837.3959570509375,
         "hp_cycle": 1.2389585529617761,
         "hamilton_trend": 837.6482410731545,
-        "hamilton_cycle": 0.9866745307447218
+        "hamilton_cycle": 0.9866745307447218,
+        "recession": 0
     },
     {
         "date": "1985-10-01",
@@ -1401,7 +1556,8 @@
         "hp_trend": 839.1485402894727,
         "hp_cycle": 0.7845899756301833,
         "hamilton_trend": 838.9835949260589,
-        "hamilton_cycle": 0.9495353390440187
+        "hamilton_cycle": 0.9495353390440187,
+        "recession": 0
     },
     {
         "date": "1986-01-01",
@@ -1410,7 +1566,8 @@
         "hp_trend": 840.8759225455481,
         "hp_cycle": 0.4826135674405805,
         "hamilton_trend": 841.205226372081,
-        "hamilton_cycle": 0.1533097409076163
+        "hamilton_cycle": 0.1533097409076163,
+        "recession": 0
     },
     {
         "date": "1986-04-01",
@@ -1419,7 +1576,8 @@
         "hp_trend": 842.5807053826961,
         "hp_cycle": -0.3949242532573862,
         "hamilton_trend": 842.5938094003535,
-        "hamilton_cycle": -0.40802827091476956
+        "hamilton_cycle": -0.40802827091476956,
+        "recession": 0
     },
     {
         "date": "1986-07-01",
@@ -1428,7 +1586,8 @@
         "hp_trend": 844.265791997929,
         "hp_cycle": -0.7180551780796804,
         "hamilton_trend": 844.8901775827434,
-        "hamilton_cycle": -1.3424407628940571
+        "hamilton_cycle": -1.3424407628940571,
+        "recession": 0
     },
     {
         "date": "1986-10-01",
@@ -1437,7 +1596,8 @@
         "hp_trend": 845.9338387605998,
         "hp_cycle": -1.3077017654456995,
         "hamilton_trend": 845.9073094153965,
-        "hamilton_cycle": -1.2811724202424557
+        "hamilton_cycle": -1.2811724202424557,
+        "recession": 0
     },
     {
         "date": "1987-01-01",
@@ -1446,7 +1606,8 @@
         "hp_trend": 847.5870532555755,
         "hp_cycle": -1.584977860720869,
         "hamilton_trend": 847.1526531804911,
-        "hamilton_cycle": -1.1505777856365285
+        "hamilton_cycle": -1.1505777856365285,
+        "recession": 0
     },
     {
         "date": "1987-04-01",
@@ -1455,7 +1616,8 @@
         "hp_trend": 849.2268257541193,
         "hp_cycle": -1.4614550080251547,
         "hamilton_trend": 847.8047792264,
-        "hamilton_cycle": -0.039408480305837656
+        "hamilton_cycle": -0.039408480305837656,
+        "recession": 0
     },
     {
         "date": "1987-07-01",
@@ -1464,7 +1626,8 @@
         "hp_trend": 850.8535559163327,
         "hp_cycle": -1.470209402521732,
         "hamilton_trend": 849.3285139613528,
-        "hamilton_cycle": 0.05483255245815144
+        "hamilton_cycle": 0.05483255245815144,
+        "recession": 0
     },
     {
         "date": "1987-10-01",
@@ -1473,7 +1636,8 @@
         "hp_trend": 852.4667299929357,
         "hp_cycle": -0.5876585233206697,
         "hamilton_trend": 850.4385049805428,
-        "hamilton_cycle": 1.4405664890722392
+        "hamilton_cycle": 1.4405664890722392,
+        "recession": 0
     },
     {
         "date": "1988-01-01",
@@ -1482,7 +1646,8 @@
         "hp_trend": 854.0649153537732,
         "hp_cycle": -0.8888189268617452,
         "hamilton_trend": 851.8327899349805,
-        "hamilton_cycle": 1.3433064919310027
+        "hamilton_cycle": 1.3433064919310027,
+        "recession": 0
     },
     {
         "date": "1988-04-01",
@@ -1491,7 +1656,8 @@
         "hp_trend": 855.6463120821127,
         "hp_cycle": -0.1967208269064713,
         "hamilton_trend": 853.899905678278,
-        "hamilton_cycle": 1.5496855769282547
+        "hamilton_cycle": 1.5496855769282547,
+        "recession": 0
     },
     {
         "date": "1988-07-01",
@@ -1500,7 +1666,8 @@
         "hp_trend": 857.2085647493917,
         "hp_cycle": 0.013251692826088401,
         "hamilton_trend": 855.4480435867673,
-        "hamilton_cycle": 1.7737728554504884
+        "hamilton_cycle": 1.7737728554504884,
+        "recession": 0
     },
     {
         "date": "1988-10-01",
@@ -1509,7 +1676,8 @@
         "hp_trend": 858.7491949765314,
         "hp_cycle": 0.6571352727113435,
         "hamilton_trend": 858.3248267872378,
-        "hamilton_cycle": 1.0815034620048891
+        "hamilton_cycle": 1.0815034620048891,
+        "recession": 0
     },
     {
         "date": "1989-01-01",
@@ -1518,7 +1686,8 @@
         "hp_trend": 860.2657326667609,
         "hp_cycle": 1.1889954345512024,
         "hamilton_trend": 859.132975608077,
-        "hamilton_cycle": 2.321752493235067
+        "hamilton_cycle": 2.321752493235067,
+        "recession": 0
     },
     {
         "date": "1989-04-01",
@@ -1527,7 +1696,8 @@
         "hp_trend": 861.7561184328549,
         "hp_cycle": 1.5183755272612416,
         "hamilton_trend": 861.5769312766027,
-        "hamilton_cycle": 1.6975626835134108
+        "hamilton_cycle": 1.6975626835134108,
+        "recession": 0
     },
     {
         "date": "1989-07-01",
@@ -1536,7 +1706,8 @@
         "hp_trend": 863.2190360097354,
         "hp_cycle": 1.521760503833434,
         "hamilton_trend": 863.4346511843751,
-        "hamilton_cycle": 1.3061453291937823
+        "hamilton_cycle": 1.3061453291937823,
+        "recession": 0
     },
     {
         "date": "1989-10-01",
@@ -1545,7 +1716,8 @@
         "hp_trend": 864.6541181170287,
         "hp_cycle": 0.9933315394411011,
         "hamilton_trend": 865.5850187491837,
-        "hamilton_cycle": 0.062430907286056936
+        "hamilton_cycle": 0.062430907286056936,
+        "recession": 0
     },
     {
         "date": "1990-01-01",
@@ -1554,7 +1726,8 @@
         "hp_trend": 866.0619485746757,
         "hp_cycle": 1.745045753134832,
         "hamilton_trend": 867.7037920317932,
-        "hamilton_cycle": 0.10320229601734354
+        "hamilton_cycle": 0.10320229601734354,
+        "recession": 0
     },
     {
         "date": "1990-04-01",
@@ -1563,7 +1736,8 @@
         "hp_trend": 867.4437320348297,
         "hp_cycle": 1.839313768663942,
         "hamilton_trend": 869.2960442692763,
-        "hamilton_cycle": -0.012998465782629864
+        "hamilton_cycle": -0.012998465782629864,
+        "recession": 0
     },
     {
         "date": "1990-07-01",
@@ -1572,7 +1746,8 @@
         "hp_trend": 868.8017638032393,
         "hp_cycle": 1.4013275310962854,
         "hamilton_trend": 870.5429073816874,
-        "hamilton_cycle": -0.3398160473518601
+        "hamilton_cycle": -0.3398160473518601,
+        "recession": 0
     },
     {
         "date": "1990-10-01",
@@ -1581,7 +1756,8 @@
         "hp_trend": 870.1394887567584,
         "hp_cycle": -0.10916169895494932,
         "hamilton_trend": 871.1128894245352,
-        "hamilton_cycle": -1.082562366731736
+        "hamilton_cycle": -1.082562366731736,
+        "recession": 1
     },
     {
         "date": "1991-01-01",
@@ -1590,7 +1766,8 @@
         "hp_trend": 871.461227601948,
         "hp_cycle": -0.9251648308058975,
         "hamilton_trend": 873.9125406450744,
-        "hamilton_cycle": -3.376477873932231
+        "hamilton_cycle": -3.376477873932231,
+        "recession": 1
     },
     {
         "date": "1991-04-01",
@@ -1599,7 +1776,8 @@
         "hp_trend": 872.7712328193074,
         "hp_cycle": -0.7274338978784272,
         "hamilton_trend": 875.3172590904251,
-        "hamilton_cycle": -3.2734601689960527
+        "hamilton_cycle": -3.2734601689960527,
+        "recession": 0
     },
     {
         "date": "1991-07-01",
@@ -1608,7 +1786,8 @@
         "hp_trend": 874.073178661317,
         "hp_cycle": -0.7470093122693697,
         "hamilton_trend": 875.5982225053306,
-        "hamilton_cycle": -2.2720531562829365
+        "hamilton_cycle": -2.2720531562829365,
+        "recession": 0
     },
     {
         "date": "1991-10-01",
@@ -1617,7 +1796,8 @@
         "hp_trend": 875.3702847342712,
         "hp_cycle": -1.104240649112171,
         "hamilton_trend": 874.8407470061959,
-        "hamilton_cycle": -0.5747029210368737
+        "hamilton_cycle": -0.5747029210368737,
+        "recession": 0
     },
     {
         "date": "1992-01-01",
@@ -1626,7 +1806,8 @@
         "hp_trend": 876.6653037636443,
         "hp_cycle": -0.8381764357685597,
         "hamilton_trend": 875.6188267471377,
-        "hamilton_cycle": 0.208300580737955
+        "hamilton_cycle": 0.208300580737955,
+        "recession": 0
     },
     {
         "date": "1992-04-01",
@@ -1635,7 +1816,8 @@
         "hp_trend": 877.960298324505,
         "hp_cycle": -0.45536738005432653,
         "hamilton_trend": 877.9716200639356,
-        "hamilton_cycle": -0.46668911948495406
+        "hamilton_cycle": -0.46668911948495406,
+        "recession": 0
     },
     {
         "date": "1992-07-01",
@@ -1644,7 +1826,8 @@
         "hp_trend": 879.2568071316491,
         "hp_cycle": -0.28103538956008833,
         "hamilton_trend": 879.1859885770142,
-        "hamilton_cycle": -0.21021683492517695
+        "hamilton_cycle": -0.21021683492517695,
+        "recession": 0
     },
     {
         "date": "1992-10-01",
@@ -1653,7 +1836,8 @@
         "hp_trend": 880.5560842952605,
         "hp_cycle": 0.14326259343317815,
         "hamilton_trend": 879.7262742249877,
-        "hamilton_cycle": 0.9730726637059206
+        "hamilton_cycle": 0.9730726637059206,
+        "recession": 0
     },
     {
         "date": "1993-01-01",
@@ -1662,7 +1846,8 @@
         "hp_trend": 881.859208278405,
         "hp_cycle": -0.43420497062970753,
         "hamilton_trend": 881.5992299787101,
-        "hamilton_cycle": -0.17422667093478594
+        "hamilton_cycle": -0.17422667093478594,
+        "recession": 0
     },
     {
         "date": "1993-04-01",
@@ -1671,7 +1856,8 @@
         "hp_trend": 883.1673470832694,
         "hp_cycle": -0.5681884120948553,
         "hamilton_trend": 883.4987022889769,
-        "hamilton_cycle": -0.899543617802351
+        "hamilton_cycle": -0.899543617802351,
+        "recession": 0
     },
     {
         "date": "1993-07-01",
@@ -1680,7 +1866,8 @@
         "hp_trend": 884.4813973339328,
         "hp_cycle": -0.8135147036792887,
         "hamilton_trend": 884.7652268805389,
-        "hamilton_cycle": -1.0973442502853459
+        "hamilton_cycle": -1.0973442502853459,
+        "recession": 0
     },
     {
         "date": "1993-10-01",
@@ -1689,7 +1876,8 @@
         "hp_trend": 885.8019005367181,
         "hp_cycle": -0.23929292284310577,
         "hamilton_trend": 886.5637008177819,
-        "hamilton_cycle": -1.001093203906862
+        "hamilton_cycle": -1.001093203906862,
+        "recession": 0
     },
     {
         "date": "1994-01-01",
@@ -1698,7 +1886,8 @@
         "hp_trend": 887.1288897512583,
         "hp_cycle": -0.12367538012733803,
         "hamilton_trend": 886.8147412949651,
-        "hamilton_cycle": 0.1904730761658584
+        "hamilton_cycle": 0.1904730761658584,
+        "recession": 0
     },
     {
         "date": "1994-04-01",
@@ -1707,7 +1896,8 @@
         "hp_trend": 888.4622484791086,
         "hp_cycle": 0.3710863091690726,
         "hamilton_trend": 888.0132270521058,
-        "hamilton_cycle": 0.820107736171849
+        "hamilton_cycle": 0.820107736171849,
+        "recession": 0
     },
     {
         "date": "1994-07-01",
@@ -1716,7 +1906,8 @@
         "hp_trend": 889.8017829247118,
         "hp_cycle": 0.18596124520320245,
         "hamilton_trend": 889.2631345144642,
-        "hamilton_cycle": 0.7246096554507631
+        "hamilton_cycle": 0.7246096554507631,
+        "recession": 0
     },
     {
         "date": "1994-10-01",
@@ -1725,7 +1916,8 @@
         "hp_trend": 891.1475312214545,
         "hp_cycle": 0.5203546028850496,
         "hamilton_trend": 891.5102381338297,
-        "hamilton_cycle": 0.1576476905098616
+        "hamilton_cycle": 0.1576476905098616,
+        "recession": 0
     },
     {
         "date": "1995-01-01",
@@ -1734,7 +1926,8 @@
         "hp_trend": 892.4996477285016,
         "hp_cycle": 0.06292816400230095,
         "hamilton_trend": 892.8587752501483,
-        "hamilton_cycle": -0.2961993576443547
+        "hamilton_cycle": -0.2961993576443547,
+        "recession": 0
     },
     {
         "date": "1995-04-01",
@@ -1743,7 +1936,8 @@
         "hp_trend": 893.8586120266446,
         "hp_cycle": -0.5186119936378191,
         "hamilton_trend": 894.6734371184284,
-        "hamilton_cycle": -1.3334370854216786
+        "hamilton_cycle": -1.3334370854216786,
+        "recession": 0
     },
     {
         "date": "1995-07-01",
@@ -1752,7 +1946,8 @@
         "hp_trend": 895.2249430267777,
         "hp_cycle": -0.5467785846171864,
         "hamilton_trend": 895.5937147333204,
-        "hamilton_cycle": -0.9155502911598887
+        "hamilton_cycle": -0.9155502911598887,
+        "recession": 0
     },
     {
         "date": "1995-10-01",
@@ -1761,7 +1956,8 @@
         "hp_trend": 896.5988355072998,
         "hp_cycle": -0.7630148550289277,
         "hamilton_trend": 897.3728733970581,
-        "hamilton_cycle": -1.5370527447872746
+        "hamilton_cycle": -1.5370527447872746,
+        "recession": 0
     },
     {
         "date": "1996-01-01",
@@ -1770,7 +1966,8 @@
         "hp_trend": 897.9801425099932,
         "hp_cycle": -0.9182765916110611,
         "hamilton_trend": 898.0346182267962,
-        "hamilton_cycle": -0.9727523084139875
+        "hamilton_cycle": -0.9727523084139875,
+        "recession": 0
     },
     {
         "date": "1996-04-01",
@@ -1779,7 +1976,8 @@
         "hp_trend": 899.3682401923561,
         "hp_cycle": -0.2388983787025154,
         "hamilton_trend": 898.5185017100888,
-        "hamilton_cycle": 0.610840103564783
+        "hamilton_cycle": 0.610840103564783,
+        "recession": 0
     },
     {
         "date": "1996-07-01",
@@ -1788,7 +1986,8 @@
         "hp_trend": 900.7619307890168,
         "hp_cycle": -0.4129934611371482,
         "hamilton_trend": 900.2690022302622,
-        "hamilton_cycle": 0.07993509761740825
+        "hamilton_cycle": 0.07993509761740825,
+        "recession": 0
     },
     {
         "date": "1996-10-01",
@@ -1797,7 +1996,8 @@
         "hp_trend": 902.1598672231171,
         "hp_cycle": -0.2446530071407551,
         "hamilton_trend": 901.439142067238,
-        "hamilton_cycle": 0.47607214873835346
+        "hamilton_cycle": 0.47607214873835346,
+        "recession": 0
     },
     {
         "date": "1997-01-01",
@@ -1806,7 +2006,8 @@
         "hp_trend": 903.560444296886,
         "hp_cycle": -0.4073203577094091,
         "hamilton_trend": 902.571779082195,
-        "hamilton_cycle": 0.5813448569815591
+        "hamilton_cycle": 0.5813448569815591,
+        "recession": 0
     },
     {
         "date": "1997-04-01",
@@ -1815,7 +2016,8 @@
         "hp_trend": 904.9619039044227,
         "hp_cycle": 0.04146604704442325,
         "hamilton_trend": 905.1343857982257,
-        "hamilton_cycle": -0.13101584675860067
+        "hamilton_cycle": -0.13101584675860067,
+        "recession": 0
     },
     {
         "date": "1997-07-01",
@@ -1824,7 +2026,8 @@
         "hp_trend": 906.362233364603,
         "hp_cycle": 0.31735963142671153,
         "hamilton_trend": 906.0168089597427,
-        "hamilton_cycle": 0.6627840362870074
+        "hamilton_cycle": 0.6627840362870074,
+        "recession": 0
     },
     {
         "date": "1997-10-01",
@@ -1833,7 +2036,8 @@
         "hp_trend": 907.7594459125812,
         "hp_cycle": 0.10308126248639837,
         "hamilton_trend": 907.4776725306189,
-        "hamilton_cycle": 0.38485464444875106
+        "hamilton_cycle": 0.38485464444875106,
+        "recession": 0
     },
     {
         "date": "1998-01-01",
@@ -1842,7 +2046,8 @@
         "hp_trend": 909.1517531332813,
         "hp_cycle": -0.14843780843216337,
         "hamilton_trend": 908.7303176761866,
-        "hamilton_cycle": 0.27299764866256737
+        "hamilton_cycle": 0.27299764866256737,
+        "recession": 0
     },
     {
         "date": "1998-04-01",
@@ -1851,7 +2056,8 @@
         "hp_trend": 910.5374310374157,
         "hp_cycle": -0.3766912183114073,
         "hamilton_trend": 910.7933743295813,
-        "hamilton_cycle": -0.6326345104770326
+        "hamilton_cycle": -0.6326345104770326,
+        "recession": 0
     },
     {
         "date": "1998-07-01",
@@ -1860,7 +2066,8 @@
         "hp_trend": 911.9146628620674,
         "hp_cycle": -0.08012676982480116,
         "hamilton_trend": 912.527219646462,
-        "hamilton_cycle": -0.692683554219343
+        "hamilton_cycle": -0.692683554219343,
+        "recession": 0
     },
     {
         "date": "1998-10-01",
@@ -1869,7 +2076,8 @@
         "hp_trend": 913.2813964123083,
         "hp_cycle": 0.4309377154683034,
         "hamilton_trend": 913.3001236388305,
-        "hamilton_cycle": 0.4122104889460161
+        "hamilton_cycle": 0.4122104889460161,
+        "recession": 0
     },
     {
         "date": "1999-01-01",
@@ -1878,7 +2086,8 @@
         "hp_trend": 914.6355294139792,
         "hp_cycle": 0.33516684813469055,
         "hamilton_trend": 914.3545455704115,
-        "hamilton_cycle": 0.6161506917023871
+        "hamilton_cycle": 0.6161506917023871,
+        "recession": 0
     },
     {
         "date": "1999-04-01",
@@ -1887,7 +2096,8 @@
         "hp_trend": 915.9752289289931,
         "hp_cycle": 0.2049936757555315,
         "hamilton_trend": 915.5900401537003,
-        "hamilton_cycle": 0.5901824510483493
+        "hamilton_cycle": 0.5901824510483493,
+        "recession": 0
     },
     {
         "date": "1999-07-01",
@@ -1896,7 +2106,8 @@
         "hp_trend": 917.2988714985427,
         "hp_cycle": 0.5512735251327285,
         "hamilton_trend": 917.549800942195,
-        "hamilton_cycle": 0.3003440814803753
+        "hamilton_cycle": 0.3003440814803753,
+        "recession": 0
     },
     {
         "date": "1999-10-01",
@@ -1905,7 +2116,8 @@
         "hp_trend": 918.6049617848678,
         "hp_cycle": 1.4257488835370395,
         "hamilton_trend": 919.6182153758922,
-        "hamilton_cycle": 0.41249529251263084
+        "hamilton_cycle": 0.41249529251263084,
+        "recession": 0
     },
     {
         "date": "2000-01-01",
@@ -1914,7 +2126,8 @@
         "hp_trend": 919.8923489961617,
         "hp_cycle": 1.1634758277809851,
         "hamilton_trend": 920.4788580105414,
-        "hamilton_cycle": 0.5769668134012136
+        "hamilton_cycle": 0.5769668134012136,
+        "recession": 0
     },
     {
         "date": "2000-04-01",
@@ -1923,7 +2136,8 @@
         "hp_trend": 921.1607734336695,
         "hp_cycle": 2.320278646223869,
         "hamilton_trend": 921.5129860769866,
-        "hamilton_cycle": 1.9680660029067667
+        "hamilton_cycle": 1.9680660029067667,
+        "recession": 0
     },
     {
         "date": "2000-07-01",
@@ -1932,7 +2146,8 @@
         "hp_trend": 922.4107025710285,
         "hp_cycle": 1.7554187437661994,
         "hamilton_trend": 923.5226647271697,
-        "hamilton_cycle": 0.6434565876249962
+        "hamilton_cycle": 0.6434565876249962,
+        "recession": 0
     },
     {
         "date": "2000-10-01",
@@ -1941,7 +2156,8 @@
         "hp_trend": 923.6440540560304,
         "hp_cycle": 1.655157492399212,
         "hamilton_trend": 926.0623273935084,
-        "hamilton_cycle": -0.7631158450788007
+        "hamilton_cycle": -0.7631158450788007,
+        "recession": 0
     },
     {
         "date": "2001-01-01",
@@ -1950,7 +2166,8 @@
         "hp_trend": 924.8638426731819,
         "hp_cycle": 0.7652939926628051,
         "hamilton_trend": 926.4586578156276,
-        "hamilton_cycle": -0.8295211497828632
+        "hamilton_cycle": -0.8295211497828632,
+        "recession": 0
     },
     {
         "date": "2001-04-01",
@@ -1959,7 +2176,8 @@
         "hp_trend": 926.0741176804222,
         "hp_cycle": 0.7773759223033494,
         "hamilton_trend": 929.3556063166305,
-        "hamilton_cycle": -2.5041127139049877
+        "hamilton_cycle": -2.5041127139049877,
+        "recession": 1
     },
     {
         "date": "2001-07-01",
@@ -1968,7 +2186,8 @@
         "hp_trend": 927.2794066444367,
         "hp_cycle": -0.43715962449221024,
         "hamilton_trend": 929.516205176463,
-        "hamilton_cycle": -2.6739581565185517
+        "hamilton_cycle": -2.6739581565185517,
+        "recession": 1
     },
     {
         "date": "2001-10-01",
@@ -1977,7 +2196,8 @@
         "hp_trend": 928.4847229918627,
         "hp_cycle": -1.0549912137025785,
         "hamilton_trend": 930.3526346728132,
-        "hamilton_cycle": -2.9229028946531344
+        "hamilton_cycle": -2.9229028946531344,
+        "recession": 1
     },
     {
         "date": "2002-01-01",
@@ -1986,7 +2206,8 @@
         "hp_trend": 929.694806924572,
         "hp_cycle": -1.117560215368485,
         "hamilton_trend": 930.6065561998458,
-        "hamilton_cycle": -2.0293094906422766
+        "hamilton_cycle": -2.0293094906422766,
+        "recession": 0
     },
     {
         "date": "2002-04-01",
@@ -1995,7 +2216,8 @@
         "hp_trend": 930.9137392749279,
         "hp_cycle": -1.3770445533273232,
         "hamilton_trend": 932.099140265993,
-        "hamilton_cycle": -2.5624455443924035
+        "hamilton_cycle": -2.5624455443924035,
+        "recession": 0
     },
     {
         "date": "2002-07-01",
@@ -2004,7 +2226,8 @@
         "hp_trend": 932.1449024001595,
         "hp_cycle": -1.7250434899822267,
         "hamilton_trend": 931.701493366045,
-        "hamilton_cycle": -1.2816344558677883
+        "hamilton_cycle": -1.2816344558677883,
+        "recession": 0
     },
     {
         "date": "2002-10-01",
@@ -2013,7 +2236,8 @@
         "hp_trend": 933.3908180046495,
         "hp_cycle": -2.268834735950236,
         "hamilton_trend": 932.25051850956,
-        "hamilton_cycle": -1.1285352408607423
+        "hamilton_cycle": -1.1285352408607423,
+        "recession": 0
     },
     {
         "date": "2003-01-01",
@@ -2022,7 +2246,8 @@
         "hp_trend": 934.6529296405992,
         "hp_cycle": -2.5172821796296603,
         "hamilton_trend": 934.0102255331564,
-        "hamilton_cycle": -1.8745780721868641
+        "hamilton_cycle": -1.8745780721868641,
+        "recession": 0
     },
     {
         "date": "2003-04-01",
@@ -2031,7 +2256,8 @@
         "hp_trend": 935.9312628384996,
         "hp_cycle": -2.5625526841105284,
         "hamilton_trend": 934.8600413078198,
-        "hamilton_cycle": -1.4913311534306786
+        "hamilton_cycle": -1.4913311534306786,
+        "recession": 0
     },
     {
         "date": "2003-07-01",
@@ -2040,7 +2266,8 @@
         "hp_trend": 937.2242698274797,
         "hp_cycle": -1.63598192788686,
         "hamilton_trend": 935.5706215321345,
-        "hamilton_cycle": 0.017666367458332388
+        "hamilton_cycle": 0.017666367458332388,
+        "recession": 0
     },
     {
         "date": "2003-10-01",
@@ -2049,7 +2276,8 @@
         "hp_trend": 938.5288012412404,
         "hp_cycle": -1.1789025580759471,
         "hamilton_trend": 936.1874409895188,
-        "hamilton_cycle": 1.162457693645706
+        "hamilton_cycle": 1.162457693645706,
+        "recession": 0
     },
     {
         "date": "2004-01-01",
@@ -2058,7 +2286,8 @@
         "hp_trend": 939.8406852247781,
         "hp_cycle": -1.214477557994769,
         "hamilton_trend": 937.3486152826238,
-        "hamilton_cycle": 1.2775923841595613
+        "hamilton_cycle": 1.2775923841595613,
+        "recession": 0
     },
     {
         "date": "2004-04-01",
@@ -2067,7 +2296,8 @@
         "hp_trend": 941.1550131089907,
         "hp_cycle": -0.953086903708936,
         "hamilton_trend": 938.7810331978208,
-        "hamilton_cycle": 1.420893007461018
+        "hamilton_cycle": 1.420893007461018,
+        "recession": 0
     },
     {
         "date": "2004-07-01",
@@ -2076,7 +2306,8 @@
         "hp_trend": 942.4661171763033,
         "hp_cycle": -0.6875260041463207,
         "hamilton_trend": 941.5194561847345,
-        "hamilton_cycle": 0.25913498742249885
+        "hamilton_cycle": 0.25913498742249885,
+        "recession": 0
     },
     {
         "date": "2004-10-01",
@@ -2085,7 +2316,8 @@
         "hp_trend": 943.7677340298252,
         "hp_cycle": -0.20186634994718133,
         "hamilton_trend": 943.1562292884001,
-        "hamilton_cycle": 0.40963839147786985
+        "hamilton_cycle": 0.40963839147786985,
+        "recession": 0
     },
     {
         "date": "2005-01-01",
@@ -2094,7 +2326,8 @@
         "hp_trend": 945.0531705689127,
         "hp_cycle": 0.4109691384192047,
         "hamilton_trend": 943.9144417196677,
-        "hamilton_cycle": 1.5496979876642172
+        "hamilton_cycle": 1.5496979876642172,
+        "recession": 0
     },
     {
         "date": "2005-04-01",
@@ -2103,7 +2336,8 @@
         "hp_trend": 946.3156075264545,
         "hp_cycle": 0.3581253700282332,
         "hamilton_trend": 945.6384030175656,
-        "hamilton_cycle": 1.0353298789171959
+        "hamilton_cycle": 1.0353298789171959,
+        "recession": 0
     },
     {
         "date": "2005-07-01",
@@ -2112,7 +2346,8 @@
         "hp_trend": 947.5484824910504,
         "hp_cycle": 0.8132512366159972,
         "hamilton_trend": 947.3408809359788,
-        "hamilton_cycle": 1.0208527916876164
+        "hamilton_cycle": 1.0208527916876164,
+        "recession": 0
     },
     {
         "date": "2005-10-01",
@@ -2121,7 +2356,8 @@
         "hp_trend": 948.7454568796569,
         "hp_cycle": 0.9882941117294877,
         "hamilton_trend": 949.185543014571,
-        "hamilton_cycle": 0.5482079768154335
+        "hamilton_cycle": 0.5482079768154335,
+        "recession": 0
     },
     {
         "date": "2006-01-01",
@@ -2130,7 +2366,8 @@
         "hp_trend": 949.9007003912536,
         "hp_cycle": 1.8756301198205847,
         "hamilton_trend": 951.1721613069698,
-        "hamilton_cycle": 0.6041692041044371
+        "hamilton_cycle": 0.6041692041044371,
+        "recession": 0
     },
     {
         "date": "2006-04-01",
@@ -2139,7 +2376,8 @@
         "hp_trend": 951.0090004086401,
         "hp_cycle": 1.8953086190253998,
         "hamilton_trend": 951.9807344109448,
-        "hamilton_cycle": 0.9235746167206571
+        "hamilton_cycle": 0.9235746167206571,
+        "recession": 0
     },
     {
         "date": "2006-07-01",
@@ -2148,7 +2386,8 @@
         "hp_trend": 952.0663165834403,
         "hp_cycle": 1.6833901816644357,
         "hamilton_trend": 953.7847085837284,
-        "hamilton_cycle": -0.03500181862364116
+        "hamilton_cycle": -0.03500181862364116,
+        "recession": 0
     },
     {
         "date": "2006-10-01",
@@ -2157,7 +2396,8 @@
         "hp_trend": 953.0697931351655,
         "hp_cycle": 1.8936406705730633,
         "hamilton_trend": 955.174185296077,
-        "hamilton_cycle": -0.21075149033845264
+        "hamilton_cycle": -0.21075149033845264,
+        "recession": 0
     },
     {
         "date": "2007-01-01",
@@ -2166,7 +2406,8 @@
         "hp_trend": 954.0176264021904,
         "hp_cycle": 2.192255570819384,
         "hamilton_trend": 957.4409304326155,
-        "hamilton_cycle": -1.2310484596056313
+        "hamilton_cycle": -1.2310484596056313,
+        "recession": 0
     },
     {
         "date": "2007-04-01",
@@ -2175,7 +2416,8 @@
         "hp_trend": 954.9091962483093,
         "hp_cycle": 2.6036095963169146,
         "hamilton_trend": 958.2294866860826,
-        "hamilton_cycle": -0.716680841456423
+        "hamilton_cycle": -0.716680841456423,
+        "recession": 0
     },
     {
         "date": "2007-07-01",
@@ -2184,7 +2426,8 @@
         "hp_trend": 955.7452526970483,
         "hp_cycle": 2.8863515799849893,
         "hamilton_trend": 958.6432225470749,
-        "hamilton_cycle": -0.01161827004159477
+        "hamilton_cycle": -0.01161827004159477,
+        "recession": 0
     },
     {
         "date": "2007-10-01",
@@ -2193,7 +2436,8 @@
         "hp_trend": 956.5281730279318,
         "hp_cycle": 3.134487193672385,
         "hamilton_trend": 960.1564655994152,
-        "hamilton_cycle": -0.4938053778110998
+        "hamilton_cycle": -0.4938053778110998,
+        "recession": 0
     },
     {
         "date": "2008-01-01",
@@ -2202,7 +2446,8 @@
         "hp_trend": 957.2621384902205,
         "hp_cycle": 2.3426050892124977,
         "hamilton_trend": 961.5262187616173,
-        "hamilton_cycle": -1.921475182184281
+        "hamilton_cycle": -1.921475182184281,
+        "recession": 1
     },
     {
         "date": "2008-04-01",
@@ -2211,7 +2456,8 @@
         "hp_trend": 957.9532893876708,
         "hp_cycle": 2.7278998196710518,
         "hamilton_trend": 962.7981503987953,
-        "hamilton_cycle": -2.11696119145347
+        "hamilton_cycle": -2.11696119145347,
+        "recession": 1
     },
     {
         "date": "2008-07-01",
@@ -2220,7 +2466,8 @@
         "hp_trend": 958.6092301522198,
         "hp_cycle": 2.2957006946541014,
         "hamilton_trend": 963.8143618195655,
-        "hamilton_cycle": -2.9094309726916663
+        "hamilton_cycle": -2.9094309726916663,
+        "recession": 1
     },
     {
         "date": "2008-10-01",
@@ -2229,7 +2476,8 @@
         "hp_trend": 959.2392701531919,
         "hp_cycle": -0.3053791570600879,
         "hamilton_trend": 964.7502711640516,
-        "hamilton_cycle": -5.81638016791976
+        "hamilton_cycle": -5.81638016791976,
+        "recession": 1
     },
     {
         "date": "2009-01-01",
@@ -2238,7 +2486,8 @@
         "hp_trend": 959.8541535728457,
         "hp_cycle": -2.1414377251617225,
         "hamilton_trend": 964.1080847405203,
-        "hamilton_cycle": -6.395368892836359
+        "hamilton_cycle": -6.395368892836359,
+        "recession": 1
     },
     {
         "date": "2009-04-01",
@@ -2247,7 +2496,8 @@
         "hp_trend": 960.4644337314669,
         "hp_cycle": -3.0964757021254172,
         "hamilton_trend": 965.6278579894008,
-        "hamilton_cycle": -8.259899960059329
+        "hamilton_cycle": -8.259899960059329,
+        "recession": 1
     },
     {
         "date": "2009-07-01",
@@ -2256,7 +2506,8 @@
         "hp_trend": 961.0793255507625,
         "hp_cycle": -3.242093520249341,
         "hamilton_trend": 965.760672048563,
-        "hamilton_cycle": -7.92344001804986
+        "hamilton_cycle": -7.92344001804986,
+        "recession": 0
     },
     {
         "date": "2009-10-01",
@@ -2265,7 +2516,8 @@
         "hp_trend": 961.7061086551269,
         "hp_cycle": -2.4780219767442304,
         "hamilton_trend": 962.2524588535598,
-        "hamilton_cycle": -3.0243721751771773
+        "hamilton_cycle": -3.0243721751771773,
+        "recession": 0
     },
     {
         "date": "2010-01-01",
@@ -2274,7 +2526,8 @@
         "hp_trend": 962.3500363605032,
         "hp_cycle": -2.3511983592317165,
         "hamilton_trend": 961.2079843695406,
-        "hamilton_cycle": -1.2091463682691028
+        "hamilton_cycle": -1.2091463682691028,
+        "recession": 0
     },
     {
         "date": "2010-04-01",
@@ -2283,7 +2536,8 @@
         "hp_trend": 963.0148132190998,
         "hp_cycle": -1.5663991357657778,
         "hamilton_trend": 961.8442859341158,
-        "hamilton_cycle": -0.39587185078175935
+        "hamilton_cycle": -0.39587185078175935,
+        "recession": 0
     },
     {
         "date": "2010-07-01",
@@ -2292,7 +2546,8 @@
         "hp_trend": 963.7026742841506,
         "hp_cycle": -1.1825078814373455,
         "hamilton_trend": 962.7882942747281,
-        "hamilton_cycle": -0.2681278720148157
+        "hamilton_cycle": -0.2681278720148157,
+        "recession": 0
     },
     {
         "date": "2010-10-01",
@@ -2301,7 +2556,8 @@
         "hp_trend": 964.4148756094296,
         "hp_cycle": -0.7921624662423028,
         "hamilton_trend": 964.676515853215,
-        "hamilton_cycle": -1.0538027100277532
+        "hamilton_cycle": -1.0538027100277532,
+        "recession": 0
     },
     {
         "date": "2011-01-01",
@@ -2310,7 +2566,8 @@
         "hp_trend": 965.1519341812852,
         "hp_cycle": -1.2554260998958853,
         "hamilton_trend": 965.1277600221966,
-        "hamilton_cycle": -1.231251940807283
+        "hamilton_cycle": -1.231251940807283,
+        "recession": 0
     },
     {
         "date": "2011-04-01",
@@ -2319,7 +2576,8 @@
         "hp_trend": 965.9138718845245,
         "hp_cycle": -0.6838095575510579,
         "hamilton_trend": 966.6820141140305,
-        "hamilton_cycle": -1.4519517870570553
+        "hamilton_cycle": -1.4519517870570553,
+        "recession": 0
     },
     {
         "date": "2011-07-01",
@@ -2328,7 +2586,8 @@
         "hp_trend": 966.6999259626423,
         "hp_cycle": -0.892131745867573,
         "hamilton_trend": 967.7623556245132,
-        "hamilton_cycle": -1.954561407738538
+        "hamilton_cycle": -1.954561407738538,
+        "recession": 0
     },
     {
         "date": "2011-10-01",
@@ -2337,7 +2596,8 @@
         "hp_trend": 967.5089062781602,
         "hp_cycle": -0.4652793945180065,
         "hamilton_trend": 968.6971978289375,
-        "hamilton_cycle": -1.6535709452953142
+        "hamilton_cycle": -1.6535709452953142,
+        "recession": 0
     },
     {
         "date": "2012-01-01",
@@ -2346,7 +2606,8 @@
         "hp_trend": 968.3390651112596,
         "hp_cycle": 0.12444426884326276,
         "hamilton_trend": 968.5813904468653,
-        "hamilton_cycle": -0.1178810667623793
+        "hamilton_cycle": -0.1178810667623793,
+        "recession": 0
     },
     {
         "date": "2012-04-01",
@@ -2355,7 +2616,8 @@
         "hp_trend": 969.1883639425005,
         "hp_cycle": 0.1321982907329584,
         "hamilton_trend": 970.341735647117,
-        "hamilton_cycle": -1.0211734138836164
+        "hamilton_cycle": -1.0211734138836164,
+        "recession": 0
     },
     {
         "date": "2012-07-01",
@@ -2364,7 +2626,8 @@
         "hp_trend": 970.0548420301109,
         "hp_cycle": -0.042991717852487454,
         "hamilton_trend": 970.8237589062355,
-        "hamilton_cycle": -0.8119085939771367
+        "hamilton_cycle": -0.8119085939771367,
+        "recession": 0
     },
     {
         "date": "2012-10-01",
@@ -2373,7 +2636,8 @@
         "hp_trend": 970.9366212562516,
         "hp_cycle": -0.3085312220277956,
         "hamilton_trend": 972.1071621548016,
-        "hamilton_cycle": -1.4790721205778254
+        "hamilton_cycle": -1.4790721205778254,
+        "recession": 0
     },
     {
         "date": "2013-01-01",
@@ -2382,7 +2646,8 @@
         "hp_trend": 971.8317966332586,
         "hp_cycle": 0.17387543914844628,
         "hamilton_trend": 973.8623397575875,
-        "hamilton_cycle": -1.8566676851804687
+        "hamilton_cycle": -1.8566676851804687,
+        "recession": 0
     },
     {
         "date": "2013-04-01",
@@ -2391,7 +2656,8 @@
         "hp_trend": 972.7382703414543,
         "hp_cycle": -0.25023942828045165,
         "hamilton_trend": 974.3277855546415,
-        "hamilton_cycle": -1.8397546414677208
+        "hamilton_cycle": -1.8397546414677208,
+        "recession": 0
     },
     {
         "date": "2013-07-01",
@@ -2400,7 +2666,8 @@
         "hp_trend": 973.6540532333103,
         "hp_cycle": 0.17089855224025996,
         "hamilton_trend": 974.7951006704394,
-        "hamilton_cycle": -0.9701488848888857
+        "hamilton_cycle": -0.9701488848888857,
+        "recession": 0
     },
     {
         "date": "2013-10-01",
@@ -2409,7 +2676,8 @@
         "hp_trend": 974.5769997616567,
         "hp_cycle": 0.6430545870362039,
         "hamilton_trend": 975.4315455524996,
-        "hamilton_cycle": -0.21149120380675868
+        "hamilton_cycle": -0.21149120380675868,
+        "recession": 0
     },
     {
         "date": "2014-01-01",
@@ -2418,7 +2686,8 @@
         "hp_trend": 975.5050711909183,
         "hp_cycle": -0.2517569383958289,
         "hamilton_trend": 977.2360296159723,
-        "hamilton_cycle": -1.9827153634497563
+        "hamilton_cycle": -1.9827153634497563,
+        "recession": 0
     },
     {
         "date": "2014-04-01",
@@ -2427,7 +2696,8 @@
         "hp_trend": 976.4366306946374,
         "hp_cycle": 0.6646894100354075,
         "hamilton_trend": 977.3686803997498,
-        "hamilton_cycle": -0.2673602950769691
+        "hamilton_cycle": -0.2673602950769691,
+        "recession": 0
     },
     {
         "date": "2014-07-01",
@@ -2436,7 +2706,8 @@
         "hp_trend": 977.3698840982697,
         "hp_cycle": 1.3492395182037171,
         "hamilton_trend": 978.8861295714271,
-        "hamilton_cycle": -0.16700595495365178
+        "hamilton_cycle": -0.16700595495365178,
+        "recession": 0
     },
     {
         "date": "2014-10-01",
@@ -2445,7 +2716,8 @@
         "hp_trend": 978.3034526581523,
         "hp_cycle": 1.0196042138436496,
         "hamilton_trend": 980.604925261168,
-        "hamilton_cycle": -1.2818683891720184
+        "hamilton_cycle": -1.2818683891720184,
+        "recession": 0
     },
     {
         "date": "2015-01-01",
@@ -2454,7 +2726,8 @@
         "hp_trend": 979.2368009053213,
         "hp_cycle": 0.9282203037042791,
         "hamilton_trend": 979.7558534629512,
-        "hamilton_cycle": 0.40916774607433126
+        "hamilton_cycle": 0.40916774607433126,
+        "recession": 0
     },
     {
         "date": "2015-04-01",
@@ -2463,7 +2736,8 @@
         "hp_trend": 980.1700306234471,
         "hp_cycle": 1.1850722511297818,
         "hamilton_trend": 982.3460186515367,
-        "hamilton_cycle": -0.9909157769598096
+        "hamilton_cycle": -0.9909157769598096,
+        "recession": 0
     },
     {
         "date": "2015-07-01",
@@ -2472,7 +2746,8 @@
         "hp_trend": 981.1038237338896,
         "hp_cycle": 0.9156071919037458,
         "hamilton_trend": 984.3733607863646,
-        "hamilton_cycle": -2.35392986057127
+        "hamilton_cycle": -2.35392986057127,
+        "recession": 0
     },
     {
         "date": "2015-10-01",
@@ -2481,7 +2756,8 @@
         "hp_trend": 982.0396028281652,
         "hp_cycle": 0.16177138751152143,
         "hamilton_trend": 984.0734759409983,
-        "hamilton_cycle": -1.8721017253214995
+        "hamilton_cycle": -1.8721017253214995,
+        "recession": 0
     },
     {
         "date": "2016-01-01",
@@ -2490,7 +2766,8 @@
         "hp_trend": 982.9793627522856,
         "hp_cycle": -0.2866814254341534,
         "hamilton_trend": 984.9030810404804,
-        "hamilton_cycle": -2.210399713628931
+        "hamilton_cycle": -2.210399713628931,
+        "recession": 0
     },
     {
         "date": "2016-04-01",
@@ -2499,7 +2776,8 @@
         "hp_trend": 983.9251994593789,
         "hp_cycle": -0.23476120658210675,
         "hamilton_trend": 986.4893596128234,
-        "hamilton_cycle": -2.798921360026611
+        "hamilton_cycle": -2.798921360026611,
+        "recession": 0
     },
     {
         "date": "2016-07-01",
@@ -2508,7 +2786,8 @@
         "hp_trend": 984.8790297266826,
         "hp_cycle": -0.2262642982051375,
         "hamilton_trend": 986.8821101624518,
-        "hamilton_cycle": -2.229344733974358
+        "hamilton_cycle": -2.229344733974358,
+        "recession": 0
     },
     {
         "date": "2016-10-01",
@@ -2517,7 +2796,8 @@
         "hp_trend": 985.8426236056802,
         "hp_cycle": -0.1538849986607147,
         "hamilton_trend": 986.6474214837947,
-        "hamilton_cycle": -0.9586828767752422
+        "hamilton_cycle": -0.9586828767752422,
+        "recession": 0
     },
     {
         "date": "2017-01-01",
@@ -2526,7 +2806,8 @@
         "hp_trend": 986.8176097326682,
         "hp_cycle": -0.13481723251641142,
         "hamilton_trend": 987.3096847726899,
-        "hamilton_cycle": -0.6268922725381572
+        "hamilton_cycle": -0.6268922725381572,
+        "recession": 0
     },
     {
         "date": "2017-04-01",
@@ -2535,7 +2816,8 @@
         "hp_trend": 987.8055205658198,
         "hp_cycle": -0.3036934606966497,
         "hamilton_trend": 988.7158608035576,
-        "hamilton_cycle": -1.2140336984343776
+        "hamilton_cycle": -1.2140336984343776,
+        "recession": 0
     },
     {
         "date": "2017-07-01",
@@ -2544,7 +2826,8 @@
         "hp_trend": 988.8078043025372,
         "hp_cycle": -0.008008728788922781,
         "hamilton_trend": 989.6910575246234,
-        "hamilton_cycle": -0.891261950875105
+        "hamilton_cycle": -0.891261950875105,
+        "recession": 0
     },
     {
         "date": "2017-10-01",
@@ -2553,7 +2836,8 @@
         "hp_trend": 989.8257193318091,
         "hp_cycle": 0.7083041941041301,
         "hamilton_trend": 990.6719140561113,
-        "hamilton_cycle": -0.13789053019809216
+        "hamilton_cycle": -0.13789053019809216,
+        "recession": 0
     },
     {
         "date": "2018-01-01",
@@ -2562,7 +2846,8 @@
         "hp_trend": 990.8605190371691,
         "hp_cycle": 1.1176538115040557,
         "hamilton_trend": 991.6566861479341,
-        "hamilton_cycle": 0.3214867007390012
+        "hamilton_cycle": 0.3214867007390012,
+        "recession": 0
     },
     {
         "date": "2018-04-01",
@@ -2571,7 +2856,8 @@
         "hp_trend": 991.9138994922729,
         "hp_cycle": 1.298032835224035,
         "hamilton_trend": 992.3556103581255,
-        "hamilton_cycle": 0.856321969371379
+        "hamilton_cycle": 0.856321969371379,
+        "recession": 0
     },
     {
         "date": "2018-07-01",
@@ -2580,7 +2866,8 @@
         "hp_trend": 992.9882553044084,
         "hp_cycle": 1.2764653088920568,
         "hamilton_trend": 993.8872037515982,
-        "hamilton_cycle": 0.3775168617022473
+        "hamilton_cycle": 0.3775168617022473,
+        "recession": 0
     },
     {
         "date": "2018-10-01",
@@ -2589,7 +2876,8 @@
         "hp_trend": 994.0867923513857,
         "hp_cycle": 0.7491029619706069,
         "hamilton_trend": 995.9660403788187,
-        "hamilton_cycle": -1.1301450654623295
+        "hamilton_cycle": -1.1301450654623295,
+        "recession": 0
     },
     {
         "date": "2019-01-01",
@@ -2598,7 +2886,8 @@
         "hp_trend": 995.2135143018329,
         "hp_cycle": 0.5442788414671895,
         "hamilton_trend": 997.2398632764305,
-        "hamilton_cycle": -1.482070133130378
+        "hamilton_cycle": -1.482070133130378,
+        "recession": 0
     },
     {
         "date": "2019-04-01",
@@ -2607,7 +2896,8 @@
         "hp_trend": 996.3728930137296,
         "hp_cycle": 0.7320911090006348,
         "hamilton_trend": 998.2281434869865,
-        "hamilton_cycle": -1.123159364256253
+        "hamilton_cycle": -1.123159364256253,
+        "recession": 0
     },
     {
         "date": "2019-07-01",
@@ -2616,7 +2906,8 @@
         "hp_trend": 997.56974051933,
         "hp_cycle": 1.0161111752698844,
         "hamilton_trend": 999.1873964537173,
-        "hamilton_cycle": -0.6015447591173597
+        "hamilton_cycle": -0.6015447591173597,
+        "recession": 0
     },
     {
         "date": "2019-10-01",
@@ -2625,7 +2916,8 @@
         "hp_trend": 998.8093264078319,
         "hp_cycle": 0.766426060154572,
         "hamilton_trend": 999.4937397353792,
-        "hamilton_cycle": 0.08201273260726794
+        "hamilton_cycle": 0.08201273260726794,
+        "recession": 0
     },
     {
         "date": "2020-01-01",
@@ -2634,7 +2926,8 @@
         "hp_trend": 1000.0975553379174,
         "hp_cycle": -1.3549598941968952,
         "hamilton_trend": 1000.549973114383,
-        "hamilton_cycle": -1.807377670662504
+        "hamilton_cycle": -1.807377670662504,
+        "recession": 1
     },
     {
         "date": "2020-04-01",
@@ -2643,7 +2936,8 @@
         "hp_trend": 1001.4408109845562,
         "hp_cycle": -11.300818488829918,
         "hamilton_trend": 1002.2662423952279,
-        "hamilton_cycle": -12.126249899501659
+        "hamilton_cycle": -12.126249899501659,
+        "recession": 1
     },
     {
         "date": "2020-07-01",
@@ -2652,7 +2946,8 @@
         "hp_trend": 1002.844630172784,
         "hp_cycle": -4.317431305435662,
         "hamilton_trend": 1003.8294312696738,
-        "hamilton_cycle": -5.302232402325444
+        "hamilton_cycle": -5.302232402325444,
+        "recession": 0
     },
     {
         "date": "2020-10-01",
@@ -2661,7 +2956,8 @@
         "hp_trend": 1004.307486716081,
         "hp_cycle": -4.032314397335199,
         "hamilton_trend": 1004.496564182753,
-        "hamilton_cycle": -4.22139186400716
+        "hamilton_cycle": -4.22139186400716,
+        "recession": 0
     },
     {
         "date": "2021-01-01",
@@ -2670,7 +2966,8 @@
         "hp_trend": 1005.8251560333612,
         "hp_cycle": -2.8982247403179144,
         "hamilton_trend": 1002.5551661906355,
-        "hamilton_cycle": 0.3717651024077213
+        "hamilton_cycle": 0.3717651024077213,
+        "recession": 0
     },
     {
         "date": "2021-04-01",
@@ -2679,7 +2976,8 @@
         "hp_trend": 1007.3908933470407,
         "hp_cycle": -1.2310979733051681,
         "hamilton_trend": 989.4785172480518,
-        "hamilton_cycle": 16.68127812568366
+        "hamilton_cycle": 16.68127812568366,
+        "recession": 0
     },
     {
         "date": "2021-07-01",
@@ -2688,7 +2986,8 @@
         "hp_trend": 1008.9961424890726,
         "hp_cycle": -0.4886793556914881,
         "hamilton_trend": 1006.12482365852,
-        "hamilton_cycle": 2.3826394748610937
+        "hamilton_cycle": 2.3826394748610937,
+        "recession": 0
     },
     {
         "date": "2021-10-01",
@@ -2697,7 +2996,8 @@
         "hp_trend": 1010.6315778551765,
         "hp_cycle": 1.2831390388828368,
         "hamilton_trend": 1008.475384192269,
-        "hamilton_cycle": 3.439332701790363
+        "hamilton_cycle": 3.439332701790363,
+        "recession": 0
     },
     {
         "date": "2022-01-01",
@@ -2706,7 +3006,8 @@
         "hp_trend": 1012.2875684164754,
         "hp_cycle": 1.371949301857967,
         "hamilton_trend": 1007.6215257787383,
-        "hamilton_cycle": 6.037991939595145
+        "hamilton_cycle": 6.037991939595145,
+        "recession": 0
     },
     {
         "date": "2022-04-01",
@@ -2715,7 +3016,8 @@
         "hp_trend": 1013.9552851059913,
         "hp_cycle": 2.094976134815056,
         "hamilton_trend": 1012.4214339078038,
-        "hamilton_cycle": 3.628827333002505
+        "hamilton_cycle": 3.628827333002505,
+        "recession": 0
     },
     {
         "date": "2022-07-01",
@@ -2724,7 +3026,8 @@
         "hp_trend": 1015.6267563250589,
         "hp_cycle": 2.2436083294459195,
         "hamilton_trend": 1014.2211009945031,
-        "hamilton_cycle": 3.6492636600016795
+        "hamilton_cycle": 3.6492636600016795,
+        "recession": 0
     },
     {
         "date": "2022-10-01",
@@ -2733,7 +3036,8 @@
         "hp_trend": 1017.2953198350973,
         "hp_cycle": 2.2103138576779884,
         "hamilton_trend": 1017.9431833883278,
-        "hamilton_cycle": 1.5624503044474523
+        "hamilton_cycle": 1.5624503044474523,
+        "recession": 0
     },
     {
         "date": "2023-01-01",
@@ -2742,7 +3046,8 @@
         "hp_trend": 1018.9557156527313,
         "hp_cycle": 2.2019508650731723,
         "hamilton_trend": 1019.0963888475824,
-        "hamilton_cycle": 2.0612776702221254
+        "hamilton_cycle": 2.0612776702221254,
+        "recession": 0
     },
     {
         "date": "2023-04-01",
@@ -2751,7 +3056,8 @@
         "hp_trend": 1020.6040652407471,
         "hp_cycle": 1.6992943547745654,
         "hamilton_trend": 1021.3634633020247,
-        "hamilton_cycle": 0.9398962934969859
+        "hamilton_cycle": 0.9398962934969859,
+        "recession": 0
     },
     {
         "date": "2023-07-01",
@@ -2760,7 +3066,8 @@
         "hp_trend": 1022.2378662812208,
         "hp_cycle": 2.025063147217793,
         "hamilton_trend": 1023.2499013872063,
-        "hamilton_cycle": 1.01302804123236
+        "hamilton_cycle": 1.01302804123236,
+        "recession": 0
     },
     {
         "date": "2023-10-01",
@@ -2769,7 +3076,8 @@
         "hp_trend": 1023.8556785152003,
         "hp_cycle": 1.645775329577532,
         "hamilton_trend": 1024.5677239901672,
-        "hamilton_cycle": 0.9337298546106467
+        "hamilton_cycle": 0.9337298546106467,
+        "recession": 0
     },
     {
         "date": "2024-01-01",
@@ -2778,7 +3086,8 @@
         "hp_trend": 1025.4573273482006,
         "hp_cycle": 1.0363443245068993,
         "hamilton_trend": 1026.2832999861475,
-        "hamilton_cycle": 0.2103716865599381
+        "hamilton_cycle": 0.2103716865599381,
+        "recession": 0
     },
     {
         "date": "2024-04-01",
@@ -2787,7 +3096,8 @@
         "hp_trend": 1027.043666795317,
         "hp_cycle": 0.9672112165469571,
         "hamilton_trend": 1027.1780371630841,
-        "hamilton_cycle": 0.8328408487798242
+        "hamilton_cycle": 0.8328408487798242,
+        "recession": 0
     },
     {
         "date": "2024-07-01",
@@ -2796,7 +3106,8 @@
         "hp_trend": 1028.6161985868487,
         "hp_cycle": 0.637886814397234,
         "hamilton_trend": 1029.4846189673572,
-        "hamilton_cycle": -0.2305335661112622
+        "hamilton_cycle": -0.2305335661112622,
+        "recession": 0
     },
     {
         "date": "2024-10-01",
@@ -2805,7 +3116,8 @@
         "hp_trend": 1030.1770289601045,
         "hp_cycle": 0.1338059609654465,
         "hamilton_trend": 1030.5465599166182,
-        "hamilton_cycle": -0.235724995548253
+        "hamilton_cycle": -0.235724995548253,
+        "recession": 0
     },
     {
         "date": "2025-01-01",
@@ -2814,7 +3126,8 @@
         "hp_trend": 1031.7286628316535,
         "hp_cycle": -0.693118536490374,
         "hamilton_trend": 1031.1364078615036,
-        "hamilton_cycle": -0.10086356634042204
+        "hamilton_cycle": -0.10086356634042204,
+        "recession": 0
     },
     {
         "date": "2025-04-01",
@@ -2823,7 +3136,8 @@
         "hp_trend": 1033.2736887467902,
         "hp_cycle": -0.7722936011873571,
         "hamilton_trend": 1033.0120419397301,
-        "hamilton_cycle": -0.5106467941272967
+        "hamilton_cycle": -0.5106467941272967,
+        "recession": 0
     },
     {
         "date": "2025-07-01",
@@ -2832,7 +3146,8 @@
         "hp_trend": 1034.814262051724,
         "hp_cycle": -0.32429648768174957,
         "hamilton_trend": 1034.2310201027287,
-        "hamilton_cycle": 0.2589454613134876
+        "hamilton_cycle": 0.2589454613134876,
+        "recession": 0
     },
     {
         "date": "2025-10-01",
@@ -2841,7 +3156,8 @@
         "hp_trend": 1036.3520554091635,
         "hp_cycle": -0.8240250860412743,
         "hamilton_trend": 1035.0444104216945,
-        "hamilton_cycle": 0.48361990142780087
+        "hamilton_cycle": 0.48361990142780087,
+        "recession": 0
     },
     {
         "date": "2026-01-01",
@@ -2850,7 +3166,8 @@
         "hp_trend": 1037.8885387965136,
         "hp_cycle": -0.9599253766302809,
         "hamilton_trend": 1035.5955322816299,
-        "hamilton_cycle": 1.3330811382534193
+        "hamilton_cycle": 1.3330811382534193,
+        "recession": 0
     },
     {
         "date": "2026-04-01",
@@ -2859,6 +3176,7 @@
         "hp_trend": 1039.424667175499,
         "hp_cycle": -0.5680133833311629,
         "hamilton_trend": 1037.4351517055961,
-        "hamilton_cycle": 1.4215020865717634
+        "hamilton_cycle": 1.4215020865717634,
+        "recession": 0
     }
 ]
